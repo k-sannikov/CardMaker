@@ -1,0 +1,69 @@
+.toolbar
+{
+    border-right: 1px solid #7E6FB8;
+    height: 100%;
+    /* width: 15%; */
+    width: 155px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 5px;
+}
+
+.toolbar__row
+{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+.toolbar__button,
+.toolbar__fontFamily,
+.toolbar__fontSize
+{
+    cursor: pointer;
+    outline: none;
+    border: 1px solid #1c182b;
+    border-radius: 2px;
+    height: 22px;
+    background: #F1EEFF;
+}
+
+.toolbar__button:hover,
+.toolbar__fontFamily:hover,
+.toolbar__fontSize:hover
+{
+     color: #7E6FB8;
+     border-color: #7E6FB8;
+     box-shadow: 0px 1px 3px 0px #7e6fb8;
+}
+
+.toolbar__button:active,
+.toolbar__fontFamily:active,
+.toolbar__fontSize:active 
+{
+    box-shadow: 1px 2px 2px 0px #7e6fb8;
+}
+
+.toolbar__button
+{
+    width: 22px;
+}
+
+.toolbar__fontFamily
+{
+    width: 100%;
+}
+
+.toolbar__fontSize
+{
+    font: 400 14px "Roboto Slab";
+    color: #1c182b;
+}
+
+.toolbar__label
+{
+    text-align: center;
+    font: 400 12px "Roboto Slab";
+    color: #1c182b;
+}

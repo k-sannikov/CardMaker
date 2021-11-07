@@ -1,0 +1,55 @@
+.dropbtn
+{
+    background: none;
+    color: white;
+    font: 400 14px "Roboto Slab";
+    color: #1c182b;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    width: 35px;
+    height: 35px;
+}
+
+
+/* .button_text
+{
+    padding-right: 5px;
+} */
+  
+.dropbtn:hover,
+.dropbtn:focus
+{
+    color: #E0E1F4;
+    background: #AEA3D7;
+    text-shadow: #7E6FB8 0 0 3px;
+}
+
+.dropdown
+{
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown_content 
+{
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 150px;
+    padding: 5px;
+    overflow: auto;
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown_content
+{
+    display: block;
+}
+
+.dropdown:hover .dropbtn
+{
+    color: #E0E1F4;
+    background: #AEA3D7;
+    text-shadow: #7E6FB8 0 0 3px;
+}
