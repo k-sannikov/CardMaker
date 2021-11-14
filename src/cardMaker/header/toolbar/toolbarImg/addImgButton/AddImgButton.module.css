@@ -1,0 +1,26 @@
+.button
+{
+    font: 400 14px "Roboto Slab";
+    color: #1c182b;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    text-align: left;
+    padding: 7px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button:hover
+{
+    color: #E0E1F4;
+    background: #AEA3D7;
+    text-shadow: #7E6FB8 0 0 3px;
+}
+
+.button:active
+{
+    background: #a79cd1;
+}

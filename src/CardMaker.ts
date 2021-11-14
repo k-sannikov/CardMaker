@@ -41,5 +41,5 @@ export function dispatch(modifyFn: Function, payload?: unknown): void {
     cardMakerChangeHandler();
   }
 
-  // console.log(cardMaker);
+  console.log(cardMaker);
 }

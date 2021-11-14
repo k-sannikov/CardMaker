@@ -19,17 +19,25 @@ export enum SetOfArtObject {
   snail = "./img/artObj/snail.png",
 }
 
+export type UnifiedBlock = {
+  readonly id: number,
+  readonly posX: number,
+  readonly posY: number,
+  readonly type: string,
+}
 
-export type BlockArtObj = {
+export type ArtObj = {
   readonly nameArtObj: string,
   readonly src: string,
-} & { readonly width: number, readonly height: number } & Component
+  readonly width: number,
+  readonly height: number
+} & UnifiedBlock
 
-export type BlockImg = {
+export type Img = {
   readonly src: string | null,
-} & { readonly width: number, readonly height: number } & Component
+} & { readonly width: number, readonly height: number } & UnifiedBlock
 
-export type BlockText = {
+export type Text = {
   readonly text: string,
   readonly color: string,
   readonly size: number,
@@ -37,16 +45,9 @@ export type BlockText = {
   readonly italic: boolean,
   readonly underline: boolean,
   readonly fontFamily: string,
-} & Component
+} & UnifiedBlock
 
-export type Block = BlockText | BlockImg | BlockArtObj;
-
-export type Component = {
-  readonly id: number,
-  readonly posX: number,
-  readonly posY: number,
-  readonly type: string,
-}
+export type Block = Text | Img | ArtObj;
 
 export type Background = {
   readonly color: string | null,
@@ -76,7 +77,7 @@ export type Canvas = {
 
 export type CardMaker = {
   readonly canvas: Canvas,
-  readonly selectComponent: number | null,
+  readonly selectBlock: number | null,
   readonly history: ActionHistory,
   readonly templates: Template[],
 }

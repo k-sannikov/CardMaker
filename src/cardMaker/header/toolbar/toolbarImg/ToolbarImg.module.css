@@ -1,0 +1,37 @@
+.toolbar
+{
+    border-right: 1px solid #6D85B6;
+    height: 100%;
+    /* width: 11%; */
+    width: 105px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 5px;
+}
+
+.button_box
+{
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.toolbar__label
+{
+    text-align: center;
+    font: 400 12px "Roboto Slab";
+    color: #1c182b;
+}
+
+.sticker
+{
+    width: 50px;
+    cursor: pointer;
+}
+
+.sticker:hover
+{
+    background: #D6CFF4;
+}

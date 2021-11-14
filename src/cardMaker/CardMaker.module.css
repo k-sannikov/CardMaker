@@ -1,0 +1,8 @@
+.main
+{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    overflow: auto;
+    margin-top: 124px;
+}

@@ -1,9 +1,9 @@
 import {
   ActionHistory,
   Template,
-  BlockArtObj,
-  BlockImg,
-  BlockText,
+  ArtObj,
+  Img,
+  Text,
   Background,
   Filter,
   Canvas,
@@ -28,7 +28,7 @@ let testSetOfArtObject = {
 }
 
 
-let testBlockArtObj: BlockArtObj = {
+let testArtObj: ArtObj = {
   id: 1,
   type: "artObj",
   width: 150,
@@ -39,7 +39,7 @@ let testBlockArtObj: BlockArtObj = {
   src: testSetOfArtObject.girl,
 }
 
-let testBlockImg: BlockImg = {
+let testImg: Img = {
   id: 2,
   type: "img",
   width: 320,
@@ -49,7 +49,7 @@ let testBlockImg: BlockImg = {
   src: "https://images.pexels.com/photos/3337209/pexels-photo-3337209.jpeg?cs=srgb&dl=pexels-mo-3337209.jpg&fm=jpg",
 }
 
-let testBlockText: BlockText = {
+let testText: Text = {
   id: 3,
   type: "text",
   posX: 200,
@@ -94,9 +94,9 @@ let testCanvas: Canvas = {
   height: 500,
   filter: testFilter,
   listBlock: [
-    testBlockImg,
-    testBlockArtObj,
-    testBlockText
+    testImg,
+    testArtObj,
+    testText
   ],
   deleteArea: deleteArea,
   background: testBackground,
@@ -112,7 +112,7 @@ let testActionHistory: ActionHistory = {
 
 export let testCardMaker: CardMaker = {
   canvas: testCanvas,
-  selectComponent: null,
+  selectBlock: null,
   history: testActionHistory,
   templates: [testTemplate],
 }

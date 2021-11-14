@@ -7,8 +7,16 @@ import {
   ActionHistory,
   Block,
 } from './CardMakerTypes';
-import { setComponentFields } from './utils/setComponentFields'
-import { getIndexById } from './utils/getIndexById'
+
+import {
+  setComponentFields,
+  getIndexById,
+  isShiftUpAvailable,
+  isShiftDownAvailable,
+  isSelectedBlock,
+  isUndoAvailable,
+  isRedoAvailable
+} from './utils/utils'
 
 export function createCanvas(cardMaker: CardMaker): CardMaker {
   const defaultWidth: number = 800;
@@ -71,14 +79,14 @@ export function setFilter(cardMaker: CardMaker, { color, opacity }: setFilterPar
 export function setSelectedComponent(cardMaker: CardMaker, id: number): CardMaker {
   return {
     ...cardMaker,
-    selectComponent: id,
+    selectBlock: id,
   };
 }
 
 export function resetSelectedComponent(cardMaker: CardMaker): CardMaker {
   return {
     ...cardMaker,
-    selectComponent: null,
+    selectBlock: null,
   };
 }
 
@@ -360,20 +368,24 @@ export function createArtObjComponent(cardMaker: CardMaker, { newId, name }: cre
 
 
 export function deleteComponent(cardMaker: CardMaker): CardMaker {
-  let copyListBlock: Block[] = [...cardMaker.canvas.listBlock];
-
-  copyListBlock.forEach(function (component, index) {
-    if (component.id === cardMaker.selectComponent) {
-      copyListBlock.splice(index, 1);
-    }
-  });
-  return {
-    ...cardMaker,
-    canvas: {
-      ...cardMaker.canvas,
-      listBlock: copyListBlock
-    }
-  };
+  if (isSelectedBlock(cardMaker)) {
+    let copyListBlock: Block[] = [...cardMaker.canvas.listBlock];
+    copyListBlock.forEach((component, index) => {
+      if (component.id === cardMaker.selectBlock) {
+        copyListBlock.splice(index, 1);
+        return false;
+      }
+    });
+    return {
+      ...cardMaker,
+      canvas: {
+        ...cardMaker.canvas,
+        listBlock: copyListBlock
+      }
+    };
+  } else {
+    return cardMaker;
+  }
 }
 
 type setPositionComponentParam = {
@@ -390,7 +402,7 @@ export function setPositionComponent(cardMaker: CardMaker, { newX, newY }: setPo
     ...cardMaker,
     canvas: {
       ...cardMaker.canvas,
-      listBlock: setComponentFields(canvas.listBlock, cardMaker.selectComponent as number, modifiableFields)
+      listBlock: setComponentFields(canvas.listBlock, cardMaker.selectBlock as number, modifiableFields)
     }
   };
 }
@@ -412,21 +424,25 @@ export function addHistory(cardMaker: CardMaker, newCanvas: Canvas): CardMaker {
 }
 
 export function undo(cardMaker: CardMaker): CardMaker {
+  const currentIndex: number = cardMaker.history.currentIndex;
+  const newCurrentIndex: number = isUndoAvailable(cardMaker) ? currentIndex - 1: currentIndex;
   return {
     ...cardMaker,
     history: {
       ...cardMaker.history,
-      currentIndex: cardMaker.history.currentIndex - 1,
+      currentIndex: newCurrentIndex,
     }
   }
 }
 
 export function redo(cardMaker: CardMaker): CardMaker {
+  const currentIndex: number = cardMaker.history.currentIndex;
+  const newCurrentIndex: number = isRedoAvailable(cardMaker) ? currentIndex + 1: currentIndex;
   return {
     ...cardMaker,
     history: {
       ...cardMaker.history,
-      currentIndex: cardMaker.history.currentIndex + 1,
+      currentIndex: newCurrentIndex,
     }
   }
 }
@@ -439,31 +455,39 @@ export function applyTemplate(cardMaker: CardMaker, template: string): CardMaker
 }
 
 export function shiftUpBlock(cardMaker: CardMaker): CardMaker {
-  let newListBlock: Block[] = [...cardMaker.canvas.listBlock];
-  const id: number = cardMaker.selectComponent as number;
-  const index: number = getIndexById(newListBlock, id);
-  const flipValue: Block[] = [newListBlock[index + 1], newListBlock[index]];
-  newListBlock.splice(index, 2, ...flipValue);
-  return {
-    ...cardMaker,
-    canvas: {
-      ...cardMaker.canvas,
-      listBlock: newListBlock,
+  if (isShiftUpAvailable(cardMaker)) {
+    let newListBlock: Block[] = [...cardMaker.canvas.listBlock];
+    const id: number = cardMaker.selectBlock as number;
+    const index: number = getIndexById(newListBlock, id);
+    const flipValue: Block[] = [newListBlock[index + 1], newListBlock[index]];
+    newListBlock.splice(index, 2, ...flipValue);
+    return {
+      ...cardMaker,
+      canvas: {
+        ...cardMaker.canvas,
+        listBlock: newListBlock,
+      }
     }
+  } else {
+    return cardMaker;
   }
 }
 
 export function shiftDownBlock(cardMaker: CardMaker): CardMaker {
-  let newListBlock: Block[] = [...cardMaker.canvas.listBlock];
-  const id: number = cardMaker.selectComponent as number;
-  const index: number = getIndexById(newListBlock, id);
-  const flipValue: Block[] = [newListBlock[index], newListBlock[index - 1]];
-  newListBlock.splice(index - 1 , 2, ...flipValue);
-  return {
-    ...cardMaker,
-    canvas: {
-      ...cardMaker.canvas,
-      listBlock: newListBlock,
+  if (isShiftDownAvailable(cardMaker)) {
+    let newListBlock: Block[] = [...cardMaker.canvas.listBlock];
+    const id: number = cardMaker.selectBlock as number;
+    const index: number = getIndexById(newListBlock, id);
+    const flipValue: Block[] = [newListBlock[index], newListBlock[index - 1]];
+    newListBlock.splice(index - 1, 2, ...flipValue);
+    return {
+      ...cardMaker,
+      canvas: {
+        ...cardMaker.canvas,
+        listBlock: newListBlock,
+      }
     }
+  } else {
+    return cardMaker;
   }
 }
