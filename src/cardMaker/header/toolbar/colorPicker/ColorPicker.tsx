@@ -1,17 +1,10 @@
 import styles from './ColorPicker.module.css';
-import { ChangeEvent, FocusEvent, forwardRef } from 'react';
+import { ForwardedRef, forwardRef } from 'react';
 
-type ColorPickerBackground = {
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void,
-  onBlur: (event: FocusEvent<HTMLInputElement>) => void,
-}
-
-const ColorPicker = forwardRef((props: ColorPickerBackground, ref: any) => (
+const ColorPicker = forwardRef((props: {}, ref: ForwardedRef<HTMLInputElement>) => (
   <input type="color"
     ref={ref}
     className={styles.input__color}
-    onChange={props.onChange}
-    onBlur={props.onBlur}
   />
 ));
 

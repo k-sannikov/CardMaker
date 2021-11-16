@@ -1,15 +1,17 @@
 import styles from './ToolbarBackground.module.css';
 import { faDownload, faGlobe, faRetweet } from '@fortawesome/free-solid-svg-icons'
-import { resetBackground } from '../../../../CardMakerFunctions';
-import { dispatch } from '../../../../CardMaker';
-import ColorPicker from '../colorPicker/ColorPickerBackground';
+import ColorPicker from '../colorPicker/ColorPicker';
 import Button from '../button/Button';
+import { MutableRefObject, useRef } from 'react';
+import { useBackgroungColor } from './useBackgroungColor';
 
 function ToolbarBackground() {
-  const onClickResetColor = () => {
-    dispatch(resetBackground);
-  }
-
+  const inputColor = useRef<HTMLInputElement>(null);
+  const buttonReset = useRef<HTMLButtonElement>(null);
+  useBackgroungColor(
+    inputColor as MutableRefObject<HTMLInputElement>,
+    buttonReset as MutableRefObject<HTMLButtonElement>
+    );
   return (
     <div className={styles.toolbar}>
       <div className={styles.toolbar__row}>
@@ -19,23 +21,23 @@ function ToolbarBackground() {
               label="C компьютера"
               title="C компьютера"
               icon={faDownload}
-              onClick={() => console.log('C компьютера')}
             />
             <Button
               label="Из Pixels"
               title="Из Pixels"
-              icon={faDownload}
-              onClick={() => console.log('Из Pixels')}
+              icon={faGlobe}
             />
           </div>
         </div>
         <div className={styles.toolbar__col2}>
-          <ColorPicker />
+          <div className={styles.colorPickerBox}>
+            <ColorPicker ref={inputColor as MutableRefObject<HTMLInputElement>} />
+          </div>
           <Button
             label="Сброс"
             title="Сброс"
             icon={faRetweet}
-            onClick={onClickResetColor}
+            ref={buttonReset as MutableRefObject<HTMLButtonElement>}
           />
         </div>
       </div>

@@ -59,3 +59,9 @@
     font: 400 12px "Roboto Slab";
     color: #1c182b;
 }
+
+.colorPickerBox
+{
+    width: 22px;
+    height: 22px;
+}

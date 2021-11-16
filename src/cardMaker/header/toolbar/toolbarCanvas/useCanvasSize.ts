@@ -1,12 +1,14 @@
 import { CardMaker as CardMakerType } from '../../../../CardMakerTypes';
 import { setCanvasSize } from '../../../../CardMakerFunctions';
 import { dispatch } from '../../../../CardMaker';
-import { CardMakerContext } from '../../../../CardMakerContext';
-import { useEffect, useContext } from 'react';
+import { MutableRefObject, useEffect } from 'react';
+import { getCardMaker } from '../../../../CardMaker';
 
-export function useCanvasSize(inputWidth: any, inputHeight: any) {
+export function useCanvasSize(
+  inputWidth: MutableRefObject<HTMLInputElement>,
+  inputHeight: MutableRefObject<HTMLInputElement>) {
 
-  const cardMaker: CardMakerType = useContext(CardMakerContext);
+  const cardMaker: CardMakerType = getCardMaker();
   const width: number = cardMaker.canvas.width;
   const height: number = cardMaker.canvas.height;
 

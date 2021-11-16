@@ -1,7 +1,7 @@
 import styles from './ToolbarCanvas.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
-import { ChangeEvent, useRef } from 'react';
+import { ChangeEvent, MutableRefObject, useRef } from 'react';
 import { useCanvasSize } from './useCanvasSize';
 
 function ToolbarCanvas() {
@@ -9,10 +9,13 @@ function ToolbarCanvas() {
     document.getElementById('canvas')!.style.transform = 'scale(' + event.target.value + ')';
   }
 
-  const inputWidth: any = useRef(null);
-  const inputHeight: any = useRef(null);
+  const inputWidth = useRef<HTMLInputElement>(null);
+  const inputHeight = useRef<HTMLInputElement>(null);
 
-  useCanvasSize(inputWidth, inputHeight);
+  useCanvasSize(
+    inputWidth as MutableRefObject<HTMLInputElement>,
+    inputHeight as MutableRefObject<HTMLInputElement>
+  );
 
   return (
     <div className={styles.toolbar}>
@@ -24,15 +27,15 @@ function ToolbarCanvas() {
       </div>
       <div className={styles.toolbar__row}>
         <input type="number" className={styles.input_number} min="0"
-          ref={inputWidth}
+          ref={inputWidth as MutableRefObject<HTMLInputElement>}
         />
         <FontAwesomeIcon icon={faTimes} className={styles.label} />
         <input type="number" className={styles.input_number} min="0"
-          ref={inputHeight}
+          ref={inputHeight as MutableRefObject<HTMLInputElement>}
         />
       </div>
 
-      <h2 className={styles.toolbar__label}>Холст</h2>
+      <label className={styles.toolbar__label}>Холст</label>
     </div>
   );
 }

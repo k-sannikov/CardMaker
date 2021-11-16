@@ -1,7 +1,7 @@
 import styles from './ToolbarText.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBold, faItalic, faUnderline } from '@fortawesome/free-solid-svg-icons'
 import ButtonEditText from './buttonEditText/ButtonEditText';
+import ColorPicker from '../colorPicker/ColorPicker';
 
 function ToolbarText() {
   return (
@@ -22,7 +22,9 @@ function ToolbarText() {
         <ButtonEditText icon={faBold} onClick={() => console.log('Bold')} />
         <ButtonEditText icon={faItalic} onClick={() => console.log('Italic')} />
         <ButtonEditText icon={faUnderline} onClick={() => console.log('Underline')} />
-        <input type="color" className={styles.toolbar__button} />
+        <div className={styles.colorPickerBox}>
+          <ColorPicker ref={null}/>
+        </div>
       </div>
 
       <label className={styles.toolbar__label}>Текст</label>

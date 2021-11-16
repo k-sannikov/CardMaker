@@ -1,6 +1,6 @@
 import styles from './Text.module.css';
 import { Text as TextType } from '../../../CardMakerTypes';
-import { useRef } from 'react';
+import { MutableRefObject, useRef } from 'react';
 import {useBlock} from '../useBlock';
 
 type TextProps = {
@@ -11,13 +11,13 @@ function Text(props: TextProps) {
   const text: TextType = props.text;
   const textStyle = getStyle(text);
 
-  let textBlock: any = useRef(null);
+  let textBlock = useRef<HTMLSpanElement>(null);
   const selectId = useBlock(props.text.id, textBlock);
-  const select: string = props.text.id == selectId ? styles.selected : '';
+  const select: string = props.text.id === selectId ? styles.selected : '';
 
   return (
     <span style={textStyle}
-      ref={textBlock}
+      ref={textBlock as MutableRefObject<HTMLSpanElement>}
       className={styles.block + ' ' + select}>
       {text.text}
     </span>

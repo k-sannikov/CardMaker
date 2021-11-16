@@ -5,42 +5,29 @@ import Text from './text/Text'
 import ArtObj from './artObj/ArtObj'
 import Filter from './filter/Filter'
 import DeleteArea from './deleteArea/DeleteArea'
+import { useCanvas } from './useCanvas';
 import {
   Block as BlockType,
   ArtObj as ArtObjType,
   Img as ImgType,
   Text as TextType,
   Canvas as CanvasType,
-  CardMaker as CardMakerType,
 } from '../../CardMakerTypes';
 
 type CanvasProps = {
-  cardMaker: CardMakerType,
+  canvas: CanvasType,
 }
 
 function Canvas(props: CanvasProps) {
-  const canvas: CanvasType = props.cardMaker.canvas;
-  let background: string = '#fff';
-  if (canvas.background.color) {
-    background = canvas.background.color;
-  } else if (canvas.background.src) {
-    background = 'url(' + canvas.background.src + ')';
-  }
-
-  const canvasStyle = {
-    width: canvas.width,
-    height: canvas.height,
-    background: background,
-  };
-
-
-  let listBlock: ReactElement[] = getListBlock(canvas.listBlock);
+  useCanvas();
+  const canvasStyle = getStyle(props.canvas);
+  let listBlock: ReactElement[] = getListBlock(props.canvas.listBlock);
   return (
     <div id="canvas" className={styles.canvas} style={canvasStyle}>
-      {canvas.deleteArea &&
-        <DeleteArea canvas={canvas} />
+      {props.canvas.deleteArea &&
+        <DeleteArea canvas={props.canvas} />
       }
-      <Filter canvas={canvas} />
+      <Filter canvas={props.canvas} />
       {listBlock}
     </div>
   );
@@ -65,6 +52,20 @@ function getListBlock(listBlock: BlockType[]): ReactElement[] {
     }
   });
   return newListBlock;
+}
+
+function getStyle(canvas: CanvasType) { 
+  let background: string = '#fff';
+  if (canvas.background.color) {
+    background = canvas.background.color;
+  } else if (canvas.background.src) {
+    background = 'url(' + canvas.background.src + ')';
+  }
+  return {
+    width: canvas.width,
+    height: canvas.height,
+    background: background,
+  };
 }
 
 export default Canvas;

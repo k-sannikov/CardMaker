@@ -44,3 +44,9 @@
     background: #7E6FB8;
     border: 1px solid #1c182b;
 }
+
+.colorPickerBox
+{
+    width: 84px;
+    height: 29px;
+}

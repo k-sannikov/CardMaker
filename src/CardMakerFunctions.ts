@@ -491,3 +491,7 @@ export function shiftDownBlock(cardMaker: CardMaker): CardMaker {
     return cardMaker;
   }
 }
+
+export function applyFileProject(cardMaker: CardMaker, newCardMaker: CardMaker): CardMaker {
+  return newCardMaker;
+}

@@ -9,15 +9,13 @@ function ToolbarArea() {
         label="Выделение"
         title="Выделение"
         icon={faVectorSquare}
-        onClick={() => console.log('')}
       />
       <Button
         label="Удалание"
         title="Удалание"
         icon={faEraser}
-        onClick={() => console.log('')}
       />
-      <h2 className={styles.toolbar__label}>Область</h2>
+      <label className={styles.toolbar__label}>Область</label>
     </div>
   );
 }

@@ -1,5 +1,4 @@
 import styles from './ToolbarImg.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDownload, faGlobe, faStickyNote } from '@fortawesome/free-solid-svg-icons'
 
 import DropdownMenu from '../../../dropdownMenu/DropdownMenu';
@@ -14,7 +13,7 @@ function ToolbarImg() {
   let srcList: SetOfArtObject[] = Object.values(SetOfArtObject);
   let imgList: ReactElement[] = [];
   srcList.forEach((src, index) => {
-    imgList.push(<img src={src} key={index} className={styles.sticker} />);
+    imgList.push(<img src={src} key={index} alt='' className={styles.sticker} />);
   });
 
   return (

@@ -1,28 +1,37 @@
 import styles from './Navbar.module.css';
-import { faClone, faUndo, faRedo, faFileExport, faImage } from '@fortawesome/free-solid-svg-icons'
+import { faClone, faUndo, faRedo, faFileExport, faImage, faFolderOpen } from '@fortawesome/free-solid-svg-icons'
 import { faPiedPiperSquare } from '@fortawesome/free-brands-svg-icons'
 import NavButton from './navButton/NavButton';
-import { dispatch } from '../../../CardMaker';
-import { undo, redo } from '../../../CardMakerFunctions';
+import NavLinkButton from './navButton/NavLinkButton';
+import NavFileButton from './navButton/NavFileButton';
+import { MutableRefObject, useRef } from 'react';
+import { useFileProject } from './useFileProject';
+import { useHistory } from './useHistory';
 
 function Navbar() {
+  let buttonUndo = useRef<HTMLButtonElement>(null);
+  let buttonRedo = useRef<HTMLButtonElement>(null);
+  useHistory(
+    buttonUndo as MutableRefObject<HTMLButtonElement>,
+    buttonRedo as MutableRefObject<HTMLButtonElement>
+  );
 
-  function onClickUndo() {
-    dispatch(undo);
-  }
-
-  function onClickRedo() {
-    dispatch(redo);
-  }
+  let inputFile = useRef<HTMLInputElement>(null);
+  let downloadFile = useRef<HTMLAnchorElement>(null);
+  useFileProject(
+    inputFile as MutableRefObject<HTMLInputElement>,
+    downloadFile as MutableRefObject<HTMLAnchorElement>
+  );
 
   return (
     <nav className={styles.navbar}>
-      <NavButton label="Новая" icon={faPiedPiperSquare} onClick={() => console.log('Новая')}/>
-      <NavButton label="в jpg/png" icon={faImage} onClick={() => console.log('Сохранить как')}/>
-      <NavButton label="в json" icon={faFileExport} onClick={() => console.log('Сохранить как')}/>
-      <NavButton label="Шаблоны" icon={faClone} onClick={() => console.log('Шаблоны')}/>
-      <NavButton label="" icon={faUndo} onClick={() => onClickUndo()} />
-      <NavButton label="" icon={faRedo} onClick={() => onClickRedo()} />
+      <NavFileButton label="Открыть" icon={faFolderOpen} ref={inputFile as MutableRefObject<HTMLInputElement>} />
+      <NavButton label="Новая" icon={faPiedPiperSquare} />
+      <NavButton label="в jpg/png" icon={faImage} />
+      <NavLinkButton label="в json" icon={faFileExport} ref={downloadFile as MutableRefObject<HTMLAnchorElement>} />
+      <NavButton label="Шаблоны" icon={faClone} />
+      <NavButton label="" icon={faUndo} ref={buttonUndo as MutableRefObject<HTMLButtonElement>} />
+      <NavButton label="" icon={faRedo} ref={buttonRedo as MutableRefObject<HTMLButtonElement>} />
     </nav>
   );
 }
