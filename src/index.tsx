@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import CardMaker from './cardMaker/CardMaker';
 import { addCardMakerChangeHandler, getCardMaker } from './CardMaker';
 
-function render() {
+function render(): void {
   ReactDOM.render(
     <React.StrictMode>
       <CardMaker cardMaker={getCardMaker()} />

@@ -1,23 +1,33 @@
-import { MutableRefObject, useEffect } from 'react';
+import { RefObject, useEffect } from 'react';
 import { dispatch } from '../../../CardMaker';
 import { undo, redo } from '../../../CardMakerFunctions';
 
 export function useHistory(
-  buttonUndo: MutableRefObject<HTMLButtonElement>,
-  buttonRedo: MutableRefObject<HTMLButtonElement>
-) {
+  buttonUndo: RefObject<HTMLButtonElement>,
+  buttonRedo: RefObject<HTMLButtonElement>
+): void {
+
+  function handlerClickUndo(): void {
+    dispatch(undo);
+  }
+  function handlerClickRedo(): void {
+    dispatch(redo);
+  }
+
   useEffect(() => {
-    buttonUndo.current.addEventListener("click", handlerClickUndo);
-    buttonRedo.current.addEventListener("click", handlerClickRedo);
-    function handlerClickUndo() {
-      dispatch(undo);
+    if (buttonUndo.current) {
+      buttonUndo.current.addEventListener("click", handlerClickUndo);
     }
-    function handlerClickRedo() {
-      dispatch(redo);
+    if (buttonRedo.current) {
+      buttonRedo.current.addEventListener("click", handlerClickRedo);
     }
     return () => {
-      buttonUndo.current.removeEventListener("click", handlerClickUndo);
-      buttonRedo.current.removeEventListener("click", handlerClickRedo);
+      if (buttonUndo.current) {
+        buttonUndo.current.removeEventListener("click", handlerClickUndo);
+      }
+      if (buttonRedo.current) {
+        buttonRedo.current.removeEventListener("click", handlerClickRedo);
+      }
     };
   }, []);
 }

@@ -2,30 +2,26 @@ import styles from './ToolbarObject.module.css';
 import { faArrowUp, faArrowDown, faTrash } from '@fortawesome/free-solid-svg-icons'
 import Button from '../button/Button';
 import { useObject } from './useObject';
-import { MutableRefObject, useRef } from 'react';
+import { RefObject, useRef } from 'react';
 
 function ToolbarObject() {
   let buttonUp = useRef<HTMLButtonElement>(null);
   let buttonDown = useRef<HTMLButtonElement>(null);
   let buttonDelete = useRef<HTMLButtonElement>(null);
-  useObject(
-    buttonUp as MutableRefObject<HTMLButtonElement>,
-    buttonDown as MutableRefObject<HTMLButtonElement>,
-    buttonDelete as MutableRefObject<HTMLButtonElement>
-  );
+  useObject(buttonUp, buttonDown, buttonDelete);
   return (
     <div className={styles.toolbar}>
       <div className={styles.toolbar__row}>
         <div>
           <div className={styles.button_container}>
             <Button
-              ref={buttonUp as MutableRefObject<HTMLButtonElement>}
+              ref={buttonUp as RefObject<HTMLButtonElement>}
               label=""
               title="Переместить вперед"
               icon={faArrowUp}
             />
             <Button
-              ref={buttonDown as MutableRefObject<HTMLButtonElement>}
+              ref={buttonDown as RefObject<HTMLButtonElement>}
               label=""
               title="Переместить назад"
               icon={faArrowDown}
@@ -34,7 +30,7 @@ function ToolbarObject() {
         </div>
         <div className={styles.toolbar__col}>
           <Button
-            ref={buttonDelete as MutableRefObject<HTMLButtonElement>}
+            ref={buttonDelete as RefObject<HTMLButtonElement>}
             label="Удалить"
             title="Удалить"
             icon={faTrash}

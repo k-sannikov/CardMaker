@@ -11,11 +11,7 @@ function ToolbarCanvas() {
 
   const inputWidth = useRef<HTMLInputElement>(null);
   const inputHeight = useRef<HTMLInputElement>(null);
-
-  useCanvasSize(
-    inputWidth as MutableRefObject<HTMLInputElement>,
-    inputHeight as MutableRefObject<HTMLInputElement>
-  );
+  useCanvasSize(inputWidth, inputHeight);
 
   return (
     <div className={styles.toolbar}>
@@ -27,11 +23,11 @@ function ToolbarCanvas() {
       </div>
       <div className={styles.toolbar__row}>
         <input type="number" className={styles.input_number} min="0"
-          ref={inputWidth as MutableRefObject<HTMLInputElement>}
+          ref={inputWidth}
         />
         <FontAwesomeIcon icon={faTimes} className={styles.label} />
         <input type="number" className={styles.input_number} min="0"
-          ref={inputHeight as MutableRefObject<HTMLInputElement>}
+          ref={inputHeight}
         />
       </div>
 

@@ -1,7 +1,7 @@
 import styles from './Img.module.css';
 import { Img as ImgType } from '../../../CardMakerTypes';
-import { MutableRefObject, useRef } from 'react';
-import {useBlock} from '../useBlock';
+import { useRef } from 'react';
+import { useBlock } from '../useBlock';
 
 type ImgProps = {
   img: ImgType,
@@ -15,7 +15,7 @@ function Img(props: ImgProps) {
   }
   const imgStyle = getStyle(img);
 
-  let imgBlock = useRef<HTMLImageElement>(null);
+  const imgBlock = useRef<HTMLImageElement>(null);
   const selectId = useBlock(props.img.id, imgBlock);
   const select: string = props.img.id === selectId ? styles.selected : '';
 
@@ -23,7 +23,7 @@ function Img(props: ImgProps) {
     <img style={imgStyle}
       alt=''
       src={src}
-      ref={imgBlock as MutableRefObject<HTMLImageElement>}
+      ref={imgBlock}
       className={styles.block + ' ' + select} />
   );
 }

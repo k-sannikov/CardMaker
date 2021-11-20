@@ -2,16 +2,13 @@ import styles from './ToolbarBackground.module.css';
 import { faDownload, faGlobe, faRetweet } from '@fortawesome/free-solid-svg-icons'
 import ColorPicker from '../colorPicker/ColorPicker';
 import Button from '../button/Button';
-import { MutableRefObject, useRef } from 'react';
+import { RefObject, useRef } from 'react';
 import { useBackgroungColor } from './useBackgroungColor';
 
 function ToolbarBackground() {
   const inputColor = useRef<HTMLInputElement>(null);
   const buttonReset = useRef<HTMLButtonElement>(null);
-  useBackgroungColor(
-    inputColor as MutableRefObject<HTMLInputElement>,
-    buttonReset as MutableRefObject<HTMLButtonElement>
-    );
+  useBackgroungColor(inputColor, buttonReset);
   return (
     <div className={styles.toolbar}>
       <div className={styles.toolbar__row}>
@@ -31,13 +28,13 @@ function ToolbarBackground() {
         </div>
         <div className={styles.toolbar__col2}>
           <div className={styles.colorPickerBox}>
-            <ColorPicker ref={inputColor as MutableRefObject<HTMLInputElement>} />
+            <ColorPicker ref={inputColor as RefObject<HTMLInputElement>} />
           </div>
           <Button
             label="Сброс"
             title="Сброс"
             icon={faRetweet}
-            ref={buttonReset as MutableRefObject<HTMLButtonElement>}
+            ref={buttonReset as RefObject<HTMLButtonElement>}
           />
         </div>
       </div>

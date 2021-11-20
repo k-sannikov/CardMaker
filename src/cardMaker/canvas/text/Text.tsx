@@ -1,7 +1,7 @@
 import styles from './Text.module.css';
 import { Text as TextType } from '../../../CardMakerTypes';
-import { MutableRefObject, useRef } from 'react';
-import {useBlock} from '../useBlock';
+import { useRef } from 'react';
+import { useBlock } from '../useBlock';
 
 type TextProps = {
   text: TextType,
@@ -11,13 +11,13 @@ function Text(props: TextProps) {
   const text: TextType = props.text;
   const textStyle = getStyle(text);
 
-  let textBlock = useRef<HTMLSpanElement>(null);
+  const textBlock = useRef<HTMLSpanElement>(null);
   const selectId = useBlock(props.text.id, textBlock);
   const select: string = props.text.id === selectId ? styles.selected : '';
 
   return (
     <span style={textStyle}
-      ref={textBlock as MutableRefObject<HTMLSpanElement>}
+      ref={textBlock}
       className={styles.block + ' ' + select}>
       {text.text}
     </span>
@@ -36,6 +36,5 @@ function getStyle(text: TextType) {
     fontFamily: text.fontFamily,
   };
 }
-
 
 export default Text;

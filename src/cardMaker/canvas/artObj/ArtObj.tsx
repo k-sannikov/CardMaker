@@ -1,6 +1,6 @@
 import styles from './ArtObj.module.css';
 import { ArtObj as ArtObjType } from '../../../CardMakerTypes';
-import { MutableRefObject, useRef } from 'react';
+import { useRef } from 'react';
 import {useBlock} from '../useBlock';
 
 type ArtObjProps = {
@@ -9,10 +9,8 @@ type ArtObjProps = {
 
 function ArtObj(props: ArtObjProps) {
   const artObj: ArtObjType = props.artObj;
-
   const artObjStyle = getStyle(artObj);
-
-  let artObjBlock = useRef<HTMLImageElement>(null);
+  const artObjBlock = useRef<HTMLImageElement>(null);
   const selectId = useBlock(props.artObj.id, artObjBlock);
   const select: string = props.artObj.id === selectId ? styles.selected : '';
 
@@ -20,7 +18,7 @@ function ArtObj(props: ArtObjProps) {
   return (
     <img src={artObj.src} style={artObjStyle}
       alt=''
-      ref={artObjBlock as MutableRefObject<HTMLImageElement>}
+      ref={artObjBlock}
       className={styles.block + ' ' + select}
     />
   );

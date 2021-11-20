@@ -1,34 +1,46 @@
-import { MouseEvent, MutableRefObject, useEffect } from 'react';
+import { RefObject, useEffect } from 'react';
 import { shiftUpBlock, shiftDownBlock, deleteComponent } from '../../../../CardMakerFunctions';
 import { dispatch } from '../../../../CardMaker';
 
 export function useObject(
-  buttonUp: MutableRefObject<any>,
-  buttonDown: MutableRefObject<any>,
-  buttonDelete: MutableRefObject<HTMLButtonElement>) {
+  buttonUp: RefObject<HTMLButtonElement>,
+  buttonDown: RefObject<HTMLButtonElement>,
+  buttonDelete: RefObject<HTMLButtonElement>): void {
+
+  function handlerClickShiftUp(event: Event): void {
+    event.preventDefault();
+    dispatch(shiftUpBlock);
+  }
+
+  function handlerClickShiftDown(event: Event): void {
+    event.preventDefault();
+    dispatch(shiftDownBlock);
+  }
+
+  function handlerClickDelete(): void {
+    dispatch(deleteComponent);
+  }
 
   useEffect(() => {
-    buttonUp.current.addEventListener("click", handlerClickShiftUp);
-    buttonDown.current.addEventListener("click", handlerClickShiftDown);
-    buttonDelete.current.addEventListener("click", handlerClickDelete);
-
-    function handlerClickShiftUp(event: MouseEvent<HTMLElement>) {
-      dispatch(shiftUpBlock);
-      event.stopPropagation();
+    if (buttonUp.current) {
+      buttonUp.current.addEventListener("click", handlerClickShiftUp);
     }
-
-    function handlerClickShiftDown(event: MouseEvent<HTMLElement>) {
-      dispatch(shiftDownBlock);
-      event.stopPropagation();
+    if (buttonDown.current) {
+      buttonDown.current.addEventListener("click", handlerClickShiftDown);
     }
-
-    function handlerClickDelete() {
-      dispatch(deleteComponent);
+    if (buttonDelete.current) {
+      buttonDelete.current.addEventListener("click", handlerClickDelete);
     }
     return () => {
-      buttonUp.current.removeEventListener("click", handlerClickShiftUp);
-      buttonDown.current.removeEventListener("click", handlerClickShiftDown);
-      buttonDelete.current.removeEventListener("click", handlerClickDelete);
+      if (buttonUp.current) {
+        buttonUp.current.removeEventListener("click", handlerClickShiftUp);
+      }
+      if (buttonDown.current) {
+        buttonDown.current.removeEventListener("click", handlerClickShiftDown);
+      }
+      if (buttonDelete.current) {
+        buttonDelete.current.removeEventListener("click", handlerClickDelete);
+      }
     };
   }, []);
 }

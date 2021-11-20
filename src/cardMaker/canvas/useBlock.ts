@@ -1,19 +1,23 @@
-import { useEffect, MouseEvent, MutableRefObject } from 'react';
+import { useEffect, RefObject } from 'react';
 import { CardMaker as CardMakerType } from '../../CardMakerTypes';
 import { dispatch } from '../../CardMaker';
 import { setSelectedComponent } from '../../CardMakerFunctions';
 import { getCardMaker } from '../../CardMaker';
 
-export function useBlock(blockId: number, block: MutableRefObject<any>): number | null {
+export function useBlock(blockId: number, block: RefObject<HTMLElement>): number | null {
   const cardMaker: CardMakerType = getCardMaker();
   const selectId: number | null = cardMaker.selectBlock;
 
+  function handleClickBlock(event: Event): void {
+    dispatch(setSelectedComponent, blockId);
+    event.preventDefault();
+  }
+
   useEffect(() => {
-    block.current.addEventListener("click", handleClickBlock);
-    function handleClickBlock(event: MouseEvent<HTMLElement>) {
-      dispatch(setSelectedComponent, blockId);
-      event.stopPropagation();
+    if (block.current) {
+      block.current.addEventListener("click", handleClickBlock);
     }
+     
     return () => {
       // block.current.removeEventListener("click", handleClickBlock);
     };

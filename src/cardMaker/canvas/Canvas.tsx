@@ -54,7 +54,7 @@ function getListBlock(listBlock: BlockType[]): ReactElement[] {
   return newListBlock;
 }
 
-function getStyle(canvas: CanvasType) { 
+function getStyle(canvas: CanvasType) {
   let background: string = '#fff';
   if (canvas.background.color) {
     background = canvas.background.color;
