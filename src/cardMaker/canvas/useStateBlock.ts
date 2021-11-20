@@ -4,7 +4,7 @@ import { dispatch } from '../../CardMaker';
 import { setSelectedComponent } from '../../CardMakerFunctions';
 import { getCardMaker } from '../../CardMaker';
 
-export function useBlock(blockId: number, block: RefObject<HTMLElement>): number | null {
+export function useStateBlock(blockId: number, block: RefObject<HTMLElement>): number | null {
   const cardMaker: CardMakerType = getCardMaker();
   const selectId: number | null = cardMaker.selectBlock;
 

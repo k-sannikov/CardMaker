@@ -2,7 +2,7 @@ import styles from './ToolbarCanvas.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { ChangeEvent, MutableRefObject, useRef } from 'react';
-import { useCanvasSize } from './useCanvasSize';
+import { useStateCanvasSize } from './useStateCanvasSize';
 
 function ToolbarCanvas() {
   const onChangeRange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -11,7 +11,7 @@ function ToolbarCanvas() {
 
   const inputWidth = useRef<HTMLInputElement>(null);
   const inputHeight = useRef<HTMLInputElement>(null);
-  useCanvasSize(inputWidth, inputHeight);
+  useStateCanvasSize(inputWidth, inputHeight);
 
   return (
     <div className={styles.toolbar}>

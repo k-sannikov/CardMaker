@@ -1,7 +1,7 @@
 import styles from './Text.module.css';
 import { Text as TextType } from '../../../CardMakerTypes';
 import { useRef } from 'react';
-import { useBlock } from '../useBlock';
+import { useStateBlock } from '../useStateBlock';
 
 type TextProps = {
   text: TextType,
@@ -12,7 +12,7 @@ function Text(props: TextProps) {
   const textStyle = getStyle(text);
 
   const textBlock = useRef<HTMLSpanElement>(null);
-  const selectId = useBlock(props.text.id, textBlock);
+  const selectId = useStateBlock(props.text.id, textBlock);
   const select: string = props.text.id === selectId ? styles.selected : '';
 
   return (

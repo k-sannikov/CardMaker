@@ -2,7 +2,7 @@ import { RefObject, useEffect } from 'react';
 import { dispatch } from '../../../CardMaker';
 import { undo, redo } from '../../../CardMakerFunctions';
 
-export function useHistory(
+export function useStateHistory(
   buttonUndo: RefObject<HTMLButtonElement>,
   buttonRedo: RefObject<HTMLButtonElement>
 ): void {

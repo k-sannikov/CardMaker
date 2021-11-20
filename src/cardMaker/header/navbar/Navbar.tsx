@@ -5,17 +5,17 @@ import NavButton from './navButton/NavButton';
 import NavLinkButton from './navButton/NavLinkButton';
 import NavFileButton from './navButton/NavFileButton';
 import { RefObject, useRef } from 'react';
-import { useFileProject } from './useFileProject';
-import { useHistory } from './useHistory';
+import { useImportFileProject } from './useImportFileProject';
+import { useStateHistory } from './useStateHistory';
 
 function Navbar() {
   let buttonUndo = useRef<HTMLButtonElement>(null);
   let buttonRedo = useRef<HTMLButtonElement>(null);
-  useHistory(buttonUndo, buttonRedo);
+  useStateHistory(buttonUndo, buttonRedo);
 
   let inputFile = useRef<HTMLInputElement>(null);
   let downloadFile = useRef<HTMLAnchorElement>(null);
-  useFileProject(inputFile, downloadFile);
+  useImportFileProject(inputFile, downloadFile);
 
   return (
     <nav className={styles.navbar}>

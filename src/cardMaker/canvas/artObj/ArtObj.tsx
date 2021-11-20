@@ -1,7 +1,7 @@
 import styles from './ArtObj.module.css';
 import { ArtObj as ArtObjType } from '../../../CardMakerTypes';
 import { useRef } from 'react';
-import {useBlock} from '../useBlock';
+import { useStateBlock } from '../useStateBlock';
 
 type ArtObjProps = {
   artObj: ArtObjType,
@@ -11,7 +11,7 @@ function ArtObj(props: ArtObjProps) {
   const artObj: ArtObjType = props.artObj;
   const artObjStyle = getStyle(artObj);
   const artObjBlock = useRef<HTMLImageElement>(null);
-  const selectId = useBlock(props.artObj.id, artObjBlock);
+  const selectId = useStateBlock(props.artObj.id, artObjBlock);
   const select: string = props.artObj.id === selectId ? styles.selected : '';
 
 

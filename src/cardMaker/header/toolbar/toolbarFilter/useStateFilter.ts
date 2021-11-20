@@ -4,7 +4,7 @@ import { CardMaker as CardMakerType, Filter as FilterType } from '../../../../Ca
 import { RefObject, useEffect } from 'react';
 import { getCardMaker } from '../../../../CardMaker';
 
-export function useFilter(
+export function useStateFilter(
   inputColor: RefObject<HTMLInputElement>,
   inputRange: RefObject<HTMLInputElement>) : void{
   const cardMaker: CardMakerType = getCardMaker();

@@ -1,12 +1,12 @@
 import styles from './ToolbarFilter.module.css';
 import ColorPicker from '../colorPicker/ColorPicker';
 import { RefObject, useRef } from 'react';
-import { useFilter } from './useFilter';
+import { useStateFilter } from './useStateFilter';
 
 function ToolbarFilter() {
   const inputColor = useRef<HTMLInputElement>(null);
   const inputRange = useRef<HTMLInputElement>(null);
-  useFilter(inputColor, inputRange);
+  useStateFilter(inputColor, inputRange);
   return (
     <div className={styles.toolbar}>
       <div className={styles.colorPickerBox}>

@@ -4,7 +4,7 @@ import { useEffect, RefObject, } from 'react';
 import { CardMaker as CardMakerType, Background as BackgroundType } from '../../../../CardMakerTypes';
 import { getCardMaker } from '../../../../CardMaker';
 
-export function useBackgroungColor(
+export function useStateBackgroungColor(
   inputColor: RefObject<HTMLInputElement>,
   buttonReset: RefObject<HTMLButtonElement>): void {
   const cardMaker: CardMakerType = getCardMaker();

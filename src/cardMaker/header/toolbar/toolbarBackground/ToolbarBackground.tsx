@@ -3,12 +3,12 @@ import { faDownload, faGlobe, faRetweet } from '@fortawesome/free-solid-svg-icon
 import ColorPicker from '../colorPicker/ColorPicker';
 import Button from '../button/Button';
 import { RefObject, useRef } from 'react';
-import { useBackgroungColor } from './useBackgroungColor';
+import { useStateBackgroungColor } from './useStateBackgroungColor';
 
 function ToolbarBackground() {
   const inputColor = useRef<HTMLInputElement>(null);
   const buttonReset = useRef<HTMLButtonElement>(null);
-  useBackgroungColor(inputColor, buttonReset);
+  useStateBackgroungColor(inputColor, buttonReset);
   return (
     <div className={styles.toolbar}>
       <div className={styles.toolbar__row}>

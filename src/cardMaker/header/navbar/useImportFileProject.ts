@@ -4,7 +4,7 @@ import { getCardMakerFromFile } from '../../../utils/utils';
 import { RefObject, useEffect } from 'react';
 import { getCardMaker } from '../../../CardMaker';
 
-export function useFileProject(
+export function useImportFileProject(
   inputFile: RefObject<HTMLInputElement>,
   downloadFile: RefObject<HTMLAnchorElement>
 ): void {

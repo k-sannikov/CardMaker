@@ -1,14 +1,16 @@
 import styles from './ToolbarObject.module.css';
 import { faArrowUp, faArrowDown, faTrash } from '@fortawesome/free-solid-svg-icons'
 import Button from '../button/Button';
-import { useObject } from './useObject';
+import { useBlockLevel } from './useBlockLevel';
+import { useBlockDelete } from './useBlockDelete';
 import { RefObject, useRef } from 'react';
 
 function ToolbarObject() {
   let buttonUp = useRef<HTMLButtonElement>(null);
   let buttonDown = useRef<HTMLButtonElement>(null);
   let buttonDelete = useRef<HTMLButtonElement>(null);
-  useObject(buttonUp, buttonDown, buttonDelete);
+  useBlockLevel(buttonUp, buttonDown);
+  useBlockDelete(buttonDelete);
   return (
     <div className={styles.toolbar}>
       <div className={styles.toolbar__row}>

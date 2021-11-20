@@ -4,7 +4,7 @@ import { dispatch } from '../../../../CardMaker';
 import { RefObject, useEffect } from 'react';
 import { getCardMaker } from '../../../../CardMaker';
 
-export function useCanvasSize(
+export function useStateCanvasSize(
   inputWidth: RefObject<HTMLInputElement>,
   inputHeight: RefObject<HTMLInputElement>): void {
 
