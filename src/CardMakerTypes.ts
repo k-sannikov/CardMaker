@@ -20,14 +20,16 @@ export enum SetOfArtObject {
 }
 
 export type UnifiedBlock = {
-  readonly id: number,
-  readonly posX: number,
-  readonly posY: number,
+  readonly id: string,
+  posX: number,
+  posY: number,
+  // readonly posX: number,
+  // readonly posY: number,
   readonly type: string,
 }
 
 export type ArtObj = {
-  readonly nameArtObj: string,
+  // readonly nameArtObj: string,
   readonly src: string,
   readonly width: number,
   readonly height: number
@@ -77,7 +79,7 @@ export type Canvas = {
 
 export type CardMaker = {
   readonly canvas: Canvas,
-  readonly selectBlock: number | null,
+  readonly selectBlock: string | null,
   readonly history: ActionHistory,
   readonly templates: Template[],
 }

@@ -24,14 +24,3 @@
     font: 400 12px "Roboto Slab";
     color: #1c182b;
 }
-
-.sticker
-{
-    width: 50px;
-    cursor: pointer;
-}
-
-.sticker:hover
-{
-    background: #D6CFF4;
-}

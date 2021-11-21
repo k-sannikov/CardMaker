@@ -9,12 +9,12 @@ import { useImportFileProject } from './useImportFileProject';
 import { useStateHistory } from './useStateHistory';
 
 function Navbar() {
-  let buttonUndo = useRef<HTMLButtonElement>(null);
-  let buttonRedo = useRef<HTMLButtonElement>(null);
+  const buttonUndo = useRef<HTMLButtonElement>(null);
+  const buttonRedo = useRef<HTMLButtonElement>(null);
   useStateHistory(buttonUndo, buttonRedo);
 
-  let inputFile = useRef<HTMLInputElement>(null);
-  let downloadFile = useRef<HTMLAnchorElement>(null);
+  const inputFile = useRef<HTMLInputElement>(null);
+  const downloadFile = useRef<HTMLAnchorElement>(null);
   useImportFileProject(inputFile, downloadFile);
 
   return (

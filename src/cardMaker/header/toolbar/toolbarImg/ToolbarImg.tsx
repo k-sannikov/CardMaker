@@ -3,9 +3,13 @@ import { faDownload, faGlobe, faStickyNote } from '@fortawesome/free-solid-svg-i
 
 import DropdownMenu from '../../../dropdownMenu/DropdownMenu';
 import AddImgButton from './addImgButton/AddImgButton';
+import AddImgButtonFile from './addImgButtonFile/AddImgButtonFile';
+import PreviewArtObj from './previewArtObj/PreviewArtObj';
 import { SetOfArtObject } from '../../../../CardMakerTypes';
+import { useCreateImg } from './useCreateImg';
 
 import { ReactElement } from 'react';
+import { useRef } from 'react';
 
 function ToolbarImg() {
 
@@ -13,15 +17,18 @@ function ToolbarImg() {
   let srcList: SetOfArtObject[] = Object.values(SetOfArtObject);
   let imgList: ReactElement[] = [];
   srcList.forEach((src, index) => {
-    imgList.push(<img src={src} key={index} alt='' className={styles.sticker} />);
+    imgList.push(<PreviewArtObj src={src} key={index} />);
   });
+
+  const inputFile = useRef<HTMLInputElement>(null);
+  useCreateImg(inputFile);
 
   return (
     <div className={styles.toolbar}>
       <div className={styles.button_box}>
-        <AddImgButton label="" title="C компьютера" icon={faDownload} onClick={() => console.log('C компьютера')}/>
-        <AddImgButton label="" title="Из Pixels" icon={faGlobe} onClick={() => console.log('Из Pixels')}/>
-        <DropdownMenu label="" icon={faStickyNote} content={imgList}  />
+        <AddImgButtonFile label="" title="C компьютера" icon={faDownload} ref={inputFile} />
+        <AddImgButton label="" title="Из Pixels" icon={faGlobe} />
+        <DropdownMenu label="" icon={faStickyNote} content={imgList} />
       </div>
       <label className={styles.toolbar__label}>Изображения</label>
     </div>

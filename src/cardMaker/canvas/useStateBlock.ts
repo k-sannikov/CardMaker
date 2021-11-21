@@ -4,22 +4,26 @@ import { dispatch } from '../../CardMaker';
 import { setSelectedComponent } from '../../CardMakerFunctions';
 import { getCardMaker } from '../../CardMaker';
 
-export function useStateBlock(blockId: number, block: RefObject<HTMLElement>): number | null {
+export function useStateBlock(blockId: string, block: RefObject<HTMLElement>): string | null {
   const cardMaker: CardMakerType = getCardMaker();
-  const selectId: number | null = cardMaker.selectBlock;
+  const selectId: string | null = cardMaker.selectBlock;
 
-  function handleClickBlock(event: Event): void {
+  function handleBlock(event: Event): void {
     dispatch(setSelectedComponent, blockId);
     event.preventDefault();
   }
 
   useEffect(() => {
     if (block.current) {
-      block.current.addEventListener("click", handleClickBlock);
+      block.current.addEventListener("click", handleBlock);
+      block.current.addEventListener("mousedown", handleBlock);
     }
      
     return () => {
-      // block.current.removeEventListener("click", handleClickBlock);
+      if (block.current) {
+        block.current.removeEventListener("click", handleBlock);
+        block.current.removeEventListener("mousedown", handleBlock);
+      }
     };
   }, []);
   return selectId;

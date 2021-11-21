@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { dispatch } from '../../CardMaker';
 import { resetSelectedComponent, } from '../../CardMakerFunctions';
 
-export function useCanvas(): void {
+export function useRemoveSelectedBlock (): void {
   function handleClickDocument(event: Event): void {
     if (!event.defaultPrevented) {
       dispatch(resetSelectedComponent);

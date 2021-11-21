@@ -1,7 +1,7 @@
 import { dispatch } from '../../../CardMaker';
 import { applyFileProject } from '../../../CardMakerFunctions';
-import { getCardMakerFromFile } from '../../../utils/utils';
-import { RefObject, useEffect } from 'react';
+import { getCanvasFromFile } from '../../../utils/utils';
+import { FormEvent, RefObject, useEffect } from 'react';
 import { getCardMaker } from '../../../CardMaker';
 
 export function useImportFileProject(
@@ -9,23 +9,16 @@ export function useImportFileProject(
   downloadFile: RefObject<HTMLAnchorElement>
 ): void {
 
-  async function handlerChangeInputFile(event: any): Promise<void> {
-    const file = event.target.files[0];
-    dispatch(applyFileProject, await getCardMakerFromFile(file))
+  async function handlerChangeInputFile(event: Event): Promise<void> {
+    const target = event.target as HTMLInputElement;
+    const files = target.files as FileList;
+    dispatch(applyFileProject, await getCanvasFromFile(files[0]))
   }
 
   function handlerClickSaveToJson(event: Event): void {
     let link = event.target as HTMLAnchorElement;
     const cardMaker = getCardMaker();
-    const json = JSON.stringify(
-      {
-        ...cardMaker,
-        history: {
-          currentIndex: 0,
-          listState: [cardMaker.canvas]
-        }
-      }
-    );
+    const json = JSON.stringify(cardMaker.canvas);
     const file = new Blob([json], { type: 'application/json' });
     link.href = URL.createObjectURL(file);
     link.download = "Новый проект.json";

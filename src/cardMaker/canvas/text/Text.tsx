@@ -2,6 +2,7 @@ import styles from './Text.module.css';
 import { Text as TextType } from '../../../CardMakerTypes';
 import { useRef } from 'react';
 import { useStateBlock } from '../useStateBlock';
+import { useDragAndDrop } from '../useDragAndDrop';
 
 type TextProps = {
   text: TextType,
@@ -10,11 +11,13 @@ type TextProps = {
 function Text(props: TextProps) {
   const text: TextType = props.text;
   const textStyle = getStyle(text);
-
   const textBlock = useRef<HTMLSpanElement>(null);
   const selectId = useStateBlock(props.text.id, textBlock);
   const select: string = props.text.id === selectId ? styles.selected : '';
-
+  useDragAndDrop(textBlock, {
+    x: text.posX,
+    y: text.posY
+  });
   return (
     <span style={textStyle}
       ref={textBlock}

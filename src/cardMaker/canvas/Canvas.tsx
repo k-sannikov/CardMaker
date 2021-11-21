@@ -5,7 +5,7 @@ import Text from './text/Text'
 import ArtObj from './artObj/ArtObj'
 import Filter from './filter/Filter'
 import DeleteArea from './deleteArea/DeleteArea'
-import { useCanvas } from './useCanvas';
+import { useRemoveSelectedBlock  } from './useRemoveSelectedBlock ';
 import {
   Block as BlockType,
   ArtObj as ArtObjType,
@@ -19,16 +19,16 @@ type CanvasProps = {
 }
 
 function Canvas(props: CanvasProps) {
-  useCanvas();
+  useRemoveSelectedBlock ();
   const canvasStyle = getStyle(props.canvas);
   let listBlock: ReactElement[] = getListBlock(props.canvas.listBlock);
   return (
     <div id="canvas" className={styles.canvas} style={canvasStyle}>
+      <Filter canvas={props.canvas} />
+      {listBlock}
       {props.canvas.deleteArea &&
         <DeleteArea canvas={props.canvas} />
       }
-      <Filter canvas={props.canvas} />
-      {listBlock}
     </div>
   );
 }

@@ -3,7 +3,6 @@ import {
   Canvas,
   Filter,
   Background,
-  SetOfArtObject,
   ActionHistory,
   Block,
 } from './CardMakerTypes';
@@ -17,6 +16,8 @@ import {
   isUndoAvailable,
   isRedoAvailable
 } from './utils/utils'
+
+import { createGUID } from './utils/guid';
 
 export function createCanvas(cardMaker: CardMaker): CardMaker {
   const defaultWidth: number = 800;
@@ -76,7 +77,7 @@ export function setFilter(cardMaker: CardMaker, { color, opacity }: setFilterPar
   };
 }
 
-export function setSelectedComponent(cardMaker: CardMaker, id: number): CardMaker {
+export function setSelectedComponent(cardMaker: CardMaker, id: string): CardMaker {
   return {
     ...cardMaker,
     selectBlock: id,
@@ -131,10 +132,10 @@ export function resetBackground(cardMaker: CardMaker): CardMaker {
   };
 }
 
-export function createTextComponent(cardMaker: CardMaker, newId: number): CardMaker {
+export function createTextComponent(cardMaker: CardMaker): CardMaker {
   const defaultWidthElement = 150;
   const defaultHeightElement = 50;
-  const defaultSizeText = 14;
+  const defaultSizeText = 30;
   return {
     ...cardMaker,
     canvas: {
@@ -142,14 +143,14 @@ export function createTextComponent(cardMaker: CardMaker, newId: number): CardMa
       listBlock: [
         ...cardMaker.canvas.listBlock,
         {
-          id: newId,
+          id: createGUID(),
           type: 'text',
           color: '#000000',
           width: defaultWidthElement,
           height: defaultHeightElement,
           posX: cardMaker.canvas.width / 2,
           posY: cardMaker.canvas.height / 2,
-          text: '',
+          text: 'Текст',
           size: defaultSizeText,
           bold: false,
           italic: false,
@@ -162,7 +163,7 @@ export function createTextComponent(cardMaker: CardMaker, newId: number): CardMa
 }
 
 type setSizeComponentParam = {
-  id: number,
+  id: string,
   width: number,
   height: number,
 }
@@ -181,7 +182,7 @@ export function setSizeComponent(cardMaker: CardMaker, { id, width, height }: se
 }
 
 type setTextInTextComponentParam = {
-  id: number,
+  id: string,
   text: string,
 }
 export function setTextInTextComponent(cardMaker: CardMaker, { id, text }: setTextInTextComponentParam): CardMaker {
@@ -198,7 +199,7 @@ export function setTextInTextComponent(cardMaker: CardMaker, { id, text }: setTe
 }
 
 type setBoldTextParam = {
-  id: number,
+  id: string,
   isBold: boolean,
 }
 export function setBoldText(cardMaker: CardMaker, { id, isBold }: setBoldTextParam): CardMaker {
@@ -215,7 +216,7 @@ export function setBoldText(cardMaker: CardMaker, { id, isBold }: setBoldTextPar
 }
 
 type setItalicTextParam = {
-  id: number,
+  id: string,
   isItalic: boolean,
 }
 export function setItalicText(cardMaker: CardMaker, { id, isItalic }: setItalicTextParam): CardMaker {
@@ -232,7 +233,7 @@ export function setItalicText(cardMaker: CardMaker, { id, isItalic }: setItalicT
 }
 
 type setUnderlineTextParam = {
-  id: number,
+  id: string,
   isUnderline: boolean,
 }
 export function setUnderlineText(cardMaker: CardMaker, { id, isUnderline }: setUnderlineTextParam): CardMaker {
@@ -249,7 +250,7 @@ export function setUnderlineText(cardMaker: CardMaker, { id, isUnderline }: setU
 }
 
 type setSizeTextParam = {
-  id: number,
+  id: string,
   size: number,
 }
 export function setSizeText(cardMaker: CardMaker, { id, size }: setSizeTextParam): CardMaker {
@@ -266,7 +267,7 @@ export function setSizeText(cardMaker: CardMaker, { id, size }: setSizeTextParam
 }
 
 type setColorTextParam = {
-  id: number,
+  id: string,
   color: string,
 }
 export function setColorText(cardMaker: CardMaker, { id, color }: setColorTextParam): CardMaker {
@@ -283,12 +284,11 @@ export function setColorText(cardMaker: CardMaker, { id, color }: setColorTextPa
 }
 
 type createImgComponentParam = {
-  newId: number,
   src: string,
   width: number,
   height: number
 }
-export function createImgComponent(cardMaker: CardMaker, { newId, src, width, height }: createImgComponentParam): CardMaker {
+export function createImgComponent(cardMaker: CardMaker, { src, width, height }: createImgComponentParam): CardMaker {
   return {
     ...cardMaker,
     canvas: {
@@ -296,7 +296,7 @@ export function createImgComponent(cardMaker: CardMaker, { newId, src, width, he
       listBlock: [
         ...cardMaker.canvas.listBlock,
         {
-          id: newId,
+          id: createGUID(),
           type: 'img',
           width: width,
           height: height,
@@ -309,41 +309,9 @@ export function createImgComponent(cardMaker: CardMaker, { newId, src, width, he
   };
 }
 
-type createArtObjComponentParam = {
-  newId: number,
-  name: string,
-}
-export function createArtObjComponent(cardMaker: CardMaker, { newId, name }: createArtObjComponentParam): CardMaker {
+export function createArtObjComponent(cardMaker: CardMaker, src: string): CardMaker {
   const defaultWidthElement = 150;
   const defaultHeightElement = 150;
-
-  let pathSelectedType: string = SetOfArtObject.boy;
-  switch (name) {
-    case 'boy':
-      pathSelectedType = SetOfArtObject.boy;
-      break;
-    case 'frog':
-      pathSelectedType = SetOfArtObject.frog;
-      break;
-    case 'girl':
-      pathSelectedType = SetOfArtObject.girl;
-      break;
-    case 'loupe':
-      pathSelectedType = SetOfArtObject.loupe;
-      break;
-    case 'palette':
-      pathSelectedType = SetOfArtObject.palette
-      break;
-    case 'pencil':
-      pathSelectedType = SetOfArtObject.pencil
-      break;
-    case 'rainbow':
-      pathSelectedType = SetOfArtObject.rainbow
-      break;
-    case 'snail':
-      pathSelectedType = SetOfArtObject.snail
-      break;
-  }
 
   return {
     ...cardMaker,
@@ -352,14 +320,14 @@ export function createArtObjComponent(cardMaker: CardMaker, { newId, name }: cre
       listBlock: [
         ...cardMaker.canvas.listBlock,
         {
-          id: newId,
-          type: 'ArtObj',
+          id: createGUID(),
+          type: 'artObj',
           width: defaultWidthElement,
           height: defaultHeightElement,
           posX: cardMaker.canvas.width / 2,
           posY: cardMaker.canvas.height / 2,
-          nameArtObj: name,
-          src: pathSelectedType,
+          // nameArtObj: name,
+          src: src,
         }
       ],
     }
@@ -402,7 +370,7 @@ export function setPositionComponent(cardMaker: CardMaker, { newX, newY }: setPo
     ...cardMaker,
     canvas: {
       ...cardMaker.canvas,
-      listBlock: setComponentFields(canvas.listBlock, cardMaker.selectBlock as number, modifiableFields)
+      listBlock: setComponentFields(canvas.listBlock, cardMaker.selectBlock as string, modifiableFields)
     }
   };
 }
@@ -425,7 +393,7 @@ export function addHistory(cardMaker: CardMaker, newCanvas: Canvas): CardMaker {
 
 export function undo(cardMaker: CardMaker): CardMaker {
   const currentIndex: number = cardMaker.history.currentIndex;
-  const newCurrentIndex: number = isUndoAvailable(cardMaker) ? currentIndex - 1: currentIndex;
+  const newCurrentIndex: number = isUndoAvailable(cardMaker) ? currentIndex - 1 : currentIndex;
   return {
     ...cardMaker,
     history: {
@@ -437,7 +405,7 @@ export function undo(cardMaker: CardMaker): CardMaker {
 
 export function redo(cardMaker: CardMaker): CardMaker {
   const currentIndex: number = cardMaker.history.currentIndex;
-  const newCurrentIndex: number = isRedoAvailable(cardMaker) ? currentIndex + 1: currentIndex;
+  const newCurrentIndex: number = isRedoAvailable(cardMaker) ? currentIndex + 1 : currentIndex;
   return {
     ...cardMaker,
     history: {
@@ -457,7 +425,7 @@ export function applyTemplate(cardMaker: CardMaker, template: string): CardMaker
 export function shiftUpBlock(cardMaker: CardMaker): CardMaker {
   if (isShiftUpAvailable(cardMaker)) {
     let newListBlock: Block[] = [...cardMaker.canvas.listBlock];
-    const id: number = cardMaker.selectBlock as number;
+    const id: string = cardMaker.selectBlock as string;
     const index: number = getIndexById(newListBlock, id);
     const flipValue: Block[] = [newListBlock[index + 1], newListBlock[index]];
     newListBlock.splice(index, 2, ...flipValue);
@@ -476,7 +444,7 @@ export function shiftUpBlock(cardMaker: CardMaker): CardMaker {
 export function shiftDownBlock(cardMaker: CardMaker): CardMaker {
   if (isShiftDownAvailable(cardMaker)) {
     let newListBlock: Block[] = [...cardMaker.canvas.listBlock];
-    const id: number = cardMaker.selectBlock as number;
+    const id: string = cardMaker.selectBlock as string;
     const index: number = getIndexById(newListBlock, id);
     const flipValue: Block[] = [newListBlock[index], newListBlock[index - 1]];
     newListBlock.splice(index - 1, 2, ...flipValue);
@@ -492,6 +460,9 @@ export function shiftDownBlock(cardMaker: CardMaker): CardMaker {
   }
 }
 
-export function applyFileProject(cardMaker: CardMaker, newCardMaker: CardMaker): CardMaker {
-  return newCardMaker;
+export function applyFileProject(cardMaker: CardMaker, newCanvas: Canvas): CardMaker {
+  return {
+    ...cardMaker,
+    canvas: newCanvas
+  };
 }

@@ -11,8 +11,8 @@ function ToolbarArea() {
         icon={faVectorSquare}
       />
       <Button
-        label="Удалание"
-        title="Удалание"
+        label="Удаление"
+        title="Удаление"
         icon={faEraser}
       />
       <label className={styles.toolbar__label}>Область</label>

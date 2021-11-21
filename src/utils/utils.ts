@@ -1,4 +1,4 @@
-import { Block, CardMaker, } from '../CardMakerTypes';
+import { Block, Canvas, CardMaker, } from '../CardMakerTypes';
 
 // проверка доступности операции undo
 export function isUndoAvailable(cardMaker: CardMaker): boolean {
@@ -21,19 +21,19 @@ export function isSelectedBlock(cardMaker: CardMaker): boolean {
 
 // проверка доступности операции перемещения слоя вверх
 export function isShiftUpAvailable(cardMaker: CardMaker): boolean {
-  const id: number|null = cardMaker.selectBlock;
+  const id: string|null = cardMaker.selectBlock;
   const length: number = cardMaker.canvas.listBlock.length;
   return Boolean(id && getIndexById(cardMaker.canvas.listBlock, id) < length - 1)
 }
 
 // проверка доступности операции перемещения слоя вниз
 export function isShiftDownAvailable(cardMaker: CardMaker): boolean {
-  const id: number|null = cardMaker.selectBlock;
+  const id: string|null = cardMaker.selectBlock;
   return Boolean(id && getIndexById(cardMaker.canvas.listBlock, id) > 0)
 }
 
 // установка значений полю/полям одного элемента из списка элементов
-export function setComponentFields(listBlock: Block[], id: number, modifiableFields: object): Block[] {
+export function setComponentFields(listBlock: Block[], id: string, modifiableFields: object): Block[] {
   let newlistBlock: Block[] = [];
   listBlock.forEach((component: Block) => {
     if (component.id === id) {
@@ -49,7 +49,7 @@ export function setComponentFields(listBlock: Block[], id: number, modifiableFie
 }
 
 // получить индекс элемента по id
-export function getIndexById(listBlock: Block[], id: number): number {
+export function getIndexById(listBlock: Block[], id: string): number {
   let foundIndex: number = -1;
   listBlock.forEach((block: Block, index: number) => {
     if (block.id === id) {
@@ -82,7 +82,7 @@ export async function getImgInformationFromFile(fileImg: File): Promise<ImgInfo>
   }
 }
 
-export async function getCardMakerFromFile(file: File): Promise<CardMaker> {
+export async function getCanvasFromFile(file: File): Promise<Canvas> {
   const filePromise = new Promise((resolve, reject) => {
     var reader = new FileReader();
     reader.readAsText(file);
@@ -90,5 +90,5 @@ export async function getCardMakerFromFile(file: File): Promise<CardMaker> {
     reader.onerror = reject;
   });
   const json = await filePromise as string;
-  return await JSON.parse(json) as CardMaker;
+  return await JSON.parse(json) as Canvas;
 }

@@ -27,20 +27,19 @@ let testSetOfArtObject = {
   snail: "img/artObj/snail.png",
 }
 
-
 let testArtObj: ArtObj = {
-  id: 1,
+  id: "d3df27cd-3053-21a6-4abe-9db51cda7c17",
   type: "artObj",
   width: 150,
   height: 150,
   posX: 20,
   posY: 280,
-  nameArtObj: "girl",
+  // nameArtObj: "girl",
   src: testSetOfArtObject.girl,
 }
 
 let testImg: Img = {
-  id: 2,
+  id: "4f406201-6f2f-b9ce-575e-438b1a7d1456",
   type: "img",
   width: 320,
   height: 238,
@@ -50,7 +49,7 @@ let testImg: Img = {
 }
 
 let testText: Text = {
-  id: 3,
+  id: "9a13a85a-59ee-7ba3-1c64-fcad25650fc1",
   type: "text",
   posX: 200,
   posY: 280,

@@ -1,9 +1,13 @@
 import styles from './ToolbarText.module.css';
-import { faBold, faItalic, faUnderline } from '@fortawesome/free-solid-svg-icons'
+import { faBold, faItalic, faUnderline, faFont } from '@fortawesome/free-solid-svg-icons'
 import ButtonEditText from './buttonEditText/ButtonEditText';
 import ColorPicker from '../colorPicker/ColorPicker';
+import { useCreateText } from './useCreateText';
+import { useRef } from 'react';
 
 function ToolbarText() {
+  const addButton = useRef<HTMLButtonElement>(null);
+  useCreateText(addButton);
   return (
     <div className={styles.toolbar}>
 
@@ -12,6 +16,7 @@ function ToolbarText() {
           <option value="">Calibri</option>
           <option value="">Arial</option>
         </select>
+        <ButtonEditText icon={faFont} ref={addButton} />
       </div>
 
       <div className={styles.toolbar__row}>
@@ -19,11 +24,11 @@ function ToolbarText() {
           <option value="">14</option>
           <option value="">16</option>
         </select>
-        <ButtonEditText icon={faBold} onClick={() => console.log('Bold')} />
-        <ButtonEditText icon={faItalic} onClick={() => console.log('Italic')} />
-        <ButtonEditText icon={faUnderline} onClick={() => console.log('Underline')} />
+        <ButtonEditText icon={faBold} />
+        <ButtonEditText icon={faItalic} />
+        <ButtonEditText icon={faUnderline} />
         <div className={styles.colorPickerBox}>
-          <ColorPicker ref={null}/>
+          <ColorPicker ref={null} />
         </div>
       </div>
 
