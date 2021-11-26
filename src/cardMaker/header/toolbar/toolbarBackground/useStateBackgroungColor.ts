@@ -1,8 +1,7 @@
 import { resetBackground, setBackgroundColor } from '../../../../CardMakerFunctions';
-import { dispatch } from '../../../../CardMaker';
+import { dispatch, getCardMaker } from '../../../../CardMaker';
 import { useEffect, RefObject, } from 'react';
 import { CardMaker as CardMakerType, Background as BackgroundType } from '../../../../CardMakerTypes';
-import { getCardMaker } from '../../../../CardMaker';
 
 export function useStateBackgroungColor(
   inputColor: RefObject<HTMLInputElement>,

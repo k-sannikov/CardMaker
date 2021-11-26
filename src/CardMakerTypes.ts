@@ -21,10 +21,8 @@ export enum SetOfArtObject {
 
 export type UnifiedBlock = {
   readonly id: string,
-  posX: number,
-  posY: number,
-  // readonly posX: number,
-  // readonly posY: number,
+  readonly posX: number,
+  readonly posY: number,
   readonly type: string,
 }
 

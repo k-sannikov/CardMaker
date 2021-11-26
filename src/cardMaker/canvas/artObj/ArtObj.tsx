@@ -3,6 +3,7 @@ import { ArtObj as ArtObjType } from '../../../CardMakerTypes';
 import { useRef } from 'react';
 import { useStateBlock } from '../useStateBlock';
 import { useDragAndDrop } from '../useDragAndDrop';
+import { useResize } from '../useResize';
 
 type ArtObjProps = {
   artObj: ArtObjType,
@@ -18,6 +19,15 @@ function ArtObj(props: ArtObjProps) {
     x: artObj.posX,
     y: artObj.posY
   });
+
+  // useResize(artObjBlock, {
+  //   x: artObj.posX,
+  //   y: artObj.posY
+  // },
+  // {
+  //   width: artObj.width,
+  //   height: artObj.height,
+  // });
   
   return (
     <img src={artObj.src} style={artObjStyle}
