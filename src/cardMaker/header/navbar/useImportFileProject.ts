@@ -1,23 +1,27 @@
-import { dispatch } from '../../../CardMaker';
-import { applyFileProject } from '../../../CardMakerFunctions';
 import { getCanvasFromFile } from '../../../utils/utils';
-import { FormEvent, RefObject, useEffect } from 'react';
-import { getCardMaker } from '../../../CardMaker';
+import { RefObject, useContext, useEffect } from 'react';
+
+import StoreContext from '../../../StoreContext';
+import { applyFileProject } from '../../../store/actionCreators/actionCreators';
 
 export function useImportFileProject(
   inputFile: RefObject<HTMLInputElement>,
   downloadFile: RefObject<HTMLAnchorElement>
 ): void {
 
+  const store = useContext(StoreContext);
+
   async function handlerChangeInputFile(event: Event): Promise<void> {
     const target = event.target as HTMLInputElement;
     const files = target.files as FileList;
-    dispatch(applyFileProject, await getCanvasFromFile(files[0]))
+    console.log(files);
+    store.dispatch(applyFileProject(await getCanvasFromFile(files[0])))
+    target.value = '';
   }
 
   function handlerClickSaveToJson(event: Event): void {
     let link = event.target as HTMLAnchorElement;
-    const cardMaker = getCardMaker();
+    const cardMaker = store.getState();
     const json = JSON.stringify(cardMaker.canvas);
     const file = new Blob([json], { type: 'application/json' });
     link.href = URL.createObjectURL(file);

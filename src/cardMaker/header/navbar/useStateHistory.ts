@@ -1,17 +1,20 @@
-import { RefObject, useEffect } from 'react';
-import { dispatch } from '../../../CardMaker';
-import { undo, redo } from '../../../CardMakerFunctions';
+import { RefObject, useContext, useEffect } from 'react';
+
+import StoreContext from '../../../StoreContext';
+import { undo, redo } from '../../../store/actionCreators/actionCreators';
 
 export function useStateHistory(
   buttonUndo: RefObject<HTMLButtonElement>,
   buttonRedo: RefObject<HTMLButtonElement>
 ): void {
+  
+  const store = useContext(StoreContext);
 
   function handlerClickUndo(): void {
-    dispatch(undo);
+    store.dispatch(undo());
   }
   function handlerClickRedo(): void {
-    dispatch(redo);
+    store.dispatch(redo());
   }
 
   useEffect(() => {

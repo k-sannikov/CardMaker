@@ -1,20 +1,18 @@
-import { useEffect } from "react";
-import { dispatch } from '../../CardMaker';
-import { resetSelectedComponent, } from '../../CardMakerFunctions';
+import { useContext, useEffect } from "react";
+import StoreContext from '../../StoreContext';
+import { resetSelectedBlock } from '../../store/actionCreators/actionCreators';
 
 export function useRemoveSelectedBlock (): void {
-  function handleClickDocument(event: Event): void {
+  const store = useContext(StoreContext);
+  function handleMousedownDocument(event: Event): void {
     if (!event.defaultPrevented) {
-      dispatch(resetSelectedComponent);
+      store.dispatch(resetSelectedBlock());
     }
   }
   useEffect(() => {
-    document.addEventListener("click", handleClickDocument);
+    document.addEventListener("mousedown", handleMousedownDocument);
     return () => {
-      document.removeEventListener("click", handleClickDocument);
+      document.removeEventListener("mousedown", handleMousedownDocument);
     };
   }, []);
 }
-
-
-

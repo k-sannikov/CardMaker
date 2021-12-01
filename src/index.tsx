@@ -2,16 +2,25 @@ import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import CardMaker from './cardMaker/CardMaker';
-import { addCardMakerChangeHandler, getCardMaker } from './CardMaker';
+import StoreContext from './StoreContext';
+import { store } from './store/store';
+
+let unsubscribe = store.subscribe(() => {
+  render();
+});
 
 function render(): void {
+  
+  console.log(store.getState());
+  
   ReactDOM.render(
     <React.StrictMode>
-      <CardMaker cardMaker={getCardMaker()} />
+      <StoreContext.Provider value={store}>
+        <CardMaker cardMaker={store.getState()} />
+      </StoreContext.Provider>
     </React.StrictMode>,
     document.getElementById('root')
   );
 }
 
-addCardMakerChangeHandler(render);
 render();

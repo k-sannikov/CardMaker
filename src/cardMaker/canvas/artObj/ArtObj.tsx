@@ -11,45 +11,47 @@ type ArtObjProps = {
 
 function ArtObj(props: ArtObjProps) {
   const artObj: ArtObjType = props.artObj;
-  const artObjBlock = useRef<HTMLImageElement>(null);
+  const artObjBlock = useRef<HTMLDivElement>(null);
   const artObjStyle = getStyle(artObj);
   const selectId = useStateBlock(props.artObj.id, artObjBlock);
   const select: string = props.artObj.id === selectId ? styles.selected : '';
   useDragAndDrop(artObjBlock, {
-    x: artObj.posX,
-    y: artObj.posY
+    x: artObj.x,
+    y: artObj.y
   });
 
-  // useResize(artObjBlock, {
-  //   x: artObj.posX,
-  //   y: artObj.posY
-  // },
-  // {
-  //   width: artObj.width,
-  //   height: artObj.height,
-  // });
-  
-  return (
-    <img src={artObj.src} style={artObjStyle}
-      alt=''
-      ref={artObjBlock}
-      className={styles.block + ' ' + select}
-      draggable="false"
-    />
-  );
-}
+  const point = useRef<HTMLDivElement>(null);
 
-type posType = {
-  x: number,
-  y: number,
+  useResize(point, artObjBlock, {
+    x: artObj.x,
+    y: artObj.y
+  },
+    {
+      width: artObj.width,
+      height: artObj.height,
+    });
+
+  return (
+    <div
+      className={styles.block + ' ' + select}
+      style={artObjStyle}
+      ref={artObjBlock}
+    >
+      <img src={artObj.src}
+        alt=''
+        className={styles.img}
+      />
+      <div className={styles.pointBottomRight} ref={point}></div>
+    </div>
+  );
 }
 
 function getStyle(artObj: ArtObjType) {
   return {
     width: artObj.width,
     height: artObj.height,
-    left: artObj.posX,
-    top: artObj.posY,
+    left: artObj.x,
+    top: artObj.y,
   };
 }
 

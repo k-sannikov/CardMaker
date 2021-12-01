@@ -15,8 +15,8 @@ function Text(props: TextProps) {
   const selectId = useStateBlock(props.text.id, textBlock);
   const select: string = props.text.id === selectId ? styles.selected : '';
   useDragAndDrop(textBlock, {
-    x: text.posX,
-    y: text.posY
+    x: text.x,
+    y: text.y
   });
   return (
     <span style={textStyle}
@@ -29,8 +29,8 @@ function Text(props: TextProps) {
 
 function getStyle(text: TextType) {
   return {
-    left: text.posX,
-    top: text.posY,
+    left: text.x,
+    top: text.y,
     color: text.color,
     fontSize: text.size,
     fontWeight: text.bold ? 700 : 400,

@@ -1,16 +1,19 @@
-import { RefObject, useEffect } from "react";
-import { dispatch } from '../../../../CardMaker';
-import { createImgComponent } from '../../../../CardMakerFunctions';
+import { RefObject, useContext, useEffect } from "react";
 import { getImgInformationFromFile } from './../../../../utils/utils';
+
+import StoreContext from '../../../../StoreContext';
+import { createImgBlock } from '../../../../store/actionCreators/actionCreators';
 
 
 export function useCreateImg(inputFile: RefObject<HTMLElement>) {
+  const store = useContext(StoreContext);
 
   async function handlerChangeInput(event: Event): Promise<void> {
     const target = event.target as HTMLInputElement;
     const files = target.files as FileList;
     const imgInfo = await getImgInformationFromFile(files[0]);
-    dispatch(createImgComponent, {...imgInfo})
+    store.dispatch(createImgBlock(imgInfo.src, imgInfo.width, imgInfo.height))
+    target.value = '';
   }
 
   useEffect(() => {

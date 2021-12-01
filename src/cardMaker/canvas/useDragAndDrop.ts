@@ -1,14 +1,14 @@
-import { useEffect, RefObject } from 'react';
-import { dispatch } from '../../CardMaker';
-import { setPositionComponent } from '../../CardMakerFunctions';
+import { useEffect, RefObject, useContext } from 'react';
 
-type posType = {
-  x: number,
-  y: number,
-}
-export function useDragAndDrop(block: RefObject<HTMLElement>, defPos: posType): void {
-  let currentPos: posType;
-  let startPos: posType;
+import StoreContext from '../../StoreContext';
+import { setPositionBlock } from '../../store/actionCreators/actionCreators';
+import { Position } from '../../CardMakerTypes';
+
+export function useDragAndDrop(block: RefObject<HTMLElement>, defPos: Position): void {
+  const store = useContext(StoreContext);
+
+  let currentPos: Position;
+  let startPos: Position;
 
   function handleMousedown(event: MouseEvent): void {
     startPos = {
@@ -20,37 +20,34 @@ export function useDragAndDrop(block: RefObject<HTMLElement>, defPos: posType): 
   }
 
   function handleMouseMove(event: MouseEvent): void {
-    currentPos = {
-      x: defPos.x,
-      y: defPos.y,
-    };
-    const delta = {
-      x: event.pageX - startPos.x,
-      y: event.pageY - startPos.y
+    console.log();
+    if (!event.defaultPrevented) {
+      currentPos = {
+        x: defPos.x,
+        y: defPos.y,
+      };
+      const delta = {
+        x: event.pageX - startPos.x,
+        y: event.pageY - startPos.y
+      }
+      const newPos = {
+        x: currentPos.x + delta.x,
+        y: currentPos.y + delta.y
+      }
+      currentPos = newPos;
+      if (block.current) {
+        block.current.style.left = String(newPos.x) + 'px';
+        block.current.style.top = String(newPos.y) + 'px';
+      }
     }
-    const newPos = {
-      x: currentPos.x + delta.x,
-      y: currentPos.y + delta.y
-    }
-    currentPos = newPos;
-    if (block.current) {
-      block.current.style.left = String(newPos.x) + 'px';
-      block.current.style.top = String(newPos.y) + 'px';
-    }
+
   }
 
   function handleMouseUp(): void {
     if (currentPos) {
-      dispatch(setPositionComponent, {
-        newX: currentPos.x,
-        newY: currentPos.y,
-      });
-    } else {
-      dispatch(setPositionComponent, {
-        newX: defPos.x,
-        newY: defPos.y,
-      });
+      store.dispatch(setPositionBlock(currentPos.x, currentPos.y));
     }
+
     if (block.current) {
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseup", handleMouseUp);

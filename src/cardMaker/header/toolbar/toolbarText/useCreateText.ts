@@ -1,12 +1,12 @@
-import { RefObject, useEffect } from "react";
-import { dispatch } from '../../../../CardMaker';
-import { createTextComponent } from '../../../../CardMakerFunctions';
+import { RefObject, useContext, useEffect } from "react";
+import StoreContext from '../../../../StoreContext';
+import { createTextBlock } from '../../../../store/actionCreators/actionCreators';
 
 
 export function useCreateText(button: RefObject<HTMLButtonElement>) {
-
+  const store = useContext(StoreContext);
   function handleClickButton() {
-    dispatch(createTextComponent);
+    store.dispatch(createTextBlock());
   }
 
   useEffect(() => {
@@ -19,6 +19,5 @@ export function useCreateText(button: RefObject<HTMLButtonElement>) {
         button.current.removeEventListener("click", handleClickButton);
       }
     };
-
   });
 }

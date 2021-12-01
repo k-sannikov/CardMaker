@@ -17,6 +17,3 @@ function Filter(props: FilterProps) {
 }
 
 export default Filter;
-
-
-

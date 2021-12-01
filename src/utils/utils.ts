@@ -1,35 +1,35 @@
-import { Block, Canvas, CardMaker, } from '../CardMakerTypes';
+import { ActionHistory, Block, Canvas } from '../CardMakerTypes';
 
 // проверка доступности операции undo
-export function isUndoAvailable(cardMaker: CardMaker): boolean {
-  let length = cardMaker.history.listState.length;
-  let index = cardMaker.history.currentIndex;
+export function isUndoAvailable(history: ActionHistory): boolean {
+  let length = history.listState.length;
+  let index = history.currentIndex;
   return length > 1 && index > 0;
 }
 
 // проверка доступности операции redo
-export function isRedoAvailable(cardMaker: CardMaker): boolean {
-  let length = cardMaker.history.listState.length;
-  let index = cardMaker.history.currentIndex;
+export function isRedoAvailable(history: ActionHistory): boolean {
+  let length = history.listState.length;
+  let index = history.currentIndex;
   return index + 1 < length;
 }
 
 // проверка выделен ли блок
-export function isSelectedBlock(cardMaker: CardMaker): boolean {
-  return Boolean(cardMaker.selectBlock)
+export function isSelectedBlock(id: string | null): boolean {
+  return Boolean(id)
 }
 
+// permisions
+
 // проверка доступности операции перемещения слоя вверх
-export function isShiftUpAvailable(cardMaker: CardMaker): boolean {
-  const id: string|null = cardMaker.selectBlock;
-  const length: number = cardMaker.canvas.listBlock.length;
-  return Boolean(id && getIndexById(cardMaker.canvas.listBlock, id) < length - 1)
+export function isShiftUpAvailable(id: string | null, listBlock: Block[]): boolean {
+  const length: number = listBlock.length;
+  return Boolean(id && getIndexById(listBlock, id) < length - 1)
 }
 
 // проверка доступности операции перемещения слоя вниз
-export function isShiftDownAvailable(cardMaker: CardMaker): boolean {
-  const id: string|null = cardMaker.selectBlock;
-  return Boolean(id && getIndexById(cardMaker.canvas.listBlock, id) > 0)
+export function isShiftDownAvailable(id: string | null, listBlock: Block[]): boolean {
+  return Boolean(id && getIndexById(listBlock, id) > 0)
 }
 
 // установка значений полю/полям одного элемента из списка элементов

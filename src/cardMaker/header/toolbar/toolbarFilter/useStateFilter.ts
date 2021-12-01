@@ -1,13 +1,16 @@
-import { setFilter } from '../../../../CardMakerFunctions';
-import { dispatch } from '../../../../CardMaker';
 import { CardMaker as CardMakerType, Filter as FilterType } from '../../../../CardMakerTypes';
-import { RefObject, useEffect } from 'react';
-import { getCardMaker } from '../../../../CardMaker';
+import { RefObject, useContext, useEffect } from 'react';
+
+import StoreContext from '../../../../StoreContext';
+import { setFilter } from '../../../../store/actionCreators/actionCreators';
 
 export function useStateFilter(
   inputColor: RefObject<HTMLInputElement>,
   inputRange: RefObject<HTMLInputElement>) : void{
-  const cardMaker: CardMakerType = getCardMaker();
+
+  const store = useContext(StoreContext);
+
+  const cardMaker: CardMakerType = store.getState();
   const filter: FilterType = cardMaker.canvas.filter;
 
   function handleInputFilter(): void {
@@ -23,9 +26,9 @@ export function useStateFilter(
 
   function handleBlurFilter(): void {
     if (inputRange.current && inputColor.current) {
-      const opacity: string = inputRange.current.value;
+      const opacity: number = Number(inputRange.current.value);
       const color: string = inputColor.current.value;
-      dispatch(setFilter, { color, opacity });
+      store.dispatch(setFilter(color, opacity));
     }
   }
 

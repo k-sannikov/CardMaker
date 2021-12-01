@@ -6,8 +6,33 @@
     border: 1px solid #f5f5f500;
 }
 
+.img
+{
+    width: 100%;
+}
+
+:root { --size-point: 10px; }
+
 .selected
 {
-    border: 1px dashed #e60505;
-    cursor: move;
+  border: 1px dashed #858585;
+  cursor: move;
+}
+
+.selected .pointBottomRight
+{
+    position: absolute;
+    width: var(--size-point);
+    height: var(--size-point);
+    background: #555555;
+}
+
+.selected .pointBottomRight
+{
+    border-radius: var(--size-point);
+    border: 2px solid #858585;
+    margin-top: calc(1px - var(--size-point));
+    margin-right: calc(5px - var(--size-point));
+    right: 0;
+    cursor: nw-resize;
 }

@@ -1,14 +1,15 @@
 import { CardMaker as CardMakerType } from '../../../../CardMakerTypes';
-import { setCanvasSize } from '../../../../CardMakerFunctions';
-import { dispatch } from '../../../../CardMaker';
-import { RefObject, useEffect } from 'react';
-import { getCardMaker } from '../../../../CardMaker';
+import { RefObject, useContext, useEffect } from 'react';
+import StoreContext from '../../../../StoreContext';
+import { setCanvasSize } from '../../../../store/actionCreators/actionCreators';
 
 export function useStateCanvasSize(
   inputWidth: RefObject<HTMLInputElement>,
   inputHeight: RefObject<HTMLInputElement>): void {
 
-  const cardMaker: CardMakerType = getCardMaker();
+  const store = useContext(StoreContext);
+
+  const cardMaker: CardMakerType = store.getState();
   const width: number = cardMaker.canvas.width;
   const height: number = cardMaker.canvas.height;
 
@@ -19,11 +20,12 @@ export function useStateCanvasSize(
       canvasDivElement.style.height = inputHeight.current.value + 'px';
     }
   }
+  
   function handleBlurSize(): void {
     if (inputWidth.current && inputHeight.current) {
       const width: number = Number(inputWidth.current.value);
       const height: number = Number(inputHeight.current.value);
-      dispatch(setCanvasSize, { width, height });
+      store.dispatch(setCanvasSize(width, height));
     }
   }
 

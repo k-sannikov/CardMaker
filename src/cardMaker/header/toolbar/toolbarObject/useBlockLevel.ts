@@ -1,34 +1,36 @@
-import { RefObject, useEffect } from 'react';
-import { shiftUpBlock, shiftDownBlock } from '../../../../CardMakerFunctions';
-import { dispatch } from '../../../../CardMaker';
+import { RefObject, useContext, useEffect } from 'react';
+import StoreContext from '../../../../StoreContext';
+import { shiftUpBlock, shiftDownBlock } from '../../../../store/actionCreators/actionCreators';
 
 export function useBlockLevel(
   buttonUp: RefObject<HTMLButtonElement>,
   buttonDown: RefObject<HTMLButtonElement>): void {
 
-  function handlerClickShiftUp(event: Event): void {
+  const store = useContext(StoreContext);
+  
+  function handlerMousedownShiftUp(event: Event): void {
     event.preventDefault();
-    dispatch(shiftUpBlock);
+    store.dispatch(shiftUpBlock());
   }
 
-  function handlerClickShiftDown(event: Event): void {
+  function handlerMousedownShiftDown(event: Event): void {
     event.preventDefault();
-    dispatch(shiftDownBlock);
+    store.dispatch(shiftDownBlock());
   }
 
   useEffect(() => {
     if (buttonUp.current) {
-      buttonUp.current.addEventListener("click", handlerClickShiftUp);
+      buttonUp.current.addEventListener("mousedown", handlerMousedownShiftUp);
     }
     if (buttonDown.current) {
-      buttonDown.current.addEventListener("click", handlerClickShiftDown);
+      buttonDown.current.addEventListener("mousedown", handlerMousedownShiftDown);
     }
     return () => {
       if (buttonUp.current) {
-        buttonUp.current.removeEventListener("click", handlerClickShiftUp);
+        buttonUp.current.removeEventListener("mousedown", handlerMousedownShiftUp);
       }
       if (buttonDown.current) {
-        buttonDown.current.removeEventListener("click", handlerClickShiftDown);
+        buttonDown.current.removeEventListener("mousedown", handlerMousedownShiftDown);
       }
     };
   }, []);

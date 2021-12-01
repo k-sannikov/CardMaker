@@ -1,16 +1,17 @@
-import { resetBackground, setBackgroundColor } from '../../../../CardMakerFunctions';
-import { dispatch, getCardMaker } from '../../../../CardMaker';
-import { useEffect, RefObject, } from 'react';
+import { useEffect, RefObject, useContext, } from 'react';
 import { CardMaker as CardMakerType, Background as BackgroundType } from '../../../../CardMakerTypes';
+import StoreContext from '../../../../StoreContext';
+import { resetBackground, setBackgroundColor } from '../../../../store/actionCreators/actionCreators';
 
 export function useStateBackgroungColor(
   inputColor: RefObject<HTMLInputElement>,
   buttonReset: RefObject<HTMLButtonElement>): void {
-  const cardMaker: CardMakerType = getCardMaker();
+  const store = useContext(StoreContext);
+  const cardMaker: CardMakerType = store.getState();
   const background: BackgroundType = cardMaker.canvas.background;
 
   function handlerClickResetColor(): void {
-    dispatch(resetBackground);
+    store.dispatch(resetBackground());
   }
 
   function handlerInputColor(event: Event): void {
@@ -22,7 +23,7 @@ export function useStateBackgroungColor(
   function handleerBlurColor(event: Event): void {
     const inputColor = event.target as HTMLInputElement;
     const color: string = inputColor.value;
-    dispatch(setBackgroundColor, color);
+    store.dispatch(setBackgroundColor(color));
   }
 
   useEffect(() => {

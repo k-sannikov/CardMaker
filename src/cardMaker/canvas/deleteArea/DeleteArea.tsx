@@ -12,8 +12,8 @@ function DeleteArea(props: DeleteAreaProps) {
     const DeleteAreaStyle = {
       width: block.width as number,
       height: block.height as number,
-      left: block.posX as number,
-      top: block.posY as number,
+      left: block.x as number,
+      top: block.y as number,
     };
 
     listBlock.push(

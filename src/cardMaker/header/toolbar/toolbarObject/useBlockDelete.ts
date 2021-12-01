@@ -1,21 +1,22 @@
-import { RefObject, useEffect } from 'react';
-import { deleteComponent } from '../../../../CardMakerFunctions';
-import { dispatch } from '../../../../CardMaker';
+import { RefObject, useContext, useEffect } from 'react';
 
-export function useBlockDelete(
-  buttonDelete: RefObject<HTMLButtonElement>): void {
+import StoreContext from '../../../../StoreContext';
+import { deleteBlock } from '../../../../store/actionCreators/actionCreators';
 
-  function handlerClickDelete(): void {
-    dispatch(deleteComponent);
+export function useBlockDelete(buttonDelete: RefObject<HTMLButtonElement>): void {
+  const store = useContext(StoreContext);
+
+  function handlerMousedownDelete(): void {
+    store.dispatch(deleteBlock());
   }
 
   useEffect(() => {
     if (buttonDelete.current) {
-      buttonDelete.current.addEventListener("click", handlerClickDelete);
+      buttonDelete.current.addEventListener("mousedown", handlerMousedownDelete);
     }
     return () => {
       if (buttonDelete.current) {
-        buttonDelete.current.removeEventListener("click", handlerClickDelete);
+        buttonDelete.current.removeEventListener("mousedown", handlerMousedownDelete);
       }
     };
   }, []);
