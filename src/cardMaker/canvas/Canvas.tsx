@@ -32,9 +32,8 @@ function Canvas(props: CanvasProps) {
       {props.canvas.deleteArea &&
         <DeleteArea canvas={props.canvas} />
       }
-      <Filter canvas={props.canvas} />
+      <Filter canvas={props.canvas} viewModel={props.viewModel} />
       {listBlock}
-
     </div>
   );
 }
@@ -63,20 +62,29 @@ function getListBlock(listBlock: BlockType[]): ReactElement[] {
 function getStyle(canvas: CanvasType, viewModel: ViewModelType) {
   let background: string = '#fff';
 
-  if (!viewModel.bgColor) {
+  if (viewModel.bgColor) {
+    background = viewModel.bgColor;
+  } else {
     if (canvas.background.color) {
       background = canvas.background.color;
     } else if (canvas.background.src) {
       background = 'url(' + canvas.background.src + ')';
     }
-  } else {
-    background = viewModel.bgColor;
   }
-
+  
+  let width: number = 0;
+  let height: number = 0;
+  if (viewModel.canvasSize) {
+    width = viewModel.canvasSize.width;
+    height = viewModel.canvasSize.height;
+  } else {
+    width = canvas.width;
+    height = canvas.height;
+  }
   
   return {
-    width: canvas.width,
-    height: canvas.height,
+    width: width,
+    height: height,
     background: background,
   };
 }

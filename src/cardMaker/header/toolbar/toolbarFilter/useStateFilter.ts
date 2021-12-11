@@ -2,7 +2,7 @@ import { CardMaker as CardMakerType, Filter as FilterType } from '../../../../Ca
 import { RefObject, useContext, useEffect } from 'react';
 
 import StoreContext from '../../../../StoreContext';
-import { setFilter } from '../../../../store/actionCreators/canvasActionCreators';
+import { setFilter, inputFilter } from '../../../../store/actionCreators/canvasActionCreators';
 
 export function useStateFilter(
   inputColor: RefObject<HTMLInputElement>,
@@ -15,13 +15,10 @@ export function useStateFilter(
 
   function handleInputFilter(): void {
     if (inputRange.current && inputColor.current) {
-      let filterDivElement: HTMLDivElement = document.getElementById('filter') as HTMLDivElement;
-      const opacity: string = inputRange.current.value;
       const color: string = inputColor.current.value;
-      filterDivElement.style.opacity = opacity;
-      filterDivElement.style.background = color;
+      const opacity: number = Number(inputRange.current.value);
+      store.dispatch(inputFilter(color, opacity));
     }
-
   }
 
   function handleBlurFilter(): void {

@@ -30,17 +30,12 @@ export type UnifiedBlock = Readonly<{
 }> & Position
 
 export type ArtObj = Readonly<{
-  // nameArtObj: string,
   src: string,
-  width: number,
-  height: number
-}> & UnifiedBlock
+}> & UnifiedBlock & Size
 
 export type Img = Readonly<{
   src: string | null,
-  width: number,
-  height: number,
-}> & UnifiedBlock
+}> & UnifiedBlock & Size
 
 export type Text = Readonly<{
   text: string,
@@ -65,23 +60,26 @@ export type Filter = Readonly<{
 }>
 
 export type DeleteArea = Readonly<{
-  width: number | null,
-  height: number | null,
   x: number | null,
   y: number | null,
-}>
+}> & Size
 
 export type Canvas = Readonly<{
-  width: number,
-  height: number,
   filter: Filter,
   listBlock: Block[];
   deleteArea: DeleteArea[],
   background: Background,
+}> & Size
+
+export type Size = Readonly<{
+  width: number,
+  height: number,
 }>
 
 export type ViewModel = Readonly<{
   bgColor: string | null,
+  canvasSize: Size | null,
+  filter: Filter | null,
 }>
 
 export type CardMaker = Readonly<{

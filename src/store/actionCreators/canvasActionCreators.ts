@@ -40,3 +40,19 @@ export function inputBackgroundColor(color: string) {
     color: color,
   }
 }
+
+export function inputCanvasSize(width: number, height: number) {
+  return {
+    type: 'INPUT_CANVAS_SIZE',
+    width: width,
+    height: height,
+  }
+}
+
+export function inputFilter(color: string, opacity: number) {
+  return {
+    type: 'INPUT_FILTER',
+    color: color,
+    opacity: opacity,
+  }
+}

@@ -111,6 +111,8 @@ const testActionHistory: ActionHistory = {
 
 const viewModel: ViewModel = {
   bgColor: null,
+  canvasSize: null,
+  filter: null,
 }
 
 export const testCardMaker: CardMaker = {

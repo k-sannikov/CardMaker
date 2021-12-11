@@ -1,7 +1,7 @@
 import { CardMaker as CardMakerType } from '../../../../CardMakerTypes';
 import { RefObject, useContext, useEffect } from 'react';
 import StoreContext from '../../../../StoreContext';
-import { setCanvasSize } from '../../../../store/actionCreators/canvasActionCreators';
+import { setCanvasSize, inputCanvasSize } from '../../../../store/actionCreators/canvasActionCreators';
 
 export function useStateCanvasSize(
   inputWidth: RefObject<HTMLInputElement>,
@@ -15,9 +15,9 @@ export function useStateCanvasSize(
 
   function handleInputSize(): void {
     if (inputWidth.current && inputHeight.current) {
-      let canvasDivElement: HTMLDivElement = document.getElementById('canvas') as HTMLDivElement;
-      canvasDivElement.style.width = inputWidth.current.value + 'px';
-      canvasDivElement.style.height = inputHeight.current.value + 'px';
+      const width: number = Number(inputWidth.current.value);
+      const height: number = Number(inputHeight.current.value);
+      store.dispatch(inputCanvasSize(width, height))
     }
   }
   
