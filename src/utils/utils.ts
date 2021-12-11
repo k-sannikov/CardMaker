@@ -1,4 +1,4 @@
-import { ActionHistory, Block, Canvas } from '../CardMakerTypes';
+import { ActionHistory, Block, Canvas } from '../store/types';
 
 // проверка доступности операции undo
 export function isUndoAvailable(history: ActionHistory): boolean {

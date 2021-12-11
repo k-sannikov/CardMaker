@@ -1,4 +1,4 @@
-import { Canvas, ActionHistory } from '../../CardMakerTypes';
+import { Canvas, ActionHistory } from '../types';
 import { isUndoAvailable, isRedoAvailable } from '../../utils/utils'
 
 function history(history: ActionHistory, action: any): ActionHistory {

@@ -1,6 +1,6 @@
 import styles from './DeleteArea.module.css';
 import { ReactElement } from 'react';
-import { DeleteArea as DeleteAreaType, Canvas as CanvasType } from '../../../CardMakerTypes';
+import { DeleteArea as DeleteAreaType, Canvas as CanvasType } from '../../../store/types';
 
 type DeleteAreaProps = { canvas: CanvasType }
 

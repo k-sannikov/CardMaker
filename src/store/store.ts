@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, Store, MiddlewareAPI, Dispatch, AnyAction } from 'redux';
 import { cardMakerReducer } from './reducers/CardMakerReducer';
 import { testCardMaker as initialState } from './initialState';
-import { CardMaker } from '../CardMakerTypes';
+import { CardMaker } from './types';
 
 import { addHistory, afterChangeHistory } from './actionCreators/historyActionCreators';
 

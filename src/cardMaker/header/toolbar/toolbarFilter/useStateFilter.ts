@@ -1,4 +1,4 @@
-import { CardMaker as CardMakerType, Filter as FilterType } from '../../../../CardMakerTypes';
+import { CardMaker as CardMakerType, Filter as FilterType } from '../../../../store/types';
 import { RefObject, useContext, useEffect } from 'react';
 
 import StoreContext from '../../../../StoreContext';

@@ -13,7 +13,7 @@ import {
   Text as TextType,
   Canvas as CanvasType,
   ViewModel as ViewModelType
-} from '../../CardMakerTypes';
+} from '../../store/types';
 
 type CanvasProps = {
   canvas: CanvasType,

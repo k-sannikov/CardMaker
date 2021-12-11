@@ -1,5 +1,5 @@
 import styles from './Img.module.css';
-import { Img as ImgType } from '../../../CardMakerTypes';
+import { Img as ImgType } from '../../../store/types';
 import { useRef } from 'react';
 import { useStateBlock } from '../useStateBlock';
 import { useDragAndDrop } from '../useDragAndDrop';

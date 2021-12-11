@@ -1,4 +1,4 @@
-import { Canvas } from '../../CardMakerTypes';
+import { Canvas } from '../types';
 import background from './BackgroundReducer';
 import filter from './FilterReducer';
 import heightCanvas from './HeightCanvasReducer';

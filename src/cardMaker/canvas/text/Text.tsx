@@ -1,5 +1,5 @@
 import styles from './Text.module.css';
-import { Text as TextType } from '../../../CardMakerTypes';
+import { Text as TextType } from '../../../store/types';
 import { useRef } from 'react';
 import { useStateBlock } from '../useStateBlock';
 import { useDragAndDrop } from '../useDragAndDrop';

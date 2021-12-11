@@ -1,4 +1,4 @@
-import { Canvas, CardMaker } from '../../CardMakerTypes';
+import { Canvas, CardMaker } from '../types';
 
 export function addHistory(newCanvas: Canvas) {
   return {

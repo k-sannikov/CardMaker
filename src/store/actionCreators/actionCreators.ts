@@ -1,4 +1,4 @@
-import { Canvas, CardMaker } from '../../CardMakerTypes';
+import { Canvas, CardMaker } from '../types';
 import { store } from '../store';
 
 export function newCardMaker() {

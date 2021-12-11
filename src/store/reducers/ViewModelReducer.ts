@@ -1,4 +1,4 @@
-import { CardMaker, Size, Filter } from "../../CardMakerTypes";
+import { CardMaker, Size, Filter } from "../types";
 
 function viewModel(cardMaker: CardMaker = {} as CardMaker, action: any) {
   return {

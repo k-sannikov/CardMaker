@@ -1,5 +1,5 @@
 import { useEffect, RefObject, useContext, } from 'react';
-import { CardMaker as CardMakerType, Background as BackgroundType } from '../../../../CardMakerTypes';
+import { CardMaker as CardMakerType, Background as BackgroundType } from '../../../../store/types';
 import StoreContext from '../../../../StoreContext';
 import {
   resetBackground,

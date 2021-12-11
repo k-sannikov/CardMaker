@@ -1,5 +1,5 @@
 import { useEffect, RefObject, useContext } from 'react';
-import { CardMaker as CardMakerType } from '../../CardMakerTypes';
+import { CardMaker as CardMakerType } from '../../store/types';
 import StoreContext from '../../StoreContext';
 import { setSelectedBlock } from '../../store/actionCreators/blockActionCreators';
 

@@ -1,7 +1,7 @@
 import styles from './CardMaker.module.css';
 import Header from './header/Header';
 import Canvas from './canvas/Canvas';
-import { CardMaker as CardMakerType } from "../CardMakerTypes";
+import { CardMaker as CardMakerType } from "../store/types";
 
 type CardMakerProps = {
   cardMaker: CardMakerType,

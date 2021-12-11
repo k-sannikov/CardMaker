@@ -1,5 +1,5 @@
 import styles from './Filter.module.css';
-import { Canvas as CanvasType, ViewModel as ViewModelType } from '../../../CardMakerTypes';
+import { Canvas as CanvasType, ViewModel as ViewModelType } from '../../../store/types';
 
 type FilterProps = {
   canvas: CanvasType

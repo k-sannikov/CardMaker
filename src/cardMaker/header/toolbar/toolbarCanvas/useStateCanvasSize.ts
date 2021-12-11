@@ -1,4 +1,4 @@
-import { CardMaker as CardMakerType } from '../../../../CardMakerTypes';
+import { CardMaker as CardMakerType } from '../../../../store/types';
 import { RefObject, useContext, useEffect } from 'react';
 import StoreContext from '../../../../StoreContext';
 import { setCanvasSize, inputCanvasSize } from '../../../../store/actionCreators/canvasActionCreators';

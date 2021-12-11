@@ -1,4 +1,4 @@
-import { Background } from '../../CardMakerTypes';
+import { Background } from '../types';
 
 type BackgroundAction = {
   type: 'NEW_CARD_MAKER',

@@ -1,5 +1,5 @@
 import styles from './ArtObj.module.css';
-import { ArtObj as ArtObjType } from '../../../CardMakerTypes';
+import { ArtObj as ArtObjType } from '../../../store/types';
 import { useRef } from 'react';
 import { useStateBlock } from '../useStateBlock';
 import { useDragAndDrop } from '../useDragAndDrop';

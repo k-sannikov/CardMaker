@@ -1,4 +1,4 @@
-import { Block } from '../../CardMakerTypes';
+import { Block } from '../types';
 
 import {
   setComponentFields,

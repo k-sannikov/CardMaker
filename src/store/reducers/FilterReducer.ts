@@ -1,4 +1,4 @@
-import { Filter } from '../../CardMakerTypes';
+import { Filter } from '../types';
 
 type FilterAction = {
   type: 'NEW_CARD_MAKER',

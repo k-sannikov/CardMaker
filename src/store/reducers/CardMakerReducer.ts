@@ -1,4 +1,4 @@
-import { CardMaker } from '../../CardMakerTypes';
+import { CardMaker } from '../types';
 import canvas from './CanvasReducer';
 import selectBlock from './SelectBlockReducer';
 import history from './HistoryReducer';

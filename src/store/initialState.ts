@@ -10,7 +10,7 @@ import {
   CardMaker,
   DeleteArea,
   ViewModel,
-} from "../CardMakerTypes";
+} from "./types";
 
 const testTemplate: Template = {
   name: "",

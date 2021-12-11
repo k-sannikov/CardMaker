@@ -5,7 +5,7 @@ import DropdownMenu from '../../../dropdownMenu/DropdownMenu';
 import AddImgButton from './addImgButton/AddImgButton';
 import AddImgButtonFile from './addImgButtonFile/AddImgButtonFile';
 import PreviewArtObj from './previewArtObj/PreviewArtObj';
-import { SetOfArtObject } from '../../../../CardMakerTypes';
+import { SetOfArtObject } from '../../../../store/types';
 import { useCreateImg } from './useCreateImg';
 
 import { ReactElement } from 'react';
