@@ -1,7 +1,7 @@
 import { useEffect, RefObject, useContext } from 'react';
 
 import StoreContext from '../../StoreContext';
-import { setPositionBlock } from '../../store/actionCreators/actionCreators';
+import { setPositionBlock } from '../../store/actionCreators/blockActionCreators';
 import { Position } from '../../CardMakerTypes';
 
 export function useDragAndDrop(block: RefObject<HTMLElement>, defPos: Position): void {

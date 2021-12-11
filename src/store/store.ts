@@ -3,7 +3,7 @@ import { cardMakerReducer } from './reducers/CardMakerReducer';
 import { testCardMaker as initialState } from './initialState';
 import { CardMaker } from '../CardMakerTypes';
 
-import { addHistory, afterChangeHistory } from './actionCreators/actionCreators';
+import { addHistory, afterChangeHistory } from './actionCreators/historyActionCreators';
 
 
 const exceptions: string[] = [
@@ -22,6 +22,7 @@ const storeHistory = (store: MiddlewareAPI<Dispatch<AnyAction>, CardMaker>) => (
 
   if (!exceptions.includes(action.type)) {
     if (JSON.stringify(oldState.canvas) !== JSON.stringify(newState.canvas)) {
+      console.log('сохранение истории');
       store.dispatch(addHistory(newState.canvas));
     }
   }
@@ -32,6 +33,7 @@ const valid: string[] = [
   'UNDO',
   'REDO',
 ];
+// подписка на изменение истории команд
 const movingHistory = (store: any) => (next: any) => (action: any) => {
   const result = next(action)
 

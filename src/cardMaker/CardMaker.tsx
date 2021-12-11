@@ -12,7 +12,7 @@ function CardMaker(props: CardMakerProps) {
     <>
       <Header />
       <main className={styles.main}>
-        <Canvas canvas={props.cardMaker.canvas} />
+        <Canvas canvas={props.cardMaker.canvas} viewModel={props.cardMaker.viewModel} />
       </main>
     </>
   );

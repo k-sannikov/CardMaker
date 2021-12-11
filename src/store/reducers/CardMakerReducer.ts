@@ -2,6 +2,7 @@ import { CardMaker } from '../../CardMakerTypes';
 import canvas from './CanvasReducer';
 import selectBlock from './SelectBlockReducer';
 import history from './HistoryReducer';
+import viewModel from './ViewModelReducer';
 
 export function cardMakerReducer(cardMaker: CardMaker = {} as CardMaker, action: any): CardMaker {
   switch (action.type) {
@@ -15,6 +16,8 @@ export function cardMakerReducer(cardMaker: CardMaker = {} as CardMaker, action:
         selectBlock: selectBlock(cardMaker.selectBlock, action),
         history: history(cardMaker.history, action),
         templates: [],
+        viewModel: viewModel(cardMaker, action)
       }
   }
 }
+

@@ -2,7 +2,7 @@ import { RefObject, useContext, useEffect } from "react";
 import { getImgInformationFromFile } from './../../../../utils/utils';
 
 import StoreContext from '../../../../StoreContext';
-import { createImgBlock } from '../../../../store/actionCreators/actionCreators';
+import { createImgBlock } from '../../../../store/actionCreators/imgBlockActionCreators';
 
 
 export function useCreateImg(inputFile: RefObject<HTMLElement>) {

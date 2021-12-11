@@ -1,7 +1,7 @@
 import { CardMaker as CardMakerType } from '../../../../CardMakerTypes';
 import { RefObject, useContext, useEffect } from 'react';
 import StoreContext from '../../../../StoreContext';
-import { setCanvasSize } from '../../../../store/actionCreators/actionCreators';
+import { setCanvasSize } from '../../../../store/actionCreators/canvasActionCreators';
 
 export function useStateCanvasSize(
   inputWidth: RefObject<HTMLInputElement>,

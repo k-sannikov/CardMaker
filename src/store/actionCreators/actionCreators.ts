@@ -199,3 +199,10 @@ export function applyFileProject(newCanvas: Canvas) {
     newCanvas: newCanvas,
   }
 }
+
+export function inputBackgroundColor(color: string) {
+  return {
+    type: 'INPUT_BACKGROUND_COLOR',
+    color: color,
+  }
+}

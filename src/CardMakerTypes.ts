@@ -80,9 +80,14 @@ export type Canvas = Readonly<{
   background: Background,
 }>
 
+export type ViewModel = Readonly<{
+  bgColor: string | null,
+}>
+
 export type CardMaker = Readonly<{
   canvas: Canvas,
   selectBlock: string | null,
   history: ActionHistory,
   templates: Template[],
+  viewModel: ViewModel,
 }>

@@ -2,7 +2,7 @@ import { CardMaker as CardMakerType, Filter as FilterType } from '../../../../Ca
 import { RefObject, useContext, useEffect } from 'react';
 
 import StoreContext from '../../../../StoreContext';
-import { setFilter } from '../../../../store/actionCreators/actionCreators';
+import { setFilter } from '../../../../store/actionCreators/canvasActionCreators';
 
 export function useStateFilter(
   inputColor: RefObject<HTMLInputElement>,

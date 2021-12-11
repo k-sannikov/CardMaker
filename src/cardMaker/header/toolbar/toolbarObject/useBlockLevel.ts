@@ -1,6 +1,6 @@
 import { RefObject, useContext, useEffect } from 'react';
 import StoreContext from '../../../../StoreContext';
-import { shiftUpBlock, shiftDownBlock } from '../../../../store/actionCreators/actionCreators';
+import { shiftUpBlock, shiftDownBlock } from '../../../../store/actionCreators/blockActionCreators';
 
 export function useBlockLevel(
   buttonUp: RefObject<HTMLButtonElement>,

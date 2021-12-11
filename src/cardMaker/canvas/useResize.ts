@@ -1,9 +1,6 @@
 import { useEffect, RefObject, useContext } from 'react';
-// import { dispatch } from '../../CardMaker';
-// import { setPositionComponent } from '../../CardMakerFunctions';
-
 import StoreContext from '../../StoreContext';
-import { setSizeBlock } from '../../store/actionCreators/actionCreators';
+import { setSizeBlock } from '../../store/actionCreators/blockActionCreators';
 
 
 type posType = {

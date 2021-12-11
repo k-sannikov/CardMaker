@@ -9,6 +9,7 @@ import {
   Canvas,
   CardMaker,
   DeleteArea,
+  ViewModel,
 } from "../CardMakerTypes";
 
 const testTemplate: Template = {
@@ -108,9 +109,14 @@ const testActionHistory: ActionHistory = {
   currentIndex: 0,
 }
 
+const viewModel: ViewModel = {
+  bgColor: null,
+}
+
 export const testCardMaker: CardMaker = {
   canvas: testCanvas,
   selectBlock: null,
   history: testActionHistory,
   templates: [testTemplate],
+  viewModel: viewModel,
 }

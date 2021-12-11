@@ -12,16 +12,18 @@ import {
   Img as ImgType,
   Text as TextType,
   Canvas as CanvasType,
+  ViewModel as ViewModelType
 } from '../../CardMakerTypes';
 
 type CanvasProps = {
   canvas: CanvasType,
+  viewModel: ViewModelType,
 }
 
 function Canvas(props: CanvasProps) {
   useRemoveSelectedBlock();
 
-  const canvasStyle = getStyle(props.canvas);
+  const canvasStyle = getStyle(props.canvas, props.viewModel);
 
   let listBlock: ReactElement[] = getListBlock(props.canvas.listBlock);
   
@@ -58,13 +60,20 @@ function getListBlock(listBlock: BlockType[]): ReactElement[] {
   return newListBlock;
 }
 
-function getStyle(canvas: CanvasType) {
+function getStyle(canvas: CanvasType, viewModel: ViewModelType) {
   let background: string = '#fff';
-  if (canvas.background.color) {
-    background = canvas.background.color;
-  } else if (canvas.background.src) {
-    background = 'url(' + canvas.background.src + ')';
+
+  if (!viewModel.bgColor) {
+    if (canvas.background.color) {
+      background = canvas.background.color;
+    } else if (canvas.background.src) {
+      background = 'url(' + canvas.background.src + ')';
+    }
+  } else {
+    background = viewModel.bgColor;
   }
+
+  
   return {
     width: canvas.width,
     height: canvas.height,

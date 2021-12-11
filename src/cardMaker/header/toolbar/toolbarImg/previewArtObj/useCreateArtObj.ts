@@ -1,6 +1,6 @@
 import { RefObject, useContext, useEffect } from "react";
 import StoreContext from '../../../../../StoreContext';
-import { createArtObjBlock } from '../../../../../store/actionCreators/actionCreators';
+import { createArtObjBlock } from '../../../../../store/actionCreators/artObjBlockActionCreators';
 
 export function useCreateArtObj(artObj: RefObject<HTMLElement>, src: string) {
   const store = useContext(StoreContext);

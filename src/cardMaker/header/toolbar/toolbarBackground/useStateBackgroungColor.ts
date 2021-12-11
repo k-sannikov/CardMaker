@@ -1,7 +1,11 @@
 import { useEffect, RefObject, useContext, } from 'react';
 import { CardMaker as CardMakerType, Background as BackgroundType } from '../../../../CardMakerTypes';
 import StoreContext from '../../../../StoreContext';
-import { resetBackground, setBackgroundColor } from '../../../../store/actionCreators/actionCreators';
+import {
+  resetBackground,
+  setBackgroundColor,
+  inputBackgroundColor,
+} from '../../../../store/actionCreators/canvasActionCreators';
 
 export function useStateBackgroungColor(
   inputColor: RefObject<HTMLInputElement>,
@@ -15,9 +19,8 @@ export function useStateBackgroungColor(
   }
 
   function handlerInputColor(event: Event): void {
-    let canvasDivElement: HTMLDivElement = document.getElementById('canvas') as HTMLDivElement;
     const inputColor = event.target as HTMLInputElement;
-    canvasDivElement.style.background = inputColor.value;
+    store.dispatch(inputBackgroundColor(inputColor.value))
   }
 
   function handleerBlurColor(event: Event): void {

@@ -2,7 +2,7 @@ import { getCanvasFromFile } from '../../../utils/utils';
 import { RefObject, useContext, useEffect } from 'react';
 
 import StoreContext from '../../../StoreContext';
-import { applyFileProject } from '../../../store/actionCreators/actionCreators';
+import { applyFileProject } from '../../../store/actionCreators/cardMakerActionCreators';
 
 export function useImportFileProject(
   inputFile: RefObject<HTMLInputElement>,

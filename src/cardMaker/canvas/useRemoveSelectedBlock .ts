@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import StoreContext from '../../StoreContext';
-import { resetSelectedBlock } from '../../store/actionCreators/actionCreators';
+import { resetSelectedBlock } from '../../store/actionCreators/blockActionCreators';
 
 export function useRemoveSelectedBlock (): void {
   const store = useContext(StoreContext);

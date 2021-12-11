@@ -1,7 +1,7 @@
 import { useEffect, RefObject, useContext } from 'react';
 import { CardMaker as CardMakerType } from '../../CardMakerTypes';
 import StoreContext from '../../StoreContext';
-import { setSelectedBlock } from '../../store/actionCreators/actionCreators';
+import { setSelectedBlock } from '../../store/actionCreators/blockActionCreators';
 
 export function useStateBlock(blockId: string, block: RefObject<HTMLElement>): string | null {
   const store = useContext(StoreContext);

@@ -14,10 +14,7 @@ function Text(props: TextProps) {
   const textBlock = useRef<HTMLSpanElement>(null);
   const selectId = useStateBlock(props.text.id, textBlock);
   const select: string = props.text.id === selectId ? styles.selected : '';
-  useDragAndDrop(textBlock, {
-    x: text.x,
-    y: text.y
-  });
+  useDragAndDrop(textBlock, {x: text.x, y: text.y });
   return (
     <span style={textStyle}
       ref={textBlock}
