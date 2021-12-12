@@ -4,6 +4,7 @@ import { testCardMaker as initialState } from './initialState';
 import { CardMaker } from './types';
 
 import { addHistory, afterChangeHistory } from './actionCreators/historyActionCreators';
+import { useSelector } from 'react-redux';
 
 
 const exceptions: string[] = [

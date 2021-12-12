@@ -14,29 +14,46 @@ import {
   Canvas as CanvasType,
   ViewModel as ViewModelType
 } from '../../store/types';
+import { connect } from 'react-redux';
+import { resetSelectedBlock } from '../../store/actionCreators/blockActionCreators';
 
 type CanvasProps = {
   canvas: CanvasType,
   viewModel: ViewModelType,
+  resetSelectedBlock: () => any,
 }
 
 function Canvas(props: CanvasProps) {
-  useRemoveSelectedBlock();
-
+  useRemoveSelectedBlock(props.resetSelectedBlock);
   const canvasStyle = getStyle(props.canvas, props.viewModel);
-
   let listBlock: ReactElement[] = getListBlock(props.canvas.listBlock);
-  
   return (
     <div id="canvas" className={styles.canvas} style={canvasStyle}>
       {props.canvas.deleteArea &&
-        <DeleteArea canvas={props.canvas} />
+        <DeleteArea />
       }
-      <Filter canvas={props.canvas} viewModel={props.viewModel} />
+      <Filter />
       {listBlock}
     </div>
   );
 }
+
+function mapStateToProps(state: any) {
+  return {
+    canvas: state.canvas,
+    viewModel: state.viewModel,
+  }
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    resetSelectedBlock: () => dispatch(resetSelectedBlock()),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Canvas);
+
+
 
 function getListBlock(listBlock: BlockType[]): ReactElement[] {
   let newListBlock: ReactElement[] = [];
@@ -71,7 +88,7 @@ function getStyle(canvas: CanvasType, viewModel: ViewModelType) {
       background = 'url(' + canvas.background.src + ')';
     }
   }
-  
+
   let width: number = 0;
   let height: number = 0;
   if (viewModel.canvasSize) {
@@ -81,12 +98,10 @@ function getStyle(canvas: CanvasType, viewModel: ViewModelType) {
     width = canvas.width;
     height = canvas.height;
   }
-  
+
   return {
     width: width,
     height: height,
     background: background,
   };
 }
-
-export default Canvas;

@@ -2,6 +2,7 @@ import styles from './NavLinkButton.module.css';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ForwardedRef, forwardRef } from 'react';
+import { connect } from 'react-redux';
 
 type NavLinkButtonProps = {
   label: string,
@@ -19,4 +20,5 @@ const NavLinkButton = forwardRef((props: NavLinkButtonProps, ref: ForwardedRef<H
   </a>
 ));
 
-export default NavLinkButton;
+
+export default connect(null, null, null, { forwardRef: true })(NavLinkButton);

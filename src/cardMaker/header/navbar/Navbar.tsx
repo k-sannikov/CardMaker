@@ -7,15 +7,35 @@ import NavFileButton from './navButton/NavFileButton';
 import { RefObject, useRef } from 'react';
 import { useImportFileProject } from './useImportFileProject';
 import { useStateHistory } from './useStateHistory';
+import { connect } from 'react-redux';
+import { undo, redo } from '../../../store/actionCreators/historyActionCreators';
+import { applyFileProject } from '../../../store/actionCreators/cardMakerActionCreators';
+import { Canvas } from '../../../store/types';
 
-function Navbar() {
+
+type NavbarProps = {
+  undo: () => any,
+  redo: () => any,
+  applyFileProject: (file: Canvas) => any
+}
+
+function Navbar(props: NavbarProps) {
   const buttonUndo = useRef<HTMLButtonElement>(null);
   const buttonRedo = useRef<HTMLButtonElement>(null);
-  useStateHistory(buttonUndo, buttonRedo);
+  useStateHistory(
+    buttonUndo,
+    buttonRedo,
+    props.undo,
+    props.redo,
+  );
 
   const inputFile = useRef<HTMLInputElement>(null);
   const downloadFile = useRef<HTMLAnchorElement>(null);
-  useImportFileProject(inputFile, downloadFile);
+  useImportFileProject(
+    inputFile,
+    downloadFile,
+    props.applyFileProject,
+  );
 
   return (
     <nav className={styles.navbar}>
@@ -30,4 +50,12 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    undo: () => dispatch(undo()),
+    redo: () => dispatch(redo()),
+    applyFileProject: (file: Canvas) => dispatch(applyFileProject(file)),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Navbar);

@@ -1,12 +1,9 @@
-import { useContext, useEffect } from "react";
-import StoreContext from '../../StoreContext';
-import { resetSelectedBlock } from '../../store/actionCreators/blockActionCreators';
+import { useEffect } from "react";
 
-export function useRemoveSelectedBlock (): void {
-  const store = useContext(StoreContext);
+export function useRemoveSelectedBlock(resetSelectedBlock: () => any): void {
   function handleMousedownDocument(event: Event): void {
     if (!event.defaultPrevented) {
-      store.dispatch(resetSelectedBlock());
+      resetSelectedBlock();
     }
   }
   useEffect(() => {

@@ -31,7 +31,6 @@
 .toolbar__fontFamily:hover,
 .toolbar__fontSize:hover
 {
-     color: #7E6FB8;
      border-color: #7E6FB8;
      box-shadow: 0px 1px 3px 0px #7e6fb8;
 }
@@ -87,4 +86,34 @@
 
 .button:active {
     box-shadow: 1px 2px 2px 0px #7e6fb8;
+}
+
+.bitter
+{
+    font-family: bitter;
+}
+
+.ptSerif
+{
+    font-family: "PT Serif";
+}
+
+.roboto
+{
+    font-family: Roboto;
+}
+
+.ibmPlexMono
+{
+    font-family: "IBM Plex Mono";
+}
+
+.alegreyaSans
+{
+    font-family: "Alegreya Sans";
+}
+
+.cormorantGaramond
+{
+    font-family: "Cormorant Garamond";
 }

@@ -19,20 +19,46 @@
   cursor: move;
 }
 
-.selected .pointBottomRight
+
+.selected .pointBottomRight,
+.selected .pointTopLeft,
+.selected .pointTopRight,
+.selected .pointBottomLeft
 {
     position: absolute;
     width: var(--size-point);
     height: var(--size-point);
     background: #555555;
+    border-radius: var(--size-point);
+    border: 2px solid #858585;
 }
 
 .selected .pointBottomRight
 {
-    border-radius: var(--size-point);
-    border: 2px solid #858585;
-    margin-top: calc(1px - var(--size-point));
-    margin-right: calc(5px - var(--size-point));
+    margin-top: calc(-1px - var(--size-point));
+    margin-right: calc(4px - var(--size-point));
     right: 0;
     cursor: nw-resize;
+}
+
+.selected .pointTopLeft
+{
+    margin-top: calc(4px - var(--size-point));
+    margin-left: calc(4px - var(--size-point));
+    cursor: nw-resize;
+}
+
+.selected .pointTopRight
+{
+    margin-top: calc(4px - var(--size-point));
+    margin-right: calc(4px - var(--size-point));
+    right: 0;
+    cursor: ne-resize;
+}
+
+.selected .pointBottomLeft
+{
+    margin-top: calc(0px - var(--size-point));
+    margin-left: calc(4px - var(--size-point));
+    cursor: ne-resize;
 }

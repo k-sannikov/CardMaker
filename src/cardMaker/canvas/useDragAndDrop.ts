@@ -1,51 +1,51 @@
-import { useEffect, RefObject, useContext } from 'react';
-
-import StoreContext from '../../StoreContext';
-import { setPositionBlock } from '../../store/actionCreators/blockActionCreators';
+import { useEffect, RefObject } from 'react';
 import { Position } from '../../store/types';
 
-export function useDragAndDrop(block: RefObject<HTMLElement>, defPos: Position): void {
-  const store = useContext(StoreContext);
+export function useDragAndDrop(
+  block: RefObject<HTMLElement>,
+  defPos: Position,
+  setPositionBlock: (x: number, y: number) => any
+): void {
 
-  let currentPos: Position;
   let startPos: Position;
 
   function handleMousedown(event: MouseEvent): void {
+    
     startPos = {
       x: event.pageX,
       y: event.pageY,
     };
+
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseup", handleMouseUp);
   }
 
+  let newPos: Position;
   function handleMouseMove(event: MouseEvent): void {
-    console.log();
     if (!event.defaultPrevented) {
-      currentPos = {
-        x: defPos.x,
-        y: defPos.y,
-      };
+
       const delta = {
         x: event.pageX - startPos.x,
         y: event.pageY - startPos.y
       }
-      const newPos = {
-        x: currentPos.x + delta.x,
-        y: currentPos.y + delta.y
+
+      newPos = {
+        x: defPos.x + delta.x,
+        y: defPos.y + delta.y
       }
-      currentPos = newPos;
+
       if (block.current) {
         block.current.style.left = String(newPos.x) + 'px';
         block.current.style.top = String(newPos.y) + 'px';
       }
+
     }
 
   }
 
   function handleMouseUp(): void {
-    if (currentPos) {
-      store.dispatch(setPositionBlock(currentPos.x, currentPos.y));
+    if (newPos) {
+      setPositionBlock(newPos.x, newPos.y);
     }
 
     if (block.current) {

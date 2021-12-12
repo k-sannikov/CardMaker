@@ -1,21 +1,17 @@
 import styles from './CardMaker.module.css';
 import Header from './header/Header';
 import Canvas from './canvas/Canvas';
-import { CardMaker as CardMakerType } from "../store/types";
+import { connect } from 'react-redux';
 
-type CardMakerProps = {
-  cardMaker: CardMakerType,
-}
-
-function CardMaker(props: CardMakerProps) {
+function CardMaker() {
   return (
     <>
       <Header />
       <main className={styles.main}>
-        <Canvas canvas={props.cardMaker.canvas} viewModel={props.cardMaker.viewModel} />
+        <Canvas />
       </main>
     </>
   );
 }
 
-export default CardMaker;
+export default connect()(CardMaker);

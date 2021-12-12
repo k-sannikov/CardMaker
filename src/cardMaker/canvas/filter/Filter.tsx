@@ -1,5 +1,7 @@
 import styles from './Filter.module.css';
 import { Canvas as CanvasType, ViewModel as ViewModelType } from '../../../store/types';
+import { connect } from 'react-redux';
+import { store } from '../../../store/store';
 
 type FilterProps = {
   canvas: CanvasType
@@ -29,4 +31,11 @@ function Filter(props: FilterProps) {
   );
 }
 
-export default Filter;
+function mapStateToProps(state: any) {
+  return {
+    canvas: state.canvas,
+    viewModel: state.viewModel,
+  }
+};
+
+export default connect(mapStateToProps)(Filter);

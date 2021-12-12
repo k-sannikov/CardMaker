@@ -6,6 +6,7 @@ import ToolbarBackground from './toolbarBackground/ToolbarBackground';
 import ToolbarArea from './toolbarArea/ToolbarArea';
 import ToolbarObject from './toolbarObject/ToolbarObject';
 import ToolbarCanvas from './toolbarCanvas/ToolbarCanvas';
+import { connect } from 'react-redux';
 
 function Toolbar() {
   return (
@@ -21,4 +22,4 @@ function Toolbar() {
   );
 }
 
-export default Toolbar;
+export default connect()(Toolbar);

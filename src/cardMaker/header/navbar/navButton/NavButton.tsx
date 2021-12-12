@@ -2,6 +2,7 @@ import styles from './NavButton.module.css';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ForwardedRef, forwardRef } from 'react';
+import { connect } from 'react-redux';
 
 type NavButtonProps = {
   label: string,
@@ -19,4 +20,4 @@ const NavButton = forwardRef((props: NavButtonProps, ref: ForwardedRef<HTMLButto
   </button>
 ));
 
-export default NavButton;
+export default connect(null, null, null, { forwardRef: true })(NavButton);

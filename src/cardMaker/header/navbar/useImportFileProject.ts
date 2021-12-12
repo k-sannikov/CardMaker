@@ -1,12 +1,12 @@
 import { getCanvasFromFile } from '../../../utils/utils';
 import { RefObject, useContext, useEffect } from 'react';
-
 import StoreContext from '../../../StoreContext';
-import { applyFileProject } from '../../../store/actionCreators/cardMakerActionCreators';
+import { Canvas } from '../../../store/types';
 
 export function useImportFileProject(
   inputFile: RefObject<HTMLInputElement>,
-  downloadFile: RefObject<HTMLAnchorElement>
+  downloadFile: RefObject<HTMLAnchorElement>,
+  applyFileProject: (file: Canvas) => any
 ): void {
 
   const store = useContext(StoreContext);
@@ -14,8 +14,7 @@ export function useImportFileProject(
   async function handlerChangeInputFile(event: Event): Promise<void> {
     const target = event.target as HTMLInputElement;
     const files = target.files as FileList;
-    console.log(files);
-    store.dispatch(applyFileProject(await getCanvasFromFile(files[0])))
+    applyFileProject(await getCanvasFromFile(files[0]))
     target.value = '';
   }
 

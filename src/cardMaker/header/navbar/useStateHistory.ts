@@ -1,20 +1,18 @@
 import { RefObject, useContext, useEffect } from 'react';
-
 import StoreContext from '../../../StoreContext';
-import { undo, redo } from '../../../store/actionCreators/historyActionCreators';
 
 export function useStateHistory(
   buttonUndo: RefObject<HTMLButtonElement>,
-  buttonRedo: RefObject<HTMLButtonElement>
+  buttonRedo: RefObject<HTMLButtonElement>,
+  undo: () => any,
+  redo: () => any,
 ): void {
-  
-  const store = useContext(StoreContext);
 
   function handlerClickUndo(): void {
-    store.dispatch(undo());
+    undo();
   }
   function handlerClickRedo(): void {
-    store.dispatch(redo());
+    redo();
   }
 
   useEffect(() => {

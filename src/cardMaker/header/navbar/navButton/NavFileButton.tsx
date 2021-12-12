@@ -2,6 +2,7 @@ import styles from './NavFileButton.module.css';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ForwardedRef, forwardRef } from 'react';
+import { connect } from 'react-redux';
 
 type NavFileButtonProps = {
   label: string,
@@ -28,4 +29,4 @@ const NavFileButton = forwardRef((props: NavFileButtonProps, ref: ForwardedRef<H
   </button>
 ));
 
-export default NavFileButton;
+export default connect(null, null, null, { forwardRef: true })(NavFileButton);
