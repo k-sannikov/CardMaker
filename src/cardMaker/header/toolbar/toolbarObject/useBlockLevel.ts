@@ -1,21 +1,19 @@
-import { RefObject, useContext, useEffect } from 'react';
-import StoreContext from '../../../../StoreContext';
-import { shiftUpBlock, shiftDownBlock } from '../../../../store/actionCreators/blockActionCreators';
+import { RefObject, useEffect } from 'react';
 
 export function useBlockLevel(
   buttonUp: RefObject<HTMLButtonElement>,
-  buttonDown: RefObject<HTMLButtonElement>): void {
-
-  const store = useContext(StoreContext);
+  buttonDown: RefObject<HTMLButtonElement>,
+  shiftUpBlock: () => void,
+  shiftDownBlock: () => void): void {
   
   function handlerMousedownShiftUp(event: Event): void {
     event.preventDefault();
-    store.dispatch(shiftUpBlock());
+    shiftUpBlock();
   }
 
   function handlerMousedownShiftDown(event: Event): void {
     event.preventDefault();
-    store.dispatch(shiftDownBlock());
+    shiftDownBlock();
   }
 
   useEffect(() => {

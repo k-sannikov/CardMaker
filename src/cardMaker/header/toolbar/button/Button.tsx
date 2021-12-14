@@ -2,6 +2,7 @@ import styles from './Button.module.css';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ForwardedRef, forwardRef } from 'react';
+import { connect } from 'react-redux';
 
 type ButtonProps = {
   label: string,
@@ -23,4 +24,4 @@ const Button = forwardRef((props: ButtonProps, ref: ForwardedRef<HTMLButtonEleme
   </button>
 ));
 
-export default Button;
+export default connect(null, null, null, { forwardRef: true })(Button);

@@ -4,13 +4,22 @@ import Button from '../button/Button';
 import { useBlockLevel } from './useBlockLevel';
 import { useBlockDelete } from './useBlockDelete';
 import { RefObject, useRef } from 'react';
+import { connect } from 'react-redux';
+import { AppDispatch } from '../../../../store/store';
+import { deleteBlock, shiftDownBlock, shiftUpBlock } from '../../../../store/actionCreators/blockActionCreators';
 
-function ToolbarObject() {
-  let buttonUp = useRef<HTMLButtonElement>(null);
-  let buttonDown = useRef<HTMLButtonElement>(null);
-  let buttonDelete = useRef<HTMLButtonElement>(null);
-  useBlockLevel(buttonUp, buttonDown);
-  useBlockDelete(buttonDelete);
+type ToolbarObjectProps = {
+  shiftUpBlock: () => void,
+  shiftDownBlock: () => void,
+  deleteBlock: () => void,
+}
+
+function ToolbarObject(props: ToolbarObjectProps) {
+  const buttonUp = useRef<HTMLButtonElement>(null);
+  const buttonDown = useRef<HTMLButtonElement>(null);
+  const buttonDelete = useRef<HTMLButtonElement>(null);
+  useBlockLevel(buttonUp, buttonDown, props.shiftUpBlock, props.shiftDownBlock);
+  useBlockDelete(buttonDelete, props.deleteBlock);
   return (
     <div className={styles.toolbar}>
       <div className={styles.toolbar__row}>
@@ -44,4 +53,12 @@ function ToolbarObject() {
   );
 }
 
-export default ToolbarObject;
+const mapDispatchToProps = (dispatch: AppDispatch) => {
+  return {
+    shiftUpBlock: () => dispatch(shiftUpBlock()),
+    shiftDownBlock: () => dispatch(shiftDownBlock()),
+    deleteBlock: () => dispatch(deleteBlock()),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(ToolbarObject);

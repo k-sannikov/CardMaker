@@ -1,12 +1,12 @@
-import { RefObject, useContext, useEffect } from "react";
-import StoreContext from '../../../../../StoreContext';
-import { createArtObjBlock } from '../../../../../store/actionCreators/artObjBlockActionCreators';
+import { RefObject, useEffect } from "react";
 
-export function useCreateArtObj(artObj: RefObject<HTMLElement>, src: string) {
-  const store = useContext(StoreContext);
+export function useCreateArtObj(
+  artObj: RefObject<HTMLElement>,
+  src: string,
+  createArtObjBlock: (src: string) => void) {
 
   function handleClickArtObj() {
-    store.dispatch(createArtObjBlock(src));
+    createArtObjBlock(src);
   }
 
   useEffect(() => {

@@ -1,54 +1,63 @@
 import { Block } from '../types';
-
-import {
-  setComponentFields,
-  getIndexById,
-  isShiftUpAvailable,
-  isShiftDownAvailable,
-  isSelectedBlock,
-} from '../../utils/utils'
-
+import { setComponentFields, getIndexById, isSelectedBlock } from '../../utils/elementList'
+import { isShiftUpAvailable, isShiftDownAvailable } from '../../utils/permisions'
 import { createGUID } from '../../utils/guid';
 
-type ListBlockAction = {
+export type ListBlockAction = {
   type: 'NEW_CARD_MAKER',
 } | {
   type: 'CREATE_TEXT_BLOCK',
-  width: number,
+  x: number,
+  y: number,
 } | {
   type: 'SET_SIZE_BLOCK',
+  id: string,
   width: number,
   height: number,
 } | {
   type: 'SET_TEXT_IN_TEXT_BLOCK',
   id: string,
+  text: string,
 } | {
   type: 'SET_BOLD_TEXT',
   id: string,
+  isBold: boolean,
 } | {
   type: 'SET_ITALIC_TEXT',
   id: string,
+  isItalic: boolean,
 } | {
   type: 'SET_UNDERLINE_TEXT',
   id: string,
+  isUnderline: boolean,
 } | {
   type: 'SET_SIZE_TEXT',
   id: string,
+  size: number,
 } | {
   type: 'SET_COLOR_TEXT',
   id: string,
+  color: string,
 } | {
   type: 'CREATE_IMG_BLOCK',
-  id: string,
+  width: number,
+  height: number,
+  src: string,
+  x: number,
+  y: number,
 } | {
   type: 'CREATE_ART_OBJ_BLOCK',
-  id: string,
+  src: string,
+  x: number,
+  y: number,
 } | {
   type: 'DELETE_BLOCK',
   id: string,
 } | {
   type: 'SET_POSITION_BLOCK',
   id: string,
+  x: number,
+  y: number,
 } | {
   type: 'SHIFT_UP_BLOCK',
   id: string,
@@ -57,7 +66,7 @@ type ListBlockAction = {
   id: string,
 }
 
-function listBlock(listBlock: Block[], action: any): Block[] {
+function listBlock(listBlock: Block[], action: ListBlockAction): Block[] {
   switch (action.type) {
 
     case 'NEW_CARD_MAKER':
@@ -70,8 +79,8 @@ function listBlock(listBlock: Block[], action: any): Block[] {
           id: createGUID(),
           type: 'text',
           color: '#000000',
-          x: 0,
-          y: 0,
+          x: action.x,
+          y: action.y,
           text: 'Текст',
           size: 30,
           bold: false,
@@ -104,7 +113,7 @@ function listBlock(listBlock: Block[], action: any): Block[] {
 
     case 'SET_UNDERLINE_TEXT':
       return setComponentFields(listBlock, action.id, {
-        italic: action.isItalic,
+        italic: action.isUnderline,
       });
 
     case 'SET_SIZE_TEXT':
@@ -125,8 +134,8 @@ function listBlock(listBlock: Block[], action: any): Block[] {
           type: 'img',
           width: action.width,
           height: action.height,
-          x: 0,
-          y: 0,
+          x: action.x,
+          y: action.y,
           src: action.src,
         }
       ];
@@ -139,8 +148,8 @@ function listBlock(listBlock: Block[], action: any): Block[] {
           type: 'artObj',
           width: 150,
           height: 150,
-          x: 0,
-          y: 0,
+          x: action.x,
+          y: action.y,
           src: action.src,
         }
       ];

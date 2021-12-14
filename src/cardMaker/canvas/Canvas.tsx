@@ -12,15 +12,16 @@ import {
   Img as ImgType,
   Text as TextType,
   Canvas as CanvasType,
-  ViewModel as ViewModelType
+  ViewModel as ViewModelType,
 } from '../../store/types';
 import { connect } from 'react-redux';
 import { resetSelectedBlock } from '../../store/actionCreators/blockActionCreators';
+import { AppDispatch, RootState } from '../../store/store';
 
 type CanvasProps = {
   canvas: CanvasType,
   viewModel: ViewModelType,
-  resetSelectedBlock: () => any,
+  resetSelectedBlock: () => void,
 }
 
 function Canvas(props: CanvasProps) {
@@ -38,14 +39,14 @@ function Canvas(props: CanvasProps) {
   );
 }
 
-function mapStateToProps(state: any) {
+function mapStateToProps(state: RootState) {
   return {
     canvas: state.canvas,
     viewModel: state.viewModel,
   }
 };
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: AppDispatch) => {
   return {
     resetSelectedBlock: () => dispatch(resetSelectedBlock()),
   }

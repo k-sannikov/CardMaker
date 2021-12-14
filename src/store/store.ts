@@ -4,7 +4,6 @@ import { testCardMaker as initialState } from './initialState';
 import { CardMaker } from './types';
 
 import { addHistory, afterChangeHistory } from './actionCreators/historyActionCreators';
-import { useSelector } from 'react-redux';
 
 
 const exceptions: string[] = [
@@ -16,42 +15,46 @@ const exceptions: string[] = [
   'RESET_SELECTED_BLOCK',
 ];
 
-const storeHistory = (store: MiddlewareAPI<Dispatch<AnyAction>, CardMaker>) => (next: any) => (action: AnyAction) => {
-  const oldState = store.getState();
-  const result = next(action)
-  const newState = store.getState();
+const storeHistory = (store: MiddlewareAPI<Dispatch<AnyAction>, CardMaker>) =>
+  (next: AppDispatch) => (action: AnyAction) => {
+    const oldState = store.getState();
+    const result = next(action)
+    const newState = store.getState();
 
-  if (!exceptions.includes(action.type)) {
-    if (JSON.stringify(oldState.canvas) !== JSON.stringify(newState.canvas)) {
-      console.log('сохранение истории');
-      store.dispatch(addHistory(newState.canvas));
+    if (!exceptions.includes(action.type)) {
+      if (JSON.stringify(oldState.canvas) !== JSON.stringify(newState.canvas)) {
+        console.log('сохранение истории');
+        store.dispatch(addHistory(newState.canvas));
+      }
     }
+    return result
   }
-  return result
-}
 
 const valid: string[] = [
   'UNDO',
   'REDO',
 ];
-// подписка на изменение истории команд
-const movingHistory = (store: any) => (next: any) => (action: any) => {
-  const result = next(action)
 
-  if ((valid.includes(action.type)) && (action.type !== 'AFTER_CHANGE_HISTORY')) {
-    const canvas = store.getState().history.listState[store.getState().history.currentIndex];
-    const newState = {
-      ...store.getState(),
-      canvas,
+const movingHistory = (store: MiddlewareAPI<Dispatch<AnyAction>, CardMaker>) =>
+  (next: AppDispatch) => (action: AnyAction) => {
+    const result = next(action)
+
+    if ((valid.includes(action.type)) && (action.type !== 'AFTER_CHANGE_HISTORY')) {
+      const canvas = store.getState().history.listState[store.getState().history.currentIndex];
+      const newState = {
+        ...store.getState(),
+        canvas,
+      }
+      store.dispatch(afterChangeHistory(newState));
     }
-    store.dispatch(afterChangeHistory(newState));
+    return result
   }
-
-  return result
-}
 
 export const store: Store<CardMaker> = createStore(
   cardMakerReducer,
   initialState,
   applyMiddleware(storeHistory, movingHistory)
 );
+
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

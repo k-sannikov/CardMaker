@@ -3,6 +3,8 @@ import { store } from '../store';
 export function createTextBlock() {
   return {
     type: 'CREATE_TEXT_BLOCK',
+    x: store.getState().canvas.width / 2,
+    y: store.getState().canvas.height / 2,
   }
 }
 

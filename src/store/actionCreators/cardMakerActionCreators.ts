@@ -1,4 +1,4 @@
-import { Canvas } from '../types';
+import { CardMaker } from '../types';
 
 export function newCardMaker() {
   return {
@@ -6,9 +6,9 @@ export function newCardMaker() {
   }
 }
 
-export function applyFileProject(newCanvas: Canvas) {
+export function applyFileProject(cardMaker: CardMaker) {
   return {
     type: 'APPLY_FILE_PROJECT',
-    newCanvas: newCanvas,
+    project: cardMaker,
   }
 }

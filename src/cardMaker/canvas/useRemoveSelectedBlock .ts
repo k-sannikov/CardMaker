@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export function useRemoveSelectedBlock(resetSelectedBlock: () => any): void {
+export function useRemoveSelectedBlock(resetSelectedBlock: () => void): void {
   function handleMousedownDocument(event: Event): void {
     if (!event.defaultPrevented) {
       resetSelectedBlock();

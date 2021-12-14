@@ -1,6 +1,7 @@
 import styles from './ToolbarArea.module.css';
 import { faVectorSquare, faEraser } from '@fortawesome/free-solid-svg-icons'
 import Button from '../button/Button';
+import { connect } from 'react-redux';
 
 function ToolbarArea() {
   return (
@@ -20,4 +21,4 @@ function ToolbarArea() {
   );
 }
 
-export default ToolbarArea;
+export default connect()(ToolbarArea);

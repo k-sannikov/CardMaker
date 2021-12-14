@@ -1,18 +1,16 @@
-import { RefObject, useContext, useEffect } from "react";
-import { getImgInformationFromFile } from './../../../../utils/utils';
-
-import StoreContext from '../../../../StoreContext';
-import { createImgBlock } from '../../../../store/actionCreators/imgBlockActionCreators';
+import { RefObject, useEffect } from "react";
+import { getImgInformationFromFile } from '../../../../utils/files';
 
 
-export function useCreateImg(inputFile: RefObject<HTMLElement>) {
-  const store = useContext(StoreContext);
+export function useCreateImg(
+  inputFile: RefObject<HTMLElement>,
+  createImgBlock: (src: string, width: number, height: number) => void) {
 
   async function handlerChangeInput(event: Event): Promise<void> {
     const target = event.target as HTMLInputElement;
     const files = target.files as FileList;
     const imgInfo = await getImgInformationFromFile(files[0]);
-    store.dispatch(createImgBlock(imgInfo.src, imgInfo.width, imgInfo.height))
+    createImgBlock(imgInfo.src, imgInfo.width, imgInfo.height);
     target.value = '';
   }
 

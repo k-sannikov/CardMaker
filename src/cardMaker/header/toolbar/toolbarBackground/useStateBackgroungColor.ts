@@ -1,32 +1,27 @@
-import { useEffect, RefObject, useContext, } from 'react';
-import { CardMaker as CardMakerType, Background as BackgroundType } from '../../../../store/types';
-import StoreContext from '../../../../StoreContext';
-import {
-  resetBackground,
-  setBackgroundColor,
-  inputBackgroundColor,
-} from '../../../../store/actionCreators/canvasActionCreators';
+import { useEffect, RefObject } from 'react';
+import { Background as BackgroundType } from '../../../../store/types';
 
 export function useStateBackgroungColor(
+  resetBackground: () => void,
+  inputBackgroundColor: (color: string) => void,
+  setBackgroundColor: (color: string) => void,
+  background: BackgroundType,
   inputColor: RefObject<HTMLInputElement>,
   buttonReset: RefObject<HTMLButtonElement>): void {
-  const store = useContext(StoreContext);
-  const cardMaker: CardMakerType = store.getState();
-  const background: BackgroundType = cardMaker.canvas.background;
 
   function handlerClickResetColor(): void {
-    store.dispatch(resetBackground());
+    resetBackground();
   }
 
   function handlerInputColor(event: Event): void {
     const inputColor = event.target as HTMLInputElement;
-    store.dispatch(inputBackgroundColor(inputColor.value))
+    inputBackgroundColor(inputColor.value);
   }
 
   function handleerBlurColor(event: Event): void {
     const inputColor = event.target as HTMLInputElement;
     const color: string = inputColor.value;
-    store.dispatch(setBackgroundColor(color));
+    setBackgroundColor(color);
   }
 
   useEffect(() => {

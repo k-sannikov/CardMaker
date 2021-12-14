@@ -1,12 +1,9 @@
-import { RefObject, useContext, useEffect } from "react";
-import StoreContext from '../../../../StoreContext';
-import { createTextBlock } from '../../../../store/actionCreators/textBlockActionCreators';
+import { RefObject, useEffect } from "react";
 
+export function useCreateText(button: RefObject<HTMLButtonElement>, createTextBlock: () => void,) {
 
-export function useCreateText(button: RefObject<HTMLButtonElement>) {
-  const store = useContext(StoreContext);
   function handleClickButton() {
-    store.dispatch(createTextBlock());
+    createTextBlock();
   }
 
   useEffect(() => {

@@ -4,28 +4,30 @@ import { useRef } from 'react';
 import { useStateBlock } from '../useStateBlock';
 import { useDragAndDrop } from '../useDragAndDrop';
 import { useResize } from '../useResize';
-import { setPositionBlock, setSizeBlock } from '../../../store/actionCreators/blockActionCreators';
+import { setPositionBlock, setSelectedBlock, setSizeBlock } from '../../../store/actionCreators/blockActionCreators';
 import { connect } from 'react-redux';
+import { AppDispatch, RootState } from '../../../store/store';
 
 type ArtObjProps = {
   artObj: ArtObjType,
-  setSizeBlock: (width: number, height: number) => any,
-  setPositionBlock: (x: number, y: number) => any,
+  selectBlock: string | null,
+  setSizeBlock: (width: number, height: number) => void,
+  setPositionBlock: (x: number, y: number) => void,
+  setSelectedBlock: (id: string) => void,
 }
 
 function ArtObj(props: ArtObjProps) {
   const artObj: ArtObjType = props.artObj;
   const artObjBlock = useRef<HTMLDivElement>(null);
   const artObjStyle = getStyle(artObj);
-  const selectId = useStateBlock(props.artObj.id, artObjBlock);
-  const select: string = props.artObj.id === selectId ? styles.selected : '';
-  useDragAndDrop(artObjBlock, { x: artObj.x, y: artObj.y }, props.setPositionBlock);
 
   const pointLT = useRef<HTMLDivElement>(null);
   const pointRT = useRef<HTMLDivElement>(null);
   const pointLB = useRef<HTMLDivElement>(null);
   const pointRB = useRef<HTMLDivElement>(null);
 
+  useStateBlock(props.artObj.id, artObjBlock, props.setSelectedBlock);
+  useDragAndDrop(artObjBlock, { x: artObj.x, y: artObj.y }, props.setPositionBlock);
   useResize(
     props.setSizeBlock,
     props.setPositionBlock,
@@ -37,6 +39,8 @@ function ArtObj(props: ArtObjProps) {
     { x: artObj.x, y: artObj.y },
     { width: artObj.width, height: artObj.height }
   );
+  
+  const select: string = props.artObj.id === props.selectBlock ? styles.selected : '';
 
   return (
     <div
@@ -56,14 +60,15 @@ function ArtObj(props: ArtObjProps) {
   );
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   selectBlock: state.selectBlock,
 })
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: AppDispatch) => {
   return {
     setPositionBlock: (x: number, y: number) => dispatch(setPositionBlock(x, y)),
     setSizeBlock: (width: number, height: number) => dispatch(setSizeBlock(width, height)),
+    setSelectedBlock: (id: string) => dispatch(setSelectedBlock(id)),
   }
 }
 

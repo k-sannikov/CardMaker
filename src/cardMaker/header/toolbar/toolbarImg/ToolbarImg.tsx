@@ -1,17 +1,22 @@
 import styles from './ToolbarImg.module.css';
 import { faDownload, faGlobe, faStickyNote } from '@fortawesome/free-solid-svg-icons'
-
 import DropdownMenu from '../../../dropdownMenu/DropdownMenu';
 import AddImgButton from './addImgButton/AddImgButton';
 import AddImgButtonFile from './addImgButtonFile/AddImgButtonFile';
 import PreviewArtObj from './previewArtObj/PreviewArtObj';
 import { SetOfArtObject } from '../../../../store/types';
 import { useCreateImg } from './useCreateImg';
-
 import { ReactElement } from 'react';
 import { useRef } from 'react';
+import { connect } from 'react-redux';
+import { AppDispatch } from '../../../../store/store';
+import { createImgBlock } from '../../../../store/actionCreators/imgBlockActionCreators';
 
-function ToolbarImg() {
+type ToolbarImgProps = {
+  createImgBlock: (src: string, width: number, height: number) => void,
+}
+
+function ToolbarImg(props: ToolbarImgProps) {
 
   // формирование списка стикеров
   let srcList: SetOfArtObject[] = Object.values(SetOfArtObject);
@@ -21,8 +26,8 @@ function ToolbarImg() {
   });
 
   const inputFile = useRef<HTMLInputElement>(null);
-  useCreateImg(inputFile);
 
+  useCreateImg(inputFile, props.createImgBlock);
   return (
     <div className={styles.toolbar}>
       <div className={styles.button_box}>
@@ -35,4 +40,10 @@ function ToolbarImg() {
   );
 }
 
-export default ToolbarImg;
+const mapDispatchToProps = (dispatch: AppDispatch) => {
+  return {
+    createImgBlock: (src: string, width: number, height: number) => dispatch(createImgBlock(src, width, height)),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(ToolbarImg);

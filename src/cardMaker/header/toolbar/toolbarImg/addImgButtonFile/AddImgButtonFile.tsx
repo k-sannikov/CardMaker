@@ -2,6 +2,7 @@ import styles from './AddImgButtonFile.module.css';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ForwardedRef, forwardRef } from 'react';
+import { connect } from 'react-redux';
 
 type NavButtonProps = {
   label: string,
@@ -29,4 +30,4 @@ const AddImgButton = forwardRef((props: NavButtonProps, ref: ForwardedRef<HTMLIn
   </button>
 ));
 
-export default AddImgButton;
+export default connect(null, null, null, { forwardRef: true })(AddImgButton);

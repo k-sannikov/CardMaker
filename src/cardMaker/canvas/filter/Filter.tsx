@@ -1,7 +1,7 @@
 import styles from './Filter.module.css';
 import { Canvas as CanvasType, ViewModel as ViewModelType } from '../../../store/types';
 import { connect } from 'react-redux';
-import { store } from '../../../store/store';
+import { RootState } from '../../../store/store';
 
 type FilterProps = {
   canvas: CanvasType
@@ -31,7 +31,7 @@ function Filter(props: FilterProps) {
   );
 }
 
-function mapStateToProps(state: any) {
+function mapStateToProps(state: RootState) {
   return {
     canvas: state.canvas,
     viewModel: state.viewModel,

@@ -1,4 +1,4 @@
-type SelectBlockAction = {
+export type SelectBlockAction = {
   type: 'NEW_CARD_MAKER',
 } | {
   type: 'RESET_SELECTED_BLOCK',

@@ -43,6 +43,7 @@
 
 .toolbar__fontFamily
 {
+    font-size: 15px;
     width: 123px;
     margin-right: 5px;
 }
@@ -88,32 +89,81 @@
     box-shadow: 1px 2px 2px 0px #7e6fb8;
 }
 
-.bitter
+.toolbar__fontFamily option
 {
-    font-family: bitter;
+    height: 30px;
+    vertical-align: middle;
 }
 
-.ptSerif
+.fantazyor
 {
-    font-family: "PT Serif";
+    font-family: fantazyor;
+    font-weight: 800;
 }
 
-.roboto
+.piroucyrillic
 {
-    font-family: Roboto;
+    font-family: piroucyrillic;
 }
 
-.ibmPlexMono
+.phenomena
 {
-    font-family: "IBM Plex Mono";
+    font-family: phenomena;
 }
 
-.alegreyaSans
+.sunday
 {
-    font-family: "Alegreya Sans";
+    font-family: sunday;
 }
 
-.cormorantGaramond
+.kurale
 {
-    font-family: "Cormorant Garamond";
+    font-family: kurale;
+}
+
+.sensei
+{
+    font-family: sensei;
+}
+
+.borsok
+{
+    font-family: borsok;
+}
+
+.summer
+{
+    font-size: 18px;
+    font-weight: 800;
+    font-family: summer;
+}
+
+.underdog
+{
+    font-family: underdog;
+}
+
+.montserrat
+{
+    font-family: montserrat;
+}
+
+.openSans
+{
+    font-family: openSans;
+}
+
+.comfortaa
+{
+    font-family: comfortaa;
+}
+
+.rubik
+{
+    font-family: rubik;
+}
+
+.marta
+{
+    font-family: marta;
 }

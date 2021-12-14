@@ -1,23 +1,18 @@
-import { CardMaker as CardMakerType, Filter as FilterType } from '../../../../store/types';
-import { RefObject, useContext, useEffect } from 'react';
-
-import StoreContext from '../../../../StoreContext';
-import { setFilter, inputFilter } from '../../../../store/actionCreators/canvasActionCreators';
+import { Filter as FilterType } from '../../../../store/types';
+import { RefObject, useEffect } from 'react';
 
 export function useStateFilter(
   inputColor: RefObject<HTMLInputElement>,
-  inputRange: RefObject<HTMLInputElement>) : void{
-
-  const store = useContext(StoreContext);
-
-  const cardMaker: CardMakerType = store.getState();
-  const filter: FilterType = cardMaker.canvas.filter;
+  inputRange: RefObject<HTMLInputElement>,
+  inputFilter: (color: string, opacity: number) => void,
+  setFilter: (color: string, opacity: number) => void,
+  filter: FilterType,) : void{
 
   function handleInputFilter(): void {
     if (inputRange.current && inputColor.current) {
       const color: string = inputColor.current.value;
       const opacity: number = Number(inputRange.current.value);
-      store.dispatch(inputFilter(color, opacity));
+      inputFilter(color, opacity);
     }
   }
 
@@ -25,7 +20,7 @@ export function useStateFilter(
     if (inputRange.current && inputColor.current) {
       const opacity: number = Number(inputRange.current.value);
       const color: string = inputColor.current.value;
-      store.dispatch(setFilter(color, opacity));
+      setFilter(color, opacity);
     }
   }
 

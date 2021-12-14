@@ -2,6 +2,7 @@ import styles from './DeleteArea.module.css';
 import { ReactElement } from 'react';
 import { DeleteArea as DeleteAreaType, Canvas as CanvasType } from '../../../store/types';
 import { connect } from 'react-redux';
+import { RootState } from '../../../store/store';
 
 type DeleteAreaProps = { canvas: CanvasType }
 
@@ -31,7 +32,7 @@ function DeleteArea(props: DeleteAreaProps) {
   );
 }
 
-function mapStateToProps(state: any) {
+function mapStateToProps(state: RootState) {
   return {
     canvas: state.canvas,
   }

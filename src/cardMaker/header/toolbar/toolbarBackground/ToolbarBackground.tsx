@@ -4,11 +4,29 @@ import ColorPicker from '../colorPicker/ColorPicker';
 import Button from '../button/Button';
 import { RefObject, useRef } from 'react';
 import { useStateBackgroungColor } from './useStateBackgroungColor';
+import { AppDispatch, RootState } from '../../../../store/store';
+import { inputBackgroundColor, resetBackground, setBackgroundColor } from '../../../../store/actionCreators/canvasActionCreators';
+import { connect } from 'react-redux';
+import { Background as BackgroundType } from '../../../../store/types';
 
-function ToolbarBackground() {
+type ToolbarBackgroundProps = {
+  resetBackground: () => void,
+  inputBackgroundColor: (color: string) => void,
+  setBackgroundColor: (color: string) => void,
+  background: BackgroundType,
+}
+
+function ToolbarBackground(props: ToolbarBackgroundProps) {
   const inputColor = useRef<HTMLInputElement>(null);
   const buttonReset = useRef<HTMLButtonElement>(null);
-  useStateBackgroungColor(inputColor, buttonReset);
+  useStateBackgroungColor(
+    props.resetBackground,
+    props.inputBackgroundColor,
+    props.setBackgroundColor,
+    props.background,
+    inputColor,
+    buttonReset
+  );
   return (
     <div className={styles.toolbar}>
       <div className={styles.toolbar__row}>
@@ -43,4 +61,17 @@ function ToolbarBackground() {
   );
 }
 
-export default ToolbarBackground;
+const mapStateToProps = (state: RootState) => ({
+  background: state.canvas.background, 
+})
+
+
+const mapDispatchToProps = (dispatch: AppDispatch) => {
+  return {
+    resetBackground: () => dispatch(resetBackground()),
+    inputBackgroundColor: (color: string) => dispatch(inputBackgroundColor(color)),
+    setBackgroundColor: (color: string) => dispatch(setBackgroundColor(color)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ToolbarBackground);

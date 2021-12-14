@@ -4,20 +4,26 @@ import { useRef } from 'react';
 import { useStateBlock } from '../useStateBlock';
 import { useDragAndDrop } from '../useDragAndDrop';
 import { connect } from 'react-redux';
-import { setPositionBlock } from '../../../store/actionCreators/blockActionCreators';
+import { setPositionBlock, setSelectedBlock } from '../../../store/actionCreators/blockActionCreators';
+import { AppDispatch, RootState } from '../../../store/store';
 
 type TextProps = {
   text: TextType,
-  setPositionBlock: (x: number, y: number) => any,
+  selectBlock: string | null,
+  setPositionBlock: (x: number, y: number) => void,
+  setSelectedBlock: (id: string) => void,
 }
 
 function Text(props: TextProps) {
   const text: TextType = props.text;
   const textStyle = getStyle(text);
   const textBlock = useRef<HTMLSpanElement>(null);
-  const selectId = useStateBlock(props.text.id, textBlock);
-  const select: string = props.text.id === selectId ? styles.selected : '';
+  
+  useStateBlock(props.text.id, textBlock, props.setSelectedBlock);
   useDragAndDrop(textBlock, {x: text.x, y: text.y }, props.setPositionBlock);
+  
+  const select: string = props.text.id === props.selectBlock ? styles.selected : '';
+
   return (
     <span style={textStyle}
       ref={textBlock}
@@ -39,14 +45,14 @@ function getStyle(text: TextType) {
     fontFamily: text.fontFamily,
   };
 }
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   selectBlock: state.selectBlock,
 })
 
-
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: AppDispatch) => {
   return {
     setPositionBlock: (x: number, y: number) => dispatch(setPositionBlock(x, y)),
+    setSelectedBlock: (id: string) => dispatch(setSelectedBlock(id)),
   }
 }
 

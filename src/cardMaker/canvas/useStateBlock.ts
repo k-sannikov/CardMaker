@@ -1,15 +1,13 @@
-import { useEffect, RefObject, useContext } from 'react';
-import { CardMaker as CardMakerType } from '../../store/types';
-import StoreContext from '../../StoreContext';
-import { setSelectedBlock } from '../../store/actionCreators/blockActionCreators';
+import { useEffect, RefObject } from 'react';
 
-export function useStateBlock(blockId: string, block: RefObject<HTMLElement>): string | null {
-  const store = useContext(StoreContext);
-  const cardMaker: CardMakerType = store.getState();
-  const selectId: string | null = cardMaker.selectBlock;
+export function useStateBlock(
+  blockId: string,
+  block: RefObject<HTMLElement>,
+  setSelectedBlock: (id: string) => void
+  ): void {
 
   function handleMousedownBlock(event: Event): void {
-    store.dispatch(setSelectedBlock(blockId));
+    setSelectedBlock(blockId);
     event.preventDefault();
   }
 
@@ -24,5 +22,4 @@ export function useStateBlock(blockId: string, block: RefObject<HTMLElement>): s
       }
     };
   }, []);
-  return selectId;
 }

@@ -1,6 +1,6 @@
 import { Background } from '../types';
 
-type BackgroundAction = {
+export type BackgroundAction = {
   type: 'NEW_CARD_MAKER',
 } | {
   type: 'RESET_BACKGROUND',

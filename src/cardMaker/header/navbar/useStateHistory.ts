@@ -1,11 +1,10 @@
-import { RefObject, useContext, useEffect } from 'react';
-import StoreContext from '../../../StoreContext';
+import { RefObject, useEffect } from 'react';
 
 export function useStateHistory(
   buttonUndo: RefObject<HTMLButtonElement>,
   buttonRedo: RefObject<HTMLButtonElement>,
-  undo: () => any,
-  redo: () => any,
+  undo: () => void,
+  redo: () => void,
 ): void {
 
   function handlerClickUndo(): void {

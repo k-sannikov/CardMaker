@@ -5,21 +5,35 @@ import ColorPicker from '../colorPicker/ColorPicker';
 import { useCreateText } from './useCreateText';
 import { useRef } from 'react';
 import { connect } from 'react-redux';
+import { AppDispatch } from '../../../../store/store';
+import { createTextBlock } from '../../../../store/actionCreators/textBlockActionCreators';
 
-function ToolbarText() {
+type ToolbarTextProps = {
+  createTextBlock: () => void,
+}
+
+function ToolbarText(props: ToolbarTextProps) {
   const addButton = useRef<HTMLButtonElement>(null);
-  useCreateText(addButton);
+  useCreateText(addButton, props.createTextBlock);
   return (
     <div className={styles.toolbar}>
 
       <div className={styles.toolbar__row}>
         <select name="" id="" className={styles.toolbar__fontFamily}>
-          <option className={styles.bitter} value="">Bitter</option>
-          <option className={styles.ptSerif} value="">PT Serif</option>
-          <option className={styles.roboto} value="">Roboto</option>
-          <option className={styles.ibmPlexMono} value="">IBM Plex Mono</option>
-          <option className={styles.alegreyaSans} value="">Alegreya Sans</option>
-          <option className={styles.cormorantGaramond} value="">Cormorant Garamond</option>
+          <option className={styles.fantazyor} value="">Fantazyor</option>
+          <option className={styles.piroucyrillic} value="">Piroucyrillic</option>
+          <option className={styles.phenomena} value="">Phenomena</option>
+          <option className={styles.sunday} value="">Sunday</option>
+          <option className={styles.kurale} value="">Kurale</option>
+          <option className={styles.sensei} value="">Sensei</option>
+          <option className={styles.borsok} value="">Borsok</option>
+          <option className={styles.summer} value="">Summer</option>
+          <option className={styles.underdog} value="">Underdog</option>
+          <option className={styles.montserrat} value="">Montserrat</option>
+          <option className={styles.openSans} value="">OpenSans</option>
+          <option className={styles.comfortaa} value="">Comfortaa</option>
+          <option className={styles.rubik} value="">Rubik</option>
+          <option className={styles.marta} value="">Marta</option>
         </select>
         <ButtonEditText icon={faFont} ref={addButton} />
       </div>
@@ -42,4 +56,10 @@ function ToolbarText() {
   );
 }
 
-export default connect()(ToolbarText);
+const mapDispatchToProps = (dispatch: AppDispatch) => {
+  return {
+    createTextBlock: () => dispatch(createTextBlock()),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(ToolbarText);

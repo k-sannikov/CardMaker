@@ -1,7 +1,18 @@
 import { Canvas, ActionHistory } from '../types';
-import { isUndoAvailable, isRedoAvailable } from '../../utils/utils'
+import { isUndoAvailable, isRedoAvailable } from '../../utils/permisions'
 
-function history(history: ActionHistory, action: any): ActionHistory {
+export type HistoryAction = {
+  type: 'NEW_CARD_MAKER',
+} | {
+  type: 'ADD_HISTORY',
+  newCanvas: Canvas,
+} | {
+  type: 'UNDO',
+} | {
+  type: 'REDO',
+}
+
+function history(history: ActionHistory, action: HistoryAction): ActionHistory {
   switch (action.type) {
 
     case 'NEW_CARD_MAKER':

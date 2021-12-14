@@ -1,6 +1,7 @@
 import styles from './DropdownMenu.module.css';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { connect } from 'react-redux';
 
 type DropdownMenuProps = {
   label: string,
@@ -23,4 +24,4 @@ function DropdownMenu(props: DropdownMenuProps) {
   );
 }
 
-export default DropdownMenu;
+export default connect()(DropdownMenu);

@@ -1,4 +1,4 @@
-type WidthAction = {
+export type WidthAction = {
   type: 'NEW_CARD_MAKER',
 } | {
   type: 'SET_CANVAS_SIZE',

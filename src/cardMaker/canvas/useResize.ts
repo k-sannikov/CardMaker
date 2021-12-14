@@ -2,8 +2,8 @@ import { useEffect, RefObject } from 'react';
 import { Position, Size } from '../../store/types';
 
 export function useResize(
-  setSizeBlock: (width: number, height: number) => any,
-  setPositionBlock: (x: number, y: number) => any,
+  setSizeBlock: (width: number, height: number) => void,
+  setPositionBlock: (x: number, y: number) => void,
   pointLT: RefObject<HTMLElement>,
   pointRT: RefObject<HTMLElement>,
   pointLB: RefObject<HTMLElement>,

@@ -10,13 +10,15 @@ import { useStateHistory } from './useStateHistory';
 import { connect } from 'react-redux';
 import { undo, redo } from '../../../store/actionCreators/historyActionCreators';
 import { applyFileProject } from '../../../store/actionCreators/cardMakerActionCreators';
-import { Canvas } from '../../../store/types';
+import { CardMaker as CardMakerType } from '../../../store/types';
+import { AppDispatch } from '../../../store/store';
+import { useExportFileProject } from './useExportFileProject';
 
 
 type NavbarProps = {
-  undo: () => any,
-  redo: () => any,
-  applyFileProject: (file: Canvas) => any
+  undo: () => void,
+  redo: () => void,
+  applyFileProject: (file: CardMakerType) => void,
 }
 
 function Navbar(props: NavbarProps) {
@@ -31,11 +33,9 @@ function Navbar(props: NavbarProps) {
 
   const inputFile = useRef<HTMLInputElement>(null);
   const downloadFile = useRef<HTMLAnchorElement>(null);
-  useImportFileProject(
-    inputFile,
-    downloadFile,
-    props.applyFileProject,
-  );
+  
+  useImportFileProject(inputFile, props.applyFileProject);
+  useExportFileProject(downloadFile);
 
   return (
     <nav className={styles.navbar}>
@@ -49,12 +49,11 @@ function Navbar(props: NavbarProps) {
     </nav>
   );
 }
-
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: AppDispatch) => {
   return {
     undo: () => dispatch(undo()),
     redo: () => dispatch(redo()),
-    applyFileProject: (file: Canvas) => dispatch(applyFileProject(file)),
+    applyFileProject: (file: CardMakerType) => dispatch(applyFileProject(file)),
   }
 }
 

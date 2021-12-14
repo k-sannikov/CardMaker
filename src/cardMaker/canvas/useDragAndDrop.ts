@@ -4,7 +4,7 @@ import { Position } from '../../store/types';
 export function useDragAndDrop(
   block: RefObject<HTMLElement>,
   defPos: Position,
-  setPositionBlock: (x: number, y: number) => any
+  setPositionBlock: (x: number, y: number) => void
 ): void {
 
   let startPos: Position;

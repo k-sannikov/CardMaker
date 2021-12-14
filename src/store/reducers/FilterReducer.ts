@@ -1,6 +1,6 @@
 import { Filter } from '../types';
 
-type FilterAction = {
+export type FilterAction = {
   type: 'NEW_CARD_MAKER',
 } | {
   type: 'SET_FILTER',

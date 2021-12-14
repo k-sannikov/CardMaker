@@ -5,12 +5,15 @@ import { useStateBlock } from '../useStateBlock';
 import { useDragAndDrop } from '../useDragAndDrop';
 import { useResize } from '../useResize';
 import { connect } from 'react-redux';
-import { setPositionBlock, setSizeBlock } from '../../../store/actionCreators/blockActionCreators';
+import { setPositionBlock, setSelectedBlock, setSizeBlock } from '../../../store/actionCreators/blockActionCreators';
+import { AppDispatch, RootState } from '../../../store/store';
 
 type ImgProps = {
   img: ImgType,
-  setSizeBlock: (width: number, height: number) => any,
-  setPositionBlock: (x: number, y: number) => any,
+  selectBlock: string | null,
+  setSizeBlock: (width: number, height: number) => void,
+  setPositionBlock: (x: number, y: number) => void,
+  setSelectedBlock: (id: string) => void,
 }
 
 function Img(props: ImgProps) {
@@ -21,15 +24,15 @@ function Img(props: ImgProps) {
   }
   const imgStyle = getStyle(img);
   const imgBlock = useRef<HTMLImageElement>(null);
-  const selectId = useStateBlock(props.img.id, imgBlock);
-  const select: string = props.img.id === selectId ? styles.selected : '';
-  useDragAndDrop(imgBlock, { x: img.x, y: img.y }, props.setPositionBlock);
+
 
   const pointLT = useRef<HTMLDivElement>(null);
   const pointRT = useRef<HTMLDivElement>(null);
   const pointLB = useRef<HTMLDivElement>(null);
   const pointRB = useRef<HTMLDivElement>(null);
-  
+
+  useStateBlock(props.img.id, imgBlock, props.setSelectedBlock);
+  useDragAndDrop(imgBlock, { x: img.x, y: img.y }, props.setPositionBlock);
   useResize(
     props.setSizeBlock,
     props.setPositionBlock,
@@ -41,6 +44,8 @@ function Img(props: ImgProps) {
     { x: img.x, y: img.y },
     { width: img.width, height: img.height }
   );
+
+  const select: string = props.img.id === props.selectBlock ? styles.selected : '';
 
   return (
     <div
@@ -60,14 +65,15 @@ function Img(props: ImgProps) {
   );
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   selectBlock: state.selectBlock,
 })
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: AppDispatch) => {
   return {
     setPositionBlock: (x: number, y: number) => dispatch(setPositionBlock(x, y)),
     setSizeBlock: (width: number, height: number) => dispatch(setSizeBlock(width, height)),
+    setSelectedBlock: (id: string) => dispatch(setSelectedBlock(id)),
   }
 }
 

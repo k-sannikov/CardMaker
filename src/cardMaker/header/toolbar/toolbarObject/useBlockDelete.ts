@@ -1,13 +1,9 @@
-import { RefObject, useContext, useEffect } from 'react';
+import { RefObject, useEffect } from 'react';
 
-import StoreContext from '../../../../StoreContext';
-import { deleteBlock } from '../../../../store/actionCreators/blockActionCreators';
-
-export function useBlockDelete(buttonDelete: RefObject<HTMLButtonElement>): void {
-  const store = useContext(StoreContext);
+export function useBlockDelete(buttonDelete: RefObject<HTMLButtonElement>, deleteBlock: () => void,): void {
 
   function handlerMousedownDelete(): void {
-    store.dispatch(deleteBlock());
+    deleteBlock();
   }
 
   useEffect(() => {
