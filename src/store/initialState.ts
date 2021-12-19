@@ -59,7 +59,7 @@ const testText: Text = {
   italic: true,
   underline: true,
   color: "#ffffff",
-  fontFamily: "Courier New",
+  fontFamily: "Sensei",
 }
 
 const testBackground: Background = {
@@ -113,6 +113,16 @@ const viewModel: ViewModel = {
   bgColor: null,
   canvasSize: null,
   filter: null,
+  text: {
+    color: null,
+    size: null,
+    bold: null,
+    italic: null,
+    underline: null,
+    fontFamily: null,
+    tempColor: null,
+    tempSize: null,
+  },
 }
 
 export const testCardMaker: CardMaker = {

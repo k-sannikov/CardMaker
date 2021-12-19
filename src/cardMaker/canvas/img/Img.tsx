@@ -5,7 +5,7 @@ import { useStateBlock } from '../useStateBlock';
 import { useDragAndDrop } from '../useDragAndDrop';
 import { useResize } from '../useResize';
 import { connect } from 'react-redux';
-import { setPositionBlock, setSelectedBlock, setSizeBlock } from '../../../store/actionCreators/blockActionCreators';
+import { resetSelectedBlock, setPositionBlock, setSelectedBlock, setSizeBlock } from '../../../store/actionCreators/blockActionCreators';
 import { AppDispatch, RootState } from '../../../store/store';
 
 type ImgProps = {
@@ -14,6 +14,7 @@ type ImgProps = {
   setSizeBlock: (width: number, height: number) => void,
   setPositionBlock: (x: number, y: number) => void,
   setSelectedBlock: (id: string) => void,
+  resetSelectedBlock: () => void,
 }
 
 function Img(props: ImgProps) {
@@ -31,7 +32,7 @@ function Img(props: ImgProps) {
   const pointLB = useRef<HTMLDivElement>(null);
   const pointRB = useRef<HTMLDivElement>(null);
 
-  useStateBlock(props.img.id, imgBlock, props.setSelectedBlock);
+  useStateBlock(props.img.id, imgBlock, props.setSelectedBlock, props.resetSelectedBlock);
   useDragAndDrop(imgBlock, { x: img.x, y: img.y }, props.setPositionBlock);
   useResize(
     props.setSizeBlock,
@@ -52,6 +53,7 @@ function Img(props: ImgProps) {
       className={styles.block + ' ' + select}
       style={imgStyle}
       ref={imgBlock}
+      onDragStart={(e) => e.preventDefault() }
     >
       <div className={styles.pointTopLeft} ref={pointLT}></div>
       <div className={styles.pointTopRight} ref={pointRT}></div>
@@ -74,6 +76,7 @@ const mapDispatchToProps = (dispatch: AppDispatch) => {
     setPositionBlock: (x: number, y: number) => dispatch(setPositionBlock(x, y)),
     setSizeBlock: (width: number, height: number) => dispatch(setSizeBlock(width, height)),
     setSelectedBlock: (id: string) => dispatch(setSelectedBlock(id)),
+    resetSelectedBlock: () => dispatch(resetSelectedBlock()),
   }
 }
 

@@ -1,53 +1,41 @@
 import styles from './ToolbarText.module.css';
 import { faBold, faItalic, faUnderline, faFont } from '@fortawesome/free-solid-svg-icons'
-import ButtonEditText from './buttonEditText/ButtonEditText';
-import ColorPicker from '../colorPicker/ColorPicker';
-import { useCreateText } from './useCreateText';
-import { useRef } from 'react';
 import { connect } from 'react-redux';
-import { AppDispatch } from '../../../../store/store';
-import { createTextBlock } from '../../../../store/actionCreators/textBlockActionCreators';
+import { AppDispatch, RootState } from '../../../../store/store';
+import { createTextBlock, setBoldText, setItalicText, setUnderlineText } from '../../../../store/actionCreators/textBlockActionCreators';
+import ButtonEditText from './buttonEditText/ButtonEditText';
+import ColorPicker from './colorPicker/ColorPicker';
+import InputNumber from './inputNumber/InputNumber';
+import SelectFontFamily from './selectFontFamily/SelectFontFamily';
+
 
 type ToolbarTextProps = {
   createTextBlock: () => void,
+  setBoldText: (isBold: boolean) => void,
+  setItalicText: (isItalic: boolean) => void,
+  setUnderlineText: (isUnderline: boolean) => void,
+  bold: boolean | null,
+  italic: boolean | null,
+  underline: boolean | null,
 }
 
 function ToolbarText(props: ToolbarTextProps) {
-  const addButton = useRef<HTMLButtonElement>(null);
-  useCreateText(addButton, props.createTextBlock);
   return (
     <div className={styles.toolbar}>
 
       <div className={styles.toolbar__row}>
-        <select name="" id="" className={styles.toolbar__fontFamily}>
-          <option className={styles.fantazyor} value="">Fantazyor</option>
-          <option className={styles.piroucyrillic} value="">Piroucyrillic</option>
-          <option className={styles.phenomena} value="">Phenomena</option>
-          <option className={styles.sunday} value="">Sunday</option>
-          <option className={styles.kurale} value="">Kurale</option>
-          <option className={styles.sensei} value="">Sensei</option>
-          <option className={styles.borsok} value="">Borsok</option>
-          <option className={styles.summer} value="">Summer</option>
-          <option className={styles.underdog} value="">Underdog</option>
-          <option className={styles.montserrat} value="">Montserrat</option>
-          <option className={styles.openSans} value="">OpenSans</option>
-          <option className={styles.comfortaa} value="">Comfortaa</option>
-          <option className={styles.rubik} value="">Rubik</option>
-          <option className={styles.marta} value="">Marta</option>
-        </select>
-        <ButtonEditText icon={faFont} ref={addButton} />
+        <SelectFontFamily />
+        <ButtonEditText icon={faFont} enabled={null} modifyFn={props.createTextBlock} param={false} />
       </div>
 
       <div className={styles.toolbar__row}>
-        <select name="" id="" className={styles.toolbar__fontSize}>
-          <option value="">14</option>
-          <option value="">16</option>
-        </select>
-        <ButtonEditText icon={faBold} />
-        <ButtonEditText icon={faItalic} />
-        <ButtonEditText icon={faUnderline} />
+        <InputNumber />
+
+        <ButtonEditText icon={faBold} enabled={props.bold} modifyFn={props.setBoldText}  param={true}/>
+        <ButtonEditText icon={faItalic} enabled={props.italic} modifyFn={props.setItalicText}  param={true}/>
+        <ButtonEditText icon={faUnderline} enabled={props.underline} modifyFn={props.setUnderlineText}  param={true}/>
         <div className={styles.colorPickerBox}>
-          <ColorPicker ref={null} />
+          <ColorPicker />
         </div>
       </div>
 
@@ -56,10 +44,21 @@ function ToolbarText(props: ToolbarTextProps) {
   );
 }
 
+function mapStateToProps(state: RootState) {
+  return {
+    bold: state.viewModel.text.bold,
+    italic: state.viewModel.text.italic,
+    underline: state.viewModel.text.underline,
+  }
+};
+
 const mapDispatchToProps = (dispatch: AppDispatch) => {
   return {
     createTextBlock: () => dispatch(createTextBlock()),
+    setBoldText: (isBold: boolean) => dispatch(setBoldText(isBold)),
+    setItalicText: (isItalic: boolean) => dispatch(setItalicText(isItalic)),
+    setUnderlineText: (isUnderline: boolean) => dispatch(setUnderlineText(isUnderline)),
   }
 }
 
-export default connect(null, mapDispatchToProps)(ToolbarText);
+export default connect(mapStateToProps, mapDispatchToProps)(ToolbarText);

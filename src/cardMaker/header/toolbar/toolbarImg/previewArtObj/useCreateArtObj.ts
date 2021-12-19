@@ -1,4 +1,5 @@
 import { RefObject, useEffect } from "react";
+import { verify } from "../../../../../utils/permisions";
 
 export function useCreateArtObj(
   artObj: RefObject<HTMLElement>,
@@ -10,10 +11,7 @@ export function useCreateArtObj(
   }
 
   useEffect(() => {
-    if (artObj.current) {
-      artObj.current.addEventListener("click", handleClickArtObj);
-    }
-
+    verify(artObj.current).addEventListener("click", handleClickArtObj);
     return () => {
       if (artObj.current) {
         artObj.current.removeEventListener("click", handleClickArtObj);

@@ -16,7 +16,15 @@ export function setTextInTextBlock(text: string) {
   }
 }
 
-export function setBoldText(id: string, isBold: boolean) {
+export function setFontFamilyText(fontFamily: string) {
+  return {
+    type: 'SET_FONT_FAMILY_TEXT',
+    id: store.getState().selectBlock,
+    fontFamily: fontFamily,
+  }
+}
+
+export function setBoldText(isBold: boolean) {
   return {
     type: 'SET_BOLD_TEXT',
     id: store.getState().selectBlock,
@@ -36,7 +44,7 @@ export function setUnderlineText(isUnderline: boolean) {
   return {
     type: 'SET_UNDERLINE_TEXT',
     id: store.getState().selectBlock,
-    underline: isUnderline,
+    isUnderline: isUnderline,
   }
 }
 
@@ -44,6 +52,20 @@ export function setSizeText(size: number) {
   return {
     type: 'SET_SIZE_TEXT',
     id: store.getState().selectBlock,
+    size: size,
+  }
+}
+
+export function inputColorText(color: string) {
+  return {
+    type: 'INPUT_COLOR_TEXT',
+    color: color,
+  }
+}
+
+export function inputSizeText(size: number) {
+  return {
+    type: 'INPUT_SIZE_TEXT',
     size: size,
   }
 }

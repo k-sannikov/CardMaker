@@ -51,3 +51,16 @@ export function shiftDownBlock() {
     id: store.getState().selectBlock,
   }
 }
+
+export function clickOnText() {
+  return {
+    type: 'CLICK_ON_TEXT',
+    id: store.getState().selectBlock,
+  }
+}
+
+export function blurOnText() {
+  return {
+    type: 'BLUR_ON_TEXT',
+  }
+}

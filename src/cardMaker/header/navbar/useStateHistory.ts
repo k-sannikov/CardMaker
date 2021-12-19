@@ -1,4 +1,5 @@
 import { RefObject, useEffect } from 'react';
+import { verify } from '../../../utils/permisions';
 
 export function useStateHistory(
   buttonUndo: RefObject<HTMLButtonElement>,
@@ -10,17 +11,24 @@ export function useStateHistory(
   function handlerClickUndo(): void {
     undo();
   }
+
   function handlerClickRedo(): void {
     redo();
   }
 
+  function handlerKeydown(event: KeyboardEvent): void {
+    if (event.code === 'KeyZ' && (event.ctrlKey || event.metaKey)) {
+      undo();
+    }
+    if (event.code === 'KeyY' && (event.ctrlKey || event.metaKey)) {
+      redo();
+    }
+  }
+
   useEffect(() => {
-    if (buttonUndo.current) {
-      buttonUndo.current.addEventListener("click", handlerClickUndo);
-    }
-    if (buttonRedo.current) {
-      buttonRedo.current.addEventListener("click", handlerClickRedo);
-    }
+    verify(buttonUndo.current).addEventListener("click", handlerClickUndo);
+    verify(buttonRedo.current).addEventListener("click", handlerClickRedo);
+    document.addEventListener("keydown", handlerKeydown);
     return () => {
       if (buttonUndo.current) {
         buttonUndo.current.removeEventListener("click", handlerClickUndo);
@@ -28,6 +36,7 @@ export function useStateHistory(
       if (buttonRedo.current) {
         buttonRedo.current.removeEventListener("click", handlerClickRedo);
       }
+      document.removeEventListener("keydown", handlerKeydown);
     };
   }, []);
 }

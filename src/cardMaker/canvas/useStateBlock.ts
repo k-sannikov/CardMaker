@@ -1,25 +1,39 @@
 import { useEffect, RefObject } from 'react';
+import { store } from '../../store/store';
+import { verify } from '../../utils/permisions';
 
 export function useStateBlock(
   blockId: string,
   block: RefObject<HTMLElement>,
-  setSelectedBlock: (id: string) => void
-  ): void {
+  setSelectedBlock: (id: string) => void,
+  resetSelectedBlock: () => void,
+): void {
 
-  function handleMousedownBlock(event: Event): void {
-    setSelectedBlock(blockId);
-    event.preventDefault();
+  function handleMousedownBlock(): void {
+    if (store.getState().selectBlock !== blockId) {
+      setTimeout(() => {
+        setSelectedBlock(blockId);
+      });
+    }
+  }
+
+  function handleClickDocument(event: Event): void {
+    const isDefPrev: boolean = event.defaultPrevented;
+    const isSelectedID: boolean = store.getState().selectBlock === blockId;
+    if (!isDefPrev && isSelectedID && (event.target !== block.current)) {
+      resetSelectedBlock();
+    }
   }
 
   useEffect(() => {
-    if (block.current) {
-      block.current.addEventListener("mousedown", handleMousedownBlock);
-    }
-     
+    document.addEventListener("click", handleClickDocument);
+    verify(block.current).addEventListener("mousedown", handleMousedownBlock);
+
     return () => {
       if (block.current) {
         block.current.removeEventListener("mousedown", handleMousedownBlock);
       }
+      document.removeEventListener("click", handleClickDocument);
     };
   }, []);
 }

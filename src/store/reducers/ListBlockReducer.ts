@@ -19,6 +19,10 @@ export type ListBlockAction = {
   id: string,
   text: string,
 } | {
+  type: 'SET_FONT_FAMILY_TEXT',
+  id: string,
+  fontFamily: string,
+} | {
   type: 'SET_BOLD_TEXT',
   id: string,
   isBold: boolean,
@@ -79,14 +83,14 @@ function listBlock(listBlock: Block[], action: ListBlockAction): Block[] {
           id: createGUID(),
           type: 'text',
           color: '#000000',
-          x: action.x,
-          y: action.y,
+          x: action.x - 45,
+          y: action.y - 25,
           text: 'Текст',
           size: 30,
           bold: false,
           italic: false,
           underline: false,
-          fontFamily: 'arial',
+          fontFamily: 'OpenSans',
         }
       ];
 
@@ -101,6 +105,11 @@ function listBlock(listBlock: Block[], action: ListBlockAction): Block[] {
         text: action.text,
       });
 
+    case 'SET_FONT_FAMILY_TEXT':
+      return setComponentFields(listBlock, action.id, {
+        fontFamily: action.fontFamily,
+      });
+
     case 'SET_BOLD_TEXT':
       return setComponentFields(listBlock, action.id, {
         bold: action.isBold,
@@ -113,7 +122,7 @@ function listBlock(listBlock: Block[], action: ListBlockAction): Block[] {
 
     case 'SET_UNDERLINE_TEXT':
       return setComponentFields(listBlock, action.id, {
-        italic: action.isUnderline,
+        underline: action.isUnderline,
       });
 
     case 'SET_SIZE_TEXT':

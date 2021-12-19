@@ -1,5 +1,6 @@
 import { RefObject, useEffect } from "react";
 import { getImgInformationFromFile } from '../../../../utils/files';
+import { verify } from "../../../../utils/permisions";
 
 
 export function useCreateImg(
@@ -15,10 +16,7 @@ export function useCreateImg(
   }
 
   useEffect(() => {
-    if (inputFile.current) {
-      inputFile.current.addEventListener("change", handlerChangeInput);
-    }
-
+    verify(inputFile.current).addEventListener("change", handlerChangeInput);
     return () => {
       if (inputFile.current) {
         inputFile.current.removeEventListener("change", handlerChangeInput);

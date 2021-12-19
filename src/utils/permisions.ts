@@ -25,3 +25,11 @@ export function isShiftUpAvailable(id: string | null, listBlock: Block[]): boole
 export function isShiftDownAvailable(id: string | null, listBlock: Block[]): boolean {
   return Boolean(id && getIndexById(listBlock, id) > 0)
 }
+
+// проверка на !null значение
+export function verify<T>(value: T | null | undefined): T {
+  if (!value) {
+    throw new Error('Assertion failed');
+  }
+  return value;
+}

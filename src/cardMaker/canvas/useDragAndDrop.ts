@@ -1,5 +1,6 @@
 import { useEffect, RefObject } from 'react';
 import { Position } from '../../store/types';
+import { verify } from '../../utils/permisions';
 
 export function useDragAndDrop(
   block: RefObject<HTMLElement>,
@@ -10,7 +11,7 @@ export function useDragAndDrop(
   let startPos: Position;
 
   function handleMousedown(event: MouseEvent): void {
-    
+
     startPos = {
       x: event.pageX,
       y: event.pageY,
@@ -34,30 +35,22 @@ export function useDragAndDrop(
         y: defPos.y + delta.y
       }
 
-      if (block.current) {
-        block.current.style.left = String(newPos.x) + 'px';
-        block.current.style.top = String(newPos.y) + 'px';
-      }
+      verify(block.current).style.left = String(newPos.x) + 'px';
+      verify(block.current).style.top = String(newPos.y) + 'px';
 
     }
-
   }
 
   function handleMouseUp(): void {
     if (newPos) {
       setPositionBlock(newPos.x, newPos.y);
     }
-
-    if (block.current) {
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseup", handleMouseUp);
-    }
+    document.removeEventListener("mousemove", handleMouseMove);
+    document.removeEventListener("mouseup", handleMouseUp);
   }
 
   useEffect(() => {
-    if (block.current) {
-      block.current.addEventListener("mousedown", handleMousedown);
-    }
+    verify(block.current).addEventListener("mousedown", handleMousedown);
     return () => {
       if (block.current) {
         block.current.removeEventListener("mousedown", handleMousedown);

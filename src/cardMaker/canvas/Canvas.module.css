@@ -5,7 +5,7 @@
     /* margin: 20px 0; */
     margin: 20px auto;
     border: 1px solid #6D85B6;
-    overflow: hidden;
+    /* overflow: hidden; */
     position: relative;
     z-index: 0;
 }

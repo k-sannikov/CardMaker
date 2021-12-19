@@ -1,5 +1,6 @@
 import { useEffect, RefObject } from 'react';
 import { Background as BackgroundType } from '../../../../store/types';
+import { verify } from '../../../../utils/permisions';
 
 export function useStateBackgroungColor(
   resetBackground: () => void,
@@ -18,24 +19,20 @@ export function useStateBackgroungColor(
     inputBackgroundColor(inputColor.value);
   }
 
-  function handleerBlurColor(event: Event): void {
+  function handleerChangeColor(event: Event): void {
     const inputColor = event.target as HTMLInputElement;
     const color: string = inputColor.value;
     setBackgroundColor(color);
   }
 
   useEffect(() => {
-    if (inputColor.current) {
-      inputColor.current.addEventListener("input", handlerInputColor);
-      inputColor.current.addEventListener("blur", handleerBlurColor);
-    }
-    if (buttonReset.current) {
-      buttonReset.current.addEventListener("click", handlerClickResetColor);
-    }
+    verify(inputColor.current).addEventListener("input", handlerInputColor);
+    verify(inputColor.current).addEventListener("change", handleerChangeColor);
+    verify(buttonReset.current).addEventListener("click", handlerClickResetColor);
     return () => {
       if (inputColor.current) {
         inputColor.current.removeEventListener("input", handlerInputColor);
-        inputColor.current.removeEventListener("blur", handleerBlurColor);
+        inputColor.current.removeEventListener("change", handleerChangeColor);
       }
       if (buttonReset.current) {
         buttonReset.current.removeEventListener("click", handlerClickResetColor);
@@ -46,9 +43,7 @@ export function useStateBackgroungColor(
 
   // изменение цвета input на белый при сбросе фона
   useEffect(() => {
-    if (inputColor.current) {
-      inputColor.current.value = background.color ? background.color : '#ffffff';
-    }
+    verify(inputColor.current).value = background.color ? background.color : '#ffffff';
   }, [background]);
 
 

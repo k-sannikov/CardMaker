@@ -1,6 +1,7 @@
 import { getProjectFromFile } from '../../../utils/files';
 import { RefObject, useEffect } from 'react';
 import { CardMaker as CardMakerType } from '../../../store/types';
+import { verify } from '../../../utils/permisions';
 
 export function useImportFileProject(
   inputFile: RefObject<HTMLInputElement>,
@@ -15,10 +16,7 @@ export function useImportFileProject(
   }
 
   useEffect(() => {
-    if (inputFile.current) {
-      inputFile.current.addEventListener("change", handlerChangeInputFile);
-    }
-
+    verify(inputFile.current).addEventListener("change", handlerChangeInputFile);
     return () => {
       if (inputFile.current) {
         inputFile.current.removeEventListener("change", handlerChangeInputFile);

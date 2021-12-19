@@ -14,7 +14,6 @@ import { CardMaker as CardMakerType } from '../../../store/types';
 import { AppDispatch } from '../../../store/store';
 import { useExportFileProject } from './useExportFileProject';
 
-
 type NavbarProps = {
   undo: () => void,
   redo: () => void,

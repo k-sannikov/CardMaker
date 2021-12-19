@@ -5,7 +5,6 @@ import Text from './text/Text'
 import ArtObj from './artObj/ArtObj'
 import Filter from './filter/Filter'
 import DeleteArea from './deleteArea/DeleteArea'
-import { useRemoveSelectedBlock } from './useRemoveSelectedBlock ';
 import {
   Block as BlockType,
   ArtObj as ArtObjType,
@@ -15,17 +14,14 @@ import {
   ViewModel as ViewModelType,
 } from '../../store/types';
 import { connect } from 'react-redux';
-import { resetSelectedBlock } from '../../store/actionCreators/blockActionCreators';
-import { AppDispatch, RootState } from '../../store/store';
+import { RootState } from '../../store/store';
 
 type CanvasProps = {
   canvas: CanvasType,
   viewModel: ViewModelType,
-  resetSelectedBlock: () => void,
 }
 
 function Canvas(props: CanvasProps) {
-  useRemoveSelectedBlock(props.resetSelectedBlock);
   const canvasStyle = getStyle(props.canvas, props.viewModel);
   let listBlock: ReactElement[] = getListBlock(props.canvas.listBlock);
   return (
@@ -46,13 +42,7 @@ function mapStateToProps(state: RootState) {
   }
 };
 
-const mapDispatchToProps = (dispatch: AppDispatch) => {
-  return {
-    resetSelectedBlock: () => dispatch(resetSelectedBlock()),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Canvas);
+export default connect(mapStateToProps)(Canvas);
 
 
 

@@ -76,10 +76,22 @@ export type Size = Readonly<{
   height: number,
 }>
 
+export type ViewModelText = {
+  color: string | null,
+  size: number | null,
+  bold: boolean | null,
+  italic: boolean | null,
+  underline: boolean | null,
+  fontFamily: string | null,
+  tempColor: string | null,
+  tempSize: number | null,
+}
+
 export type ViewModel = Readonly<{
   bgColor: string | null,
   canvasSize: Size | null,
   filter: Filter | null,
+  text: ViewModelText,
 }>
 
 export type CardMaker = Readonly<{

@@ -1,5 +1,6 @@
 import { RefObject, useEffect } from 'react';
 import { store } from '../../../store/store';
+import { verify } from '../../../utils/permisions';
 
 export function useExportFileProject(
   downloadFile: RefObject<HTMLAnchorElement>,
@@ -21,10 +22,7 @@ export function useExportFileProject(
   }
 
   useEffect(() => {
-    if (downloadFile.current) {
-      downloadFile.current.addEventListener("click", handlerClickSaveToJson);
-    }
-
+    verify(downloadFile.current).addEventListener("click", handlerClickSaveToJson);
     return () => {
       if (downloadFile.current) {
         downloadFile.current.removeEventListener("click", handlerClickSaveToJson);
