@@ -1,5 +1,4 @@
-.button
-{
+.button {
     font: 400 14px "Roboto Slab";
     color: #1c182b;
     background: none;
@@ -8,19 +7,16 @@
     padding: 5px;
 }
 
-.button:hover
-{
+.button:hover {
     color: #E0E1F4;
     background: #AEA3D7;
     text-shadow: #7E6FB8 0 0 3px;
 }
 
-.button:active
-{
+.button:active {
     background: #a79cd1;
 }
 
-.button__text
-{
+.button__text {
     padding-left: 5px;
 }

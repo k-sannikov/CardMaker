@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { clickOnText, deleteBlock, resetSelectedBlock, setPositionBlock, setSelectedBlock } from '../../../store/actionCreators/blockActionCreators';
 import { AppDispatch, RootState } from '../../../store/store';
 import { useEditText } from './useEditText';
-import { setTextInTextBlock } from '../../../store/actionCreators/textBlockActionCreators';
+import { setBoldText, setItalicText, setTextInTextBlock, setUnderlineText } from '../../../store/actionCreators/textBlockActionCreators';
 
 type TextProps = {
   text: TextType,
@@ -20,15 +20,30 @@ type TextProps = {
   setTextInTextBlock: (text: string) => void,
   clickOnText: () => void,
   deleteBlock: () => void,
+  setBoldText: (isBold: boolean) => void,
+  setItalicText: (isItalic: boolean) => void,
+  setUnderlineText: (isUnderline: boolean) => void,
 }
 
 function Text(props: TextProps) {
   const text: TextType = props.text;
-  
+
   const textBlock = useRef<HTMLSpanElement>(null);
   useStateBlock(props.text.id, textBlock, props.setSelectedBlock, props.resetSelectedBlock);
-  useDragAndDrop(textBlock, {x: text.x, y: text.y }, props.setPositionBlock);
-  useEditText(textBlock, props.setTextInTextBlock, props.clickOnText, props.deleteBlock);
+  useDragAndDrop(textBlock, { x: text.x, y: text.y }, props.setPositionBlock);
+
+  useEditText(
+    textBlock,
+    text.bold,
+    text.italic,
+    text.underline,
+    props.setTextInTextBlock,
+    props.clickOnText,
+    props.deleteBlock,
+    props.setBoldText,
+    props.setItalicText,
+    props.setUnderlineText,
+  );
 
   const select: string = props.text.id === props.selectBlock ? styles.selected : '';
   let textStyle = getStyle(text);
@@ -42,11 +57,11 @@ function Text(props: TextProps) {
     <span style={textStyle}
       contentEditable={false}
       suppressContentEditableWarning={true}
-      onDragStart={(e) => e.preventDefault() }
+      onDragStart={(e) => e.preventDefault()}
       ref={textBlock}
       className={styles.block + ' ' + select}
-      dangerouslySetInnerHTML={{ __html: text.text}}
-      >
+      dangerouslySetInnerHTML={{ __html: text.text }}
+    >
     </span>
   );
 }
@@ -78,6 +93,9 @@ const mapDispatchToProps = (dispatch: AppDispatch) => {
     setTextInTextBlock: (text: string) => dispatch(setTextInTextBlock(text)),
     clickOnText: () => dispatch(clickOnText()),
     deleteBlock: () => dispatch(deleteBlock()),
+    setBoldText: (isBold: boolean) => dispatch(setBoldText(isBold)),
+    setItalicText: (isItalic: boolean) => dispatch(setItalicText(isItalic)),
+    setUnderlineText: (isUnderline: boolean) => dispatch(setUnderlineText(isUnderline)),
   }
 }
 

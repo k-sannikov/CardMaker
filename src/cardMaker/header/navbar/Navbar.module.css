@@ -1,10 +1,8 @@
-.navbar
-{
+.navbar {
     display: flex;
 }
 
-.input
-{
+.input {
     outline: none;
     border: 1px solid #1c182b;
     border-radius: 2px;

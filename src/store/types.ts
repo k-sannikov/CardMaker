@@ -1,3 +1,9 @@
+export enum BlockTypes {
+  img,
+  artObj,
+  text
+}
+
 export type ActionHistory = Readonly<{
   listState: Canvas[],
   currentIndex: number,
@@ -26,15 +32,17 @@ export type Position = Readonly<{
 
 export type UnifiedBlock = Readonly<{
   id: string,
-  type: string,
+  // type: string,
 }> & Position
 
 export type ArtObj = Readonly<{
   src: string,
+  type: BlockTypes.artObj
 }> & UnifiedBlock & Size
 
 export type Img = Readonly<{
   src: string | null,
+  type: BlockTypes.img
 }> & UnifiedBlock & Size
 
 export type Text = Readonly<{
@@ -45,6 +53,7 @@ export type Text = Readonly<{
   italic: boolean,
   underline: boolean,
   fontFamily: string,
+  type: BlockTypes.text
 }> & UnifiedBlock
 
 export type Block = Text | Img | ArtObj;

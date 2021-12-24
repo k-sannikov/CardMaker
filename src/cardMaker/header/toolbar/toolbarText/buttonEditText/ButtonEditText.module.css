@@ -1,5 +1,4 @@
-.button
-{
+.button {
     cursor: pointer;
     outline: none;
     border: 1px solid #1c182b;
@@ -9,19 +8,16 @@
     background: #F1EEFF;
 }
 
-.button:hover
-{
-     color: #7E6FB8;
-     border-color: #7E6FB8;
-     box-shadow: 0px 1px 3px 0px #7e6fb8;
+.button:hover {
+    color: #7E6FB8;
+    border-color: #7E6FB8;
+    box-shadow: 0px 1px 3px 0px #7e6fb8;
 }
 
-.button:active
-{
+.button:active {
     box-shadow: 1px 2px 2px 0px #7e6fb8;
 }
 
-.active
-{
+.active {
     background: #dcdada;
 }

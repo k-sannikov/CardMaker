@@ -1,28 +1,30 @@
 import { RefObject, useEffect } from 'react';
 import { verify } from '../../../../utils/permisions';
 
-export function useBlockDelete(buttonDelete: RefObject<HTMLButtonElement>, deleteBlock: () => void,): void {
-
-  function handlerClickDelete(): void {
-    deleteBlock();
-  }
-
-  function handlerKeydown(event: KeyboardEvent): void {
-    if (event.code == 'Delete') {
-      deleteBlock();
-    }
-  }
+export function useBlockDelete(buttonDelete: RefObject<HTMLButtonElement>, deleteBlock: () => void): void {
 
   useEffect(() => {
-    verify(buttonDelete.current).addEventListener("click", handlerClickDelete);
+
+    const button = buttonDelete.current;
+
+    function handlerClickDelete(): void {
+      deleteBlock();
+    }
+
+    function handlerKeydown(event: KeyboardEvent): void {
+      if (event.code === 'Delete') {
+        deleteBlock();
+      }
+    }
+
+    
+    verify(button).addEventListener("click", handlerClickDelete);
     document.addEventListener("keydown", handlerKeydown);
     return () => {
-      if (buttonDelete.current) {
-        buttonDelete.current.removeEventListener("click", handlerClickDelete);
-      }
+      if (button) button.removeEventListener("click", handlerClickDelete);
       document.removeEventListener("keydown", handlerKeydown);
     };
-  }, []);
+  }, [buttonDelete, deleteBlock]);
 }
 
 

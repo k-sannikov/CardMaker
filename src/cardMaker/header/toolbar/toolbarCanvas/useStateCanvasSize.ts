@@ -9,42 +9,43 @@ export function useStateCanvasSize(
   width: number,
   height: number): void {
 
-  function handleChangeSize(): void {
-    if (inputWidth.current && inputHeight.current) {
-      const width: number = Number(inputWidth.current.value);
-      const height: number = Number(inputHeight.current.value);
-      inputCanvasSize(width, height);
-    }
-  }
-
-  function handleBlurSize(): void {
-    if (inputWidth.current && inputHeight.current) {
-      const width: number = Number(inputWidth.current.value);
-      const height: number = Number(inputHeight.current.value);
-      setCanvasSize(width, height);
-    }
-  }
-
   useEffect(() => {
-    verify(inputWidth.current).value = String(width);
-    verify(inputHeight.current).value = String(height);
-  }, [width, height]);
+    const fieldWidth = inputWidth.current;
+    const fieldHeight = inputHeight.current;
 
-  useEffect(() => {
-    verify(inputWidth.current).addEventListener("change", handleChangeSize);
-    verify(inputWidth.current).addEventListener("blur", handleBlurSize);
-    verify(inputHeight.current).addEventListener("change", handleChangeSize);
-    verify(inputHeight.current).addEventListener("blur", handleBlurSize);
-    return () => {
-      if (inputWidth.current) {
-        inputWidth.current.removeEventListener("change", handleChangeSize);
-        inputWidth.current.removeEventListener("blur", handleBlurSize);
+    verify(fieldWidth).value = String(width);
+    verify(fieldHeight).value = String(height);
+
+    function handleChangeSize(): void {
+      if (fieldWidth && fieldHeight) {
+        const width: number = Number(fieldWidth.value);
+        const height: number = Number(fieldHeight.value);
+        inputCanvasSize(width, height);
       }
-      if (inputHeight.current) {
-        inputHeight.current.removeEventListener("change", handleChangeSize);
-        inputHeight.current.removeEventListener("blur", handleBlurSize);
+    }
+
+    function handleBlurSize(): void {
+      if (fieldWidth && fieldHeight) {
+        const width: number = Number(fieldWidth.value);
+        const height: number = Number(fieldHeight.value);
+        setCanvasSize(width, height);
+      }
+    }
+
+
+    verify(fieldWidth).addEventListener("change", handleChangeSize);
+    verify(fieldWidth).addEventListener("blur", handleBlurSize);
+    verify(fieldHeight).addEventListener("change", handleChangeSize);
+    verify(fieldHeight).addEventListener("blur", handleBlurSize);
+    return () => {
+      if (fieldWidth) {
+        fieldWidth.removeEventListener("change", handleChangeSize);
+        fieldWidth.removeEventListener("blur", handleBlurSize);
+      }
+      if (fieldHeight) {
+        fieldHeight.removeEventListener("change", handleChangeSize);
+        fieldHeight.removeEventListener("blur", handleBlurSize);
       }
     };
-  }, []);
-
+  }, [inputWidth, inputHeight, inputCanvasSize, setCanvasSize, width, height]);
 }

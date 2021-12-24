@@ -7,6 +7,7 @@ import { addHistory, afterChangeHistory } from './actionCreators/historyActionCr
 
 
 const exceptions: string[] = [
+  'NEW_CARD_MAKER',
   'ADD_HISTORY',
   'AFTER_CHANGE_HISTORY',
   'UNDO',

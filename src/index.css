@@ -70,15 +70,13 @@
 	src: url("./fonts/marta.otf");
 }
 
-*
-{
-    margin: 0;
-    padding: 0;
+* {
+	margin: 0;
+	padding: 0;
 }
 
-body
-{
-    background: #E4E0F4;
+body {
+	background: #E4E0F4;
 }
 
 /* #canvas > *:active ~  * {

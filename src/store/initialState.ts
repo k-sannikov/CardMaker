@@ -10,6 +10,7 @@ import {
   CardMaker,
   DeleteArea,
   ViewModel,
+  BlockTypes
 } from "./types";
 
 const testTemplate: Template = {
@@ -30,7 +31,7 @@ const testSetOfArtObject = {
 
 const testArtObj: ArtObj = {
   id: "d3df27cd-3053-21a6-4abe-9db51cda7c17",
-  type: "artObj",
+  type: BlockTypes.artObj,
   width: 150,
   height: 150,
   x: 20,
@@ -40,7 +41,7 @@ const testArtObj: ArtObj = {
 
 const testImg: Img = {
   id: "4f406201-6f2f-b9ce-575e-438b1a7d1456",
-  type: "img",
+  type: BlockTypes.img,
   width: 320,
   height: 238,
   x: 100,
@@ -50,7 +51,7 @@ const testImg: Img = {
 
 const testText: Text = {
   id: "9a13a85a-59ee-7ba3-1c64-fcad25650fc1",
-  type: "text",
+  type: BlockTypes.text,
   x: 200,
   y: 280,
   text: "Закат",

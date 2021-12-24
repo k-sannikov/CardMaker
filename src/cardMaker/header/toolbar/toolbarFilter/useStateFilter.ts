@@ -7,43 +7,45 @@ export function useStateFilter(
   inputRange: RefObject<HTMLInputElement>,
   inputFilter: (color: string, opacity: number) => void,
   setFilter: (color: string, opacity: number) => void,
-  filter: FilterType,): void {
-
-  function handleInputFilter(): void {
-    if (inputRange.current && inputColor.current) {
-      const color: string = inputColor.current.value;
-      const opacity: number = Number(inputRange.current.value);
-      inputFilter(color, opacity);
-    }
-  }
-
-  function handleChangeFilter(): void {
-    if (inputRange.current && inputColor.current) {
-      const opacity: number = Number(inputRange.current.value);
-      const color: string = inputColor.current.value;
-      setFilter(color, opacity);
-    }
-  }
+  filter: FilterType): void {
 
   useEffect(() => {
-    verify(inputColor.current).value = filter.color;
-    verify(inputRange.current).value = String(filter.opacity);
-  }, [filter]);
 
-  useEffect(() => {
-    verify(inputColor.current).addEventListener("input", handleInputFilter);
-    verify(inputColor.current).addEventListener("change", handleChangeFilter);
-    verify(inputRange.current).addEventListener("input", handleInputFilter);
-    verify(inputRange.current).addEventListener("change", handleChangeFilter);
-    return () => {
-      if (inputColor.current) {
-        inputColor.current.removeEventListener("input", handleInputFilter);
-        inputColor.current.removeEventListener("change", handleChangeFilter);
+    const fieldColor = inputColor.current;
+    const fieldRange = inputRange.current;
+
+    verify(fieldColor).value = filter.color;
+    verify(fieldRange).value = String(filter.opacity);
+
+    function handleInputFilter(): void {
+      if (fieldRange && fieldColor) {
+        const color: string = fieldColor.value;
+        const opacity: number = Number(fieldRange.value);
+        inputFilter(color, opacity);
       }
-      if (inputRange.current) {
-        inputRange.current.removeEventListener("input", handleInputFilter);
-        inputRange.current.removeEventListener("change", handleChangeFilter);
+    }
+
+    function handleChangeFilter(): void {
+      if (fieldRange && fieldColor) {
+        const opacity: number = Number(fieldRange.value);
+        const color: string = fieldColor.value;
+        setFilter(color, opacity);
+      }
+    }
+
+    verify(fieldColor).addEventListener("input", handleInputFilter);
+    verify(fieldColor).addEventListener("change", handleChangeFilter);
+    verify(fieldRange).addEventListener("input", handleInputFilter);
+    verify(fieldRange).addEventListener("change", handleChangeFilter);
+    return () => {
+      if (fieldColor) {
+        fieldColor.removeEventListener("input", handleInputFilter);
+        fieldColor.removeEventListener("change", handleChangeFilter);
+      }
+      if (fieldRange) {
+        fieldRange.removeEventListener("input", handleInputFilter);
+        fieldRange.removeEventListener("change", handleChangeFilter);
       }
     };
-  }, []);
+  }, [inputColor, inputRange, inputFilter, setFilter, filter]);
 }

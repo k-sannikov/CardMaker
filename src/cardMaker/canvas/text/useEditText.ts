@@ -3,66 +3,88 @@ import { verify } from "../../../utils/permisions";
 
 export function useEditText(
   block: RefObject<HTMLSpanElement>,
-  setTextInTextBlock: (text: string) => void,
+  bold: boolean,
+  italic: boolean,
+  underline: boolean,
+  setTextIncurrentBlock: (text: string) => void,
   clickOnText: () => void,
   deleteBlock: () => void,
+  setBoldText: (isBold: boolean) => void,
+  setItalicText: (isItalic: boolean) => void,
+  setUnderlineText: (isUnderline: boolean) => void,
 ) {
 
-  function handleClickBlock() {
-    setTimeout(() => {
-      clickOnText();
-    });
-  }
-
-  function handleDblclickBlock() {
-    verify(block.current).setAttribute("contenteditable", "true")
-    verify(block.current).focus();
-  }
-
-  function handleBlur() {
-    if (block.current) {
-      block.current.setAttribute("contenteditable", "false")
-      const content: string = block.current.innerHTML;
-      if (content === '') {
-        deleteBlock();
-      } else {
-        setTextInTextBlock(block.current.innerHTML);
-      }
-    }
-  }
-
-  function handleMouseMove(event: Event) {
-    if (verify(block.current).getAttribute('contenteditable') === 'true') {
-      event.stopImmediatePropagation();
-    }
-  }
-
-  function handlerKeydown(event: KeyboardEvent): void {
-    if (event.code === 'Escape') {
-      if (verify(block.current).getAttribute('contenteditable') === 'true') {
-        verify(block.current).setAttribute("contenteditable", "false")
-        setTextInTextBlock(verify(block.current).innerHTML)
-      }
-    }
-    if (event.code === 'Delete') {
-      event.stopImmediatePropagation();
-    }
-  }
-
   useEffect(() => {
-    verify(block.current).addEventListener("mousedown", handleClickBlock);
-    verify(block.current).addEventListener("dblclick", handleDblclickBlock);
-    verify(block.current).addEventListener("blur", handleBlur);
+
+    const currentBlock = block.current;
+
+    function handleClickBlock() {
+      setTimeout(() => {
+        clickOnText();
+      });
+    }
+
+    function handleDblclickBlock() {
+      verify(currentBlock).setAttribute("contenteditable", "true")
+      verify(currentBlock).focus();
+    }
+
+    function handleBlur() {
+      if (currentBlock) {
+        currentBlock.setAttribute("contenteditable", "false")
+        const content: string = currentBlock.innerHTML;
+        if (content === '') {
+          deleteBlock();
+        } else {
+          setTextIncurrentBlock(currentBlock.innerHTML);
+        }
+      }
+    }
+
+    function handleMouseMove(event: Event) {
+      if (verify(currentBlock).getAttribute('contenteditable') === 'true') {
+        event.stopImmediatePropagation();
+      }
+    }
+
+    function handlerKeydown(event: KeyboardEvent): void {
+      if (event.code === 'Escape') {
+        if (verify(currentBlock).getAttribute('contenteditable') === 'true') {
+          verify(currentBlock).setAttribute("contenteditable", "false")
+          setTextIncurrentBlock(verify(currentBlock).innerHTML)
+        }
+      }
+      if (event.code === 'Delete') {
+        event.stopImmediatePropagation();
+      }
+      if (event.code === 'KeyB' && (event.ctrlKey || event.metaKey)) {
+        setBoldText(!bold)
+      }
+      if (event.code === 'KeyI' && (event.ctrlKey || event.metaKey)) {
+        setItalicText(!italic)
+      }
+      if (event.code === 'KeyU' && (event.ctrlKey || event.metaKey)) {
+        setUnderlineText(!underline)
+      }
+    }
+
+
+    verify(currentBlock).addEventListener("mousedown", handleClickBlock);
+    verify(currentBlock).addEventListener("dblclick", handleDblclickBlock);
+    verify(currentBlock).addEventListener("blur", handleBlur);
     document.addEventListener("mousemove", handleMouseMove);
-    verify(block.current).addEventListener("keydown", handlerKeydown);
+    verify(currentBlock).addEventListener("keydown", handlerKeydown);
     return () => {
-      if (block.current) {
-        block.current.removeEventListener("mousedown", handleClickBlock);
-        block.current.removeEventListener("dblclick", handleDblclickBlock);
-        block.current.addEventListener("blur", handleBlur);
+      if (currentBlock) {
+        currentBlock.removeEventListener("mousedown", handleClickBlock);
+        currentBlock.removeEventListener("dblclick", handleDblclickBlock);
+        currentBlock.addEventListener("blur", handleBlur);
       }
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("keydown", handlerKeydown);
     };
-  }, []);
+  }, [
+    block, bold, italic, underline, setTextIncurrentBlock, clickOnText,
+    deleteBlock, setBoldText, setItalicText, setUnderlineText
+  ]);
 }

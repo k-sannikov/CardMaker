@@ -1,4 +1,4 @@
-import { Block } from '../types';
+import { Block, BlockTypes } from '../types';
 import { setComponentFields, getIndexById, isSelectedBlock } from '../../utils/elementList'
 import { isShiftUpAvailable, isShiftDownAvailable } from '../../utils/permisions'
 import { createGUID } from '../../utils/guid';
@@ -81,7 +81,7 @@ function listBlock(listBlock: Block[], action: ListBlockAction): Block[] {
         ...listBlock,
         {
           id: createGUID(),
-          type: 'text',
+          type: BlockTypes.text,
           color: '#000000',
           x: action.x - 45,
           y: action.y - 25,
@@ -140,7 +140,7 @@ function listBlock(listBlock: Block[], action: ListBlockAction): Block[] {
         ...listBlock,
         {
           id: createGUID(),
-          type: 'img',
+          type: BlockTypes.img,
           width: action.width,
           height: action.height,
           x: action.x,
@@ -154,7 +154,7 @@ function listBlock(listBlock: Block[], action: ListBlockAction): Block[] {
         ...listBlock,
         {
           id: createGUID(),
-          type: 'artObj',
+          type: BlockTypes.artObj,
           width: 150,
           height: 150,
           x: action.x,

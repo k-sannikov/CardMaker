@@ -1,5 +1,4 @@
-.toolbar
-{
+.toolbar {
     border-right: 1px solid #6D85B6;
     height: 100%;
     /* width: 21%; */
@@ -10,35 +9,29 @@
     padding: 0 5px;
 }
 
-.toolbar__label
-{
+.toolbar__label {
     text-align: center;
     font: 400 12px "Roboto Slab";
     color: #1c182b;
 }
 
-.toolbar__col1
-{
+.toolbar__col1 {
     width: 65%;
 }
 
-.toolbar__col2
-{
+.toolbar__col2 {
     width: 35%;
 }
 
-.toolbar__row
-{
+.toolbar__row {
     display: flex;
 }
 
-.button_container
-{
+.button_container {
     margin-right: 5px;
 }
 
-.colorPickerBox
-{
+.colorPickerBox {
     width: 75px;
     height: 29px;
 }

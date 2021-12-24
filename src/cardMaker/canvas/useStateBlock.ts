@@ -9,31 +9,32 @@ export function useStateBlock(
   resetSelectedBlock: () => void,
 ): void {
 
-  function handleMousedownBlock(): void {
-    if (store.getState().selectBlock !== blockId) {
-      setTimeout(() => {
-        setSelectedBlock(blockId);
-      });
-    }
-  }
-
-  function handleClickDocument(event: Event): void {
-    const isDefPrev: boolean = event.defaultPrevented;
-    const isSelectedID: boolean = store.getState().selectBlock === blockId;
-    if (!isDefPrev && isSelectedID && (event.target !== block.current)) {
-      resetSelectedBlock();
-    }
-  }
-
   useEffect(() => {
-    document.addEventListener("click", handleClickDocument);
-    verify(block.current).addEventListener("mousedown", handleMousedownBlock);
 
-    return () => {
-      if (block.current) {
-        block.current.removeEventListener("mousedown", handleMousedownBlock);
+    const currentBlock = block.current;
+
+    function handleMousedownBlock(): void {
+      if (store.getState().selectBlock !== blockId) {
+        setTimeout(() => {
+          setSelectedBlock(blockId);
+        });
       }
+    }
+
+    function handleClickDocument(event: Event): void {
+      const isDefPrev: boolean = event.defaultPrevented;
+      const isSelectedID: boolean = store.getState().selectBlock === blockId;
+      if (!isDefPrev && isSelectedID && (event.target !== currentBlock)) {
+        resetSelectedBlock();
+      }
+    }
+
+
+    document.addEventListener("click", handleClickDocument);
+    verify(currentBlock).addEventListener("mousedown", handleMousedownBlock);
+    return () => {
+      if (currentBlock) currentBlock.removeEventListener("mousedown", handleMousedownBlock);
       document.removeEventListener("click", handleClickDocument);
     };
-  }, []);
+  }, [blockId, block, setSelectedBlock, resetSelectedBlock]);
 }

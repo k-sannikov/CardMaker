@@ -1,5 +1,4 @@
-.toolbar
-{
+.toolbar {
     border-right: 1px solid #7E6FB8;
     height: 100%;
     /* width: 15%; */
@@ -10,22 +9,19 @@
     padding: 0 5px;
 }
 
-.toolbar__row
-{
+.toolbar__row {
     display: flex;
     justify-content: space-between;
     padding: 5px 0;
 }
 
-.toolbar__label
-{
+.toolbar__label {
     text-align: center;
     font: 400 12px "Roboto Slab";
     color: #1c182b;
 }
 
-.button
-{
+.button {
     cursor: pointer;
     outline: none;
     border: 1px solid #1c182b;

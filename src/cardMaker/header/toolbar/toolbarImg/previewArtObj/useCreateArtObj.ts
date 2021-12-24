@@ -6,17 +6,18 @@ export function useCreateArtObj(
   src: string,
   createArtObjBlock: (src: string) => void) {
 
-  function handleClickArtObj() {
-    createArtObjBlock(src);
-  }
-
   useEffect(() => {
-    verify(artObj.current).addEventListener("click", handleClickArtObj);
-    return () => {
-      if (artObj.current) {
-        artObj.current.removeEventListener("click", handleClickArtObj);
-      }
-    };
 
-  });
+    const artObjPreview = artObj.current;
+
+    function handleClickArtObj() {
+      createArtObjBlock(src);
+    }
+
+
+    verify(artObjPreview).addEventListener("click", handleClickArtObj);
+    return () => {
+      if (artObjPreview) artObjPreview.removeEventListener("click", handleClickArtObj);
+    };
+  }, [artObj, src, createArtObjBlock]);
 }

@@ -7,21 +7,23 @@ export function useEditStateText(
   modifyFn: (() => void) | ((enabled: boolean) => void),
   param: boolean) {
 
-  function handleClickButton(event: Event) {
-    if (enabled !== null) {
-      modifyFn(!enabled)
-      event.preventDefault();
-    } else if (!param) {
-      modifyFn(true)
-    }
-  }
-
   useEffect(() => {
-    verify(button.current).addEventListener("click", handleClickButton);
-    return () => {
-      if (button.current) {
-        button.current.removeEventListener("click", handleClickButton);
+
+    const btn = button.current;
+
+    function handleClickButton(event: Event) {
+      if (enabled !== null) {
+        modifyFn(!enabled)
+        event.preventDefault();
+      } else if (!param) {
+        modifyFn(true)
       }
+    }
+
+
+    verify(btn).addEventListener("click", handleClickButton);
+    return () => {
+      if (btn) btn.removeEventListener("click", handleClickButton);
     };
-  }, [enabled, param]);
+  }, [button, modifyFn, enabled, param]);
 }

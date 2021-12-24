@@ -5,16 +5,10 @@ import Text from './text/Text'
 import ArtObj from './artObj/ArtObj'
 import Filter from './filter/Filter'
 import DeleteArea from './deleteArea/DeleteArea'
-import {
-  Block as BlockType,
-  ArtObj as ArtObjType,
-  Img as ImgType,
-  Text as TextType,
-  Canvas as CanvasType,
-  ViewModel as ViewModelType,
-} from '../../store/types';
+import { Block as BlockType, Canvas as CanvasType, ViewModel as ViewModelType } from '../../store/types';
 import { connect } from 'react-redux';
 import { RootState } from '../../store/store';
+import { BlockTypes } from '../../store/types';
 
 type CanvasProps = {
   canvas: CanvasType,
@@ -45,21 +39,20 @@ function mapStateToProps(state: RootState) {
 export default connect(mapStateToProps)(Canvas);
 
 
-
 function getListBlock(listBlock: BlockType[]): ReactElement[] {
   let newListBlock: ReactElement[] = [];
   listBlock.forEach((block: BlockType) => {
     switch (block.type) {
-      case 'text':
-        newListBlock.push(<Text text={block as TextType}
+      case BlockTypes.text:
+        newListBlock.push(<Text text={block}
           key={block.id} />);
         break;
-      case 'img':
-        newListBlock.push(<Img img={block as ImgType}
+      case BlockTypes.img:
+        newListBlock.push(<Img img={block}
           key={block.id} />);
         break;
-      case 'artObj':
-        newListBlock.push(<ArtObj artObj={block as ArtObjType}
+      case BlockTypes.artObj:
+        newListBlock.push(<ArtObj artObj={block}
           key={block.id} />);
         break;
     }

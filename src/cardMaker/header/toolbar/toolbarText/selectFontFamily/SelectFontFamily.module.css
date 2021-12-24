@@ -1,5 +1,4 @@
-.select
-{
+.select {
     cursor: pointer;
     outline: none;
     border: 1px solid #1c182b;
@@ -8,94 +7,77 @@
     background: #F1EEFF;
 }
 
-.select:hover
-{
-     border-color: #7E6FB8;
-     box-shadow: 0px 1px 3px 0px #7e6fb8;
+.select:hover {
+    border-color: #7E6FB8;
+    box-shadow: 0px 1px 3px 0px #7e6fb8;
 }
 
-.select:active
-{
+.select:active {
     box-shadow: 1px 2px 2px 0px #7e6fb8;
 }
 
-.select
-{
+.select {
     font-size: 15px;
     width: 123px;
     margin-right: 5px;
 }
 
 
-.fantazyor
-{
+.fantazyor {
     font-family: fantazyor;
     font-weight: 800;
 }
 
-.piroucyrillic
-{
+.piroucyrillic {
     font-family: piroucyrillic;
 }
 
-.phenomena
-{
+.phenomena {
     font-family: phenomena;
 }
 
-.sunday
-{
+.sunday {
     font-family: sunday;
 }
 
-.kurale
-{
+.kurale {
     font-family: kurale;
 }
 
-.sensei
-{
+.sensei {
     font-family: sensei;
 }
 
-.borsok
-{
+.borsok {
     font-family: borsok;
 }
 
-.summer
-{
+.summer {
     font-size: 18px;
     font-weight: 800;
     font-family: summer;
 }
 
-.underdog
-{
+.underdog {
     font-family: underdog;
 }
 
-.montserrat
-{
+.montserrat {
     font-family: montserrat;
 }
 
-.openSans
-{
+.openSans {
     font-family: openSans;
 }
 
-.comfortaa
-{
+.comfortaa {
     font-family: comfortaa;
 }
 
-.rubik
-{
+.rubik {
     font-family: rubik;
 }
 
-.marta
-{
+.marta {
     font-family: marta;
 }

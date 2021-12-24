@@ -1,5 +1,4 @@
-.input__number
-{
+.input__number {
     width: 43px;
     height: 14px;
     cursor: pointer;
@@ -13,13 +12,11 @@
     display: flex;
 }
 
-.input__number:hover
-{
-     border-color: #7E6FB8;
-     box-shadow: 0px 1px 3px 0px #7e6fb8;
+.input__number:hover {
+    border-color: #7E6FB8;
+    box-shadow: 0px 1px 3px 0px #7e6fb8;
 }
 
-.input__number:active 
-{
+.input__number:active {
     box-shadow: 1px 2px 2px 0px #7e6fb8;
 }

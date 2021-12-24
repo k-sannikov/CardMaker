@@ -7,34 +7,36 @@ export function useEditColorText(
   setColorText: (color: string) => void,
   inputColorText: (color: string) => void) {
 
-  function handleInput(event: Event) {
-    const target = event.target as HTMLOptionElement;
-    inputColorText(target.value);
-  }
-
-  function handleChange(event: Event) {
-    const target = event.target as HTMLOptionElement;
-    setColorText(target.value);
-  }
-  
-  function handleClick(event: Event) {
-    event.stopImmediatePropagation();
-  }
-
   useEffect(() => {
-    verify(colorPicker.current).addEventListener("input", handleInput);
-    verify(colorPicker.current).addEventListener("change", handleChange);
-    verify(colorPicker.current).addEventListener("click", handleClick);
+
+    const inputColor = colorPicker.current;
+
+    verify(inputColor).value = color ? color : '#000000';
+
+    function handleInput(event: Event) {
+      const target = event.target as HTMLOptionElement;
+      inputColorText(target.value);
+    }
+  
+    function handleChange(event: Event) {
+      const target = event.target as HTMLOptionElement;
+      setColorText(target.value);
+    }
+    
+    function handleClick(event: Event) {
+      event.stopImmediatePropagation();
+    }
+
+
+    verify(inputColor).addEventListener("input", handleInput);
+    verify(inputColor).addEventListener("change", handleChange);
+    verify(inputColor).addEventListener("click", handleClick);
     return () => {
-      if (colorPicker.current) {
-        colorPicker.current.removeEventListener("input", handleInput);
-        colorPicker.current.removeEventListener("change", handleChange);
-        colorPicker.current.removeEventListener("click", handleClick);
+      if (inputColor) {
+        inputColor.removeEventListener("input", handleInput);
+        inputColor.removeEventListener("change", handleChange);
+        inputColor.removeEventListener("click", handleClick);
       }
     };
-  }, []);
-
-  useEffect(() => {
-    verify(colorPicker.current).value = color ? color : '#000000';
-  }, [color]);
+  }, [color, colorPicker, setColorText, inputColorText]);
 }

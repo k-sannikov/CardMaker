@@ -1,20 +1,18 @@
 import { RefObject, useEffect } from "react";
+import { verify } from "../../../../utils/permisions";
 
 export function useCreateText(button: RefObject<HTMLButtonElement>, createTextBlock: () => void,) {
 
-  function handleClickButton() {
-    createTextBlock();
-  }
-
   useEffect(() => {
-    if (button.current) {
-      button.current.addEventListener("click", handleClickButton);
+
+    function handleClickButton() {
+      createTextBlock();
     }
 
+
+    verify(button.current).addEventListener("click", handleClickButton);
     return () => {
-      if (button.current) {
-        button.current.removeEventListener("click", handleClickButton);
-      }
+      if (button.current) button.current.removeEventListener("click", handleClickButton);
     };
-  });
+  }, [button, createTextBlock]);
 }

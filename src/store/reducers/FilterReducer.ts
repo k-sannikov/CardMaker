@@ -14,7 +14,7 @@ function filter(filter: Filter, action: FilterAction): Filter {
     case 'NEW_CARD_MAKER':
       return {
         color: '#ffffff',
-        opacity: 100,
+        opacity: 0,
       };
 
     case 'SET_FILTER':

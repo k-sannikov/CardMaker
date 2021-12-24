@@ -11,6 +11,7 @@ type NavLinkButtonProps = {
 
 const NavLinkButton = forwardRef((props: NavLinkButtonProps, ref: ForwardedRef<HTMLAnchorElement>) => (
   <a
+    href="/#"
     ref={ref}
     className={styles.button}>
     <FontAwesomeIcon icon={props.icon} />

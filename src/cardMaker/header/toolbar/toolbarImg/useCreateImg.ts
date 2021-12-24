@@ -2,26 +2,26 @@ import { RefObject, useEffect } from "react";
 import { getImgInformationFromFile } from '../../../../utils/files';
 import { verify } from "../../../../utils/permisions";
 
-
 export function useCreateImg(
   inputFile: RefObject<HTMLElement>,
   createImgBlock: (src: string, width: number, height: number) => void) {
 
-  async function handlerChangeInput(event: Event): Promise<void> {
-    const target = event.target as HTMLInputElement;
-    const files = target.files as FileList;
-    const imgInfo = await getImgInformationFromFile(files[0]);
-    createImgBlock(imgInfo.src, imgInfo.width, imgInfo.height);
-    target.value = '';
-  }
-
   useEffect(() => {
-    verify(inputFile.current).addEventListener("change", handlerChangeInput);
-    return () => {
-      if (inputFile.current) {
-        inputFile.current.removeEventListener("change", handlerChangeInput);
-      }
-    };
 
-  });
+    const fieldFile = inputFile.current;
+
+    async function handlerChangeInput(event: Event): Promise<void> {
+      const target = event.target as HTMLInputElement;
+      const files = target.files as FileList;
+      const imgInfo = await getImgInformationFromFile(files[0]);
+      createImgBlock(imgInfo.src, imgInfo.width, imgInfo.height);
+      target.value = '';
+    }
+
+
+    verify(fieldFile).addEventListener("change", handlerChangeInput);
+    return () => {
+      if (fieldFile) fieldFile.removeEventListener("change", handlerChangeInput);
+    };
+  }, [inputFile, createImgBlock]);
 }

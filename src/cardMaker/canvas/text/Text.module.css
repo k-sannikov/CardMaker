@@ -1,5 +1,4 @@
-.block
-{
+.block {
     position: absolute;
     z-index: -1;
     cursor: pointer;
@@ -9,20 +8,17 @@
     white-space: nowrap;
 }
 
-.selected
-{
+.selected {
     border: 1px dashed #e60505;
     cursor: move;
 }
 
-.selected[contenteditable=true]
-{
+.selected[contenteditable=true] {
     cursor: text;
     outline: none;
     border: 1px dashed #e60505;
 }
 
-.block div 
-{
+.block div {
     pointer-events: none;
 }

@@ -7,34 +7,36 @@ export function useEditFontSize(
   setSizeText: (size: number) => void,
   inputSizeText: (size: number) => void) {
 
-  function handleInput(event: Event) {
-    const target = event.target as HTMLOptionElement;
-    inputSizeText(Number(target.value));
-  }
-
-  function handleBlur(event: Event) {
-    const target = event.target as HTMLOptionElement;
-    setSizeText(Number(target.value));
-  }
-  
-  function handleClick(event: Event) {
-    event.stopImmediatePropagation();
-  }
-
   useEffect(() => {
-    verify(input.current).addEventListener("input", handleInput);
-    verify(input.current).addEventListener("blur", handleBlur);
-    verify(input.current).addEventListener("click", handleClick);
+
+    const fieldSize = input.current;
+
+    verify(fieldSize).value = size ? String(size) : "10";
+
+    function handleInput(event: Event) {
+      const target = event.target as HTMLOptionElement;
+      inputSizeText(Number(target.value));
+    }
+  
+    function handleBlur(event: Event) {
+      const target = event.target as HTMLOptionElement;
+      setSizeText(Number(target.value));
+    }
+    
+    function handleClick(event: Event) {
+      event.stopImmediatePropagation();
+    }
+
+
+    verify(fieldSize).addEventListener("input", handleInput);
+    verify(fieldSize).addEventListener("blur", handleBlur);
+    verify(fieldSize).addEventListener("click", handleClick);
     return () => {
-      if (input.current) {
-        input.current.removeEventListener("input", handleInput);
-        input.current.removeEventListener("blur", handleBlur);
-        input.current.removeEventListener("click", handleClick);
+      if (fieldSize) {
+        fieldSize.removeEventListener("input", handleInput);
+        fieldSize.removeEventListener("blur", handleBlur);
+        fieldSize.removeEventListener("click", handleClick);
       }
     };
-  }, []);
-
-  useEffect(() => {
-    verify(input.current).value = size ? String(size) : "10";
-  }, [size]);
+  }, [size, input, setSizeText, inputSizeText]);
 }

@@ -3,13 +3,9 @@
     color: #1c182b;
     background: none;
     border: none;
-    outline: none;
     cursor: pointer;
-    text-align: left;
-    padding: 7px 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    user-select: none;
+    text-decoration: none;
 }
 
 .button:hover {
@@ -20,4 +16,21 @@
 
 .button:active {
     background: #a79cd1;
+}
+
+.button__text {
+    padding: 5px;
+}
+
+.button>label,
+.button>svg {
+    cursor: pointer;
+}
+
+.inputFile {
+    display: none;
+}
+
+.icon {
+    padding: 5px 0 5px 5px;
 }

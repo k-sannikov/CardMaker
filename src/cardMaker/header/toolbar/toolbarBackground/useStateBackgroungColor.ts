@@ -10,41 +10,45 @@ export function useStateBackgroungColor(
   inputColor: RefObject<HTMLInputElement>,
   buttonReset: RefObject<HTMLButtonElement>): void {
 
-  function handlerClickResetColor(): void {
-    resetBackground();
-  }
-
-  function handlerInputColor(event: Event): void {
-    const inputColor = event.target as HTMLInputElement;
-    inputBackgroundColor(inputColor.value);
-  }
-
-  function handleerChangeColor(event: Event): void {
-    const inputColor = event.target as HTMLInputElement;
-    const color: string = inputColor.value;
-    setBackgroundColor(color);
-  }
-
   useEffect(() => {
-    verify(inputColor.current).addEventListener("input", handlerInputColor);
-    verify(inputColor.current).addEventListener("change", handleerChangeColor);
-    verify(buttonReset.current).addEventListener("click", handlerClickResetColor);
+
+    const input = inputColor.current;
+    const button = buttonReset.current;
+
+    function handlerClickResetColor(): void {
+      resetBackground();
+    }
+  
+    function handlerInputColor(event: Event): void {
+      const inputColor = event.target as HTMLInputElement;
+      inputBackgroundColor(inputColor.value);
+    }
+  
+    function handleerChangeColor(event: Event): void {
+      const inputColor = event.target as HTMLInputElement;
+      const color: string = inputColor.value;
+      setBackgroundColor(color);
+    }
+
+
+    verify(input).addEventListener("input", handlerInputColor);
+    verify(input).addEventListener("change", handleerChangeColor);
+    verify(button).addEventListener("click", handlerClickResetColor);
     return () => {
-      if (inputColor.current) {
-        inputColor.current.removeEventListener("input", handlerInputColor);
-        inputColor.current.removeEventListener("change", handleerChangeColor);
+      if (input) {
+        input.removeEventListener("input", handlerInputColor);
+        input.removeEventListener("change", handleerChangeColor);
       }
-      if (buttonReset.current) {
-        buttonReset.current.removeEventListener("click", handlerClickResetColor);
-      }
+      if (button) button.removeEventListener("click", handlerClickResetColor);
 
     };
-  }, []);
+  }, [resetBackground, inputBackgroundColor, setBackgroundColor, background, inputColor, buttonReset]);
 
   // изменение цвета input на белый при сбросе фона
   useEffect(() => {
-    verify(inputColor.current).value = background.color ? background.color : '#ffffff';
-  }, [background]);
+    const input = inputColor.current;
+    verify(input).value = background.color ? background.color : '#ffffff';
+  }, [inputColor, background]);
 
 
 }

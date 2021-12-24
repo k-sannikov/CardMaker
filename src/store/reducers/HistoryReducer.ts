@@ -1,31 +1,32 @@
-import { Canvas, ActionHistory } from '../types';
+import { Canvas as CanvasType, ActionHistory as ActionHistoryType } from '../types';
 import { isUndoAvailable, isRedoAvailable } from '../../utils/permisions'
+import canvas from './CanvasReducer';
 
 export type HistoryAction = {
   type: 'NEW_CARD_MAKER',
 } | {
   type: 'ADD_HISTORY',
-  newCanvas: Canvas,
+  newCanvas: CanvasType,
 } | {
   type: 'UNDO',
 } | {
   type: 'REDO',
 }
 
-function history(history: ActionHistory, action: HistoryAction): ActionHistory {
+function history(history: ActionHistoryType, action: HistoryAction): ActionHistoryType {
   switch (action.type) {
 
     case 'NEW_CARD_MAKER':
       return {
-        listState: [],
+        listState: [canvas({} as CanvasType, action)],
         currentIndex: 0,
       };
 
     case 'ADD_HISTORY':
       {
-        const listState: Canvas[] = history.listState;
+        const listState: CanvasType[] = history.listState;
         const currentIndex: number = history.currentIndex;
-        let newListState: Canvas[] = [...history.listState];
+        let newListState: CanvasType[] = [...history.listState];
         if (currentIndex !== listState.length - 1) {
           newListState.splice(currentIndex + 1, listState.length - currentIndex + 1);
         }

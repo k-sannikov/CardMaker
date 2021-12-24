@@ -7,28 +7,29 @@ export function useBlockLevel(
   shiftUpBlock: () => void,
   shiftDownBlock: () => void): void {
 
-  function handlerClickShiftUp(event: Event): void {
-    event.preventDefault();
-    shiftUpBlock();
-  }
-
-  function handlerClickShiftDown(event: Event): void {
-    event.preventDefault();
-    shiftDownBlock();
-  }
-
   useEffect(() => {
-    verify(buttonUp.current).addEventListener("click", handlerClickShiftUp);
-    verify(buttonDown.current).addEventListener("click", handlerClickShiftDown);
+
+    const btnUp = buttonUp.current;
+    const btnDown = buttonDown.current;
+
+    function handlerClickShiftUp(event: Event): void {
+      event.preventDefault();
+      shiftUpBlock();
+    }
+  
+    function handlerClickShiftDown(event: Event): void {
+      event.preventDefault();
+      shiftDownBlock();
+    }
+
+
+    verify(btnUp).addEventListener("click", handlerClickShiftUp);
+    verify(btnDown).addEventListener("click", handlerClickShiftDown);
     return () => {
-      if (buttonUp.current) {
-        buttonUp.current.removeEventListener("click", handlerClickShiftUp);
-      }
-      if (buttonDown.current) {
-        buttonDown.current.removeEventListener("click", handlerClickShiftDown);
-      }
+      if (btnUp) btnUp.removeEventListener("click", handlerClickShiftUp);
+      if (btnDown) btnDown.removeEventListener("click", handlerClickShiftDown);
     };
-  }, []);
+  }, [buttonUp, buttonDown, shiftUpBlock, shiftDownBlock]);
 }
 
 
