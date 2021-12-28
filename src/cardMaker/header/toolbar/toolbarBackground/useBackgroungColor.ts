@@ -2,7 +2,7 @@ import { useEffect, RefObject } from 'react';
 import { Background as BackgroundType } from '../../../../store/types';
 import { verify } from '../../../../utils/permisions';
 
-export function useStateBackgroungColor(
+export function useBackgroungColor(
   resetBackground: () => void,
   inputBackgroundColor: (color: string) => void,
   setBackgroundColor: (color: string) => void,

@@ -1,11 +1,12 @@
 import { CardMaker, Size, Filter, ViewModelText, Block, Text } from "../types";
 import { getIndexById } from '../../utils/elementList';
 
-export type ViewModelAction = BgColorAction | CanvasSizeAction | FilterAction | TextAction;
+export type ViewModelAction = BgColorAction | BgImgAction | CanvasSizeAction | FilterAction | TextAction;
 
 function viewModel(cardMaker: CardMaker = {} as CardMaker, action: ViewModelAction) {
   return {
     bgColor: bgColor(cardMaker, action as BgColorAction),
+    bgImg: bgImg(cardMaker, action as BgImgAction),
     canvasSize: canvasSize(cardMaker, action as CanvasSizeAction),
     filter: filter(cardMaker, action as FilterAction),
     text: text(cardMaker, action as TextAction),
@@ -27,6 +28,31 @@ function bgColor(cardMaker: CardMaker, action: BgColorAction): string | null {
     case 'UNDO': return null;
     case 'REDO': return null;
     default: return cardMaker.canvas.background.color;
+  }
+}
+
+type BgImgAction = {
+  type: 'INPUT_BACKGROUND_IMG',
+  width: number,
+  height: number,
+  src: string,
+} | {
+  type: 'UNDO',
+} | {
+  type: 'REDO'
+}
+
+function bgImg(cardMaker: CardMaker, action: BgImgAction): Size & {src: string} | null {
+  switch (action.type) {
+    case 'INPUT_BACKGROUND_IMG':
+      return {
+        width: action.width,
+        height: action.height,
+        src: action.src,
+      };
+    case 'UNDO': return null;
+    case 'REDO': return null;
+    default: return null;
   }
 }
 

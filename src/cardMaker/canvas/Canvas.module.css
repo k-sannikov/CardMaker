@@ -6,4 +6,6 @@
     /* overflow: hidden; */
     position: relative;
     z-index: 0;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
 }

@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { ReactElement, useEffect } from "react"
 import { connect } from "react-redux"
 import styles from './Modal.module.css';
@@ -19,8 +21,6 @@ const Modal = ({
   onClose,
 }: ModalProps) => {
 
-
-
   // c помощью useEffect цепляем обработчик к нажатию клавиш
   useEffect(() => {
     // создаем обработчик нажатия клавиши Esc
@@ -35,7 +35,6 @@ const Modal = ({
     return () => document.removeEventListener('keydown', onKeydown)
   }, [onClose])
 
-
   // если компонент невидим, то не отображаем его
   if (!visible) {
     return null;
@@ -47,7 +46,7 @@ const Modal = ({
       <div className={styles.modalHeader}>
         <h3 className={styles.modalTitle}>{title}</h3>
         <span className={styles.modalClose} onClick={onClose}>
-          &times;
+        <FontAwesomeIcon icon={faTimes} />
         </span>
       </div>
       <div className={styles.modalBody}>

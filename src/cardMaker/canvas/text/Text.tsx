@@ -28,7 +28,7 @@ type TextProps = {
 function Text(props: TextProps) {
   const text: TextType = props.text;
 
-  const textBlock = useRef<HTMLSpanElement>(null);
+  const textBlock = useRef<HTMLDivElement>(null);
   useStateBlock(props.text.id, textBlock, props.setSelectedBlock, props.resetSelectedBlock);
   useDragAndDrop(textBlock, { x: text.x, y: text.y }, props.setPositionBlock);
 
@@ -54,7 +54,7 @@ function Text(props: TextProps) {
   }
 
   return (
-    <span style={textStyle}
+    <div style={textStyle}
       contentEditable={false}
       suppressContentEditableWarning={true}
       onDragStart={(e) => e.preventDefault()}
@@ -62,7 +62,7 @@ function Text(props: TextProps) {
       className={styles.block + ' ' + select}
       dangerouslySetInnerHTML={{ __html: text.text }}
     >
-    </span>
+    </div>
   );
 }
 

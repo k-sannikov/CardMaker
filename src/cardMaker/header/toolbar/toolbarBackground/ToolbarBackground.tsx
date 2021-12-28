@@ -1,9 +1,10 @@
 import styles from './ToolbarBackground.module.css';
 import { faDownload, faGlobe, faRetweet } from '@fortawesome/free-solid-svg-icons'
 import ColorPicker from '../colorPicker/ColorPicker';
+import FileImgButton from './FileImgButton/FileImgButton';
 import Button from '../button/Button';
 import { RefObject, useRef } from 'react';
-import { useStateBackgroungColor } from './useStateBackgroungColor';
+import { useBackgroungColor } from './useBackgroungColor';
 import { AppDispatch, RootState } from '../../../../store/store';
 import { inputBackgroundColor, resetBackground, setBackgroundColor } from '../../../../store/actionCreators/canvasActionCreators';
 import { connect } from 'react-redux';
@@ -17,9 +18,11 @@ type ToolbarBackgroundProps = {
 }
 
 function ToolbarBackground(props: ToolbarBackgroundProps) {
+
   const inputColor = useRef<HTMLInputElement>(null);
   const buttonReset = useRef<HTMLButtonElement>(null);
-  useStateBackgroungColor(
+
+  useBackgroungColor(
     props.resetBackground,
     props.inputBackgroundColor,
     props.setBackgroundColor,
@@ -27,12 +30,13 @@ function ToolbarBackground(props: ToolbarBackgroundProps) {
     inputColor,
     buttonReset
   );
+
   return (
     <div className={styles.toolbar}>
       <div className={styles.toolbar__row}>
         <div className={styles.toolbar__col1}>
           <div className={styles.button_container}>
-            <Button
+            <FileImgButton
               label="C компьютера"
               title="C компьютера"
               icon={faDownload}
@@ -62,7 +66,7 @@ function ToolbarBackground(props: ToolbarBackgroundProps) {
 }
 
 const mapStateToProps = (state: RootState) => ({
-  background: state.canvas.background, 
+  background: state.canvas.background,
 })
 
 

@@ -2,7 +2,7 @@ import { RefObject, useEffect } from "react";
 import { verify } from "../../../utils/permisions";
 
 export function useEditText(
-  block: RefObject<HTMLSpanElement>,
+  block: RefObject<HTMLDivElement>,
   bold: boolean,
   italic: boolean,
   underline: boolean,
@@ -68,20 +68,27 @@ export function useEditText(
       }
     }
 
+    function handlerPaste(event: any) {
+      event.preventDefault();
+      const text = event.clipboardData.getData("text/plain");
+      document.execCommand("insertHTML", false, text);
+    }
+
 
     verify(currentBlock).addEventListener("mousedown", handleClickBlock);
     verify(currentBlock).addEventListener("dblclick", handleDblclickBlock);
     verify(currentBlock).addEventListener("blur", handleBlur);
     document.addEventListener("mousemove", handleMouseMove);
     verify(currentBlock).addEventListener("keydown", handlerKeydown);
+    verify(currentBlock).addEventListener("paste", handlerPaste);
     return () => {
       if (currentBlock) {
         currentBlock.removeEventListener("mousedown", handleClickBlock);
         currentBlock.removeEventListener("dblclick", handleDblclickBlock);
         currentBlock.addEventListener("blur", handleBlur);
+        currentBlock.removeEventListener("keydown", handlerKeydown);
       }
       document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("keydown", handlerKeydown);
     };
   }, [
     block, bold, italic, underline, setTextIncurrentBlock, clickOnText,

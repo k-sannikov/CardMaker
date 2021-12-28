@@ -28,7 +28,7 @@ function ToolbarFilter(props: ToolbarFilterProps) {
       <div className={styles.colorPickerBox}>
         <ColorPicker ref={inputColor as RefObject<HTMLInputElement>} />
       </div>
-      <input type="range" min="0" max="0.5" step="0.05" className={styles.input_range}
+      <input type="range" min="0" max="0.2" step="0.025" className={styles.input_range}
         ref={inputRange}
       />
       <label className={styles.toolbar__label}>Фильтр</label>

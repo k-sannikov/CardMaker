@@ -112,6 +112,7 @@ const testActionHistory: ActionHistory = {
 
 const viewModel: ViewModel = {
   bgColor: null,
+  bgImg: null,
   canvasSize: null,
   filter: null,
   text: {

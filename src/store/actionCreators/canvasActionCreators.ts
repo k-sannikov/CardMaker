@@ -41,6 +41,15 @@ export function inputBackgroundColor(color: string) {
   }
 }
 
+export function inputBackgroundImg(width: number, height: number, src: string) {
+  return {
+    type: 'INPUT_BACKGROUND_IMG',
+    width: width,
+    height: height,
+    src: src,
+  }
+}
+
 export function inputCanvasSize(width: number, height: number) {
   return {
     type: 'INPUT_CANVAS_SIZE',

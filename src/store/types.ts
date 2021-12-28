@@ -96,8 +96,15 @@ export type ViewModelText = {
   tempSize: number | null,
 }
 
+export type ViewModelBgImg = {
+  width: number,
+  height: number,
+  src: string,
+}
+
 export type ViewModel = Readonly<{
   bgColor: string | null,
+  bgImg: ViewModelBgImg | null,
   canvasSize: Size | null,
   filter: Filter | null,
   text: ViewModelText,
