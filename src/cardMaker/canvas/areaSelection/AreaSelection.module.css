@@ -1,0 +1,6 @@
+.areaSelection {
+    position: absolute;
+    z-index: 2;
+    border: 1px dashed #ff0000;
+    cursor: move;
+}

@@ -4,15 +4,53 @@ export enum BlockTypes {
   text
 }
 
-export type ActionHistory = Readonly<{
-  listState: Canvas[],
-  currentIndex: number,
-}>
-
-export type Template = Readonly<{
-  name: string,
-  json: string,
-}>
+export const templates = {
+  birthday_1: {
+    name: 'С днем рождения!',
+    json: './templates/birthday_1.json',
+    preview: './templates/birthday_1.png',
+  },
+  birthday_2: {
+    name: 'С днем рождения!',
+    json: './templates/birthday_2.json',
+    preview: './templates/birthday_2.png',
+  },
+  february_23_1: {
+    name: 'С 23 февраля!',
+    json: './templates/february_23_1.json',
+    preview: './templates/february_23_1.png',
+  },
+  march_8_1: {
+    name: 'С 8 марта!',
+    json: './templates/march_8_1.json',
+    preview: './templates/march_8_1.png',
+  },
+  march_8_2: {
+    name: 'С 8 марта!',
+    json: './templates/march_8_2.json',
+    preview: './templates/march_8_2.png',
+  },
+  new_year_1: {
+    name: 'С новым годом!',
+    json: './templates/new_year_1.json',
+    preview: './templates/new_year_1.png',
+  },
+  new_year_2: {
+    name: 'С новым годом!',
+    json: './templates/new_year_2.json',
+    preview: './templates/new_year_2.png',
+  },
+  new_year_3: {
+    name: 'С новым годом!',
+    json: './templates/new_year_3.json',
+    preview: './templates/new_year_3.png',
+  },
+  september_1_1: {
+    name: 'С 1 сентября!',
+    json: './templates/september_1_1.json',
+    preview: './templates/september_1_1.png',
+  },
+}
 
 export enum SetOfArtObject {
   boy = "./img/artObj/boy.png",
@@ -24,6 +62,11 @@ export enum SetOfArtObject {
   rainbow = "./img/artObj/rainbow.png",
   snail = "./img/artObj/snail.png",
 }
+
+export type ActionHistory = Readonly<{
+  listState: Canvas[],
+  currentIndex: number,
+}>
 
 export type Position = Readonly<{
   x: number,
@@ -41,7 +84,7 @@ export type ArtObj = Readonly<{
 }> & UnifiedBlock & Size
 
 export type Img = Readonly<{
-  src: string | null,
+  src: string,
   type: BlockTypes.img
 }> & UnifiedBlock & Size
 
@@ -61,6 +104,8 @@ export type Block = Text | Img | ArtObj;
 export type Background = Readonly<{
   color: string | null,
   src: string | null,
+  width: number | null,
+  height: number | null,
 }>
 
 export type Filter = Readonly<{
@@ -68,15 +113,15 @@ export type Filter = Readonly<{
   opacity: number,
 }>
 
-export type DeleteArea = Readonly<{
-  x: number | null,
-  y: number | null,
+export type Area = Readonly<{
+  x: number,
+  y: number,
 }> & Size
 
 export type Canvas = Readonly<{
   filter: Filter,
   listBlock: Block[];
-  deleteArea: DeleteArea[],
+  deleteArea: Area[],
   background: Background,
 }> & Size
 
@@ -108,12 +153,12 @@ export type ViewModel = Readonly<{
   canvasSize: Size | null,
   filter: Filter | null,
   text: ViewModelText,
+  areaSelection: Area | null,
 }>
 
 export type CardMaker = Readonly<{
   canvas: Canvas,
   selectBlock: string | null,
   history: ActionHistory,
-  templates: Template[],
   viewModel: ViewModel,
 }>

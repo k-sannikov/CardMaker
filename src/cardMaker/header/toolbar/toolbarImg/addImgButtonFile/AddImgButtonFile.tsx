@@ -18,6 +18,7 @@ const AddImgButton = forwardRef((props: NavButtonProps, ref: ForwardedRef<HTMLIn
     <input
       className={styles.inputFile}
       type="file"
+      accept=".png,.jpg,.jfif,.jpe,.jpeg"
       ref={ref}
       id="input-file-img"
     />

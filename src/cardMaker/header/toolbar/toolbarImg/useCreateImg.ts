@@ -13,8 +13,14 @@ export function useCreateImg(
     async function handlerChangeInput(event: Event): Promise<void> {
       const target = event.target as HTMLInputElement;
       const files = target.files as FileList;
-      const imgInfo = await getImgInformationFromFile(files[0]);
-      createImgBlock(imgInfo.src, imgInfo.width, imgInfo.height);
+
+      try {
+        const imgInfo = await getImgInformationFromFile(files[0]);
+        createImgBlock(imgInfo.src, imgInfo.width, imgInfo.height);
+      } catch {
+        alert('Текст ошибки')
+      }
+      
       target.value = '';
     }
 

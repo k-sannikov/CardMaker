@@ -1,0 +1,33 @@
+.preview {
+    width: 140px;
+    cursor: pointer;
+    display: inline-block;
+    margin: 5px 5px 1px 5px;
+    height: 105px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.preview p {
+    display: none;
+    position: relative;
+    top: -70px;
+    font: 400 14px "Roboto Slab";
+    color: #1c182b;
+}
+
+.preview:hover p {
+    display: block;
+}
+.preview:hover .img {
+    opacity: 0;
+}
+
+.img {
+    width: 100%;
+    cursor: pointer;
+}
+
+.preview:hover {
+    background: #D6CFF4;
+}

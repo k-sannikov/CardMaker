@@ -33,7 +33,7 @@ export function useEditText(
       if (currentBlock) {
         currentBlock.setAttribute("contenteditable", "false")
         const content: string = currentBlock.innerHTML;
-        if (content === '') {
+        if (content === '<div><br></div>') {
           deleteBlock();
         } else {
           setTextIncurrentBlock(currentBlock.innerHTML);
@@ -74,6 +74,15 @@ export function useEditText(
       document.execCommand("insertHTML", false, text);
     }
 
+    function handlerInput(event: Event) {
+      if (currentBlock) {
+        if (currentBlock.innerHTML[0] !== '<' || currentBlock.innerHTML === '<br>') {
+          currentBlock.innerHTML = `<div>${currentBlock.innerText}<br></div>`;
+          currentBlock.focus();
+        }
+      }
+    }
+
 
     verify(currentBlock).addEventListener("mousedown", handleClickBlock);
     verify(currentBlock).addEventListener("dblclick", handleDblclickBlock);
@@ -81,12 +90,15 @@ export function useEditText(
     document.addEventListener("mousemove", handleMouseMove);
     verify(currentBlock).addEventListener("keydown", handlerKeydown);
     verify(currentBlock).addEventListener("paste", handlerPaste);
+    verify(currentBlock).addEventListener("input", handlerInput);
     return () => {
       if (currentBlock) {
         currentBlock.removeEventListener("mousedown", handleClickBlock);
         currentBlock.removeEventListener("dblclick", handleDblclickBlock);
         currentBlock.addEventListener("blur", handleBlur);
         currentBlock.removeEventListener("keydown", handlerKeydown);
+        currentBlock.removeEventListener("paste", handlerPaste);
+        currentBlock.removeEventListener("input", handlerInput);
       }
       document.removeEventListener("mousemove", handleMouseMove);
     };

@@ -17,6 +17,7 @@ const NavFileButton = forwardRef((props: NavFileButtonProps, ref: ForwardedRef<H
     <input
       className={styles.inputFile}
       type="file"
+      accept=".json"
       ref={ref}
       id="input-file"
     />

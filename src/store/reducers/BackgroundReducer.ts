@@ -10,6 +10,8 @@ export type BackgroundAction = {
 } | {
   type: 'SET_BACKGROUND_IMG',
   src: string,
+  width: number,
+  height: number,
 }
 
 function background(background: Background, action: BackgroundAction): Background {
@@ -19,24 +21,32 @@ function background(background: Background, action: BackgroundAction): Backgroun
       return {
         color: '#ffffff',
         src: null,
+        width: null,
+        height: null,
       };
 
     case 'RESET_BACKGROUND':
       return {
         color: '#ffffff',
         src: null,
+        width: null,
+        height: null,
       };
 
     case 'SET_BACKGROUND_COLOR':
       return {
         color: action.color,
         src: null,
+        width: null,
+        height: null,
       };
 
     case 'SET_BACKGROUND_IMG':
       return {
         color: null,
         src: action.src,
+        width: action.width,
+        height: action.height,
       };
 
     default:

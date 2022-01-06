@@ -1,6 +1,5 @@
 .dropbtn {
     background: none;
-    color: white;
     font: 400 14px "Roboto Slab";
     color: #1c182b;
     border: none;
@@ -24,7 +23,6 @@
     display: none;
     position: absolute;
     background-color: #f1f1f1;
-    min-width: 150px;
     padding: 5px;
     overflow: auto;
     z-index: 1;

@@ -6,17 +6,18 @@
     padding: 5px;
     user-select: none;
     white-space: nowrap;
+    line-height: 1.2;
 }
 
 .selected {
-    border: 1px dashed #e60505;
+    border: 1px dashed #858585;
     cursor: move;
 }
 
 .selected[contenteditable=true] {
     cursor: text;
     outline: none;
-    border: 1px dashed #e60505;
+    border: 1px dashed #858585;
 }
 
 .block div {

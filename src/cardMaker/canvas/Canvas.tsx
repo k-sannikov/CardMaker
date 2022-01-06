@@ -1,25 +1,40 @@
 import styles from './Canvas.module.css';
-import { ReactElement } from 'react';
+import { ReactElement, useRef } from 'react';
 import Img from './img/Img'
 import Text from './text/Text'
 import ArtObj from './artObj/ArtObj'
 import Filter from './filter/Filter'
 import DeleteArea from './deleteArea/DeleteArea'
-import { Block as BlockType, Canvas as CanvasType, ViewModel as ViewModelType } from '../../store/types';
+import { Area, Block as BlockType, Canvas as CanvasType, Size } from '../../store/types';
 import { connect } from 'react-redux';
-import { RootState } from '../../store/store';
+import { AppDispatch, RootState } from '../../store/store';
 import { BlockTypes } from '../../store/types';
+import AreaSelection from './areaSelection/AreaSelection';
+import { areaSelection, resetAreaSelection } from '../../store/actionCreators/canvasActionCreators';
+import { useAreaSelection } from './useAreaSelection';
 
 type CanvasProps = {
   canvas: CanvasType,
-  viewModel: ViewModelType,
+  area: Area | null,
+  bgColor: string | null,
+  canvasSize: Size | null,
+  areaSelection: (x: number, y: number, width: number, height: number) => void,
+  resetAreaSelection: () => void,
 }
 
 function Canvas(props: CanvasProps) {
-  const canvasStyle = getStyle(props.canvas, props.viewModel);
-  let listBlock: ReactElement[] = getListBlock(props.canvas.listBlock);
+  const canvasStyle = getStyle(props.canvas, props.bgColor, props.canvasSize);
+  const listBlock: ReactElement[] = getListBlock(props.canvas.listBlock);
+
+  const canvas = useRef<HTMLDivElement>(null);
+  const area = useRef<HTMLDivElement>(null);
+  useAreaSelection(canvas, area, props.areaSelection, props.resetAreaSelection);
+
   return (
-    <div id="canvas" className={styles.canvas} style={canvasStyle}>
+    <div id="canvas" className={styles.canvas} style={canvasStyle} ref={canvas}>
+      {props.area &&
+        <AreaSelection area={props.area} ref={area}/>
+      }
       {props.canvas.deleteArea &&
         <DeleteArea />
       }
@@ -32,11 +47,20 @@ function Canvas(props: CanvasProps) {
 function mapStateToProps(state: RootState) {
   return {
     canvas: state.canvas,
-    viewModel: state.viewModel,
+    area: state.viewModel.areaSelection,
+    bgColor: state.viewModel.bgColor,
+    canvasSize: state.viewModel.canvasSize,
   }
 };
 
-export default connect(mapStateToProps)(Canvas);
+const mapDispatchToProps = (dispatch: AppDispatch) => {
+  return {
+    areaSelection: (x: number, y: number, width: number, height: number) => dispatch(areaSelection(x, y, width, height)),
+    resetAreaSelection: () => dispatch(resetAreaSelection()),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Canvas);
 
 
 function getListBlock(listBlock: BlockType[]): ReactElement[] {
@@ -60,32 +84,54 @@ function getListBlock(listBlock: BlockType[]): ReactElement[] {
   return newListBlock;
 }
 
-function getStyle(canvas: CanvasType, viewModel: ViewModelType) {
-  let background: string = '#fff';
+function getStyle(canvas: CanvasType, bgColor: string | null, canvasSize: Size | null) {
+  let backgroundColor: string = '#fff';
+  let backgroundImage: string = '';
 
-  if (viewModel.bgColor) {
-    background = viewModel.bgColor;
+  if (bgColor) {
+    backgroundColor = bgColor;
   } else {
     if (canvas.background.color) {
-      background = canvas.background.color;
+      backgroundColor = canvas.background.color;
     } else if (canvas.background.src) {
-      background = 'url(' + canvas.background.src + ')';
+      backgroundImage = 'url(' + canvas.background.src + ')';
     }
   }
 
   let width: number = 0;
   let height: number = 0;
-  if (viewModel.canvasSize) {
-    width = viewModel.canvasSize.width;
-    height = viewModel.canvasSize.height;
+  if (canvasSize) {
+    width = canvasSize.width;
+    height = canvasSize.height;
   } else {
     width = canvas.width;
     height = canvas.height;
   }
 
+  const bgWidth: number | null = canvas.background.width;
+  const bgHeight: number | null = canvas.background.height;
+
   return {
     width: width,
     height: height,
-    background: background,
+    backgroundColor: backgroundColor,
+    backgroundImage: backgroundImage,
+    backgroundSize: (bgWidth && bgHeight) ? getbackgroundSize(bgWidth, bgHeight, width, height): '',
   };
+}
+
+function getbackgroundSize(imgWidth: number, imgHeight: number, canvasWidth: number, canvasHeight: number): string {
+  let prevImgWidth: number = imgWidth;
+  let prevImgHeight: number = imgHeight;
+
+  if (prevImgWidth < canvasWidth) {
+    imgHeight = (prevImgHeight * canvasWidth) / prevImgWidth;
+    imgWidth = (prevImgWidth * imgHeight) / prevImgHeight;
+  }
+
+  if (prevImgHeight < canvasHeight) {
+    imgWidth = (prevImgWidth * canvasHeight) / prevImgHeight;
+    imgHeight = (prevImgHeight * imgWidth) / prevImgWidth;
+  }
+  return `${imgWidth}px ${imgHeight}px`
 }

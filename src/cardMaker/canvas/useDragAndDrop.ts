@@ -16,6 +16,7 @@ export function useDragAndDrop(
     let startPos: Position;
 
     function handleMousedown(event: MouseEvent): void {
+      // event.preventDefault();
       startPos = {
         x: event.pageX,
         y: event.pageY,
@@ -28,6 +29,7 @@ export function useDragAndDrop(
 
     function handleMouseMove(event: MouseEvent): void {
       if (!event.defaultPrevented) {
+        event.preventDefault();
         const delta = {
           x: event.pageX - startPos.x,
           y: event.pageY - startPos.y

@@ -1,3 +1,5 @@
+import { store } from "../store"
+
 export function setCanvasSize(width: number, height: number) {
   return {
     type: 'SET_CANVAS_SIZE',
@@ -21,10 +23,12 @@ export function setBackgroundColor(color: string) {
   }
 }
 
-export function setBackgroundImg(src: string) {
+export function setBackgroundImg(src: string, width: number, height: number) {
   return {
     type: 'SET_BACKGROUND_IMG',
     src: src,
+    width: width,
+    height: height,
   }
 }
 
@@ -41,12 +45,12 @@ export function inputBackgroundColor(color: string) {
   }
 }
 
-export function inputBackgroundImg(width: number, height: number, src: string) {
+export function inputBackgroundImg(src: string, width: number, height: number) {
   return {
     type: 'INPUT_BACKGROUND_IMG',
+    src: src,
     width: width,
     height: height,
-    src: src,
   }
 }
 
@@ -63,5 +67,36 @@ export function inputFilter(color: string, opacity: number) {
     type: 'INPUT_FILTER',
     color: color,
     opacity: opacity,
+  }
+}
+
+export function areaSelection(x: number, y: number, width: number, height: number) {
+  return {
+    type: 'AREA_SELECTION',
+    x: x,
+    y: y,
+    width: width,
+    height: height,
+  }
+}
+
+export function resetAreaSelection() {
+  return {
+    type: 'RESET_AREA_SELECTION',
+  }
+}
+
+export function setPositionAreaSelection(x: number, y: number) {
+  return {
+    type: 'SET_POSITION_AREA_SELECTION',
+    x: x,
+    y: y,
+  }
+}
+
+export function deleteAreaSelection() {
+  return {
+    type: 'DELETE_AREA_SELECTION',
+    area: store.getState().viewModel.areaSelection,
   }
 }

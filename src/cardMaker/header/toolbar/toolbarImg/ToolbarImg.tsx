@@ -33,7 +33,9 @@ function ToolbarImg(props: ToolbarImgProps) {
       <div className={styles.button_box}>
         <AddImgButtonFile label="" title="C компьютера" icon={faDownload} ref={inputFile} />
         <AddImgButton label="" title="Из Pixels" icon={faGlobe} />
-        <DropdownMenu label="" icon={faStickyNote} content={imgList} />
+        <DropdownMenu minWidth={200} label="" icon={faStickyNote} sizeIcon='lg'>
+          {imgList}
+        </DropdownMenu>
       </div>
       <label className={styles.toolbar__label}>Изображения</label>
     </div>

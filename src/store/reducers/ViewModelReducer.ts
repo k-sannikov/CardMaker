@@ -1,15 +1,75 @@
-import { CardMaker, Size, Filter, ViewModelText, Block, Text } from "../types";
+import { CardMaker, Size, Filter, ViewModelText, Block, Text, Area } from "../types";
 import { getIndexById } from '../../utils/elementList';
 
-export type ViewModelAction = BgColorAction | BgImgAction | CanvasSizeAction | FilterAction | TextAction;
+export type ViewModelAction = { type: 'NEW_CARD_MAKER' } | BgColorAction | BgImgAction | CanvasSizeAction | FilterAction | TextAction;
 
 function viewModel(cardMaker: CardMaker = {} as CardMaker, action: ViewModelAction) {
+  if (action.type === 'NEW_CARD_MAKER') {
+    return {
+      bgColor: null,
+      bgImg: null,
+      canvasSize: null,
+      filter: null,
+      text: {
+        color: null,
+        size: null,
+        bold: null,
+        italic: null,
+        underline: null,
+        fontFamily: null,
+        tempColor: null,
+        tempSize: null,
+      },
+      areaSelection: null,
+    }
+  }
   return {
     bgColor: bgColor(cardMaker, action as BgColorAction),
     bgImg: bgImg(cardMaker, action as BgImgAction),
     canvasSize: canvasSize(cardMaker, action as CanvasSizeAction),
     filter: filter(cardMaker, action as FilterAction),
     text: text(cardMaker, action as TextAction),
+    areaSelection: areaSelection(cardMaker, action as AreaSelectionAction),
+  }
+}
+
+type AreaSelectionAction = {
+  type: 'AREA_SELECTION',
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+} | {
+  type: 'RESET_AREA_SELECTION',
+} | {
+  type: 'SET_POSITION_AREA_SELECTION',
+  x: number,
+  y: number,
+} | {
+  type: 'UNDO',
+} | {
+  type: 'REDO'
+}
+
+function areaSelection(cardMaker: CardMaker, action: AreaSelectionAction): Area | null {
+  switch (action.type) {
+    case 'AREA_SELECTION':
+      return {
+        x: action.x,
+        y: action.y,
+        width: action.width,
+        height: action.height,
+      }
+    case 'SET_POSITION_AREA_SELECTION':
+      return {
+        ...cardMaker.viewModel.areaSelection as Area,
+        x: action.x,
+        y: action.y,
+      };
+    case 'RESET_AREA_SELECTION': return null;
+    case 'UNDO': return null;
+    case 'REDO': return null;
+    default: return cardMaker.viewModel.areaSelection;
   }
 }
 
@@ -42,7 +102,7 @@ type BgImgAction = {
   type: 'REDO'
 }
 
-function bgImg(cardMaker: CardMaker, action: BgImgAction): Size & {src: string} | null {
+function bgImg(cardMaker: CardMaker, action: BgImgAction): Size & { src: string } | null {
   switch (action.type) {
     case 'INPUT_BACKGROUND_IMG':
       return {

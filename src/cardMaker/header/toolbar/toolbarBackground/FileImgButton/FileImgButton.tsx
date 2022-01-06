@@ -17,10 +17,10 @@ type NavButtonProps = {
   label: string,
   title: string,
   icon: IconDefinition,
-  inputBackgroundImg: (width: number, height: number, src: string) => void,
-  setBackgroundImg: (src: string) => void,
+  inputBackgroundImg: (src: string, width: number, height: number) => void,
+  setBackgroundImg: (src: string, width: number, height: number) => void,
   setCanvasSize: (width: number, height: number) => void,
-  bgImg: ViewModelBgImg | null,
+  ViewModelBgImg: ViewModelBgImg | null,
 }
 
 function AddImgButton(props: NavButtonProps): any {
@@ -32,19 +32,19 @@ function AddImgButton(props: NavButtonProps): any {
 
   useBackgroungImg(inputFile, props.setBackgroundImg, props.inputBackgroundImg, setModal);
 
-  const bg = props.bgImg ?? {
+  const bg = props.ViewModelBgImg ?? {
     width: 0,
     height: 0,
     src: '',
   }
 
   const onAcceptStretch = () => {
-    props.setBackgroundImg(bg.src);
+    props.setBackgroundImg(bg.src, bg.width, bg.height);
     props.setCanvasSize(bg.width, bg.height);
     onClose();
   }
   const onAcceptCrop = () => {
-    props.setBackgroundImg(bg.src);
+    props.setBackgroundImg(bg.src, bg.width, bg.height);
     onClose();
   }
 
@@ -76,6 +76,7 @@ function AddImgButton(props: NavButtonProps): any {
         <input
           className={styles.inputFile}
           type="file"
+          accept=".png,.jpg,.jfif,.jpe,.jpeg"
           id="input-file-bg-img"
           ref={inputFile}
         />
@@ -91,13 +92,13 @@ function AddImgButton(props: NavButtonProps): any {
 };
 
 const mapStateToProps = (state: RootState) => ({
-  bgImg: state.viewModel.bgImg,
+  ViewModelBgImg: state.viewModel.bgImg,
 })
 
 const mapDispatchToProps = (dispatch: AppDispatch) => {
   return {
-    inputBackgroundImg: (width: number, height: number, src: string) => dispatch(inputBackgroundImg(width, height, src)),
-    setBackgroundImg: (src: string) => dispatch(setBackgroundImg(src)),
+    inputBackgroundImg: (src: string, width: number, height: number) => dispatch(inputBackgroundImg(src, width, height, )),
+    setBackgroundImg: (src: string, width: number, height: number) => dispatch(setBackgroundImg(src, width, height)),
     setCanvasSize: (width: number, height: number) => dispatch(setCanvasSize(width, height)),
   }
 }

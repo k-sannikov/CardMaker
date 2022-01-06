@@ -14,6 +14,16 @@ const exceptions: string[] = [
   'REDO',
   'SET_SELECTED_BLOCK',
   'RESET_SELECTED_BLOCK',
+  'INPUT_SIZE_TEXT',
+  'INPUT_COLOR_TEXT',
+  'SET_SIZE_TEXT',
+  'SET_POSITION_AREA_SELECTION',
+  'RESET_AREA_SELECTION',
+  'AREA_SELECTION',
+  'INPUT_FILTER',
+  'INPUT_CANVAS_SIZE',
+  'INPUT_BACKGROUND_IMG',
+  'INPUT_BACKGROUND_COLOR',
 ];
 
 const storeHistory = (store: MiddlewareAPI<Dispatch<AnyAction>, CardMaker>) =>

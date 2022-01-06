@@ -14,7 +14,13 @@ export function useImportFileProject(
     async function handlerChangeInputFile(event: Event): Promise<void> {
       const target = event.target as HTMLInputElement;
       const files = target.files as FileList;
-      applyFileProject(await getProjectFromFile(files[0]))
+
+      try {
+        applyFileProject(await getProjectFromFile(files[0]))
+      } catch {
+        alert('Текст ошибки')
+      }
+
       target.value = '';
     }
 

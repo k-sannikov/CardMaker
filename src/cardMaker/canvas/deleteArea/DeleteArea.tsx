@@ -1,6 +1,6 @@
 import styles from './DeleteArea.module.css';
 import { ReactElement } from 'react';
-import { DeleteArea as DeleteAreaType, Canvas as CanvasType } from '../../../store/types';
+import { Area, Canvas as CanvasType } from '../../../store/types';
 import { connect } from 'react-redux';
 import { RootState } from '../../../store/store';
 
@@ -10,7 +10,7 @@ function DeleteArea(props: DeleteAreaProps) {
   const canvas: CanvasType = props.canvas;
 
   let listBlock: ReactElement[] = [];
-  canvas.deleteArea.forEach((block: DeleteAreaType, index: number) => {
+  canvas.deleteArea.forEach((block: Area, index: number) => {
     const DeleteAreaStyle = {
       width: block.width as number,
       height: block.height as number,

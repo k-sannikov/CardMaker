@@ -1,12 +1,10 @@
-import styles from './NewProjectButton.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPiedPiperSquare } from '@fortawesome/free-brands-svg-icons'
 import { connect } from 'react-redux';
-
-import Modal from '../../../../modal/Modal';
 import { useState } from 'react';
 import { AppDispatch } from '../../../../../store/store';
 import { newCardMaker } from '../../../../../store/actionCreators/cardMakerActionCreators';
+import NavButton from '../NavButton/NavButton';
+import Modal from '../../../../modal/Modal';
 
 type NewProjectButtonProps = {
   newCardMaker: () => void,
@@ -35,12 +33,7 @@ function NewProjectButton(props: NewProjectButtonProps) {
 
   return (
     <>
-      <button
-        onClick={() => setModal(true)}
-        className={styles.button}>
-        <FontAwesomeIcon icon={faPiedPiperSquare} />
-        <span className={styles.button__text}>Новая</span>
-      </button>
+      <NavButton label="Новая" icon={faPiedPiperSquare} onClick={() => setModal(true)} />
       <Modal
         visible={isModal}
         title="Новая открытка"

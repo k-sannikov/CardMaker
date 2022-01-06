@@ -26,7 +26,6 @@ export function cardMakerReducer(cardMaker: CardMaker = {} as CardMaker, action:
         canvas: canvas(cardMaker.canvas, action as CanvasAction),
         selectBlock: selectBlock(cardMaker.selectBlock, action as SelectBlockAction),
         history: history(cardMaker.history, action as HistoryAction),
-        templates: [],
         viewModel: viewModel(cardMaker, action as ViewModelAction)
       }
   }

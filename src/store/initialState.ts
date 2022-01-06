@@ -1,6 +1,5 @@
 import {
   ActionHistory,
-  Template,
   ArtObj,
   Img,
   Text,
@@ -8,15 +7,11 @@ import {
   Filter,
   Canvas,
   CardMaker,
-  DeleteArea,
   ViewModel,
-  BlockTypes
+  BlockTypes,
+  Area
 } from "./types";
 
-const testTemplate: Template = {
-  name: "",
-  json: "",
-}
 
 const testSetOfArtObject = {
   boy: "img/artObj/boy.png",
@@ -54,7 +49,7 @@ const testText: Text = {
   type: BlockTypes.text,
   x: 200,
   y: 280,
-  text: "Закат",
+  text: "<div>Это</div><div>закат!!!</div>",
   size: 40,
   bold: true,
   italic: true,
@@ -66,6 +61,8 @@ const testText: Text = {
 const testBackground: Background = {
   color: null,
   src: "https://images.pexels.com/photos/8175462/pexels-photo-8175462.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+  width: 867,
+  height: 650,
 }
 
 const testFilter: Filter = {
@@ -73,19 +70,19 @@ const testFilter: Filter = {
   opacity: 0.05,
 }
 
-const deleteArea: DeleteArea[] = [
-  // {
-  //   width: 100,
-  //   height: 50,
-  //   x: 150,
-  //   y: 200,
-  // },
-  // {
-  //   width: 70,
-  //   height: 50,
-  //   x: 350,
-  //   y: 175,
-  // }
+const deleteArea: Area[] = [
+  {
+    width: 100,
+    height: 50,
+    x: 150,
+    y: 200,
+  },
+  {
+    width: 70,
+    height: 50,
+    x: 350,
+    y: 175,
+  }
 ];
 
 
@@ -125,12 +122,12 @@ const viewModel: ViewModel = {
     tempColor: null,
     tempSize: null,
   },
+  areaSelection: null,
 }
 
 export const testCardMaker: CardMaker = {
   canvas: testCanvas,
   selectBlock: null,
   history: testActionHistory,
-  templates: [testTemplate],
   viewModel: viewModel,
 }

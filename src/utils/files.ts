@@ -9,14 +9,17 @@ type ImgInfo = {
 
 export async function getImgInformationFromFile(fileImg: File): Promise<ImgInfo> {
   const fileImgPromise = new Promise((resolve, reject) => {
-    var reader = new FileReader();
+    let reader = new FileReader();
     reader.readAsDataURL(fileImg);
     reader.onload = () => resolve(reader.result);
     reader.onerror = reject;
   });
+
   const img = new Image();
+
   img.src = await fileImgPromise as string;
-  await img.decode();
+  await img.decode().catch((error: string) => { throw new Error(error) });
+
   return {
     width: img.width,
     height: img.height,
@@ -26,11 +29,11 @@ export async function getImgInformationFromFile(fileImg: File): Promise<ImgInfo>
 
 export async function getProjectFromFile(file: File): Promise<CardMaker> {
   const filePromise = new Promise((resolve, reject) => {
-    var reader = new FileReader();
+    let reader = new FileReader();
     reader.readAsText(file);
     reader.onload = () => resolve(reader.result);
     reader.onerror = reject;
   });
   const json = await filePromise as string;
-  return await JSON.parse(json) as CardMaker;
+  return await JSON.parse(json).catch((error: string) => { throw new Error(error) });;
 }

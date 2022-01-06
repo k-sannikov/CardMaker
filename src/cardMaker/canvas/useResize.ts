@@ -45,7 +45,7 @@ export function useResize(
 
       startPos = {
         x: event.pageX + (5 - event.offsetX),
-        y: event.pageY + (5 - event.offsetX)
+        y: event.pageY + (5 - event.offsetY)
       };
 
       document.addEventListener("mousemove", handleMouseMove);

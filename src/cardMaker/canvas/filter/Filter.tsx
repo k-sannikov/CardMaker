@@ -1,11 +1,11 @@
 import styles from './Filter.module.css';
-import { Canvas as CanvasType, ViewModel as ViewModelType } from '../../../store/types';
+import { Canvas as CanvasType, Filter as FilterType } from '../../../store/types';
 import { connect } from 'react-redux';
 import { RootState } from '../../../store/store';
 
 type FilterProps = {
   canvas: CanvasType
-  viewModel: ViewModelType,
+  filter: FilterType | null,
 }
 
 function Filter(props: FilterProps) {
@@ -13,9 +13,9 @@ function Filter(props: FilterProps) {
 
   let color: string = '';
   let opacity: number = 0;
-  if (props.viewModel.filter) {
-    color = props.viewModel.filter.color;
-    opacity = props.viewModel.filter.opacity;
+  if (props.filter) {
+    color = props.filter.color;
+    opacity = props.filter.opacity;
   } else {
     color = canvas.filter.color;
     opacity = canvas.filter.opacity;
@@ -34,7 +34,7 @@ function Filter(props: FilterProps) {
 function mapStateToProps(state: RootState) {
   return {
     canvas: state.canvas,
-    viewModel: state.viewModel,
+    filter: state.viewModel.filter,
   }
 };
 
