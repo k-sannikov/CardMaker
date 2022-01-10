@@ -13,7 +13,10 @@ export function useBlockDelete(buttonDelete: RefObject<HTMLButtonElement>, delet
 
     function handlerKeydown(event: KeyboardEvent): void {
       if (event.code === 'Delete') {
-        deleteBlock();
+        if (!event.defaultPrevented) {
+          deleteBlock();
+        }
+
       }
     }
 

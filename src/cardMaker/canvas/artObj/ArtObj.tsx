@@ -27,7 +27,7 @@ function ArtObj(props: ArtObjProps) {
   const pointLB = useRef<HTMLDivElement>(null);
   const pointRB = useRef<HTMLDivElement>(null);
 
-  useStateBlock(props.artObj.id, artObjBlock, props.setSelectedBlock, props.resetSelectedBlock);
+  useStateBlock(artObj.id, artObjBlock, props.setSelectedBlock, props.resetSelectedBlock);
   useDragAndDrop(artObjBlock, { x: artObj.x, y: artObj.y }, props.setPositionBlock);
   useResize(
     props.setSizeBlock,
@@ -41,7 +41,7 @@ function ArtObj(props: ArtObjProps) {
     { width: artObj.width, height: artObj.height }
   );
   
-  const select: string = props.artObj.id === props.selectBlock ? styles.selected : '';
+  const select: string = artObj.id === props.selectBlock ? styles.selected : '';
 
   return (
     <div

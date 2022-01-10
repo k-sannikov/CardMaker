@@ -15,16 +15,14 @@ type AreaSelectionProps = {
 
   const AreaSelection = forwardRef((props: AreaSelectionProps, ref: ForwardedRef<HTMLDivElement>) => {
 
-  let areaSelectionStyle = {};
+  useDragAndDrop(ref as RefObject<HTMLElement>, { x: props.area.x, y: props.area.y }, props.setPositionAreaSelection);
 
-
-  areaSelectionStyle = {
+  const areaSelectionStyle = {
     left: props.area.x,
     top: props.area.y,
     width: props.area.width - 2,
     height: props.area.height - 2,
   }
-  useDragAndDrop(ref as RefObject<HTMLElement>, { x: props.area.x, y: props.area.y }, props.setPositionAreaSelection);
 
   return (
     <div className={styles.areaSelection} style={areaSelectionStyle} ref={ref}></div>

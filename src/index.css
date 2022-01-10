@@ -1,83 +1,83 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 @font-face {
-	font-family: 'fantazyor';
-	src: url("./fonts/fantazyor.ttf");
+    font-family: 'fantazyor';
+    src: url("./fonts/fantazyor.ttf");
 }
 
 @font-face {
-	font-family: 'piroucyrillic';
-	src: url("./fonts/piroucyrillic.ttf");
+    font-family: 'piroucyrillic';
+    src: url("./fonts/piroucyrillic.ttf");
 }
 
 @font-face {
-	font-family: 'phenomena';
-	src: url("./fonts/phenomena.ttf");
+    font-family: 'phenomena';
+    src: url("./fonts/phenomena.ttf");
 }
 
 @font-face {
-	font-family: 'sunday';
-	src: url("./fonts/sunday.ttf");
+    font-family: 'sunday';
+    src: url("./fonts/sunday.ttf");
 }
 
 @font-face {
-	font-family: 'kurale';
-	src: url("./fonts/kurale.ttf");
+    font-family: 'kurale';
+    src: url("./fonts/kurale.ttf");
 }
 
 @font-face {
-	font-family: 'sensei';
-	src: url("./fonts/sensei.ttf");
+    font-family: 'sensei';
+    src: url("./fonts/sensei.ttf");
 }
 
 @font-face {
-	font-family: 'borsok';
-	src: url("./fonts/borsok.ttf");
+    font-family: 'borsok';
+    src: url("./fonts/borsok.ttf");
 }
 
 @font-face {
-	font-family: 'summer';
-	src: url("./fonts/summer.otf");
+    font-family: 'summer';
+    src: url("./fonts/summer.otf");
 }
 
 @font-face {
-	font-family: 'underdog';
-	src: url("./fonts/underdog.otf");
+    font-family: 'underdog';
+    src: url("./fonts/underdog.otf");
 }
 
 @font-face {
-	font-family: 'montserrat';
-	src: url("./fonts/montserrat.ttf");
+    font-family: 'montserrat';
+    src: url("./fonts/montserrat.ttf");
 }
 
 @font-face {
-	font-family: 'openSans';
-	src: url("./fonts/openSans.ttf");
+    font-family: 'openSans';
+    src: url("./fonts/openSans.ttf");
 }
 
 @font-face {
-	font-family: 'comfortaa';
-	src: url("./fonts/comfortaa.ttf");
+    font-family: 'comfortaa';
+    src: url("./fonts/comfortaa.ttf");
 }
 
 @font-face {
-	font-family: 'rubik';
-	src: url("./fonts/rubik.ttf");
+    font-family: 'rubik';
+    src: url("./fonts/rubik.ttf");
 }
 
 @font-face {
-	font-family: 'marta';
-	src: url("./fonts/marta.otf");
+    font-family: 'marta';
+    src: url("./fonts/marta.otf");
 }
 
 * {
-	margin: 0;
-	padding: 0;
-	user-select: none;
+    margin: 0;
+    padding: 0;
+    user-select: none;
 }
 
 body {
-	background: #E4E0F4;
+    background: #E4E0F4;
 }
 
 /* #canvas > *:active ~  * {

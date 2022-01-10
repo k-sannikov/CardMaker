@@ -41,20 +41,22 @@ const Modal = ({
   }
 
   // или возвращаем верстку модального окна
-  return <div className={styles.modal} onClick={onClose}>
-    <div className={styles.modalDialog} onClick={e => e.stopPropagation()}>
-      <div className={styles.modalHeader}>
-        <h3 className={styles.modalTitle}>{title}</h3>
-        <span className={styles.modalClose} onClick={onClose}>
-        <FontAwesomeIcon icon={faTimes} />
-        </span>
+  return (
+    <div className={styles.modal} onClick={onClose}>
+      <div className={styles.modalDialog} onClick={e => e.stopPropagation()}>
+        <div className={styles.modalHeader}>
+          <h3 className={styles.modalTitle}>{title}</h3>
+          <span className={styles.modalClose} onClick={onClose}>
+            <FontAwesomeIcon icon={faTimes} />
+          </span>
+        </div>
+        <div className={styles.modalBody}>
+          <div className={styles.modalContent}>{content}</div>
+        </div>
+        {footer && <div className={styles.modalFooter}>{footer}</div>}
       </div>
-      <div className={styles.modalBody}>
-        <div className={styles.modalContent}>{content}</div>
-      </div>
-      {footer && <div className={styles.modalFooter}>{footer}</div>}
     </div>
-  </div>
+  )
 }
 
 export default connect()(Modal)

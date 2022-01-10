@@ -1,15 +1,14 @@
 import styles from './Canvas.module.css';
 import { ReactElement, useRef } from 'react';
+import { connect } from 'react-redux';
 import Img from './img/Img'
 import Text from './text/Text'
 import ArtObj from './artObj/ArtObj'
 import Filter from './filter/Filter'
 import DeleteArea from './deleteArea/DeleteArea'
-import { Area, Block as BlockType, Canvas as CanvasType, Size } from '../../store/types';
-import { connect } from 'react-redux';
-import { AppDispatch, RootState } from '../../store/store';
-import { BlockTypes } from '../../store/types';
 import AreaSelection from './areaSelection/AreaSelection';
+import { Area, Block as BlockType, Canvas as CanvasType, Size as SizeType, BlockTypes} from '../../store/types';
+import { AppDispatch, RootState } from '../../store/store';
 import { areaSelection, resetAreaSelection } from '../../store/actionCreators/canvasActionCreators';
 import { useAreaSelection } from './useAreaSelection';
 
@@ -17,7 +16,7 @@ type CanvasProps = {
   canvas: CanvasType,
   area: Area | null,
   bgColor: string | null,
-  canvasSize: Size | null,
+  canvasSize: SizeType | null,
   areaSelection: (x: number, y: number, width: number, height: number) => void,
   resetAreaSelection: () => void,
 }
@@ -84,7 +83,7 @@ function getListBlock(listBlock: BlockType[]): ReactElement[] {
   return newListBlock;
 }
 
-function getStyle(canvas: CanvasType, bgColor: string | null, canvasSize: Size | null) {
+function getStyle(canvas: CanvasType, bgColor: string | null, canvasSize: SizeType | null) {
   let backgroundColor: string = '#fff';
   let backgroundImage: string = '';
 

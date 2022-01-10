@@ -16,7 +16,6 @@ export function useDragAndDrop(
     let startPos: Position;
 
     function handleMousedown(event: MouseEvent): void {
-      // event.preventDefault();
       startPos = {
         x: event.pageX,
         y: event.pageY,

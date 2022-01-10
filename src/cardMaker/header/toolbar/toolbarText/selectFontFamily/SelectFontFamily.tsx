@@ -6,7 +6,7 @@ import { useSelectFont } from './useSelectFont';
 import { setFontFamilyText } from '../../../../../store/actionCreators/textBlockActionCreators';
 
 type SelectFontFamilyProps = {
-  fontFamily: string | null
+  fontFamily: string | null,
   setFontFamilyText: (fontFamily: string) => void,
 }
 
@@ -61,12 +61,8 @@ function SelectFontFamily(props: SelectFontFamilyProps) {
 }
 
 function mapStateToProps(state: RootState) {
-  let fontFamily: string | null = null;
-  if (state.viewModel.text?.fontFamily) {
-    fontFamily = state.viewModel.text.fontFamily;
-  }
   return {
-    fontFamily: fontFamily
+    fontFamily: state.viewModel.text.fontFamily
   }
 };
 

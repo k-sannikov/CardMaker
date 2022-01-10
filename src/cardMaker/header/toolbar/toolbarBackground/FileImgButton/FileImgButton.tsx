@@ -27,7 +27,7 @@ function AddImgButton(props: NavButtonProps): any {
 
   const inputFile = useRef<HTMLInputElement>(null);
 
-  let [isModal, setModal] = useState(false);
+  const [isModal, setModal] = useState(false);
   const onClose = () => setModal(false);
 
   useBackgroungImg(inputFile, props.setBackgroundImg, props.inputBackgroundImg, setModal);

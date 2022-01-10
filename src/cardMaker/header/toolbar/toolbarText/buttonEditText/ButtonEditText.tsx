@@ -15,7 +15,7 @@ type ButtonEditTextProps = {
 function ButtonEditText(props: ButtonEditTextProps) {
   const button = useRef<HTMLButtonElement>(null);
 
-  useEditStateText(button, props.enabled,  props.modifyFn, props.param);
+  useEditStateText(button, props.enabled, props.modifyFn, props.param);
 
   return (
     <button className={styles.button + ' ' + (props.enabled ? styles.active : '')} ref={button}>

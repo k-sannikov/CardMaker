@@ -164,7 +164,7 @@ function listBlock(listBlock: Block[], action: ListBlockAction): Block[] {
       ];
 
     case 'DELETE_BLOCK':
-      let copyListBlock: Block[] = [...listBlock];
+      const copyListBlock: Block[] = [...listBlock];
       if (isSelectedBlock(action.id)) {
         copyListBlock.forEach((component, index) => {
           if (component.id === action.id) {
@@ -183,7 +183,7 @@ function listBlock(listBlock: Block[], action: ListBlockAction): Block[] {
 
     case 'SHIFT_UP_BLOCK':
       {
-        let newListBlock: Block[] = [...listBlock];
+        const newListBlock: Block[] = [...listBlock];
         if (isShiftUpAvailable(action.id, listBlock)) {
           const id: string = action.id as string;
           const index: number = getIndexById(newListBlock, id);
@@ -195,7 +195,7 @@ function listBlock(listBlock: Block[], action: ListBlockAction): Block[] {
 
     case 'SHIFT_DOWN_BLOCK':
       {
-        let newListBlock: Block[] = [...listBlock];
+        const newListBlock: Block[] = [...listBlock];
         if (isShiftDownAvailable(action.id, listBlock)) {
           const id: string = action.id as string;
           const index: number = getIndexById(newListBlock, id);

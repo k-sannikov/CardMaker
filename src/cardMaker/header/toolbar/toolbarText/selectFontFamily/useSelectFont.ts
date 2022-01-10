@@ -10,7 +10,7 @@ export function useSelectFont(
     const selectFontFamily = select.current;
     
     function handleClick(event: Event) {
-      event.stopImmediatePropagation();
+      event.preventDefault();
     }
 
     function handleChange(event: Event) {

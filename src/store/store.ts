@@ -1,25 +1,27 @@
 import { createStore, applyMiddleware, Store, MiddlewareAPI, Dispatch, AnyAction } from 'redux';
 import { cardMakerReducer } from './reducers/CardMakerReducer';
 import { testCardMaker as initialState } from './initialState';
-import { CardMaker } from './types';
+import { Canvas, CardMaker } from './types';
 
 import { addHistory, afterChangeHistory } from './actionCreators/historyActionCreators';
 
 
 const exceptions: string[] = [
-  'NEW_CARD_MAKER',
-  'ADD_HISTORY',
-  'AFTER_CHANGE_HISTORY',
   'UNDO',
   'REDO',
+  'ADD_HISTORY',
+  'AFTER_CHANGE_HISTORY',
   'SET_SELECTED_BLOCK',
-  'RESET_SELECTED_BLOCK',
-  'INPUT_SIZE_TEXT',
-  'INPUT_COLOR_TEXT',
   'SET_SIZE_TEXT',
   'SET_POSITION_AREA_SELECTION',
+  'RESET_SELECTED_BLOCK',
   'RESET_AREA_SELECTION',
+  'APPLY_FILE_PROJECT',
+  'NEW_CARD_MAKER',
   'AREA_SELECTION',
+  'CLICK_ON_TEXT',
+  'INPUT_SIZE_TEXT',
+  'INPUT_COLOR_TEXT',
   'INPUT_FILTER',
   'INPUT_CANVAS_SIZE',
   'INPUT_BACKGROUND_IMG',
@@ -28,11 +30,12 @@ const exceptions: string[] = [
 
 const storeHistory = (store: MiddlewareAPI<Dispatch<AnyAction>, CardMaker>) =>
   (next: AppDispatch) => (action: AnyAction) => {
-    const oldState = store.getState();
-    const result = next(action)
-    const newState = store.getState();
 
+    const oldState: CardMaker = store.getState();
+    const result: AnyAction = next(action)
+    
     if (!exceptions.includes(action.type)) {
+      const newState: CardMaker = store.getState();
       if (JSON.stringify(oldState.canvas) !== JSON.stringify(newState.canvas)) {
         console.log('сохранение истории');
         store.dispatch(addHistory(newState.canvas));
@@ -41,18 +44,15 @@ const storeHistory = (store: MiddlewareAPI<Dispatch<AnyAction>, CardMaker>) =>
     return result
   }
 
-const valid: string[] = [
-  'UNDO',
-  'REDO',
-];
-
 const movingHistory = (store: MiddlewareAPI<Dispatch<AnyAction>, CardMaker>) =>
   (next: AppDispatch) => (action: AnyAction) => {
-    const result = next(action)
 
-    if ((valid.includes(action.type)) && (action.type !== 'AFTER_CHANGE_HISTORY')) {
-      const canvas = store.getState().history.listState[store.getState().history.currentIndex];
-      const newState = {
+    const result: AnyAction = next(action)
+
+    if (['UNDO', 'REDO'].includes(action.type)) {
+      const currentIndex: number = store.getState().history.currentIndex;
+      const canvas: Canvas = store.getState().history.listState[currentIndex];
+      const newState: CardMaker = {
         ...store.getState(),
         canvas,
       }

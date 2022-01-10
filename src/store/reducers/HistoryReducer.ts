@@ -26,7 +26,7 @@ function history(history: ActionHistoryType, action: HistoryAction): ActionHisto
       {
         const listState: CanvasType[] = history.listState;
         const currentIndex: number = history.currentIndex;
-        let newListState: CanvasType[] = [...history.listState];
+        const newListState: CanvasType[] = [...history.listState];
         if (currentIndex !== listState.length - 1) {
           newListState.splice(currentIndex + 1, listState.length - currentIndex + 1);
         }

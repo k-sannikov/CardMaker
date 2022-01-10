@@ -24,7 +24,7 @@ export function useEditFontSize(
     }
     
     function handleClick(event: Event) {
-      event.stopImmediatePropagation();
+      event.preventDefault();
     }
 
 

@@ -6,7 +6,7 @@ export function useEditText(
   bold: boolean,
   italic: boolean,
   underline: boolean,
-  setTextIncurrentBlock: (text: string) => void,
+  setTextInTextBlock: (text: string) => void,
   clickOnText: () => void,
   deleteBlock: () => void,
   setBoldText: (isBold: boolean) => void,
@@ -36,7 +36,7 @@ export function useEditText(
         if (content === '<div><br></div>') {
           deleteBlock();
         } else {
-          setTextIncurrentBlock(currentBlock.innerHTML);
+          setTextInTextBlock(currentBlock.innerHTML);
         }
       }
     }
@@ -51,11 +51,12 @@ export function useEditText(
       if (event.code === 'Escape') {
         if (verify(currentBlock).getAttribute('contenteditable') === 'true') {
           verify(currentBlock).setAttribute("contenteditable", "false")
-          setTextIncurrentBlock(verify(currentBlock).innerHTML)
+          setTextInTextBlock(verify(currentBlock).innerHTML)
         }
       }
       if (event.code === 'Delete') {
-        event.stopImmediatePropagation();
+        event.preventDefault();
+        document.execCommand('forwardDelete');
       }
       if (event.code === 'KeyB' && (event.ctrlKey || event.metaKey)) {
         setBoldText(!bold)
@@ -74,7 +75,7 @@ export function useEditText(
       document.execCommand("insertHTML", false, text);
     }
 
-    function handlerInput(event: Event) {
+    function handlerInput() {
       if (currentBlock) {
         if (currentBlock.innerHTML[0] !== '<' || currentBlock.innerHTML === '<br>') {
           currentBlock.innerHTML = `<div>${currentBlock.innerText}<br></div>`;
@@ -87,10 +88,10 @@ export function useEditText(
     verify(currentBlock).addEventListener("mousedown", handleClickBlock);
     verify(currentBlock).addEventListener("dblclick", handleDblclickBlock);
     verify(currentBlock).addEventListener("blur", handleBlur);
-    document.addEventListener("mousemove", handleMouseMove);
     verify(currentBlock).addEventListener("keydown", handlerKeydown);
     verify(currentBlock).addEventListener("paste", handlerPaste);
     verify(currentBlock).addEventListener("input", handlerInput);
+    document.addEventListener("mousemove", handleMouseMove);
     return () => {
       if (currentBlock) {
         currentBlock.removeEventListener("mousedown", handleClickBlock);
@@ -103,7 +104,7 @@ export function useEditText(
       document.removeEventListener("mousemove", handleMouseMove);
     };
   }, [
-    block, bold, italic, underline, setTextIncurrentBlock, clickOnText,
+    block, bold, italic, underline, setTextInTextBlock, clickOnText,
     deleteBlock, setBoldText, setItalicText, setUnderlineText
   ]);
 }

@@ -18,10 +18,10 @@ export function useResize(
   useEffect(() => {
 
     const currentBlock = block.current;
-    const pointLT = LT;
-    const pointRT = RT;
-    const pointLB = LB;
-    const pointRB = RB;
+    const pointLT = LT.current;
+    const pointRT = RT.current;
+    const pointLB = LB.current;
+    const pointRB = RB.current;
 
     let startPos: Position;
     let point: string;
@@ -29,16 +29,16 @@ export function useResize(
     function handleMousedown(event: MouseEvent): void {
       event.preventDefault();
       switch (event.target) {
-        case pointLT.current:
+        case pointLT:
           point = 'LT';
           break;
-        case pointRT.current:
+        case pointRT:
           point = 'RT';
           break;
-        case pointLB.current:
+        case pointLB:
           point = 'LB';
           break;
-        case pointRB.current:
+        case pointRB:
           point = 'RB';
           break;
       }
@@ -123,15 +123,15 @@ export function useResize(
     }
 
     
-    verify(pointLT.current).addEventListener("mousedown", handleMousedown);
-    verify(pointRT.current).addEventListener("mousedown", handleMousedown);
-    verify(pointLB.current).addEventListener("mousedown", handleMousedown);
-    verify(pointRB.current).addEventListener("mousedown", handleMousedown);
+    verify(pointLT).addEventListener("mousedown", handleMousedown);
+    verify(pointRT).addEventListener("mousedown", handleMousedown);
+    verify(pointLB).addEventListener("mousedown", handleMousedown);
+    verify(pointRB).addEventListener("mousedown", handleMousedown);
     return () => {
-      if (pointLT.current) pointLT.current.removeEventListener("mousedown", handleMousedown);
-      if (pointRT.current) pointRT.current.removeEventListener("mousedown", handleMousedown);
-      if (pointLB.current) pointLB.current.removeEventListener("mousedown", handleMousedown);
-      if (pointRB.current) pointRB.current.removeEventListener("mousedown", handleMousedown);
+      if (pointLT) pointLT.removeEventListener("mousedown", handleMousedown);
+      if (pointRT) pointRT.removeEventListener("mousedown", handleMousedown);
+      if (pointLB) pointLB.removeEventListener("mousedown", handleMousedown);
+      if (pointRB) pointRB.removeEventListener("mousedown", handleMousedown);
     };
   }, [setSizeBlock, setPositionBlock, LT, RT, LB, RB, block, defPos, defSize]);
 }

@@ -14,17 +14,12 @@ type ToolbarAreaProps = {
 
 function ToolbarArea(props: ToolbarAreaProps) {
 
-  let buttonDelete = useRef<HTMLButtonElement>(null); 
+  const buttonDelete = useRef<HTMLButtonElement>(null); 
 
   useDeleteArea(buttonDelete, props.deleteAreaSelection, props.resetAreaSelection);
 
   return (
     <div className={styles.toolbar}>
-      {/* <Button
-        label="Выделение"
-        title="Выделение"
-        icon={faVectorSquare}
-      /> */}
       <Button
         ref={buttonDelete}
         label="Удаление"
@@ -32,10 +27,6 @@ function ToolbarArea(props: ToolbarAreaProps) {
         icon={faEraser}
       />
 
-      {/* <button onClick={() => {
-        props.deleteAreaSelection();
-        props.resetAreaSelection();
-      }}>УДАЛИТЬ</button> */}
       <label className={styles.toolbar__label}>Область</label>
     </div>
   );

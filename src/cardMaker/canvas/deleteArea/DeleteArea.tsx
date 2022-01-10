@@ -9,7 +9,7 @@ type DeleteAreaProps = { canvas: CanvasType }
 function DeleteArea(props: DeleteAreaProps) {
   const canvas: CanvasType = props.canvas;
 
-  let listBlock: ReactElement[] = [];
+  const listBlock: ReactElement[] = [];
   canvas.deleteArea.forEach((block: Area, index: number) => {
     const DeleteAreaStyle = {
       width: block.width as number,

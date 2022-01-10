@@ -32,7 +32,7 @@ function Img(props: ImgProps) {
   const pointLB = useRef<HTMLDivElement>(null);
   const pointRB = useRef<HTMLDivElement>(null);
 
-  useStateBlock(props.img.id, imgBlock, props.setSelectedBlock, props.resetSelectedBlock);
+  useStateBlock(img.id, imgBlock, props.setSelectedBlock, props.resetSelectedBlock);
   useDragAndDrop(imgBlock, { x: img.x, y: img.y }, props.setPositionBlock);
   useResize(
     props.setSizeBlock,
@@ -46,7 +46,7 @@ function Img(props: ImgProps) {
     { width: img.width, height: img.height }
   );
 
-  const select: string = props.img.id === props.selectBlock ? styles.selected : '';
+  const select: string = img.id === props.selectBlock ? styles.selected : '';
 
   return (
     <div

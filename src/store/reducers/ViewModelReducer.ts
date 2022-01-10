@@ -224,37 +224,37 @@ function text(cardMaker: CardMaker, action: TextAction): ViewModelText {
       return {
         ...cardMaker.viewModel.text,
         fontFamily: action.fontFamily
-      } as ViewModelText;
+      };
 
     case 'INPUT_COLOR_TEXT':
       return {
         ...cardMaker.viewModel.text,
         tempColor: action.color
-      } as ViewModelText;
+      };
 
     case 'INPUT_SIZE_TEXT':
       return {
         ...cardMaker.viewModel.text,
         tempSize: action.size
-      } as ViewModelText;
+      };
 
     case 'SET_BOLD_TEXT':
       return {
         ...cardMaker.viewModel.text,
         bold: action.isBold
-      } as ViewModelText;
+      };
 
     case 'SET_ITALIC_TEXT':
       return {
         ...cardMaker.viewModel.text,
         italic: action.isItalic
-      } as ViewModelText;
+      };
 
     case 'SET_UNDERLINE_TEXT':
       return {
         ...cardMaker.viewModel.text,
         underline: action.isUnderline
-      } as ViewModelText;
+      };
 
     case 'SET_SELECTED_BLOCK': return defState;
     case 'RESET_SELECTED_BLOCK': return defState;

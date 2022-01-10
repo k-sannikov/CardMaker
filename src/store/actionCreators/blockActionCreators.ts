@@ -58,9 +58,3 @@ export function clickOnText() {
     id: store.getState().selectBlock,
   }
 }
-
-export function blurOnText() {
-  return {
-    type: 'BLUR_ON_TEXT',
-  }
-}

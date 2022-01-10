@@ -18,7 +18,7 @@ export function useExportFileProject(downloadButton: RefObject<HTMLButtonElement
         }
       });
       const file = new Blob([json], { type: 'application/json' });
-      let link = document.createElement("a");
+      const link = document.createElement("a");
       link.href = URL.createObjectURL(file);
       link.download = "Новый проект.json";
       link.click();

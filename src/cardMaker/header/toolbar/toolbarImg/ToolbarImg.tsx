@@ -19,8 +19,8 @@ type ToolbarImgProps = {
 function ToolbarImg(props: ToolbarImgProps) {
 
   // формирование списка стикеров
-  let srcList: SetOfArtObject[] = Object.values(SetOfArtObject);
-  let imgList: ReactElement[] = [];
+  const srcList: SetOfArtObject[] = Object.values(SetOfArtObject);
+  const imgList: ReactElement[] = [];
   srcList.forEach((src, index) => {
     imgList.push(<PreviewArtObj src={src} key={index} />);
   });

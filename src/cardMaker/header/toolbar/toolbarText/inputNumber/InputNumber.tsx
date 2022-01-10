@@ -15,7 +15,6 @@ type InputNumberProps = {
 function InputNumber(props: InputNumberProps) {
   const inputNumber = useRef<HTMLInputElement>(null);
   useEditFontSize(props.size, inputNumber, props.setSizeText, props.inputSizeText);
-  
 
   return (
     <input type="number"

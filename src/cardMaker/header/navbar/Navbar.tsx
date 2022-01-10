@@ -40,8 +40,8 @@ function Navbar(props: NavbarProps) {
 
 
   // формирование списка стикеров
-  let srcList = Object.values(templates);
-  let previewList: ReactElement[] = [];
+  const srcList = Object.values(templates);
+  const previewList: ReactElement[] = [];
   srcList.forEach((tmp, index) => {
     previewList.push(<PreviewTemplate name={tmp.name} srcImg={tmp.preview} srcJson={tmp.json} key={index} />);
   });

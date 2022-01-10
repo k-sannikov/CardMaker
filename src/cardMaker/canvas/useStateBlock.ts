@@ -13,7 +13,10 @@ export function useStateBlock(
 
     const currentBlock = block.current;
 
+    let mouseDownCurrentBlock: boolean = false;
+
     function handleMousedownBlock(): void {
+      mouseDownCurrentBlock = true;
       if (store.getState().selectBlock !== blockId) {
         setTimeout(() => {
           setSelectedBlock(blockId);
@@ -24,9 +27,10 @@ export function useStateBlock(
     function handleClickDocument(event: Event): void {
       const isDefPrev: boolean = event.defaultPrevented;
       const isSelectedID: boolean = store.getState().selectBlock === blockId;
-      if (!isDefPrev && isSelectedID && (event.target !== currentBlock)) {
+      if (!isDefPrev && isSelectedID && (event.target !== currentBlock) && !mouseDownCurrentBlock) {
         resetSelectedBlock();
       }
+      mouseDownCurrentBlock = false;
     }
 
 

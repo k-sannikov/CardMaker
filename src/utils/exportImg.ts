@@ -96,7 +96,7 @@ async function renderBlock(element: Block, ctx: CanvasRenderingContext2D) {
           let chars = 0;
           let underline = '';
           while (str.innerText.length > chars) {
-            underline += '_';
+            underline += '__';
             chars++;
           }
           ctx.font = `700 ${style.size}px openSans`;

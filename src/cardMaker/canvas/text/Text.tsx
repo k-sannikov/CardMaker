@@ -29,7 +29,7 @@ function Text(props: TextProps) {
   const text: TextType = props.text;
 
   const textBlock = useRef<HTMLDivElement>(null);
-  useStateBlock(props.text.id, textBlock, props.setSelectedBlock, props.resetSelectedBlock);
+  useStateBlock(text.id, textBlock, props.setSelectedBlock, props.resetSelectedBlock);
   useDragAndDrop(textBlock, { x: text.x, y: text.y }, props.setPositionBlock);
 
   useEditText(
@@ -45,7 +45,7 @@ function Text(props: TextProps) {
     props.setUnderlineText,
   );
 
-  const select: string = props.text.id === props.selectBlock ? styles.selected : '';
+  const select: string = text.id === props.selectBlock ? styles.selected : '';
   let textStyle = getStyle(text);
   textStyle = {
     ...textStyle,

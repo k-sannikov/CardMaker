@@ -7,18 +7,18 @@ export function isSelectedBlock(id: string | null): boolean {
 
 // установка значений полю/полям одного элемента из списка элементов
 export function setComponentFields(listBlock: Block[], id: string, modifiableFields: object): Block[] {
-  let newlistBlock: Block[] = [];
+  let newListBlock: Block[] = [];
   listBlock.forEach((component: Block) => {
     if (component.id === id) {
-      newlistBlock.push({
+      newListBlock.push({
         ...component,
         ...modifiableFields,
       });
     } else {
-      newlistBlock.push(component);
+      newListBlock.push(component);
     }
   });
-  return newlistBlock;
+  return newListBlock;
 }
 
 // получить индекс элемента по id
@@ -27,6 +27,7 @@ export function getIndexById(listBlock: Block[], id: string): number {
   listBlock.forEach((block: Block, index: number) => {
     if (block.id === id) {
       foundIndex = index;
+      return;
     }
   });
   return foundIndex;

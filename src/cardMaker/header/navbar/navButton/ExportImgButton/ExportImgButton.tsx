@@ -22,10 +22,7 @@ function ExportImgButton() {
     onClose();
   }
 
-  const content =
-    <>
-      <p>Выберите формат сохраняемого файла</p>
-    </>
+  const content = <p>Выберите формат сохраняемого файла</p>
 
   const footer =
     <>
