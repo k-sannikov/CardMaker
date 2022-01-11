@@ -1,5 +1,5 @@
-import { ActionHistory, Block } from '../store/types';
-import { getIndexById } from './elementList';
+import { ActionHistory, Block } from "../store/types";
+import { getIndexById } from "./elementList";
 
 // провера доступности операции undo
 export function isUndoAvailable(history: ActionHistory): boolean {
@@ -29,7 +29,7 @@ export function isShiftDownAvailable(id: string | null, listBlock: Block[]): boo
 // проверка на !null значение
 export function verify<T>(value: T | null | undefined): T {
   if (!value) {
-    throw new Error('Assertion failed');
+    throw new Error("Assertion failed");
   }
   return value;
 }

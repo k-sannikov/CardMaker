@@ -1,9 +1,9 @@
-import { faImage } from '@fortawesome/free-solid-svg-icons'
-import { connect } from 'react-redux';
-import { useRef, useState } from 'react';
-import NavButton from '../NavButton/NavButton';
-import Modal from '../../../../modal/Modal';
-import { exportImg } from "../../../../../utils/exportImg";
+import { faImage } from "@fortawesome/free-solid-svg-icons"
+import { connect } from "react-redux";
+import { useRef, useState } from "react";
+import NavButton from "../NavButton/NavButton";
+import Modal from "../../../../modal/Modal";
+import { exportInImage } from "../../../../../utils/exportInImage";
 
 function ExportImgButton() {
 
@@ -13,12 +13,12 @@ function ExportImgButton() {
   const onClose = () => setModal(false)
 
   const onAcceptJpg = () => {
-    exportImg('image/jpeg');
+    exportInImage("image/jpeg");
     onClose();
   }
 
   const onAcceptPng = () => {
-    exportImg('image/png');
+    exportInImage("image/png");
     onClose();
   }
 

@@ -1,4 +1,4 @@
-import { Block } from '../store/types';
+import { Block } from "../store/types";
 
 // проверка выделен ли блок
 export function isSelectedBlock(id: string | null): boolean {
@@ -32,6 +32,3 @@ export function getIndexById(listBlock: Block[], id: string): number {
   });
   return foundIndex;
 }
-
-
-

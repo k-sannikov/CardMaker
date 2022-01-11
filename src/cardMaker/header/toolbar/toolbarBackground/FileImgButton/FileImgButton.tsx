@@ -1,17 +1,17 @@
-import styles from './FileImgButton.module.css';
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useRef, useState } from 'react';
-import { connect } from 'react-redux';
-import Modal from '../../../../modal/Modal';
-import { useBackgroungImg } from '../useBackgroungImg';
-import { AppDispatch, RootState } from '../../../../../store/store';
+import styles from "./FileImgButton.module.css";
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { useRef, useState } from "react";
+import { connect } from "react-redux";
+import Modal from "../../../../modal/Modal";
+import { useBackgroungImg } from "../useBackgroungImg";
+import { AppDispatch, RootState } from "../../../../../store/store";
 import {
   inputBackgroundImg,
   setBackgroundImg,
   setCanvasSize
-} from '../../../../../store/actionCreators/canvasActionCreators';
-import { ViewModelBgImg } from '../../../../../store/types';
+} from "../../../../../store/actionCreators/canvasActionCreators";
+import { ViewModelBgImg } from "../../../../../store/types";
 
 type NavButtonProps = {
   label: string,
@@ -35,7 +35,7 @@ function AddImgButton(props: NavButtonProps): any {
   const bg = props.ViewModelBgImg ?? {
     width: 0,
     height: 0,
-    src: '',
+    src: "",
   }
 
   const onAcceptStretch = () => {
@@ -80,7 +80,7 @@ function AddImgButton(props: NavButtonProps): any {
           id="input-file-bg-img"
           ref={inputFile}
         />
-        {props.label !== '' &&
+        {props.label !== "" &&
           <label className={styles.button__text}
             htmlFor="input-file-bg-img">
             {props.label}

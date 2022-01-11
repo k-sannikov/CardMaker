@@ -1,9 +1,9 @@
-import styles from './PreviewArtObj.module.css';
-import { useCreateArtObj } from './useCreateArtObj';
-import { useRef } from 'react';
-import { connect } from 'react-redux';
-import { AppDispatch } from '../../../../../store/store';
-import { createArtObjBlock } from '../../../../../store/actionCreators/artObjBlockActionCreators';
+import styles from "./PreviewArtObj.module.css";
+import { useCreateArtObj } from "./useCreateArtObj";
+import { useRef } from "react";
+import { connect } from "react-redux";
+import { AppDispatch } from "../../../../../store/store";
+import { createArtObjBlock } from "../../../../../store/actionCreators/artObjBlockActionCreators";
 
 type PreviewArtObjProps = {
   src: string,
@@ -15,7 +15,7 @@ function PreviewArtObj(props: PreviewArtObjProps) {
   const img = useRef<HTMLImageElement>(null);
   useCreateArtObj(img, props.src, props.createArtObjBlock);
   return (
-    <img src={props.src} alt='' ref={img} className={styles.sticker} />
+    <img src={props.src} alt="" ref={img} className={styles.sticker} />
   );
 }
 

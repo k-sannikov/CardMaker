@@ -1,16 +1,16 @@
-import styles from './ToolbarFilter.module.css';
-import ColorPicker from '../colorPicker/ColorPicker';
-import { RefObject, useRef } from 'react';
-import { useStateFilter } from './useStateFilter';
-import { AppDispatch, RootState } from '../../../../store/store';
-import { inputFilter, setFilter } from '../../../../store/actionCreators/canvasActionCreators';
-import { connect } from 'react-redux';
-import { Filter as FilterType } from '../../../../store/types';
+import styles from "./ToolbarFilter.module.css";
+import ColorPicker from "../colorPicker/ColorPicker";
+import { useRef } from "react";
+import { useStateFilter } from "./useStateFilter";
+import { AppDispatch, RootState } from "../../../../store/store";
+import { inputFilter, setFilter } from "../../../../store/actionCreators/canvasActionCreators";
+import { connect } from "react-redux";
+import { Filter } from "../../../../store/types";
 
 type ToolbarFilterProps = {
   inputFilter: (color: string, opacity: number) => void,
   setFilter: (color: string, opacity: number) => void,
-  filter: FilterType,
+  filter: Filter,
 }
 
 function ToolbarFilter(props: ToolbarFilterProps) {
@@ -26,7 +26,7 @@ function ToolbarFilter(props: ToolbarFilterProps) {
   return (
     <div className={styles.toolbar}>
       <div className={styles.colorPickerBox}>
-        <ColorPicker ref={inputColor as RefObject<HTMLInputElement>} />
+        <ColorPicker ref={inputColor} />
       </div>
       <input type="range" min="0" max="0.2" step="0.025" className={styles.input_range}
         ref={inputRange}

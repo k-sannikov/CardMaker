@@ -1,9 +1,9 @@
-import { connect } from 'react-redux';
-import { AppDispatch, RootState } from '../../../../../store/store';
-import styles from './SelectFontFamily.module.css';
-import { useRef } from 'react';
-import { useSelectFont } from './useSelectFont';
-import { setFontFamilyText } from '../../../../../store/actionCreators/textBlockActionCreators';
+import { connect } from "react-redux";
+import { AppDispatch, RootState } from "../../../../../store/store";
+import styles from "./SelectFontFamily.module.css";
+import { useRef } from "react";
+import { useSelectFont } from "./useSelectFont";
+import { setFontFamilyText } from "../../../../../store/actionCreators/textBlockActionCreators";
 
 type SelectFontFamilyProps = {
   fontFamily: string | null,
@@ -16,20 +16,21 @@ function SelectFontFamily(props: SelectFontFamilyProps) {
   useSelectFont(select, props.setFontFamilyText);
 
   const listParameters = [
-    { value: 'Fantazyor', class: styles.fantazyor },
-    { value: 'Piroucyrillic', class: styles.piroucyrillic },
-    { value: 'Phenomena', class: styles.phenomena },
-    { value: 'Sunday', class: styles.sunday },
-    { value: 'Kurale', class: styles.kurale },
-    { value: 'Sensei', class: styles.sensei },
-    { value: 'Borsok', class: styles.borsok },
-    { value: 'Summer', class: styles.summer },
-    { value: 'Underdog', class: styles.underdog },
-    { value: 'Montserrat', class: styles.montserrat },
-    { value: 'OpenSans', class: styles.openSans },
-    { value: 'Comfortaa', class: styles.comfortaa },
-    { value: 'Rubik', class: styles.rubik },
-    { value: 'Marta', class: styles.marta },
+    { value: "Roboto Slab", class: styles.robotoSlab },
+    { value: "Fantazyor", class: styles.fantazyor },
+    { value: "Piroucyrillic", class: styles.piroucyrillic },
+    { value: "Phenomena", class: styles.phenomena },
+    { value: "Sunday", class: styles.sunday },
+    { value: "Kurale", class: styles.kurale },
+    { value: "Sensei", class: styles.sensei },
+    { value: "Borsok", class: styles.borsok },
+    { value: "Summer", class: styles.summer },
+    { value: "Underdog", class: styles.underdog },
+    { value: "Montserrat", class: styles.montserrat },
+    { value: "OpenSans", class: styles.openSans },
+    { value: "Comfortaa", class: styles.comfortaa },
+    { value: "Rubik", class: styles.rubik },
+    { value: "Marta", class: styles.marta },
   ]
 
   let fontFamilies: JSX.Element[] = listParameters.map((element, index) => {
@@ -54,7 +55,7 @@ function SelectFontFamily(props: SelectFontFamilyProps) {
   });
 
   return (
-    <select name="" id="" className={styles.select + ' ' + currentStyle} ref={select}>
+    <select name="" id="" className={`${styles.select} ${currentStyle}`} ref={select}>
       {fontFamilies}
     </select>
   );

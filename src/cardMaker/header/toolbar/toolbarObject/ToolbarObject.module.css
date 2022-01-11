@@ -10,7 +10,7 @@
 
 .toolbar__label {
     text-align: center;
-    font: 400 12px "Roboto Slab";
+    font: 400 12px robotoSlab;
     color: #1c182b;
 }
 

@@ -1,20 +1,24 @@
-import styles from './ToolbarBackground.module.css';
-import { faDownload, faGlobe, faRetweet } from '@fortawesome/free-solid-svg-icons'
-import ColorPicker from '../colorPicker/ColorPicker';
-import FileImgButton from './FileImgButton/FileImgButton';
-import Button from '../button/Button';
-import { RefObject, useRef } from 'react';
-import { useBackgroungColor } from './useBackgroungColor';
-import { AppDispatch, RootState } from '../../../../store/store';
-import { inputBackgroundColor, resetBackground, setBackgroundColor } from '../../../../store/actionCreators/canvasActionCreators';
-import { connect } from 'react-redux';
-import { Background as BackgroundType } from '../../../../store/types';
+import styles from "./ToolbarBackground.module.css";
+import { faDownload, faGlobe, faRetweet } from "@fortawesome/free-solid-svg-icons"
+import ColorPicker from "../colorPicker/ColorPicker";
+import FileImgButton from "./FileImgButton/FileImgButton";
+import Button from "../button/Button";
+import { useRef } from "react";
+import { useBackgroungColor } from "./useBackgroungColor";
+import { AppDispatch, RootState } from "../../../../store/store";
+import {
+  inputBackgroundColor,
+  resetBackground,
+  setBackgroundColor
+} from "../../../../store/actionCreators/canvasActionCreators";
+import { connect } from "react-redux";
+import { Background } from "../../../../store/types";
 
 type ToolbarBackgroundProps = {
   resetBackground: () => void,
   inputBackgroundColor: (color: string) => void,
   setBackgroundColor: (color: string) => void,
-  background: BackgroundType,
+  background: Background,
 }
 
 function ToolbarBackground(props: ToolbarBackgroundProps) {
@@ -50,13 +54,13 @@ function ToolbarBackground(props: ToolbarBackgroundProps) {
         </div>
         <div className={styles.toolbar__col2}>
           <div className={styles.colorPickerBox}>
-            <ColorPicker ref={inputColor as RefObject<HTMLInputElement>} />
+            <ColorPicker ref={inputColor} />
           </div>
           <Button
             label="Сброс"
             title="Сброс"
             icon={faRetweet}
-            ref={buttonReset as RefObject<HTMLButtonElement>}
+            ref={buttonReset}
           />
         </div>
       </div>

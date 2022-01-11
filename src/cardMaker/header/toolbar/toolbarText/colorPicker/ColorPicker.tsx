@@ -1,9 +1,9 @@
-import styles from './ColorPicker.module.css';
-import { useRef } from 'react';
-import { connect } from 'react-redux';
-import { AppDispatch, RootState } from '../../../../../store/store';
-import { inputColorText, setColorText } from '../../../../../store/actionCreators/textBlockActionCreators';
-import { useEditColorText } from './useEditColorText';
+import styles from "./ColorPicker.module.css";
+import { useRef } from "react";
+import { connect } from "react-redux";
+import { AppDispatch, RootState } from "../../../../../store/store";
+import { inputColorText, setColorText } from "../../../../../store/actionCreators/textBlockActionCreators";
+import { useEditColorText } from "./useEditColorText";
 
 type ColorPickerProps = {
   setColorText: (color: string) => void,

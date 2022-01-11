@@ -1,11 +1,11 @@
-import styles from './ToolbarCanvas.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
-import { useRef } from 'react';
-import { useStateCanvasSize } from './useStateCanvasSize';
-import { connect } from 'react-redux';
-import { inputCanvasSize, setCanvasSize } from '../../../../store/actionCreators/canvasActionCreators';
-import { AppDispatch, RootState } from '../../../../store/store';
+import styles from "./ToolbarCanvas.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faTimes } from "@fortawesome/free-solid-svg-icons"
+import { useRef } from "react";
+import { useStateCanvasSize } from "./useStateCanvasSize";
+import { connect } from "react-redux";
+import { inputCanvasSize, setCanvasSize } from "../../../../store/actionCreators/canvasActionCreators";
+import { AppDispatch, RootState } from "../../../../store/store";
 
 type ToolbarCanvasProps = {
   inputCanvasSize: (width: number, height: number) => void,

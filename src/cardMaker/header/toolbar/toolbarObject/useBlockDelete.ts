@@ -1,5 +1,5 @@
-import { RefObject, useEffect } from 'react';
-import { verify } from '../../../../utils/permisions';
+import { RefObject, useEffect } from "react";
+import { verify } from "../../../../utils/permisions";
 
 export function useBlockDelete(buttonDelete: RefObject<HTMLButtonElement>, deleteBlock: () => void): void {
 
@@ -12,7 +12,7 @@ export function useBlockDelete(buttonDelete: RefObject<HTMLButtonElement>, delet
     }
 
     function handlerKeydown(event: KeyboardEvent): void {
-      if (event.code === 'Delete') {
+      if (event.code === "Delete") {
         if (!event.defaultPrevented) {
           deleteBlock();
         }

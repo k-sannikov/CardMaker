@@ -1,12 +1,12 @@
-import styles from './Img.module.css';
-import { Img as ImgType } from '../../../store/types';
-import { useRef } from 'react';
-import { useStateBlock } from '../useStateBlock';
-import { useDragAndDrop } from '../useDragAndDrop';
-import { useResize } from '../useResize';
-import { connect } from 'react-redux';
-import { resetSelectedBlock, setPositionBlock, setSelectedBlock, setSizeBlock } from '../../../store/actionCreators/blockActionCreators';
-import { AppDispatch, RootState } from '../../../store/store';
+import styles from "./Img.module.css";
+import { Img as ImgType } from "../../../store/types";
+import { useRef } from "react";
+import { useStateBlock } from "../useStateBlock";
+import { useDragAndDrop } from "../useDragAndDrop";
+import { useResize } from "../useResize";
+import { connect } from "react-redux";
+import { resetSelectedBlock, setPositionBlock, setSelectedBlock, setSizeBlock } from "../../../store/actionCreators/blockActionCreators";
+import { AppDispatch, RootState } from "../../../store/store";
 
 type ImgProps = {
   img: ImgType,
@@ -19,7 +19,7 @@ type ImgProps = {
 
 function Img(props: ImgProps) {
   const img: ImgType = props.img;
-  let src: string = '';
+  let src: string = "";
   if (img.src) {
     src = img.src;
   }
@@ -46,11 +46,11 @@ function Img(props: ImgProps) {
     { width: img.width, height: img.height }
   );
 
-  const select: string = img.id === props.selectBlock ? styles.selected : '';
+  const select: string = img.id === props.selectBlock ? styles.selected : "";
 
   return (
     <div
-      className={styles.block + ' ' + select}
+      className={`${styles.block} ${select}`}
       style={imgStyle}
       ref={imgBlock}
       onDragStart={(e) => e.preventDefault() }
@@ -58,7 +58,7 @@ function Img(props: ImgProps) {
       <div className={styles.pointTopLeft} ref={pointLT}></div>
       <div className={styles.pointTopRight} ref={pointRT}></div>
       <img src={src}
-        alt=''
+        alt=""
         className={styles.img}
       />
       <div className={styles.pointBottomLeft} ref={pointLB}></div>

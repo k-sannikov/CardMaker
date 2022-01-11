@@ -1,12 +1,12 @@
-import styles from './ToolbarText.module.css';
-import { faBold, faItalic, faUnderline, faFont } from '@fortawesome/free-solid-svg-icons'
-import { connect } from 'react-redux';
-import { AppDispatch, RootState } from '../../../../store/store';
-import { createTextBlock, setBoldText, setItalicText, setUnderlineText } from '../../../../store/actionCreators/textBlockActionCreators';
-import ButtonEditText from './buttonEditText/ButtonEditText';
-import ColorPicker from './colorPicker/ColorPicker';
-import InputNumber from './inputNumber/InputNumber';
-import SelectFontFamily from './selectFontFamily/SelectFontFamily';
+import styles from "./ToolbarText.module.css";
+import { faBold, faItalic, faUnderline, faFont } from "@fortawesome/free-solid-svg-icons"
+import { connect } from "react-redux";
+import { AppDispatch, RootState } from "../../../../store/store";
+import { createTextBlock, setBoldText, setItalicText, setUnderlineText } from "../../../../store/actionCreators/textBlockActionCreators";
+import ButtonEditText from "./buttonEditText/ButtonEditText";
+import ColorPicker from "./colorPicker/ColorPicker";
+import InputNumber from "./inputNumber/InputNumber";
+import SelectFontFamily from "./selectFontFamily/SelectFontFamily";
 
 
 type ToolbarTextProps = {

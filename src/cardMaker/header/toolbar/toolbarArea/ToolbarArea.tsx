@@ -1,11 +1,11 @@
-import styles from './ToolbarArea.module.css';
-import { faEraser } from '@fortawesome/free-solid-svg-icons'
-import Button from '../button/Button';
-import { connect } from 'react-redux';
-import { AppDispatch } from '../../../../store/store';
-import { deleteAreaSelection, resetAreaSelection } from '../../../../store/actionCreators/canvasActionCreators';
-import { useDeleteArea } from './useDeleteArea';
-import { useRef } from 'react';
+import styles from "./ToolbarArea.module.css";
+import { faEraser } from "@fortawesome/free-solid-svg-icons"
+import Button from "../button/Button";
+import { connect } from "react-redux";
+import { AppDispatch } from "../../../../store/store";
+import { deleteAreaSelection, resetAreaSelection } from "../../../../store/actionCreators/canvasActionCreators";
+import { useDeleteArea } from "./useDeleteArea";
+import { useRef } from "react";
 
 type ToolbarAreaProps = {
   deleteAreaSelection: () => void,

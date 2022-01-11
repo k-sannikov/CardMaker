@@ -1,12 +1,12 @@
-import { useEffect, RefObject } from 'react';
-import { Background as BackgroundType } from '../../../../store/types';
-import { verify } from '../../../../utils/permisions';
+import { useEffect, RefObject } from "react";
+import { Background } from "../../../../store/types";
+import { verify } from "../../../../utils/permisions";
 
 export function useBackgroungColor(
   resetBackground: () => void,
   inputBackgroundColor: (color: string) => void,
   setBackgroundColor: (color: string) => void,
-  background: BackgroundType,
+  background: Background,
   inputColor: RefObject<HTMLInputElement>,
   buttonReset: RefObject<HTMLButtonElement>): void {
 
@@ -47,7 +47,7 @@ export function useBackgroungColor(
   // изменение цвета input на белый при сбросе фона
   useEffect(() => {
     const input = inputColor.current;
-    verify(input).value = background.color ? background.color : '#ffffff';
+    verify(input).value = background.color ? background.color : "#ffffff";
   }, [inputColor, background]);
 
 

@@ -1,9 +1,9 @@
-import styles from './InputNumber.module.css';
-import { connect } from 'react-redux';
-import { useEditFontSize } from './useEditFontSize';
-import { useRef } from 'react';
-import { AppDispatch, RootState } from '../../../../../store/store';
-import { inputSizeText, setSizeText } from '../../../../../store/actionCreators/textBlockActionCreators';
+import styles from "./InputNumber.module.css";
+import { connect } from "react-redux";
+import { useEditFontSize } from "./useEditFontSize";
+import { useRef } from "react";
+import { AppDispatch, RootState } from "../../../../../store/store";
+import { inputSizeText, setSizeText } from "../../../../../store/actionCreators/textBlockActionCreators";
 
 type InputNumberProps = {
   size: number | null,

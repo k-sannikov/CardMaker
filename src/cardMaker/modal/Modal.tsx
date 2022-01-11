@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faTimes } from "@fortawesome/free-solid-svg-icons"
 import { ReactElement, useEffect } from "react"
 import { connect } from "react-redux"
-import styles from './Modal.module.css';
+import styles from "./Modal.module.css";
 
 // интерфейс для пропсов
 type ModalProps = {
@@ -15,9 +15,9 @@ type ModalProps = {
 
 const Modal = ({
   visible = false,
-  title = '',
-  content = '',
-  footer = '',
+  title = "",
+  content = "",
+  footer = "",
   onClose,
 }: ModalProps) => {
 
@@ -26,13 +26,13 @@ const Modal = ({
     // создаем обработчик нажатия клавиши Esc
     const onKeydown = ({ key }: KeyboardEvent) => {
       switch (key) {
-        case 'Escape':
+        case "Escape":
           onClose()
           break
       }
     }
-    document.addEventListener('keydown', onKeydown)
-    return () => document.removeEventListener('keydown', onKeydown)
+    document.addEventListener("keydown", onKeydown)
+    return () => document.removeEventListener("keydown", onKeydown)
   }, [onClose])
 
   // если компонент невидим, то не отображаем его

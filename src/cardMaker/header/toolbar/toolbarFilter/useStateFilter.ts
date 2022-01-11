@@ -1,13 +1,13 @@
-import { Filter as FilterType } from '../../../../store/types';
-import { RefObject, useEffect } from 'react';
-import { verify } from '../../../../utils/permisions';
+import { Filter } from "../../../../store/types";
+import { RefObject, useEffect } from "react";
+import { verify } from "../../../../utils/permisions";
 
 export function useStateFilter(
   inputColor: RefObject<HTMLInputElement>,
   inputRange: RefObject<HTMLInputElement>,
   inputFilter: (color: string, opacity: number) => void,
   setFilter: (color: string, opacity: number) => void,
-  filter: FilterType): void {
+  filter: Filter): void {
 
   useEffect(() => {
 

@@ -1,14 +1,14 @@
-import { Background } from '../types';
+import { Background } from "../types";
 
 export type BackgroundAction = {
-  type: 'NEW_CARD_MAKER',
+  type: "NEW_CARD_MAKER",
 } | {
-  type: 'RESET_BACKGROUND',
+  type: "RESET_BACKGROUND",
 } | {
-  type: 'SET_BACKGROUND_COLOR',
+  type: "SET_BACKGROUND_COLOR",
   color: string,
 } | {
-  type: 'SET_BACKGROUND_IMG',
+  type: "SET_BACKGROUND_IMG",
   src: string,
   width: number,
   height: number,
@@ -17,23 +17,23 @@ export type BackgroundAction = {
 function background(background: Background, action: BackgroundAction): Background {
   switch (action.type) {
 
-    case 'NEW_CARD_MAKER':
+    case "NEW_CARD_MAKER":
       return {
-        color: '#ffffff',
+        color: "#ffffff",
         src: null,
         width: null,
         height: null,
       };
 
-    case 'RESET_BACKGROUND':
+    case "RESET_BACKGROUND":
       return {
-        color: '#ffffff',
+        color: "#ffffff",
         src: null,
         width: null,
         height: null,
       };
 
-    case 'SET_BACKGROUND_COLOR':
+    case "SET_BACKGROUND_COLOR":
       return {
         color: action.color,
         src: null,
@@ -41,7 +41,7 @@ function background(background: Background, action: BackgroundAction): Backgroun
         height: null,
       };
 
-    case 'SET_BACKGROUND_IMG':
+    case "SET_BACKGROUND_IMG":
       return {
         color: null,
         src: action.src,

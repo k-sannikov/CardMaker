@@ -1,16 +1,16 @@
-import styles from './PreviewTemplate.module.css';
-import { useRef, useState } from 'react';
-import { connect } from 'react-redux';
-import { AppDispatch } from '../../../../store/store';
-import Modal from '../../../modal/Modal';
-import { CardMaker as CardMakerType } from '../../../../store/types';
-import { applyFileProject } from '../../../../store/actionCreators/cardMakerActionCreators';
+import styles from "./PreviewTemplate.module.css";
+import { useRef, useState } from "react";
+import { connect } from "react-redux";
+import { AppDispatch } from "../../../../store/store";
+import Modal from "../../../modal/Modal";
+import { CardMaker } from "../../../../store/types";
+import { applyFileProject } from "../../../../store/actionCreators/cardMakerActionCreators";
 
 type PreviewTemplateProps = {
   name: string,
   srcImg: string,
   srcJson: string,
-  applyFileProject: (tepmlate: CardMakerType) => void,
+  applyFileProject: (tepmlate: CardMaker) => void,
 }
 
 function PreviewTemplate(props: PreviewTemplateProps) {
@@ -41,7 +41,7 @@ function PreviewTemplate(props: PreviewTemplateProps) {
   return (
     <>
       <div className={styles.preview} onClick={() => setModal(true)}>
-        <img src={props.srcImg} alt='' ref={img} className={styles.img} />
+        <img src={props.srcImg} alt="" ref={img} className={styles.img} />
         <p>{props.name}</p>
       </div>
       <Modal
@@ -57,7 +57,7 @@ function PreviewTemplate(props: PreviewTemplateProps) {
 
 const mapDispatchToProps = (dispatch: AppDispatch) => {
   return {
-    applyFileProject: (template: CardMakerType) => dispatch(applyFileProject(template)),
+    applyFileProject: (template: CardMaker) => dispatch(applyFileProject(template)),
   }
 }
 

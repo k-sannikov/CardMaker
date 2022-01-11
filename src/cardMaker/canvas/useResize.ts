@@ -1,6 +1,7 @@
-import { useEffect, RefObject } from 'react';
-import { Position, Size } from '../../store/types';
-import { verify } from '../../utils/permisions';
+import { useEffect, RefObject } from "react";
+import { Position, Size } from "../../store/types";
+import { verify } from "../../utils/permisions";
+import { calcHeightByWidth, calcWidthByHeight } from "../../utils/size";
 
 export function useResize(
   setSizeBlock: (width: number, height: number) => void,
@@ -30,16 +31,16 @@ export function useResize(
       event.preventDefault();
       switch (event.target) {
         case pointLT:
-          point = 'LT';
+          point = "LT";
           break;
         case pointRT:
-          point = 'RT';
+          point = "RT";
           break;
         case pointLB:
-          point = 'LB';
+          point = "LB";
           break;
         case pointRB:
-          point = 'RB';
+          point = "RB";
           break;
       }
 
@@ -68,33 +69,33 @@ export function useResize(
       // перемещение при изменении размеров
       let moving: Position = { x: 0, y: 0 };
       switch (point) {
-        case 'LT':
+        case "LT":
           [newWidth, newHeight] = calculateSize({ x: -delta.x, y: -delta.y }, prevWidth, prevHeight);
           moving = { x: defSize.width - newWidth, y: defSize.height - newHeight };
           break;
-        case 'RT':
+        case "RT":
           [newWidth, newHeight] = calculateSize({ x: delta.x, y: -delta.y }, prevWidth, prevHeight);
           moving = { x: 0, y: defSize.height - newHeight };
           break;
-        case 'LB':
+        case "LB":
           [newWidth, newHeight] = calculateSize({ x: -delta.x, y: delta.y }, prevWidth, prevHeight);
           moving = { x: defSize.width - newWidth, y: 0 };
           break;
-        case 'RB':
+        case "RB":
           [newWidth, newHeight] = calculateSize(delta, prevWidth, prevHeight);
           break;
       }
 
-      verify(currentBlock).style.width = String(newWidth) + 'px';
-      verify(currentBlock).style.height = String(newHeight) + 'px';
+      verify(currentBlock).style.width = `${newWidth}px`;
+      verify(currentBlock).style.height = `${newHeight}px`;
 
       newPos = {
         x: defPos.x + moving.x,
         y: defPos.y + moving.y
       }
 
-      verify(currentBlock).style.left = String(newPos.x) + 'px';
-      verify(currentBlock).style.top = String(newPos.y) + 'px';
+      verify(currentBlock).style.left = `${newPos.x}px`;
+      verify(currentBlock).style.top = `${newPos.y}px`;
 
       prevWidth = newWidth;
       prevHeight = newHeight;
@@ -104,20 +105,18 @@ export function useResize(
       if ((delta.x / prevWidth) < (delta.y / prevHeight)) {
         newHeight = defSize.height + delta.y;
         newHeight = newHeight < 20 ? 20 : newHeight;
-        newWidth = (prevWidth * newHeight) / prevHeight;
+        newWidth = calcWidthByHeight(prevWidth, prevHeight, newHeight);
       } else {
         newWidth = defSize.width + delta.x;
         newWidth = newWidth < 20 ? 20 : newWidth;
-        newHeight = (prevHeight * newWidth) / prevWidth;
+        newHeight = calcHeightByWidth(prevWidth, prevHeight, newWidth);
       }
       return [newWidth, newHeight];
     }
 
     function handleMouseUp(): void {
       setSizeBlock(newWidth, newHeight);
-      if (newPos) {
-        setPositionBlock(newPos.x, newPos.y);
-      }
+      if (newPos) setPositionBlock(newPos.x, newPos.y);
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseup", handleMouseUp);
     }

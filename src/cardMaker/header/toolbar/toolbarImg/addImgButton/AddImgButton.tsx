@@ -1,8 +1,8 @@
-import styles from './AddImgButton.module.css';
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { ForwardedRef, forwardRef } from 'react';
-import { connect } from 'react-redux';
+import styles from "./AddImgButton.module.css";
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { ForwardedRef, forwardRef } from "react";
+import { connect } from "react-redux";
 
 type NavButtonProps = {
   label: string,
@@ -16,7 +16,7 @@ const AddImgButton = forwardRef((props: NavButtonProps, ref: ForwardedRef<HTMLBu
     className={styles.button}
     title={props.title}>
     <FontAwesomeIcon icon={props.icon} size="lg" />
-    {props.label !== '' &&
+    {props.label !== "" &&
       <span className={styles.button__text}>{props.label}</span>
     }
   </button>

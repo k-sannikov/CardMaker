@@ -1,17 +1,17 @@
-import styles from './Filter.module.css';
-import { Canvas as CanvasType, Filter as FilterType } from '../../../store/types';
-import { connect } from 'react-redux';
-import { RootState } from '../../../store/store';
+import styles from "./Filter.module.css";
+import { Canvas, Filter as FilterType } from "../../../store/types";
+import { connect } from "react-redux";
+import { RootState } from "../../../store/store";
 
 type FilterProps = {
-  canvas: CanvasType
+  canvas: Canvas
   filter: FilterType | null,
 }
 
 function Filter(props: FilterProps) {
-  const canvas: CanvasType = props.canvas;
+  const canvas: Canvas = props.canvas;
 
-  let color: string = '';
+  let color: string = "";
   let opacity: number = 0;
   if (props.filter) {
     color = props.filter.color;

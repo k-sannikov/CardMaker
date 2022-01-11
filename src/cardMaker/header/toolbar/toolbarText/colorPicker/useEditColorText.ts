@@ -11,7 +11,7 @@ export function useEditColorText(
 
     const inputColor = colorPicker.current;
 
-    verify(inputColor).value = color ? color : '#000000';
+    verify(inputColor).value = color ? color : "#000000";
 
     function handleInput(event: Event) {
       const target = event.target as HTMLOptionElement;

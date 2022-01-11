@@ -1,6 +1,6 @@
-import { useEffect, RefObject } from 'react';
-import { store } from '../../store/store';
-import { verify } from '../../utils/permisions';
+import { useEffect, RefObject } from "react";
+import { store } from "../../store/store";
+import { verify } from "../../utils/permisions";
 
 export function useStateBlock(
   blockId: string,

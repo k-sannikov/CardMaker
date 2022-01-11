@@ -1,32 +1,32 @@
-import { Canvas as CanvasType, ActionHistory as ActionHistoryType } from '../types';
-import { isUndoAvailable, isRedoAvailable } from '../../utils/permisions'
-import canvas from './CanvasReducer';
+import { Canvas, ActionHistory } from "../types";
+import { isUndoAvailable, isRedoAvailable } from "../../utils/permisions"
+import canvas from "./CanvasReducer";
 
 export type HistoryAction = {
-  type: 'NEW_CARD_MAKER',
+  type: "NEW_CARD_MAKER",
 } | {
-  type: 'ADD_HISTORY',
-  newCanvas: CanvasType,
+  type: "ADD_HISTORY",
+  newCanvas: Canvas,
 } | {
-  type: 'UNDO',
+  type: "UNDO",
 } | {
-  type: 'REDO',
+  type: "REDO",
 }
 
-function history(history: ActionHistoryType, action: HistoryAction): ActionHistoryType {
+function history(history: ActionHistory, action: HistoryAction): ActionHistory {
   switch (action.type) {
 
-    case 'NEW_CARD_MAKER':
+    case "NEW_CARD_MAKER":
       return {
-        listState: [canvas({} as CanvasType, action)],
+        listState: [canvas({} as Canvas, action)],
         currentIndex: 0,
       };
 
-    case 'ADD_HISTORY':
+    case "ADD_HISTORY":
       {
-        const listState: CanvasType[] = history.listState;
+        const listState: Canvas[] = history.listState;
         const currentIndex: number = history.currentIndex;
-        const newListState: CanvasType[] = [...history.listState];
+        const newListState: Canvas[] = [...history.listState];
         if (currentIndex !== listState.length - 1) {
           newListState.splice(currentIndex + 1, listState.length - currentIndex + 1);
         }
@@ -37,7 +37,7 @@ function history(history: ActionHistoryType, action: HistoryAction): ActionHisto
         };
       }
 
-    case 'UNDO':
+    case "UNDO":
       {
         const currentIndex: number = history.currentIndex;
         const newCurrentIndex: number = isUndoAvailable(history) ? currentIndex - 1 : currentIndex;
@@ -47,7 +47,7 @@ function history(history: ActionHistoryType, action: HistoryAction): ActionHisto
         }
       }
 
-    case 'REDO':
+    case "REDO":
       {
         const currentIndex: number = history.currentIndex;
         const newCurrentIndex: number = isRedoAvailable(history) ? currentIndex + 1 : currentIndex;

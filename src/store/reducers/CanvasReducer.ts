@@ -1,9 +1,9 @@
-import { Canvas, Area } from '../types';
-import background, { BackgroundAction } from './BackgroundReducer';
-import filter, { FilterAction } from './FilterReducer';
-import heightCanvas, { HeightAction } from './HeightCanvasReducer';
-import listBlock, { ListBlockAction } from './ListBlockReducer';
-import widthCanvas, { WidthAction } from './WidthCanvasReducer';
+import { Canvas, Area } from "../types";
+import background, { BackgroundAction } from "./BackgroundReducer";
+import filter, { FilterAction } from "./FilterReducer";
+import heightCanvas, { HeightAction } from "./HeightCanvasReducer";
+import listBlock, { ListBlockAction } from "./ListBlockReducer";
+import widthCanvas, { WidthAction } from "./WidthCanvasReducer";
 
 export type CanvasAction = WidthAction | HeightAction | FilterAction | ListBlockAction | BackgroundAction | DeleteAreaAction;
 
@@ -21,15 +21,15 @@ function canvas(canvas: Canvas, action: CanvasAction): Canvas {
 export default canvas;
 
 type DeleteAreaAction = {
-  type: 'DELETE_AREA_SELECTION',
+  type: "DELETE_AREA_SELECTION",
   area: Area | null
 } | {
-  type: 'NEW_CARD_MAKER',
+  type: "NEW_CARD_MAKER",
 }
 
 function deleteArea(deleteArea: Area[], action: DeleteAreaAction): Area[] {
   switch (action.type) {
-    case 'DELETE_AREA_SELECTION':
+    case "DELETE_AREA_SELECTION":
       if (action.area) {
         return [
           ...deleteArea,
@@ -38,7 +38,7 @@ function deleteArea(deleteArea: Area[], action: DeleteAreaAction): Area[] {
       } else {
         return deleteArea;
       }
-    case 'NEW_CARD_MAKER':
+    case "NEW_CARD_MAKER":
       return [];
   
     default:

@@ -1,31 +1,31 @@
-import { createStore, applyMiddleware, Store, MiddlewareAPI, Dispatch, AnyAction } from 'redux';
-import { cardMakerReducer } from './reducers/CardMakerReducer';
-import { testCardMaker as initialState } from './initialState';
-import { Canvas, CardMaker } from './types';
+import { createStore, applyMiddleware, Store, MiddlewareAPI, Dispatch, AnyAction } from "redux";
+import { cardMakerReducer } from "./reducers/CardMakerReducer";
+import { testCardMaker } from "./initialState";
+import { Canvas, CardMaker } from "./types";
 
-import { addHistory, afterChangeHistory } from './actionCreators/historyActionCreators';
+import { addHistory, afterChangeHistory } from "./actionCreators/historyActionCreators";
 
 
 const exceptions: string[] = [
-  'UNDO',
-  'REDO',
-  'ADD_HISTORY',
-  'AFTER_CHANGE_HISTORY',
-  'SET_SELECTED_BLOCK',
-  'SET_SIZE_TEXT',
-  'SET_POSITION_AREA_SELECTION',
-  'RESET_SELECTED_BLOCK',
-  'RESET_AREA_SELECTION',
-  'APPLY_FILE_PROJECT',
-  'NEW_CARD_MAKER',
-  'AREA_SELECTION',
-  'CLICK_ON_TEXT',
-  'INPUT_SIZE_TEXT',
-  'INPUT_COLOR_TEXT',
-  'INPUT_FILTER',
-  'INPUT_CANVAS_SIZE',
-  'INPUT_BACKGROUND_IMG',
-  'INPUT_BACKGROUND_COLOR',
+  "UNDO",
+  "REDO",
+  "ADD_HISTORY",
+  "AFTER_CHANGE_HISTORY",
+  "SET_SELECTED_BLOCK",
+  "SET_SIZE_TEXT",
+  "SET_POSITION_AREA_SELECTION",
+  "RESET_SELECTED_BLOCK",
+  "RESET_AREA_SELECTION",
+  "APPLY_FILE_PROJECT",
+  "NEW_CARD_MAKER",
+  "AREA_SELECTION",
+  "CLICK_ON_TEXT",
+  "INPUT_SIZE_TEXT",
+  "INPUT_COLOR_TEXT",
+  "INPUT_FILTER",
+  "INPUT_CANVAS_SIZE",
+  "INPUT_BACKGROUND_IMG",
+  "INPUT_BACKGROUND_COLOR",
 ];
 
 const storeHistory = (store: MiddlewareAPI<Dispatch<AnyAction>, CardMaker>) =>
@@ -37,7 +37,7 @@ const storeHistory = (store: MiddlewareAPI<Dispatch<AnyAction>, CardMaker>) =>
     if (!exceptions.includes(action.type)) {
       const newState: CardMaker = store.getState();
       if (JSON.stringify(oldState.canvas) !== JSON.stringify(newState.canvas)) {
-        console.log('сохранение истории');
+        console.log("сохранение истории");
         store.dispatch(addHistory(newState.canvas));
       }
     }
@@ -49,7 +49,7 @@ const movingHistory = (store: MiddlewareAPI<Dispatch<AnyAction>, CardMaker>) =>
 
     const result: AnyAction = next(action)
 
-    if (['UNDO', 'REDO'].includes(action.type)) {
+    if (["UNDO", "REDO"].includes(action.type)) {
       const currentIndex: number = store.getState().history.currentIndex;
       const canvas: Canvas = store.getState().history.listState[currentIndex];
       const newState: CardMaker = {
@@ -63,7 +63,7 @@ const movingHistory = (store: MiddlewareAPI<Dispatch<AnyAction>, CardMaker>) =>
 
 export const store: Store<CardMaker> = createStore(
   cardMakerReducer,
-  initialState,
+  testCardMaker,
   applyMiddleware(storeHistory, movingHistory)
 );
 

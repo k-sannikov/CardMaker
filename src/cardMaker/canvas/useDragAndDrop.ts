@@ -1,6 +1,6 @@
-import { useEffect, RefObject } from 'react';
-import { Position } from '../../store/types';
-import { verify } from '../../utils/permisions';
+import { useEffect, RefObject } from "react";
+import { Position } from "../../store/types";
+import { verify } from "../../utils/permisions";
 
 export function useDragAndDrop(
   block: RefObject<HTMLElement>,
@@ -23,7 +23,7 @@ export function useDragAndDrop(
       document.addEventListener("mousemove", handleMouseMove);
       document.addEventListener("mouseup", handleMouseUp);
     }
-  
+
     let newPos: Position;
 
     function handleMouseMove(event: MouseEvent): void {
@@ -37,11 +37,11 @@ export function useDragAndDrop(
           x: defPos.x + delta.x,
           y: defPos.y + delta.y
         }
-        verify(currentBlock).style.left = String(newPos.x) + 'px';
-        verify(currentBlock).style.top = String(newPos.y) + 'px';
+        verify(currentBlock).style.left = `${newPos.x}px`;
+        verify(currentBlock).style.top = `${newPos.y}px`;
       }
     }
-  
+
     function handleMouseUp(): void {
       if (newPos) {
         setPositionBlock(newPos.x, newPos.y);
@@ -49,9 +49,9 @@ export function useDragAndDrop(
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseup", handleMouseUp);
     }
-  
 
-    verify(currentBlock).addEventListener("mousedown", handleMousedown);
+
+    if (currentBlock) currentBlock.addEventListener("mousedown", handleMousedown);
     return () => {
       if (currentBlock) currentBlock.removeEventListener("mousedown", handleMousedown);
     };

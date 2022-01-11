@@ -1,72 +1,77 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 @font-face {
-    font-family: 'fantazyor';
+    font-family: "robotoSlab";
+    src: url("./fonts/robotoSlab.ttf");
+}
+
+@font-face {
+    font-family: "fantazyor";
     src: url("./fonts/fantazyor.ttf");
 }
 
 @font-face {
-    font-family: 'piroucyrillic';
+    font-family: "piroucyrillic";
     src: url("./fonts/piroucyrillic.ttf");
 }
 
 @font-face {
-    font-family: 'phenomena';
+    font-family: "phenomena";
     src: url("./fonts/phenomena.ttf");
 }
 
 @font-face {
-    font-family: 'sunday';
+    font-family: "sunday";
     src: url("./fonts/sunday.ttf");
 }
 
 @font-face {
-    font-family: 'kurale';
+    font-family: "kurale";
     src: url("./fonts/kurale.ttf");
 }
 
 @font-face {
-    font-family: 'sensei';
+    font-family: "sensei";
     src: url("./fonts/sensei.ttf");
 }
 
 @font-face {
-    font-family: 'borsok';
+    font-family: "borsok";
     src: url("./fonts/borsok.ttf");
 }
 
 @font-face {
-    font-family: 'summer';
+    font-family: "summer";
     src: url("./fonts/summer.otf");
 }
 
 @font-face {
-    font-family: 'underdog';
+    font-family: "underdog";
     src: url("./fonts/underdog.otf");
 }
 
 @font-face {
-    font-family: 'montserrat';
+    font-family: "montserrat";
     src: url("./fonts/montserrat.ttf");
 }
 
 @font-face {
-    font-family: 'openSans';
+    font-family: "openSans";
     src: url("./fonts/openSans.ttf");
 }
 
 @font-face {
-    font-family: 'comfortaa';
+    font-family: "comfortaa";
     src: url("./fonts/comfortaa.ttf");
 }
 
 @font-face {
-    font-family: 'rubik';
+    font-family: "rubik";
     src: url("./fonts/rubik.ttf");
 }
 
 @font-face {
-    font-family: 'marta';
+    font-family: "marta";
     src: url("./fonts/marta.otf");
 }
 

@@ -1,7 +1,7 @@
-import { connect } from 'react-redux';
-import styles from './Header.module.css';
-import Navbar from './navbar/Navbar';
-import Toolbar from './toolbar/Toolbar';
+import { connect } from "react-redux";
+import styles from "./Header.module.css";
+import Navbar from "./navbar/Navbar";
+import Toolbar from "./toolbar/Toolbar";
 
 function Header() {
 

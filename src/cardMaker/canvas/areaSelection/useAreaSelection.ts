@@ -1,6 +1,6 @@
-import { useEffect, RefObject } from 'react';
-import { Position } from '../../store/types';
-import { verify } from '../../utils/permisions';
+import { useEffect, RefObject } from "react";
+import { Position } from "../../../store/types";
+import { verify } from "../../../utils/permisions";
 
 export function useAreaSelection(
   canvas: RefObject<HTMLDivElement>,
@@ -17,9 +17,9 @@ export function useAreaSelection(
     let startOffsetPos: Position;
 
     const div: HTMLDivElement = document.createElement("div");
-    div.style.position = 'absolute';
-    div.style.zIndex = '1';
-    div.style.pointerEvents = 'none';
+    div.style.position = "absolute";
+    div.style.zIndex = "1";
+    div.style.pointerEvents = "none";
 
     function handleMousedown(event: MouseEvent): void {
       
@@ -37,12 +37,12 @@ export function useAreaSelection(
         document.addEventListener("mousemove", handleMouseMove);
         document.addEventListener("mouseup", handleMouseUp);
 
-        div.style.border = '1px dashed red';
-        div.style.width = '0px';
-        div.style.height = '0px';
+        div.style.border = "1px dashed red";
+        div.style.width = "0px";
+        div.style.height = "0px";
 
-        div.style.left = event.offsetX + 'px';
-        div.style.top = event.offsetY + 'px';
+        div.style.left = `${event.offsetX}px`;
+        div.style.top = `${event.offsetY}px`;
         if (field) field.appendChild(div);
       }
     }
@@ -67,11 +67,11 @@ export function useAreaSelection(
           moving = { x: -delta.x, y: 0 };
         }
 
-        div.style.width = delta.x + 'px';
-        div.style.height = delta.y + 'px';
+        div.style.width = `${delta.x}px`;
+        div.style.height = `${delta.y}px`;
 
-        div.style.left = startOffsetPos.x + moving.x + 'px';
-        div.style.top = startOffsetPos.y + moving.y + 'px';
+        div.style.left = `${startOffsetPos.x + moving.x}px`;
+        div.style.top = `${startOffsetPos.y + moving.y}px`;
       }
     }
 

@@ -1,28 +1,32 @@
-import styles from './DeleteArea.module.css';
-import { ReactElement } from 'react';
-import { Area, Canvas as CanvasType } from '../../../store/types';
-import { connect } from 'react-redux';
-import { RootState } from '../../../store/store';
+import styles from "./DeleteArea.module.css";
+import { ReactElement } from "react";
+import { Area } from "../../../store/types";
+import { connect } from "react-redux";
+import { RootState } from "../../../store/store";
 
-type DeleteAreaProps = { canvas: CanvasType }
+type DeleteAreaProps = { deleteArea: Area[] }
 
 function DeleteArea(props: DeleteAreaProps) {
-  const canvas: CanvasType = props.canvas;
+
+  if (props.deleteArea === []) {
+    return null;
+  }
 
   const listBlock: ReactElement[] = [];
-  canvas.deleteArea.forEach((block: Area, index: number) => {
+  props.deleteArea.forEach((block: Area, index: number) => {
     const DeleteAreaStyle = {
-      width: block.width as number,
-      height: block.height as number,
-      left: block.x as number,
-      top: block.y as number,
+      width: block.width,
+      height: block.height,
+      left: block.x,
+      top: block.y,
     };
 
     listBlock.push(
-    <div className={styles.deleteArea}
-      key={index}
-      style={DeleteAreaStyle}>
-    </div>);
+      <div className={styles.deleteArea}
+        key={index}
+        style={DeleteAreaStyle}>
+      </div>
+    );
   });
 
   return (
@@ -34,7 +38,7 @@ function DeleteArea(props: DeleteAreaProps) {
 
 function mapStateToProps(state: RootState) {
   return {
-    canvas: state.canvas,
+    deleteArea: state.canvas.deleteArea,
   }
 };
 

@@ -1,12 +1,12 @@
-import styles from './ToolbarObject.module.css';
-import { faArrowUp, faArrowDown, faTrash } from '@fortawesome/free-solid-svg-icons'
-import Button from '../button/Button';
-import { useBlockLevel } from './useBlockLevel';
-import { useBlockDelete } from './useBlockDelete';
-import { RefObject, useRef } from 'react';
-import { connect } from 'react-redux';
-import { AppDispatch } from '../../../../store/store';
-import { deleteBlock, shiftDownBlock, shiftUpBlock } from '../../../../store/actionCreators/blockActionCreators';
+import styles from "./ToolbarObject.module.css";
+import { faArrowUp, faArrowDown, faTrash } from "@fortawesome/free-solid-svg-icons"
+import Button from "../button/Button";
+import { useBlockLevel } from "./useBlockLevel";
+import { useBlockDelete } from "./useBlockDelete";
+import { useRef } from "react";
+import { connect } from "react-redux";
+import { AppDispatch } from "../../../../store/store";
+import { deleteBlock, shiftDownBlock, shiftUpBlock } from "../../../../store/actionCreators/blockActionCreators";
 
 type ToolbarObjectProps = {
   shiftUpBlock: () => void,
@@ -26,13 +26,13 @@ function ToolbarObject(props: ToolbarObjectProps) {
         <div>
           <div className={styles.button_container}>
             <Button
-              ref={buttonUp as RefObject<HTMLButtonElement>}
+              ref={buttonUp}
               label=""
               title="Переместить вперед"
               icon={faArrowUp}
             />
             <Button
-              ref={buttonDown as RefObject<HTMLButtonElement>}
+              ref={buttonDown}
               label=""
               title="Переместить назад"
               icon={faArrowDown}
@@ -41,7 +41,7 @@ function ToolbarObject(props: ToolbarObjectProps) {
         </div>
         <div className={styles.toolbar__col}>
           <Button
-            ref={buttonDelete as RefObject<HTMLButtonElement>}
+            ref={buttonDelete}
             label="Удалить"
             title="Удалить"
             icon={faTrash}

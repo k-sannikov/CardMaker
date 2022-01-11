@@ -1,5 +1,5 @@
-import { RefObject, useEffect } from 'react';
-import { verify } from '../../../../utils/permisions';
+import { RefObject, useEffect } from "react";
+import { verify } from "../../../../utils/permisions";
 
 export function useStateCanvasSize(
   inputWidth: RefObject<HTMLInputElement>,

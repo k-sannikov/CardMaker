@@ -1,5 +1,5 @@
-import { RefObject, useEffect } from 'react';
-import { verify } from '../../../utils/permisions';
+import { RefObject, useEffect } from "react";
+import { verify } from "../../../utils/permisions";
 
 export function useStateHistory(
   buttonUndo: RefObject<HTMLButtonElement>,
@@ -23,10 +23,10 @@ export function useStateHistory(
     }
   
     function handlerKeydown(event: KeyboardEvent): void {
-      if (event.code === 'KeyZ' && (event.ctrlKey || event.metaKey)) {
+      if (event.code === "KeyZ" && (event.ctrlKey || event.metaKey)) {
         undo();
       }
-      if (event.code === 'KeyY' && (event.ctrlKey || event.metaKey)) {
+      if (event.code === "KeyY" && (event.ctrlKey || event.metaKey)) {
         redo();
       }
     }

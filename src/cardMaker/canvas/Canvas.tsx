@@ -1,22 +1,21 @@
-import styles from './Canvas.module.css';
-import { ReactElement, useRef } from 'react';
-import { connect } from 'react-redux';
-import Img from './img/Img'
-import Text from './text/Text'
-import ArtObj from './artObj/ArtObj'
-import Filter from './filter/Filter'
-import DeleteArea from './deleteArea/DeleteArea'
-import AreaSelection from './areaSelection/AreaSelection';
-import { Area, Block as BlockType, Canvas as CanvasType, Size as SizeType, BlockTypes} from '../../store/types';
-import { AppDispatch, RootState } from '../../store/store';
-import { areaSelection, resetAreaSelection } from '../../store/actionCreators/canvasActionCreators';
-import { useAreaSelection } from './useAreaSelection';
+import styles from "./Canvas.module.css";
+import { ReactElement, useRef } from "react";
+import { connect } from "react-redux";
+import Img from "./img/Img"
+import Text from "./text/Text"
+import ArtObj from "./artObj/ArtObj"
+import Filter from "./filter/Filter"
+import DeleteArea from "./deleteArea/DeleteArea"
+import AreaSelection from "./areaSelection/AreaSelection";
+import { Block, Canvas as CanvasType, Size, BlockTypes } from "../../store/types";
+import { AppDispatch, RootState } from "../../store/store";
+import { areaSelection, resetAreaSelection } from "../../store/actionCreators/canvasActionCreators";
+import { calcSizeImgByCanvas } from "../../utils/size";
 
 type CanvasProps = {
   canvas: CanvasType,
-  area: Area | null,
   bgColor: string | null,
-  canvasSize: SizeType | null,
+  canvasSize: Size | null,
   areaSelection: (x: number, y: number, width: number, height: number) => void,
   resetAreaSelection: () => void,
 }
@@ -24,19 +23,12 @@ type CanvasProps = {
 function Canvas(props: CanvasProps) {
   const canvasStyle = getStyle(props.canvas, props.bgColor, props.canvasSize);
   const listBlock: ReactElement[] = getListBlock(props.canvas.listBlock);
-
   const canvas = useRef<HTMLDivElement>(null);
-  const area = useRef<HTMLDivElement>(null);
-  useAreaSelection(canvas, area, props.areaSelection, props.resetAreaSelection);
 
   return (
     <div id="canvas" className={styles.canvas} style={canvasStyle} ref={canvas}>
-      {props.area &&
-        <AreaSelection area={props.area} ref={area}/>
-      }
-      {props.canvas.deleteArea &&
-        <DeleteArea />
-      }
+      <AreaSelection ref={canvas} />
+      <DeleteArea />
       <Filter />
       {listBlock}
     </div>
@@ -62,30 +54,24 @@ const mapDispatchToProps = (dispatch: AppDispatch) => {
 export default connect(mapStateToProps, mapDispatchToProps)(Canvas);
 
 
-function getListBlock(listBlock: BlockType[]): ReactElement[] {
+function getListBlock(listBlock: Block[]): ReactElement[] {
   let newListBlock: ReactElement[] = [];
-  listBlock.forEach((block: BlockType) => {
+  listBlock.forEach((block: Block) => {
     switch (block.type) {
-      case BlockTypes.text:
-        newListBlock.push(<Text text={block}
-          key={block.id} />);
+      case BlockTypes.text: newListBlock.push(<Text text={block} key={block.id} />);
         break;
-      case BlockTypes.img:
-        newListBlock.push(<Img img={block}
-          key={block.id} />);
+      case BlockTypes.img: newListBlock.push(<Img img={block} key={block.id} />);
         break;
-      case BlockTypes.artObj:
-        newListBlock.push(<ArtObj artObj={block}
-          key={block.id} />);
+      case BlockTypes.artObj: newListBlock.push(<ArtObj artObj={block} key={block.id} />);
         break;
     }
   });
   return newListBlock;
 }
 
-function getStyle(canvas: CanvasType, bgColor: string | null, canvasSize: SizeType | null) {
-  let backgroundColor: string = '#fff';
-  let backgroundImage: string = '';
+function getStyle(canvas: CanvasType, bgColor: string | null, canvasSize: Size | null) {
+  let backgroundColor: string = "#fff";
+  let backgroundImage: string = "";
 
   if (bgColor) {
     backgroundColor = bgColor;
@@ -93,7 +79,7 @@ function getStyle(canvas: CanvasType, bgColor: string | null, canvasSize: SizeTy
     if (canvas.background.color) {
       backgroundColor = canvas.background.color;
     } else if (canvas.background.src) {
-      backgroundImage = 'url(' + canvas.background.src + ')';
+      backgroundImage = `url(${canvas.background.src})`;
     }
   }
 
@@ -110,27 +96,17 @@ function getStyle(canvas: CanvasType, bgColor: string | null, canvasSize: SizeTy
   const bgWidth: number | null = canvas.background.width;
   const bgHeight: number | null = canvas.background.height;
 
+  let bgSize: Size | null = null;
+
+  if (bgWidth && bgHeight) {
+    bgSize = calcSizeImgByCanvas(bgWidth, bgHeight, width, height);
+  }
+
   return {
     width: width,
     height: height,
     backgroundColor: backgroundColor,
     backgroundImage: backgroundImage,
-    backgroundSize: (bgWidth && bgHeight) ? getbackgroundSize(bgWidth, bgHeight, width, height): '',
+    backgroundSize: bgSize ? `${bgSize.width}px ${bgSize.height}px` : '',
   };
-}
-
-function getbackgroundSize(imgWidth: number, imgHeight: number, canvasWidth: number, canvasHeight: number): string {
-  let prevImgWidth: number = imgWidth;
-  let prevImgHeight: number = imgHeight;
-
-  if (prevImgWidth < canvasWidth) {
-    imgHeight = (prevImgHeight * canvasWidth) / prevImgWidth;
-    imgWidth = (prevImgWidth * imgHeight) / prevImgHeight;
-  }
-
-  if (prevImgHeight < canvasHeight) {
-    imgWidth = (prevImgWidth * canvasHeight) / prevImgHeight;
-    imgHeight = (prevImgHeight * imgWidth) / prevImgWidth;
-  }
-  return `${imgWidth}px ${imgHeight}px`
 }

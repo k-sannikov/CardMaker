@@ -1,12 +1,12 @@
-import styles from './ArtObj.module.css';
-import { ArtObj as ArtObjType } from '../../../store/types';
-import { useRef } from 'react';
-import { useStateBlock } from '../useStateBlock';
-import { useDragAndDrop } from '../useDragAndDrop';
-import { useResize } from '../useResize';
-import { resetSelectedBlock, setPositionBlock, setSelectedBlock, setSizeBlock } from '../../../store/actionCreators/blockActionCreators';
-import { connect } from 'react-redux';
-import { AppDispatch, RootState } from '../../../store/store';
+import styles from "./ArtObj.module.css";
+import { ArtObj as ArtObjType } from "../../../store/types";
+import { useRef } from "react";
+import { useStateBlock } from "../useStateBlock";
+import { useDragAndDrop } from "../useDragAndDrop";
+import { useResize } from "../useResize";
+import { resetSelectedBlock, setPositionBlock, setSelectedBlock, setSizeBlock } from "../../../store/actionCreators/blockActionCreators";
+import { connect } from "react-redux";
+import { AppDispatch, RootState } from "../../../store/store";
 
 type ArtObjProps = {
   artObj: ArtObjType,
@@ -41,11 +41,11 @@ function ArtObj(props: ArtObjProps) {
     { width: artObj.width, height: artObj.height }
   );
   
-  const select: string = artObj.id === props.selectBlock ? styles.selected : '';
+  const select: string = artObj.id === props.selectBlock ? styles.selected : "";
 
   return (
     <div
-      className={styles.block + ' ' + select}
+      className={`${styles.block} ${select}`}
       style={artObjStyle}
       ref={artObjBlock}
       onDragStart={(e) => e.preventDefault() }
@@ -53,7 +53,7 @@ function ArtObj(props: ArtObjProps) {
       <div className={styles.pointTopLeft} ref={pointLT}></div>
       <div className={styles.pointTopRight} ref={pointRT}></div>
       <img src={artObj.src}
-        alt=''
+        alt=""
         className={styles.img}
       />
       <div className={styles.pointBottomLeft} ref={pointLB}></div>

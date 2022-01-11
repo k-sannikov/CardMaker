@@ -1,8 +1,8 @@
-import styles from './Button.module.css';
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { ForwardedRef, forwardRef } from 'react';
-import { connect } from 'react-redux';
+import styles from "./Button.module.css";
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { ForwardedRef, forwardRef } from "react";
+import { connect } from "react-redux";
 
 type ButtonProps = {
   label: string,
@@ -15,10 +15,10 @@ const Button = forwardRef((props: ButtonProps, ref: ForwardedRef<HTMLButtonEleme
     className={styles.button}
     ref={ref}
     title={props.title}
-    style={{ textAlign: props.label === '' ? 'center' : 'left' }}
+    style={{ textAlign: props.label === "" ? "center" : "left" }}
   >
     <FontAwesomeIcon icon={props.icon} />
-    {props.label !== '' &&
+    {props.label !== "" &&
       <span className={styles.button_text}>{props.label}</span>
     }
   </button>

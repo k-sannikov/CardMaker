@@ -1,27 +1,27 @@
-import { Canvas, CardMaker } from '../types';
+import { Canvas, CardMaker } from "../types";
 
 export function addHistory(newCanvas: Canvas) {
   return {
-    type: 'ADD_HISTORY',
+    type: "ADD_HISTORY",
     newCanvas: newCanvas,
   }
 }
 
 export function undo() {
   return {
-    type: 'UNDO',
+    type: "UNDO",
   }
 }
 
 export function redo() {
   return {
-    type: 'REDO',
+    type: "REDO",
   }
 }
 
 export function afterChangeHistory(cardMaker: CardMaker) {
   return {
-    type: 'AFTER_CHANGE_HISTORY',
+    type: "AFTER_CHANGE_HISTORY",
     cardMaker: cardMaker,
   }
 }

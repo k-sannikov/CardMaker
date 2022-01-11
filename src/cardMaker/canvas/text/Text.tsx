@@ -1,13 +1,13 @@
-import styles from './Text.module.css';
-import { Text as TextType } from '../../../store/types';
-import { useRef } from 'react';
-import { useStateBlock } from '../useStateBlock';
-import { useDragAndDrop } from '../useDragAndDrop';
-import { connect } from 'react-redux';
-import { clickOnText, deleteBlock, resetSelectedBlock, setPositionBlock, setSelectedBlock } from '../../../store/actionCreators/blockActionCreators';
-import { AppDispatch, RootState } from '../../../store/store';
-import { useEditText } from './useEditText';
-import { setBoldText, setItalicText, setTextInTextBlock, setUnderlineText } from '../../../store/actionCreators/textBlockActionCreators';
+import styles from "./Text.module.css";
+import { Text as TextType } from "../../../store/types";
+import { useRef } from "react";
+import { useStateBlock } from "../useStateBlock";
+import { useDragAndDrop } from "../useDragAndDrop";
+import { connect } from "react-redux";
+import { clickOnText, deleteBlock, resetSelectedBlock, setPositionBlock, setSelectedBlock } from "../../../store/actionCreators/blockActionCreators";
+import { AppDispatch, RootState } from "../../../store/store";
+import { useEditText } from "./useEditText";
+import { setBoldText, setItalicText, setTextInTextBlock, setUnderlineText } from "../../../store/actionCreators/textBlockActionCreators";
 
 type TextProps = {
   text: TextType,
@@ -45,12 +45,12 @@ function Text(props: TextProps) {
     props.setUnderlineText,
   );
 
-  const select: string = text.id === props.selectBlock ? styles.selected : '';
+  const select: string = text.id === props.selectBlock ? styles.selected : "";
   let textStyle = getStyle(text);
   textStyle = {
     ...textStyle,
-    color: props.color && select !== '' ? props.color : textStyle.color,
-    fontSize: props.size && select !== '' ? props.size : textStyle.fontSize,
+    color: props.color && select !== "" ? props.color : textStyle.color,
+    fontSize: props.size && select !== "" ? props.size : textStyle.fontSize,
   }
 
   return (
@@ -59,7 +59,7 @@ function Text(props: TextProps) {
       suppressContentEditableWarning={true}
       onDragStart={(e) => e.preventDefault()}
       ref={textBlock}
-      className={styles.block + ' ' + select}
+      className={`${styles.block} ${select}`}
       dangerouslySetInnerHTML={{ __html: text.text }}
     >
     </div>
@@ -73,8 +73,8 @@ function getStyle(text: TextType) {
     color: text.color,
     fontSize: text.size,
     fontWeight: text.bold ? 700 : 400,
-    textDecoration: text.underline ? 'underline' : 'none',
-    fontStyle: text.italic ? 'italic' : 'normal',
+    textDecoration: text.underline ? "underline" : "none",
+    fontStyle: text.italic ? "italic" : "normal",
     fontFamily: text.fontFamily,
   };
 }

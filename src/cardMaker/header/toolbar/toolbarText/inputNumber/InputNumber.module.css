@@ -6,7 +6,7 @@
     border: 1px solid #1c182b;
     border-radius: 2px;
     background: #F1EEFF;
-    font: 400 14px "Roboto Slab";
+    font: 400 14px robotoSlab;
     color: #1c182b;
     padding: 3px 3px;
     display: flex;

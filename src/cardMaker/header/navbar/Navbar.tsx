@@ -1,25 +1,25 @@
-import styles from './Navbar.module.css';
-import { faClone, faUndo, faRedo, faFileExport, faFolderOpen } from '@fortawesome/free-solid-svg-icons'
-import NavButton from './navButton/NavButton/NavButton';
-import NavFileButton from './navButton/NavFileButton/NavFileButton';
-import { ReactElement, useRef } from 'react';
-import { useImportFileProject } from './useImportFileProject';
-import { useStateHistory } from './useStateHistory';
-import { connect } from 'react-redux';
-import { undo, redo } from '../../../store/actionCreators/historyActionCreators';
-import { applyFileProject } from '../../../store/actionCreators/cardMakerActionCreators';
-import { CardMaker as CardMakerType, templates } from '../../../store/types';
-import { AppDispatch } from '../../../store/store';
-import { useExportFileProject } from './useExportFileProject';
-import NewProjectButton from './navButton/NewProjectButton/NewProjectButton';
-import ExportImgButton from './navButton/ExportImgButton/ExportImgButton';
-import DropdownMenu from '../../dropdownMenu/DropdownMenu';
-import PreviewTemplate from './previewTemplate/PreviewTemplate';
+import styles from "./Navbar.module.css";
+import { faClone, faUndo, faRedo, faFileExport, faFolderOpen } from "@fortawesome/free-solid-svg-icons"
+import NavButton from "./navButton/NavButton/NavButton";
+import NavFileButton from "./navButton/NavFileButton/NavFileButton";
+import { ReactElement, useRef } from "react";
+import { useImportFileProject } from "./useImportFileProject";
+import { useStateHistory } from "./useStateHistory";
+import { connect } from "react-redux";
+import { undo, redo } from "../../../store/actionCreators/historyActionCreators";
+import { applyFileProject } from "../../../store/actionCreators/cardMakerActionCreators";
+import { CardMaker, templates } from "../../../store/types";
+import { AppDispatch } from "../../../store/store";
+import { useExportFileProject } from "./useExportFileProject";
+import NewProjectButton from "./navButton/NewProjectButton/NewProjectButton";
+import ExportImgButton from "./navButton/ExportImgButton/ExportImgButton";
+import DropdownMenu from "../../dropdownMenu/DropdownMenu";
+import PreviewTemplate from "./previewTemplate/PreviewTemplate";
 
 type NavbarProps = {
   undo: () => void,
   redo: () => void,
-  applyFileProject: (file: CardMakerType) => void,
+  applyFileProject: (file: CardMaker) => void,
 }
 
 function Navbar(props: NavbarProps) {
@@ -54,7 +54,7 @@ function Navbar(props: NavbarProps) {
         <NewProjectButton />
         <ExportImgButton />
         <NavButton label="в json" icon={faFileExport} ref={downloadFile} onClick={null} />
-        <DropdownMenu minWidth={450} label="Шаблоны" icon={faClone} sizeIcon='1x'>
+        <DropdownMenu minWidth={450} label="Шаблоны" icon={faClone} sizeIcon="1x">
           {previewList}
         </DropdownMenu>
         <NavButton label="" icon={faUndo} ref={buttonUndo} onClick={null} />
@@ -67,7 +67,7 @@ const mapDispatchToProps = (dispatch: AppDispatch) => {
   return {
     undo: () => dispatch(undo()),
     redo: () => dispatch(redo()),
-    applyFileProject: (file: CardMakerType) => dispatch(applyFileProject(file)),
+    applyFileProject: (file: CardMaker) => dispatch(applyFileProject(file)),
   }
 }
 

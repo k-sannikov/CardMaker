@@ -1,11 +1,11 @@
 import { RefObject, useEffect } from "react";
-import { getImgInformationFromFile } from '../../../../utils/files';
+import { getImgInformationFromFile } from "../../../../utils/files";
 import { verify } from "../../../../utils/permisions";
 import { store } from "../../../../store/store";
 import { Size } from "../../../../store/types";
 
 export function useBackgroungImg(
-  inputFile: RefObject<HTMLElement>,
+  inputFile: RefObject<HTMLInputElement>,
   setBackgroundImg: (src: string, width: number, height: number) => void,
   inputBackgroundImg: (src: string, width: number, height: number) => void,
   setModal: (state: boolean) => void
@@ -18,30 +18,33 @@ export function useBackgroungImg(
       height: store.getState().canvas.height,
     };
 
-    const fieldFile = inputFile.current;
-    async function handlerChange(event: Event): Promise<void> {
-      const target = event.target as HTMLInputElement;
-      const files = target.files as FileList;
+    const input = inputFile.current;
+    async function handlerChange(): Promise<void> {
 
-      try {
-        const imgInfo = await getImgInformationFromFile(files[0]);
-        if ((canvasSize.width < imgInfo.width) || (canvasSize.height < imgInfo.height)) {
-          inputBackgroundImg(imgInfo.src, imgInfo.width, imgInfo.height)
-          setModal(true);
-        } else {
-          setBackgroundImg(imgInfo.src, imgInfo.width, imgInfo.height);
+      if (input) {
+        const files = input.files;
+        try {
+          if (files) {
+            const img = await getImgInformationFromFile(files[0]);
+            if ((canvasSize.width < img.width) || (canvasSize.height < img.height)) {
+              inputBackgroundImg(img.src, img.width, img.height)
+              setModal(true);
+            } else {
+              setBackgroundImg(img.src, img.width, img.height);
+            }
+          }
+        } catch {
+          alert("Текст ошибки")
         }
-      } catch {
-        alert('Текст ошибки')
+        input.value = "";
       }
-      
-      target.value = '';
+
     }
 
 
-    verify(fieldFile).addEventListener("change", handlerChange);
+    verify(input).addEventListener("change", handlerChange);
     return () => {
-      if (fieldFile) fieldFile.removeEventListener("change", handlerChange);
+      if (input) input.removeEventListener("change", handlerChange);
     };
   }, [inputFile, setBackgroundImg, inputBackgroundImg, setModal]);
 }

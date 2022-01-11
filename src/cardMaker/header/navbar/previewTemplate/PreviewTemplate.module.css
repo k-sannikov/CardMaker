@@ -12,7 +12,7 @@
     display: none;
     position: relative;
     top: -70px;
-    font: 400 14px "Roboto Slab";
+    font: 400 14px robotoSlab;
     color: #1c182b;
 }
 

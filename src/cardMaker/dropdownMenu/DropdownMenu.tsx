@@ -1,7 +1,7 @@
-import styles from './DropdownMenu.module.css';
-import { IconDefinition, SizeProp } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { connect } from 'react-redux';
+import styles from "./DropdownMenu.module.css";
+import { IconDefinition, SizeProp } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { connect } from "react-redux";
 
 type DropdownMenuProps = {
   minWidth: number,
@@ -15,7 +15,7 @@ function DropdownMenu(props: DropdownMenuProps) {
     <div className={styles.dropdown}>
       <button className={styles.dropbtn}>
         <FontAwesomeIcon icon={props.icon} size={props.sizeIcon} />
-        {props.label !== '' &&
+        {props.label !== "" &&
           <span className={styles.dropdown_text}>{props.label}</span>
         }
       </button>

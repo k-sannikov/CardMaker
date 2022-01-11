@@ -1,7 +1,7 @@
-import styles from './CardMaker.module.css';
-import Header from './header/Header';
-import Canvas from './canvas/Canvas';
-import { connect } from 'react-redux';
+import styles from "./CardMaker.module.css";
+import Header from "./header/Header";
+import Canvas from "./canvas/Canvas";
+import { connect } from "react-redux";
 
 function CardMaker() {
   return (
