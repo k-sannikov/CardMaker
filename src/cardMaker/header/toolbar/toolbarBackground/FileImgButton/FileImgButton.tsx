@@ -20,10 +20,10 @@ type NavButtonProps = {
   inputBackgroundImg: (src: string, width: number, height: number) => void,
   setBackgroundImg: (src: string, width: number, height: number) => void,
   setCanvasSize: (width: number, height: number) => void,
-  ViewModelBgImg: ViewModelBgImg | null,
+  viewModelBgImg: ViewModelBgImg | null,
 }
 
-function AddImgButton(props: NavButtonProps): any {
+function AddImgButton(props: NavButtonProps) {
 
   const inputFile = useRef<HTMLInputElement>(null);
 
@@ -32,7 +32,7 @@ function AddImgButton(props: NavButtonProps): any {
 
   useBackgroungImg(inputFile, props.setBackgroundImg, props.inputBackgroundImg, setModal);
 
-  const bg = props.ViewModelBgImg ?? {
+  const bg = props.viewModelBgImg ?? {
     width: 0,
     height: 0,
     src: "",
@@ -92,7 +92,7 @@ function AddImgButton(props: NavButtonProps): any {
 };
 
 const mapStateToProps = (state: RootState) => ({
-  ViewModelBgImg: state.viewModel.bgImg,
+  viewModelBgImg: state.viewModel.bgImg,
 })
 
 const mapDispatchToProps = (dispatch: AppDispatch) => {

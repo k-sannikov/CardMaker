@@ -1,7 +1,6 @@
 import styles from "./ToolbarImg.module.css";
 import { faDownload, faGlobe, faStickyNote } from "@fortawesome/free-solid-svg-icons"
 import DropdownMenu from "../../../dropdownMenu/DropdownMenu";
-import AddImgButton from "./addImgButton/AddImgButton";
 import AddImgButtonFile from "./addImgButtonFile/AddImgButtonFile";
 import PreviewArtObj from "./previewArtObj/PreviewArtObj";
 import { SetOfArtObject } from "../../../../store/types";
@@ -11,6 +10,7 @@ import { useRef } from "react";
 import { connect } from "react-redux";
 import { AppDispatch } from "../../../../store/store";
 import { createImgBlock } from "../../../../store/actionCreators/imgBlockActionCreators";
+import AddImgByUrlButton from "./addImgByUrlButton/AddImgByUrlButton";
 
 type ToolbarImgProps = {
   createImgBlock: (src: string, width: number, height: number) => void,
@@ -22,18 +22,20 @@ function ToolbarImg(props: ToolbarImgProps) {
   const srcList: SetOfArtObject[] = Object.values(SetOfArtObject);
   const imgList: ReactElement[] = [];
   srcList.forEach((src, index) => {
-    console.log(src);
     imgList.push(<PreviewArtObj src={src} key={index} />);
   });
 
   const inputFile = useRef<HTMLInputElement>(null);
 
   useCreateImg(inputFile, props.createImgBlock);
+
   return (
     <div className={styles.toolbar}>
       <div className={styles.button_box}>
         <AddImgButtonFile label="" title="C компьютера" icon={faDownload} ref={inputFile} />
-        <AddImgButton label="" title="Из Pixels" icon={faGlobe} />
+
+        <AddImgByUrlButton label="" title="Из Pixels" icon={faGlobe} />
+
         <DropdownMenu minWidth={200} label="" icon={faStickyNote} sizeIcon="lg">
           {imgList}
         </DropdownMenu>

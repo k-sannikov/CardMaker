@@ -1,7 +1,7 @@
 import styles from "./ToolbarBackground.module.css";
 import { faDownload, faGlobe, faRetweet } from "@fortawesome/free-solid-svg-icons"
 import ColorPicker from "../colorPicker/ColorPicker";
-import FileImgButton from "./FileImgButton/FileImgButton";
+import FileImgButton from "./fileImgButton/FileImgButton";
 import Button from "../button/Button";
 import { useRef } from "react";
 import { useBackgroungColor } from "./useBackgroungColor";
@@ -13,6 +13,7 @@ import {
 } from "../../../../store/actionCreators/canvasActionCreators";
 import { connect } from "react-redux";
 import { Background } from "../../../../store/types";
+import AddBackgroundByUrlButton from "./addBackgroundByUrlButton/AddBackgroundByUrlButton";
 
 type ToolbarBackgroundProps = {
   resetBackground: () => void,
@@ -45,7 +46,7 @@ function ToolbarBackground(props: ToolbarBackgroundProps) {
               title="C компьютера"
               icon={faDownload}
             />
-            <Button
+            <AddBackgroundByUrlButton
               label="Из Pixels"
               title="Из Pixels"
               icon={faGlobe}
