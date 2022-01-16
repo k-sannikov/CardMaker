@@ -11,7 +11,7 @@ export function useStateBlock(
 
   useEffect(() => {
 
-    const currentBlock = block.current;
+    const currentBlock: HTMLElement | null = block.current;
 
     let mouseDownCurrentBlock: boolean = false;
 

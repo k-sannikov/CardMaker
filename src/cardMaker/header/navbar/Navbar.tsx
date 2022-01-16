@@ -40,7 +40,7 @@ function Navbar(props: NavbarProps) {
 
 
   // формирование списка стикеров
-  const srcList = Object.values(templates);
+  const srcList: {name: string, json: string, preview: string}[] = Object.values(templates);
   const previewList: ReactElement[] = [];
   srcList.forEach((tmp, index) => {
     previewList.push(<PreviewTemplate name={tmp.name} srcImg={tmp.preview} srcJson={tmp.json} key={index} />);
@@ -50,13 +50,16 @@ function Navbar(props: NavbarProps) {
   return (
     <>
       <nav className={styles.navbar}>
-        <NavFileButton label="Открыть" icon={faFolderOpen} ref={inputFile} />
         <NewProjectButton />
+        <NavFileButton label="Открыть проект" icon={faFolderOpen} ref={inputFile} />
+        <NavButton label="Сохранить проект" icon={faFileExport} ref={downloadFile} onClick={null} />
         <ExportImgButton />
-        <NavButton label="в json" icon={faFileExport} ref={downloadFile} onClick={null} />
-        <DropdownMenu minWidth={450} label="Шаблоны" icon={faClone} sizeIcon="1x">
-          {previewList}
-        </DropdownMenu>
+        <div>
+          <DropdownMenu minWidth={450} label="Шаблоны" icon={faClone}>
+            {previewList}
+          </DropdownMenu>
+        </div>
+
         <NavButton label="" icon={faUndo} ref={buttonUndo} onClick={null} />
         <NavButton label="" icon={faRedo} ref={buttonRedo} onClick={null} />
       </nav>

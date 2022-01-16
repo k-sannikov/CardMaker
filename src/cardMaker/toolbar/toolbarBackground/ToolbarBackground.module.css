@@ -1,0 +1,38 @@
+.toolbar {
+    width: 100%;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.label {
+    width: 80px;
+    font: 400 14px robotoSlab;
+}
+
+.reset {
+    cursor: pointer;
+    outline: none;
+    border: 1px solid #777777;
+    border-radius: 2px;
+    width: 22px;
+    height: 22px;
+    background: #F1EEFF;
+}
+
+.reset:hover {
+    color: #7E6FB8;
+    border-color: #7E6FB8;
+    box-shadow: 0px 1px 3px 0px #7e6fb8;
+}
+
+.reset:active {
+    box-shadow: 1px 2px 2px 0px #7e6fb8;
+}
+
+.active {
+    background: #dcdada;
+}

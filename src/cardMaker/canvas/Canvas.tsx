@@ -35,7 +35,7 @@ function Canvas(props: CanvasProps) {
   );
 }
 
-function mapStateToProps(state: RootState) {
+const mapStateToProps = (state: RootState) => {
   return {
     canvas: state.canvas,
     area: state.viewModel.areaSelection,

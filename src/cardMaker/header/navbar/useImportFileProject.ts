@@ -9,18 +9,18 @@ export function useImportFileProject(
 
   useEffect(() => {
 
-    const input = inputFile.current;
+    const input: HTMLInputElement | null = inputFile.current;
 
     async function handlerChangeInputFile(): Promise<void> {
 
       if (input) {
-        const files = input.files;
+        const files: FileList | null = input.files;
         try {
           if (files) {
             applyFileProject(await getProjectFromFile(files[0]))
           }
         } catch {
-          alert("Текст ошибки")
+          alert("Ошибка при импорте проекта. Проверьте исходный фаил и повторите попытку")
         }
         input.value = "";
       }

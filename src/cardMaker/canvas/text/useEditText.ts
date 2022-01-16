@@ -16,7 +16,7 @@ export function useEditText(
 
   useEffect(() => {
 
-    const currentBlock = block.current;
+    const currentBlock: HTMLDivElement | null = block.current;
 
     function handleClickBlock() {
       setTimeout(() => {
@@ -71,7 +71,7 @@ export function useEditText(
 
     function handlerPaste(event: any) {
       event.preventDefault();
-      const text = event.clipboardData.getData("text/plain");
+      const text: string = event.clipboardData.getData("text/plain");
       document.execCommand("insertHTML", false, text);
     }
 

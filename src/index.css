@@ -84,11 +84,3 @@
 body {
     background: #E4E0F4;
 }
-
-/* #canvas > *:active ~  * {
-    pointer-events: none;
-}
-
-#canvas > *:active ~ div {
-    pointer-events: none;
-} */

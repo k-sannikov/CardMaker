@@ -1,0 +1,25 @@
+.button {
+    font: 400 14px robotoSlab;
+    color: #1c182b;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    text-align: left;
+    padding: 5px;
+    width: 100%;
+}
+
+.button:hover {
+    color: #E0E1F4;
+    background: #AEA3D7;
+    text-shadow: #7E6FB8 0 0 3px;
+}
+
+.button:active {
+    background: #a79cd1;
+}
+
+.buttonText {
+    padding-left: 5px;
+}

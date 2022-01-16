@@ -10,8 +10,8 @@ export function useAreaSelection(
 
   useEffect(() => {
 
-    const field = canvas.current;
-    const selectArea = area.current;
+    const field: HTMLDivElement | null = canvas.current;
+    const selectArea: HTMLDivElement | null = area.current;
 
     let startPos: Position;
     let startOffsetPos: Position;
@@ -52,7 +52,7 @@ export function useAreaSelection(
 
       if (!event.defaultPrevented) {
 
-        const delta = {
+        const delta: Position = {
           x: Math.abs(event.pageX - startPos.x),
           y: Math.abs(event.pageY - startPos.y)
         }

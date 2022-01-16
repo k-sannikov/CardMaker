@@ -174,3 +174,9 @@ export type CardMaker = Readonly<{
   history: ActionHistory,
   viewModel: ViewModel,
 }>
+
+export type RGB = {
+  r: number,
+  g: number,
+  b: number
+}

@@ -22,9 +22,9 @@ function ExportImgButton() {
     onClose();
   }
 
-  const content = <p>Выберите формат сохраняемого файла</p>
+  const content: JSX.Element = <p>Выберите формат сохраняемого файла</p>
 
-  const footer =
+  const footer: JSX.Element =
     <>
       <button onClick={onAcceptJpg}>jpg</button>
       <button onClick={onAcceptPng}>png</button>
@@ -34,7 +34,7 @@ function ExportImgButton() {
 
   return (
     <>
-      <NavButton label="В jpg/png" icon={faImage} onClick={() => setModal(true)} ref={downloadImg} />
+      <NavButton label="Сохранить как jpg/png" icon={faImage} onClick={() => setModal(true)} ref={downloadImg} />
       <Modal
         visible={isModal}
         title="Сохранить как..."

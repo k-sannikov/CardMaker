@@ -45,7 +45,7 @@ const AreaSelection = forwardRef((props: AreaSelectionProps, ref: ForwardedRef<H
   );
 });
 
-function mapStateToProps(state: RootState) {
+const mapStateToProps = (state: RootState) => {
   return {
     area: state.viewModel.areaSelection,
   }

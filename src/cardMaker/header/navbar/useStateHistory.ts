@@ -11,8 +11,8 @@ export function useStateHistory(
 
   useEffect(() => {
 
-    const btnUndo = buttonUndo.current;
-    const btnRedo = buttonRedo.current;
+    const btnUndo: HTMLButtonElement | null = buttonUndo.current;
+    const btnRedo: HTMLButtonElement | null = buttonRedo.current;
 
     function handlerClickUndo(): void {
       undo();

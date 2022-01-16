@@ -11,7 +11,7 @@ export function useDragAndDrop(
 
   useEffect(() => {
 
-    const currentBlock = block.current;
+    const currentBlock: HTMLElement | null = block.current;
 
     let startPos: Position;
 
@@ -29,7 +29,7 @@ export function useDragAndDrop(
     function handleMouseMove(event: MouseEvent): void {
       if (!event.defaultPrevented) {
         event.preventDefault();
-        const delta = {
+        const delta: Position = {
           x: event.pageX - startPos.x,
           y: event.pageY - startPos.y
         }

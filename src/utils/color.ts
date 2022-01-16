@@ -1,8 +1,5 @@
-type RGB = {
-  r: number,
-  g: number,
-  b: number
-}
+import { RGB } from "../store/types";
+
 // конвертирование hex в rgb
 export function convertColor(color: string): RGB {
   if (color.substring(0, 1) === "#") {

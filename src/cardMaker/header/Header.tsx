@@ -1,16 +1,12 @@
 import { connect } from "react-redux";
 import styles from "./Header.module.css";
 import Navbar from "./navbar/Navbar";
-import Toolbar from "./toolbar/Toolbar";
 
 function Header() {
-
   return (
     <header className={styles.header}>
-      <div className={styles.panel}>
-        <Navbar />
-        <Toolbar />
-      </div>
+      <div className={styles.mainLabel}>Card Maker</div>
+      <Navbar />
     </header >
   );
 }

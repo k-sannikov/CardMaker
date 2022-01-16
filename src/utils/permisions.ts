@@ -3,15 +3,15 @@ import { getIndexById } from "./elementList";
 
 // провера доступности операции undo
 export function isUndoAvailable(history: ActionHistory): boolean {
-  const length = history.listState.length;
-  const index = history.currentIndex;
+  const length: number = history.listState.length;
+  const index: number = history.currentIndex;
   return length > 1 && index > 0;
 }
 
 // проверка доступности операции redo
 export function isRedoAvailable(history: ActionHistory): boolean {
-  const length = history.listState.length;
-  const index = history.currentIndex;
+  const length: number = history.listState.length;
+  const index: number = history.currentIndex;
   return index + 1 < length;
 }
 

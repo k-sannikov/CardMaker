@@ -1,6 +1,6 @@
 
 import { store } from "../store/store";
-import { Block, BlockTypes, Background, Filter, Size, Text, Img, ArtObj, Canvas } from "../store/types";
+import { Block, BlockTypes, Background, Filter, Size, Text, Img, ArtObj, Canvas, RGB, Area } from "../store/types";
 import { convertColor } from "./color";
 import { calcSizeImgByCanvas } from "./size";
 
@@ -12,10 +12,10 @@ export async function exportInImage(type: string): Promise<void> {
   const canvasHeight: number = canvas.height;
   const background: Background = canvas.background;
   const filter: Filter = canvas.filter;
-  const elements = canvas.listBlock;
-  const deleteAreas = canvas.deleteArea;
+  const elements: Block[] = canvas.listBlock;
+  const deleteAreas: Area[] = canvas.deleteArea;
 
-  const canvasElement = document.createElement("canvas");
+  const canvasElement: HTMLCanvasElement = document.createElement("canvas");
   canvasElement.width = canvasWidth;
   canvasElement.height = canvasHeight;
   const ctx: CanvasRenderingContext2D | null = canvasElement.getContext("2d");
@@ -23,7 +23,7 @@ export async function exportInImage(type: string): Promise<void> {
   if (ctx) {
     // отрисовка фона
     if (background.src) {
-      const img = new Image();
+      const img: HTMLImageElement = new Image();
       img.crossOrigin = "anonymous"
       img.src = background.src;
       await img.decode();
@@ -40,7 +40,7 @@ export async function exportInImage(type: string): Promise<void> {
     }
 
     // отрисовка фильтра
-    const color = convertColor(filter.color);
+    const color: RGB = convertColor(filter.color);
     ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${filter.opacity})`;
     ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
@@ -50,8 +50,8 @@ export async function exportInImage(type: string): Promise<void> {
       ctx.fillRect(element.x, element.y, element.width, element.height);
     });
 
-    const dataURL = canvasElement.toDataURL(type);
-    const link = document.createElement("a");
+    const dataURL: string = canvasElement.toDataURL(type);
+    const link: HTMLAnchorElement = document.createElement("a");
     link.href = dataURL;
     link.download = "new_card";
     link.click();
@@ -87,11 +87,11 @@ function getStyle(text: Text) {
 
 function renderText(element: Text, ctx: CanvasRenderingContext2D) {
       // внутрений отступ 
-      const paddingText = 5;
+      const paddingText: number = 5;
       // высота строки
-      const lineHeight = 1.2;
+      const lineHeight: number = 1.2;
       const style = getStyle(element);
-      const textBlock = document.createElement("div");
+      const textBlock: HTMLDivElement = document.createElement("div");
       textBlock.innerHTML = element.text;
       // сдивг строки
       let shift = 0;
@@ -103,7 +103,7 @@ function renderText(element: Text, ctx: CanvasRenderingContext2D) {
         ctx.fillText(str.innerText, element.x + paddingText, element.y + shift + style.size);
         // подчеркивание
         if (element.underline) {
-          const textWidth = ctx.measureText(str.innerText).width;
+          const textWidth: number = ctx.measureText(str.innerText).width;
           let chars = 0;
           let underline = "";
           while (str.innerText.length > chars) {
@@ -118,7 +118,7 @@ function renderText(element: Text, ctx: CanvasRenderingContext2D) {
 }
 
 async function renderImg(element: Img, ctx: CanvasRenderingContext2D) {
-  const img = new Image();
+  const img: HTMLImageElement = new Image();
   img.crossOrigin = "anonymous"
   img.src = element.src;
   await img.decode();
@@ -126,7 +126,7 @@ async function renderImg(element: Img, ctx: CanvasRenderingContext2D) {
 }
 
 async function renderArtObj(element: ArtObj, ctx: CanvasRenderingContext2D) {
-  const artObj = new Image();
+  const artObj: HTMLImageElement = new Image();
   artObj.crossOrigin = "anonymous"
   artObj.src = element.src;
   await artObj.decode();

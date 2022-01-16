@@ -1,0 +1,32 @@
+.toolbar {
+    width: 100%;
+}
+
+.inputNumber {
+    width: 60px;
+    cursor: pointer;
+    outline: none;
+    border: 1px solid #1c182b;
+    border-radius: 2px;
+    background: #F1EEFF;
+    font: 400 14px robotoSlab;
+    color: #1c182b;
+    padding: 0 5px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.label {
+    width: 70px;
+    font: 400 14px robotoSlab;
+}
+
+.unitsLabel {
+    width: 20px;
+    font: 400 14px robotoSlab;
+    margin-left: 3px;
+}

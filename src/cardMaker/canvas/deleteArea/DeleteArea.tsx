@@ -14,7 +14,7 @@ function DeleteArea(props: DeleteAreaProps) {
 
   const listBlock: ReactElement[] = [];
   props.deleteArea.forEach((block: Area, index: number) => {
-    const DeleteAreaStyle = {
+    const deleteAreaStyle = {
       width: block.width,
       height: block.height,
       left: block.x,
@@ -24,7 +24,7 @@ function DeleteArea(props: DeleteAreaProps) {
     listBlock.push(
       <div className={styles.deleteArea}
         key={index}
-        style={DeleteAreaStyle}>
+        style={deleteAreaStyle}>
       </div>
     );
   });
@@ -36,7 +36,7 @@ function DeleteArea(props: DeleteAreaProps) {
   );
 }
 
-function mapStateToProps(state: RootState) {
+const mapStateToProps = (state: RootState) => {
   return {
     deleteArea: state.canvas.deleteArea,
   }

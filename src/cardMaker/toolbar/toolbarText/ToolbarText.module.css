@@ -1,0 +1,9 @@
+.toolbar {
+    width: 100%;
+}
+
+.toolbar__row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}

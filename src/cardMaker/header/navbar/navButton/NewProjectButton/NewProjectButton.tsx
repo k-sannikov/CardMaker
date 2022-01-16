@@ -18,13 +18,13 @@ function NewProjectButton(props: NewProjectButtonProps) {
     onClose()
   }
 
-  const content =
+  const content: JSX.Element =
     <>
       <p>Несохраненные изменения будут потеряны</p>
       <p>Вы хотите продолжить ?</p>
     </>
 
-  const footer =
+  const footer: JSX.Element =
     <>
       <button onClick={onAccept}>Да</button>
       <button onClick={onClose}>Нет</button>
@@ -33,7 +33,7 @@ function NewProjectButton(props: NewProjectButtonProps) {
 
   return (
     <>
-      <NavButton label="Новая" icon={faPiedPiperSquare} onClick={() => setModal(true)} />
+      <NavButton label="Новый проект" icon={faPiedPiperSquare} onClick={() => setModal(true)} />
       <Modal
         visible={isModal}
         title="Новая открытка"

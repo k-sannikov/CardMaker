@@ -19,18 +19,18 @@ function PreviewTemplate(props: PreviewTemplateProps) {
   const onClose = () => setModal(false)
   
   const onAccept = async () => {
-    const response = await fetch(props.srcJson);
+    const response: Response = await fetch(props.srcJson);
     props.applyFileProject(await response.json());
     onClose()
   }
 
-  const content =
+  const content: JSX.Element =
     <>
       <p>Несохраненные изменения будут потеряны</p>
       <p>Вы хотите продолжить ?</p>
     </>
 
-  const footer =
+  const footer: JSX.Element =
     <>
       <button onClick={onAccept}>Да</button>
       <button onClick={onClose}>Нет</button>

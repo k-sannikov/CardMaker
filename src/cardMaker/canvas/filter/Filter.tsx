@@ -31,7 +31,7 @@ function Filter(props: FilterProps) {
   );
 }
 
-function mapStateToProps(state: RootState) {
+const mapStateToProps = (state: RootState) => {
   return {
     canvas: state.canvas,
     filter: state.viewModel.filter,

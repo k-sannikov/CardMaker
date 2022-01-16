@@ -18,11 +18,11 @@ export function useResize(
 
   useEffect(() => {
 
-    const currentBlock = block.current;
-    const pointLT = LT.current;
-    const pointRT = RT.current;
-    const pointLB = LB.current;
-    const pointRB = RB.current;
+    const currentBlock: HTMLElement | null = block.current;
+    const pointLT: HTMLElement | null = LT.current;
+    const pointRT: HTMLElement | null = RT.current;
+    const pointLB: HTMLElement | null = LB.current;
+    const pointRB: HTMLElement | null = RB.current;
 
     let startPos: Position;
     let point: string;
@@ -61,7 +61,7 @@ export function useResize(
 
     function handleMouseMove(event: MouseEvent): void {
       event.preventDefault();
-      const delta = {
+      const delta: Position = {
         x: event.pageX - startPos.x,
         y: event.pageY - startPos.y,
       }
@@ -121,7 +121,7 @@ export function useResize(
       document.removeEventListener("mouseup", handleMouseUp);
     }
 
-    
+
     verify(pointLT).addEventListener("mousedown", handleMousedown);
     verify(pointRT).addEventListener("mousedown", handleMousedown);
     verify(pointLB).addEventListener("mousedown", handleMousedown);

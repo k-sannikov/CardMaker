@@ -2,14 +2,16 @@ import styles from "./CardMaker.module.css";
 import Header from "./header/Header";
 import Canvas from "./canvas/Canvas";
 import { connect } from "react-redux";
+import Toolbar from "./toolbar/Toolbar";
 
 function CardMaker() {
   return (
     <>
-      <Header />
       <main className={styles.main}>
         <Canvas />
       </main>
+      <Header />
+      <Toolbar />
     </>
   );
 }

@@ -1,22 +1,25 @@
 import { CardMaker } from "../store/types";
 
 // файл изображения в base64
-export const getImgInformationFromFile = (fileImg: File): Promise<HTMLImageElement> => new Promise((resolve, reject) => {
-  const reader = new FileReader();
-  reader.readAsDataURL(fileImg);
-  reader.onload = async () => {
-    const img = new Image();
-    img.src = reader.result as string;
+export const getImgInformationFromFile = async (fileImg: File): Promise<HTMLImageElement> => {
+
+  const promise = new Promise((resolve, reject) => {
+    const reader: FileReader = new FileReader();
+    reader.readAsDataURL(fileImg);
+    reader.onload = async () => resolve(reader.result);
+    reader.onerror = reject;
+  });
+    const img: HTMLImageElement = new Image();
+    img.src = await promise as string;
     await img.decode();
-    resolve(img)
-  };
-  reader.onerror = reject;
-});
+    return img;
+}
 
 // json файл проекта в объект
-export const getProjectFromFile = (file: File): Promise<CardMaker> => new Promise((resolve, reject) => {
-  const reader = new FileReader();
-  reader.readAsText(file);
-  reader.onload = () => resolve(JSON.parse(reader.result as string));
-  reader.onerror = reject;
-});
+export const getProjectFromFile = async (file: File): Promise<CardMaker> =>
+  JSON.parse(await new Promise((resolve, reject) => {
+    const reader: FileReader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = reject;
+  }));

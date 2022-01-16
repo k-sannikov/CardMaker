@@ -1,0 +1,33 @@
+.toolbar {
+    width: 100%;
+}
+
+.inputRange {
+    -webkit-appearance: none;
+    width: 158px;
+    height: 6px;
+    background: #F1EEFF;
+    border: 1px solid #1c182b;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.inputRange::-webkit-slider-thumb {
+    appearance: none;
+    width: 11px;
+    height: 11px;
+    border-radius: 2px;
+    background: #7E6FB8;
+    border: 1px solid #1c182b;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.label {
+    width: 102px;
+    font: 400 14px robotoSlab;
+}
