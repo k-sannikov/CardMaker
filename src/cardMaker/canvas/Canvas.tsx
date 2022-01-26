@@ -26,7 +26,7 @@ function Canvas(props: CanvasProps) {
   const canvas = useRef<HTMLDivElement>(null);
 
   return (
-    <div id="canvas" className={styles.canvas} style={canvasStyle} ref={canvas}>
+    <div className={styles.canvas} style={canvasStyle} ref={canvas}>
       <AreaSelection ref={canvas} />
       <DeleteArea />
       <Filter />
@@ -107,6 +107,6 @@ function getStyle(canvas: CanvasType, bgColor: string | null, canvasSize: Size |
     height: height,
     backgroundColor: backgroundColor,
     backgroundImage: backgroundImage,
-    backgroundSize: bgSize ? `${bgSize.width}px ${bgSize.height}px` : '',
+    backgroundSize: bgSize ? `${bgSize.width}px ${bgSize.height}px` : "",
   };
 }

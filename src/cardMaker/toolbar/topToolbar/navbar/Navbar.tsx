@@ -6,14 +6,14 @@ import { ReactElement, useRef } from "react";
 import { useImportFileProject } from "./useImportFileProject";
 import { useStateHistory } from "./useStateHistory";
 import { connect } from "react-redux";
-import { undo, redo } from "../../../store/actionCreators/historyActionCreators";
-import { applyFileProject } from "../../../store/actionCreators/cardMakerActionCreators";
-import { CardMaker, templates } from "../../../store/types";
-import { AppDispatch } from "../../../store/store";
+import { undo, redo } from "../../../../store/actionCreators/historyActionCreators";
+import { applyFileProject } from "../../../../store/actionCreators/cardMakerActionCreators";
+import { CardMaker, templates } from "../../../../store/types";
+import { AppDispatch } from "../../../../store/store";
 import { useExportFileProject } from "./useExportFileProject";
 import NewProjectButton from "./navButton/NewProjectButton/NewProjectButton";
 import ExportImgButton from "./navButton/ExportImgButton/ExportImgButton";
-import DropdownMenu from "../../dropdownMenu/DropdownMenu";
+import DropdownMenu from "../../../dropdownMenu/DropdownMenu";
 import PreviewTemplate from "./previewTemplate/PreviewTemplate";
 
 type NavbarProps = {

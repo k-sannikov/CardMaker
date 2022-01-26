@@ -2,12 +2,13 @@ import styles from "./DropdownMenu.module.css";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { connect } from "react-redux";
+import { ReactElement } from "react";
 
 type DropdownMenuProps = {
   minWidth: number,
   label: string,
   icon: IconDefinition,
-  children: React.ReactElement[],
+  children: ReactElement[],
 }
 function DropdownMenu(props: DropdownMenuProps) {
   return (

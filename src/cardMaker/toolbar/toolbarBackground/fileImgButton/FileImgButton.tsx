@@ -38,8 +38,8 @@ function AddImgButton(props: NavButtonProps) {
   }
 
   const onAcceptStretch = () => {
-    props.setBackgroundImg(bg.src, bg.width, bg.height);
     props.setCanvasSize(bg.width, bg.height);
+    props.setBackgroundImg(bg.src, bg.width, bg.height);
     onClose();
   }
   const onAcceptCrop = () => {

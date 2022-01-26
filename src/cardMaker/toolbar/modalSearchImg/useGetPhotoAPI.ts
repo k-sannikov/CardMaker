@@ -116,17 +116,13 @@ export function useGetPhotoAPI(
   });
 }
 
-
 async function search(query: string, src: string | null = null) {
-  if (query.split(' ').join('') !== "") {
-    let response: Response = await fetch(src ? src : 'https://api.pexels.com/v1/search?per_page=20&locale=ru-RU&query=' + query, {
+  if (query.split(" ").join("") !== "") {
+    let response: Response = await fetch(src ? src : "https://api.pexels.com/v1/search?per_page=20&locale=ru-RU&query=" + query, {
       headers: {
         "Content-Type": "application/json",
         "User-Agent": "Pexels/JavaScript",
-        // "Authorization": '563492ad6f91700001000001cf263b7519584f7fa301d119d96b629c',
-        // "Authorization": '563492ad6f917000010000019c0b3566c70e42328eb3340748668ddf',
-        // "Authorization": '563492ad6f917000010000010b6c64ee2ba847d1bc2d064fd821c6a5',
-        "Authorization": '563492ad6f91700001000001cbbc3b7fe6c14a5faa262d8d356ad945',
+        "Authorization": "563492ad6f9170000100000107aa3c55704e4fccb227b495534c2ef1",
       },
     });
     return await response.json();

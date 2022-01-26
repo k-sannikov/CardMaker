@@ -6,10 +6,12 @@ import ToolbarBackground from "./toolbarBackground/ToolbarBackground";
 import ToolbarObject from "./toolbarObject/ToolbarObject";
 import ToolbarCanvas from "./toolbarCanvas/ToolbarCanvas";
 import { connect } from "react-redux";
+import TopToolbar from "./topToolbar/TopToolbar";
 
 function Toolbar() {
   return (
     <div className={styles.toolbar}>
+      <TopToolbar />
       <label>Текст</label>
       <ToolbarText />
       <label>Изображения</label>

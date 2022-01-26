@@ -28,7 +28,7 @@ function history(history: ActionHistory, action: HistoryAction): ActionHistory {
         const currentIndex: number = history.currentIndex;
         const newListState: Canvas[] = [...history.listState];
         if (currentIndex !== listState.length - 1) {
-          newListState.splice(currentIndex + 1, listState.length - currentIndex + 1);
+          newListState.splice(currentIndex + 1, listState.length - (currentIndex + 1));
         }
         newListState.push(action.newCanvas);
         return {

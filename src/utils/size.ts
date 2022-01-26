@@ -31,7 +31,7 @@ export function calcSizeByHeight(initWidth: number, initHeight: number, baseHeig
 }
 
 // пропорциональный расчет размера изображения для полного заполнения холста
-export function calcSizeImgByCanvas(imgW: number, imgH: number, canvasW: number, canvasH: number) {
+export function calcSizeImgByCanvas(imgW: number, imgH: number, canvasW: number, canvasH: number): Size {
   let size = {
     width: imgW,
     height: imgH,

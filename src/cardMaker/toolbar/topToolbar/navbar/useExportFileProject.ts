@@ -1,7 +1,7 @@
 import { RefObject, useEffect } from "react";
-import { store } from "../../../store/store";
-import { CardMaker } from "../../../store/types";
-import { verify } from "../../../utils/permisions";
+import { store } from "../../../../store/store";
+import { CardMaker } from "../../../../store/types";
+import { verify } from "../../../../utils/permisions";
 
 export function useExportFileProject(downloadButton: RefObject<HTMLButtonElement>): void {
 

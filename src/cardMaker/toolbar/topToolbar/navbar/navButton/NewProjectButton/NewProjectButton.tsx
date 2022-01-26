@@ -1,10 +1,10 @@
 import { faPiedPiperSquare } from "@fortawesome/free-brands-svg-icons"
 import { connect } from "react-redux";
 import { useState } from "react";
-import { AppDispatch } from "../../../../../store/store";
-import { newCardMaker } from "../../../../../store/actionCreators/cardMakerActionCreators";
+import { AppDispatch } from "../../../../../../store/store";
+import { newCardMaker } from "../../../../../../store/actionCreators/cardMakerActionCreators";
 import NavButton from "../NavButton/NavButton";
-import Modal from "../../../../modal/Modal";
+import Modal from "../../../../../modal/Modal";
 
 type NewProjectButtonProps = {
   newCardMaker: () => void,

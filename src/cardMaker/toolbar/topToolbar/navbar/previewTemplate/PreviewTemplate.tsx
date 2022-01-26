@@ -1,10 +1,10 @@
 import styles from "./PreviewTemplate.module.css";
 import { useRef, useState } from "react";
 import { connect } from "react-redux";
-import { AppDispatch } from "../../../../store/store";
-import Modal from "../../../modal/Modal";
-import { CardMaker } from "../../../../store/types";
-import { applyFileProject } from "../../../../store/actionCreators/cardMakerActionCreators";
+import { AppDispatch } from "../../../../../store/store";
+import Modal from "../../../../modal/Modal";
+import { CardMaker } from "../../../../../store/types";
+import { applyFileProject } from "../../../../../store/actionCreators/cardMakerActionCreators";
 
 type PreviewTemplateProps = {
   name: string,

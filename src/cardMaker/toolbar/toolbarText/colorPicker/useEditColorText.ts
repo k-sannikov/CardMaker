@@ -14,12 +14,12 @@ export function useEditColorText(
     verify(inputColor).value = color ? color : "#000000";
 
     function handleInput(event: Event) {
-      const target = event.target as HTMLOptionElement;
+      const target = event.target as HTMLInputElement;
       inputColorText(target.value);
     }
   
     function handleChange(event: Event) {
-      const target = event.target as HTMLOptionElement;
+      const target = event.target as HTMLInputElement;
       setColorText(target.value);
     }
     

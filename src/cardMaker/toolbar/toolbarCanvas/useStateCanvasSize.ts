@@ -8,7 +8,7 @@ export function useStateCanvasSize(
   setCanvasSize: (width: number, height: number) => void,
   width: number,
   height: number
-  ): void {
+): void {
 
   useEffect(() => {
     const fieldWidth: HTMLInputElement | null = inputWidth.current;

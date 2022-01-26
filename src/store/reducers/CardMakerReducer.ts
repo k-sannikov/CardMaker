@@ -2,7 +2,7 @@ import { CardMaker } from "../types";
 import canvas, { CanvasAction } from "./CanvasReducer";
 import selectBlock, { SelectBlockAction } from "./SelectBlockReducer";
 import history, { HistoryAction } from "./HistoryReducer";
-import viewModel, { ViewModelAction } from "./ViewModelReducer";
+import viewModel, { ViewModelAction } from "./ViewModel/ViewModelReducer";
 
 export type CardMakerReducerAction = {
   type: "AFTER_CHANGE_HISTORY",

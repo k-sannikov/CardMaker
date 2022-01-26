@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import styles from "./Header.module.css";
+import styles from "./TopToolbar.module.css";
 import Navbar from "./navbar/Navbar";
 
 function Header() {

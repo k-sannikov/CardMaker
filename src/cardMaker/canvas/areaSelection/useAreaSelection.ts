@@ -37,7 +37,7 @@ export function useAreaSelection(
         document.addEventListener("mousemove", handleMouseMove);
         document.addEventListener("mouseup", handleMouseUp);
 
-        div.style.border = "1px dashed red";
+        div.style.border = "1px dashed #858585";
         div.style.width = "0px";
         div.style.height = "0px";
 

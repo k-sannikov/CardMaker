@@ -6,6 +6,8 @@ export type SelectBlockAction = {
 } | {
   type: "SET_SELECTED_BLOCK",
   id: string,
+} | {
+  type: "DELETE_BLOCK",
 }
 
 function selectBlock(selectBlock: null | string, action: SelectBlockAction): string | null {
@@ -19,6 +21,9 @@ function selectBlock(selectBlock: null | string, action: SelectBlockAction): str
 
     case "SET_SELECTED_BLOCK":
       return action.id;
+
+    case "DELETE_BLOCK":
+      return null;
 
     default:
       return selectBlock;

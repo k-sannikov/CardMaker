@@ -18,7 +18,7 @@ export function useEditText(
 
     const currentBlock: HTMLDivElement | null = block.current;
 
-    function handleClickBlock() {
+    function handleMousedownBlock() {
       setTimeout(() => {
         clickOnText();
       });
@@ -33,7 +33,7 @@ export function useEditText(
       if (currentBlock) {
         currentBlock.setAttribute("contenteditable", "false")
         const content: string = currentBlock.innerHTML;
-        if (content === '<div><br></div>') {
+        if (content === "<div><br></div>") {
           deleteBlock();
         } else {
           setTextInTextBlock(currentBlock.innerHTML);
@@ -42,42 +42,48 @@ export function useEditText(
     }
 
     function handleMouseMove(event: Event) {
-      if (verify(currentBlock).getAttribute('contenteditable') === 'true') {
+      if (verify(currentBlock).getAttribute("contenteditable") === "true") {
         event.stopImmediatePropagation();
       }
     }
 
     function handlerKeydown(event: KeyboardEvent): void {
-      if (event.code === 'Escape') {
-        if (verify(currentBlock).getAttribute('contenteditable') === 'true') {
+      if (event.code === "Escape") {
+        if (verify(currentBlock).getAttribute("contenteditable") === "true") {
           verify(currentBlock).setAttribute("contenteditable", "false")
           setTextInTextBlock(verify(currentBlock).innerHTML)
         }
       }
-      if (event.code === 'Delete') {
+      if (event.code === "Delete") {
         event.preventDefault();
-        document.execCommand('forwardDelete');
+        document.execCommand("forwardDelete");
       }
-      if (event.code === 'KeyB' && (event.ctrlKey || event.metaKey)) {
+      if (event.code === "KeyB" && (event.ctrlKey || event.metaKey)) {
+        event.preventDefault();
         setBoldText(!bold)
       }
-      if (event.code === 'KeyI' && (event.ctrlKey || event.metaKey)) {
+      if (event.code === "KeyI" && (event.ctrlKey || event.metaKey)) {
+        event.preventDefault();
         setItalicText(!italic)
       }
-      if (event.code === 'KeyU' && (event.ctrlKey || event.metaKey)) {
+      if (event.code === "KeyU" && (event.ctrlKey || event.metaKey)) {
+        event.preventDefault();
         setUnderlineText(!underline)
       }
     }
 
-    function handlerPaste(event: any) {
+    function handlerPaste(event: ClipboardEvent) {
       event.preventDefault();
-      const text: string = event.clipboardData.getData("text/plain");
-      document.execCommand("insertHTML", false, text);
+      if (event.clipboardData) {
+        const text: string = event.clipboardData.getData("text/plain");
+        document.execCommand("insertHTML", false, text);
+      }
+
     }
 
     function handlerInput() {
       if (currentBlock) {
-        if (currentBlock.innerHTML[0] !== '<' || currentBlock.innerHTML === '<br>') {
+        if (currentBlock.innerHTML[0] !== "<" || currentBlock.innerHTML === "<br>") {
           currentBlock.innerHTML = `<div>${currentBlock.innerText}<br></div>`;
           currentBlock.focus();
         }
@@ -85,7 +91,7 @@ export function useEditText(
     }
 
 
-    verify(currentBlock).addEventListener("mousedown", handleClickBlock);
+    verify(currentBlock).addEventListener("mousedown", handleMousedownBlock);
     verify(currentBlock).addEventListener("dblclick", handleDblclickBlock);
     verify(currentBlock).addEventListener("blur", handleBlur);
     verify(currentBlock).addEventListener("keydown", handlerKeydown);
@@ -94,7 +100,7 @@ export function useEditText(
     document.addEventListener("mousemove", handleMouseMove);
     return () => {
       if (currentBlock) {
-        currentBlock.removeEventListener("mousedown", handleClickBlock);
+        currentBlock.removeEventListener("mousedown", handleMousedownBlock);
         currentBlock.removeEventListener("dblclick", handleDblclickBlock);
         currentBlock.addEventListener("blur", handleBlur);
         currentBlock.removeEventListener("keydown", handlerKeydown);

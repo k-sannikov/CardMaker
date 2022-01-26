@@ -33,6 +33,9 @@
 .dropdown:hover .dropdownContent {
     display: block;
 }
+.dropdownContent:hover  {
+    display: block;
+}
 
 .dropdown:hover .dropbtn {
     color: #E0E1F4;

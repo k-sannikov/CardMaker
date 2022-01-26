@@ -2,8 +2,8 @@ import { faImage } from "@fortawesome/free-solid-svg-icons"
 import { connect } from "react-redux";
 import { useRef, useState } from "react";
 import NavButton from "../NavButton/NavButton";
-import Modal from "../../../../modal/Modal";
-import { exportInImage } from "../../../../../utils/exportInImage";
+import Modal from "../../../../../modal/Modal";
+import { exportInImage } from "../../../../../../utils/exportInImage";
 
 function ExportImgButton() {
 

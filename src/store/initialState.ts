@@ -8,7 +8,7 @@ import {
 } from "./types";
 
 const testBackground: Background = {
-  color: '#ffffff',
+  color: "#ffffff",
   src: null,
   width: null,
   height: null,

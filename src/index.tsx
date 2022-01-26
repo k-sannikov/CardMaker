@@ -5,7 +5,7 @@ import CardMaker from "./cardMaker/CardMaker";
 import { store } from "./store/store";
 import { Provider } from "react-redux";
 
-window.addEventListener("beforeunload", (event) => event.returnValue = false);
+window.addEventListener("beforeunload", (event: BeforeUnloadEvent) => event.returnValue = false);
 
 ReactDOM.render(
   <React.StrictMode>

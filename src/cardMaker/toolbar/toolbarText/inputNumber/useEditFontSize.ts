@@ -16,7 +16,7 @@ export function useEditFontSize(
     verify(fieldSize).value = size ? String(size) : `${defSize}`;
 
     function handleInput(event: Event) {
-      const target = event.target as HTMLOptionElement;
+      const target = event.target as HTMLInputElement;
       if (Number(target.value) > defSize) {
         inputSizeText(Number(target.value));
       } else {
@@ -25,7 +25,7 @@ export function useEditFontSize(
     }
 
     function handleBlur(event: Event) {
-      const target = event.target as HTMLOptionElement;
+      const target = event.target as HTMLInputElement;
       if (Number(target.value) > defSize) {
         setSizeText(Number(target.value));
       } else {
@@ -37,10 +37,16 @@ export function useEditFontSize(
       event.preventDefault();
     }
 
+    function handlerKeydown(event: KeyboardEvent): void {
+      if (event.code === "Delete") {
+        event.preventDefault();
+      }
+    }
 
     verify(fieldSize).addEventListener("input", handleInput);
     verify(fieldSize).addEventListener("blur", handleBlur);
     verify(fieldSize).addEventListener("click", handleClick);
+    verify(fieldSize).addEventListener("keydown", handlerKeydown);
     return () => {
       if (fieldSize) {
         fieldSize.removeEventListener("input", handleInput);

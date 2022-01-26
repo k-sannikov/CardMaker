@@ -1,7 +1,7 @@
-import { getProjectFromFile } from "../../../utils/files";
+import { getProjectFromFile } from "../../../../utils/files";
 import { RefObject, useEffect } from "react";
-import { CardMaker } from "../../../store/types";
-import { verify } from "../../../utils/permisions";
+import { CardMaker } from "../../../../store/types";
+import { verify } from "../../../../utils/permisions";
 
 export function useImportFileProject(
   inputFile: RefObject<HTMLInputElement>,

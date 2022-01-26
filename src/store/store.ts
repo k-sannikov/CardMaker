@@ -12,7 +12,6 @@ const exceptions: string[] = [
   "ADD_HISTORY",
   "AFTER_CHANGE_HISTORY",
   "SET_SELECTED_BLOCK",
-  "SET_SIZE_TEXT",
   "SET_POSITION_AREA_SELECTION",
   "RESET_SELECTED_BLOCK",
   "RESET_AREA_SELECTION",
@@ -37,7 +36,6 @@ const storeHistory = (store: MiddlewareAPI<Dispatch<AnyAction>, CardMaker>) =>
     if (!exceptions.includes(action.type)) {
       const newState: CardMaker = store.getState();
       if (JSON.stringify(oldState.canvas) !== JSON.stringify(newState.canvas)) {
-        console.log("сохранение истории");
         store.dispatch(addHistory(newState.canvas));
       }
     }
